@@ -1,0 +1,107 @@
+import React from "react";
+
+
+import { Centered } from "meteor/empirica:core";
+
+const Radio = ({ selected, name, value, label, onChange }) => (
+    <label className="questionnaire-radio">
+        <input
+        className="quiz-button"
+        type="radio"
+        name={name}
+        value={value}
+        checked={selected === value}
+        onChange={onChange}
+        />
+        {label}
+    </label>
+);
+
+export default class MidSurveyOne extends React.Component {
+  state = { };
+
+  handleChange = event => {
+    const el = event.currentTarget;
+    this.setState({ [el.name]: el.value });
+  };
+
+  handleSubmit = event => {
+    const { onNext, player } = this.props;
+    const surveyNumber = player.get("surveyNumber");
+
+    event.preventDefault();
+    // TODO: log player response to survey question
+    player.round.set(`survey_${surveyNumber}`, this.state);
+    onNext();
+  };
+
+  render() {
+    const { game, round, stage, player } = this.props;
+    const { response } = this.state;
+
+    const network = player.get("neighbors");
+
+    const surveyNumber = player.get("surveyNumber");
+    const completedWidth = 590/5 * surveyNumber
+    const uncompletedWidth = 590 - completedWidth;
+    const offset = 590/5 * 0.5;
+    const stageNumPosition = completedWidth - offset;
+    return (
+      <Centered>
+        <div className="intro-heading questionnaire-heading"> To complete the challenge, please fill in the following questionnaire </div>
+            <div className="questionnaire-content-container">
+                <div className="progress-bar">
+                    <div className="completed-bar">
+                        <div className="completed-heading" style={{marginLeft: stageNumPosition }}> {surveyNumber} </div>
+                        <img src={`images/hr-color.png`} width={`${completedWidth} px`} height="7px" />
+                    </div>
+                    <img src={`images/hr-color-dark.png`} width={`${uncompletedWidth} px`} height="7px" />
+                </div>
+                <div className="questionnaire-body">
+                    <label className="questionnaire-question"> Did your group have a leader? If so, who?</label>
+                    {network.map(otherNodeId => {
+                        const otherPlayerId = game.players.find(p => p.get("nodeId") === parseInt(otherNodeId)).id
+                        return (
+                            <Radio
+                                selected={response}
+                                key={otherPlayerId}
+                                name="response"
+                                value={otherPlayerId}
+                                label={otherPlayerId}
+                                onChange={this.handleChange}
+                            />
+                        )
+                        })
+                    }
+                    <Radio
+                        selected={response}
+                        name="response"
+                        value="myself"
+                        label="Myself"
+                        onChange={this.handleChange}
+                    />
+                    <Radio
+                        selected={response}
+                        name="response"
+                        value="team"
+                        label="We worked as a team"
+                        onChange={this.handleChange}
+                    />
+                    <Radio
+                        selected={response}
+                        name="response"
+                        value="none"
+                        label="Our team did not have a leader"
+                        onChange={this.handleChange}
+                    />
+                </div>
+                <form className="questionnaire-btn-container" onSubmit={this.handleSubmit}>
+                    <button 
+                        className={!response ? "arrow-button button-submit-disabled" : "arrow-button button-submit"}
+                        disabled={!response} type="submit"> Submit </button> 
+                </form>
+            </div>
+      </Centered>
+    );
+  }
+}
