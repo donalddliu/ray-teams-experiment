@@ -1,0 +1,791 @@
+@charset "UTF-8";
+/* CSS Document */
+
+:root {
+    /* Colors */
+    --darkblue: #051A46;
+    --turquoise: #0BC5C8;
+    --mediumblue: rgb(31, 47, 84);
+    --chat-self-color: rgb(142, 209, 205);
+    --chat-other-color: rgb(242,242,242);
+    --periwinkle: rgb(91, 107, 191);
+  }
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent; } body {line-height: 1,4} ol, ul {list-style: none;} li{ display:inline} blockquote, q {quotes: none} blockquote:before, blockquote:after, q:before, q:after {content: '';content: none} :focus {outline: 0} ins {text-decoration: none} del {text-decoration: line-through} table {border-collapse: collapse;border-spacing: 0} * {margin:0; padding:0}
+/**FIM RESET **/
+
+html, body {height:100%; min-height:100%}
+body {width:100%; min-width:100%; overflow-x:hidden; background:url(../images/bg-repeater-light.png) center top repeat; background-size:55px 55px}
+body > div:first-child, .dark, .light {height:100%; min-height:100%}
+
+.clear {clear:both}
+
+.light {background:url(../images/bg-repeater-light.png) center top repeat; background-size:55px 55px}
+.dark {background:url(../images/bg-repeater-dark.png) center top repeat; background-size:55px 55px; overflow-x:hidden}
+
+.contentor {padding:52px}
+.contentor > img:first-child {position:absolute; left:52px; top:52px}
+
+h1, h2, h3 {font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-style:italic; text-transform:uppercase; font-weight:normal}
+
+.light h1, .light h2, .light h3 {color:#051A46}
+.light h1 {font-size:26px}
+.dark h1, .dark h2, .dark h3 {color:white}
+
+
+
+.menu {position:absolute; width:54px; height:54px; text-indent:-5000px; display:inline-block; background:url(../images/icon-menu.png) center center no-repeat; background-size:54px 54px; right:90px; top:20px}
+.menu:hover {background:url(../images/icon-menu-on.png) center center no-repeat; background-size:54px 54px}
+.logout {position:absolute; width:54px; height:54px; text-indent:-5000px; display:inline-block; background:url(../images/icon-logout.png) center center no-repeat; background-size:54px 54px; right:20px; top:20px}
+.logout:hover {background:url(../images/icon-logout-on.png) center center no-repeat; background-size:54px 54px}
+
+a, button {text-decoration:none; transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}
+.button {padding:15px 23px 13px; font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-style:italic; text-transform:uppercase; color:white; display:block; width:155px; position:relative; font-size:15.5px; height:18px}
+button.button {padding:15px 23px 13px; font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-style:italic; text-transform:uppercase; color:white; display:block; width:201px; position:relative; font-size:15.5px; height:46px; border:0; cursor:pointer; text-align:left}
+
+/* .button::after {content:" "; width:0; height:0; border-top:23px solid transparent; border-bottom:23px solid transparent; position:absolute; top:50%; margin-top:-23px; right:-18px}
+.button-a {background:#0BC5C8}
+.button-b {background:#586AC5}
+
+.button-a:after {border-left:18px solid #0BC5C8; transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}
+.button-b:after {border-left:18px solid #586AC5; transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}
+
+.button-a:hover {background:#586AC5}
+.button-a:hover:after {border-left:18px solid #586AC5}
+.button-b:hover, .button-a.button-login:hover, .challenge .button-a:hover {background:#051A46}
+.button-b:hover:after, .button-a.button-login:hover:after, .challenge .button-a:hover:after {border-left:18px solid #051A46} */
+
+
+p {font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-style:italic; text-transform:uppercase; color:#586AC5; font-size:13px; font-weight:bold}
+p a {color:#0BC5C8}
+p a:hover {color:#051A46}
+
+form {font-family:"Trebuchet MS", Arial, Helvetica, sans-serif}
+
+#login {background:#586AC5; width:285px; padding:20px; position:relative; margin-top:-48px; margin-bottom:25px}
+#login input {margin-bottom:25px; background:#4f60b1; border:0; padding:7px; color:white; font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-size:13px; width:120px}
+#login .button {position:absolute; left:0; bottom:-23px}
+
+#login input::-webkit-input-placeholder {color: white; font-style:italic; font-size:15.5px}
+#login input:-moz-placeholder {/* Firefox 18- */ color:white; font-style:italic; font-size:15.5px}
+#login input::-moz-placeholder {/* Firefox 19+ */ color:white; font-style:italic; font-size:15.5px}
+#login input:-ms-input-placeholder {color:white; font-style:italic; font-size:15.5px}
+
+
+.challenge-module {width:390px; background:#051A46; padding:100px; position:relative; margin-bottom:180px}
+.challenge-module:first-child {margin-top:30%}
+.challenge-module h2 {color:white; font-size:24px; text-align:center}
+.challenge-module h2 span {font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; color:#0BC5C8; font-style:normal; font-size:16px}
+.challenge-module a {position:absolute; left:0; bottom:-23px; cursor:pointer}
+
+.challenge-module.challenge-timeout:after {content:" "; position:absolute; width:129px; height:129px; background:url(../images/time-out.png) center center no-repeat; background-size:129px 129px; left:50%; margin-left:-65px; top:50%; margin-top:-65px}
+.challenge-module.challenge-timeout h2, .challenge-module.challenge-timeout h2 span {color:#38476b}
+.challenge-module.challenge-timeout a {cursor:not-allowed; background:white; color:#051A46}
+.challenge-module.challenge-timeout a:after {display:none}
+
+.challenge-module.challenge-completed h2 span {color:#586AC5}
+.challenge-module.challenge-completed a {cursor:default; background:#586AC5; color:white}
+.challenge-module.challenge-completed a:after {display:none}
+
+
+
+
+.challenge .contentor {padding:45px 52px 52px}
+.challenge h2 {margin-bottom:7px}
+.challenge .box img {width:46px; height:43px}
+.challenge .cards {margin-top:2%}
+
+.card1, .card2 {float:left; width:50%; position:relative}
+.card1 .box {background:#051A46; padding:25px}
+.card2 .box {background:#586AC5; padding:25px}
+.challenge .box .inner-box {display:table; width:100%; height:165px}
+.challenge .box .inner-box span {display:table-cell; vertical-align:middle; padding:13px; text-align:center}
+.inner-box span a {display:inline-block; padding:5px; cursor:pointer}
+
+.challenge .submition-dots {position:absolute; top:-16px; right:0; text-align:right}
+.challenge .submition-dots span {background:#ccc; width:9px; height:9px; display:inline-block; border-radius:5px; margin-left:13px; margin-bottom:3px}
+.challenge .submition-dots span.active {background:#051A46}
+.challenge .submition-dots h2 {color:#0BC5C8}
+.challenge .box a.button, .challenge .box button.button {position:absolute; left:0; bottom:-23px}
+
+/* .challenge .button.button-reconsider {left:auto!important; right:0}
+.challenge .button.button-reconsider:after {display:none}
+.challenge .button.button-reconsider:before {content:" "; width:0; height:0; border-top:23px solid transparent; border-bottom:23px solid transparent; border-right:18px solid #0BC5C8; position:absolute; top:50%; margin-top:-23px; left:-18px; transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}
+.challenge .button.button-reconsider:hover:before {border-right:18px solid #051A46} */
+
+
+
+.challenge .network-wrap {position:absolute; bottom:0; left:0; right:0; padding:0 52px; overflow-x:auto; overflow-y:hidden; height:278px}
+
+.challenge .network {bottom:50px; display:inline-block; float:left}
+.challenge .network .inner {background:#051A46; padding:25px;}
+.challenge .network a {display:table; color:white; font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; font-size:15px; margin-top:5px}
+.challenge .network a:first-child {margin-top:0}
+.challenge .network a span {display:table-cell; vertical-align:middle}
+.challenge .network a .avatar {width:37px; height:37px; display:inline-block; overflow:hidden; border-radius:20px; margin-right:13px}
+.challenge .network a .avatar img {margin-left:-30%; max-height:37px}
+.challenge .network a .avatar img.default {width:36px; height:auto; margin-left:1px; margin-top:4px}
+.challenge .network a .net-name {border-bottom:2px solid white; display:inline-block}
+
+.challenge .network .has-dialogue {width:15px; height:15px; background:url(../images/icon-bubble.png) center center no-repeat; background-size:15px 14px; display:inline-block; margin-left:13px}
+
+.network-window {width:244px; height:278px; display:table; float:left; position:relative; margin-left:50px}
+.network-window-positioner {width:244px; display:table-cell; vertical-align:bottom; position:relative}
+.network-window-inner {width:210px; background:#051A46; padding:17px; display:inline-block; position:relative}
+
+.network-window header {color:white; padding-bottom:7px}
+.network-window header .name {font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold}
+.network-window header .minimize {width:23px; height:17px; margin-right:16px; display:inline-block; background:url(../images/icon-net-window-minimize.png) center center no-repeat; background-size:23px 2px; float:right}
+.network-window header .close {width:17px; height:17px; display:inline-block; background:url(../images/icon-net-window-close.png) center center no-repeat; background-size:17px 17px; float:right}
+.network-window .dialogue-box {color:#051A46; font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; font-size:13px; max-height:180px; overflow-y:scroll; overflow-x:hidden; border-bottom:10px solid #051A46}
+.network-window .dialogue-box .net-bubble {background:#f2f2f2; padding:8px; position:relative; margin:12px 0; max-width:174px; box-shadow:2px 2px 1px black}
+.network-window .dialogue-box .net-bubble:before {content:" "; width:16px; height:7px; background:url(../images/net-bubble.png) top left no-repeat; background-size:16px 7px; display:inline-block; position:absolute; top:-7px; left:0}
+.network-window .dialogue-box .my-bubble {background:#79D3CE; padding:8px; position:relative; margin:12px 0 12px 16px; box-shadow:2px 2px 1px black}
+.network-window .dialogue-box .my-bubble:after {content:" "; width:16px; height:7px; background:url(../images/my-bubble.png) top left no-repeat; background-size:16px 7px; display:inline-block; position:absolute; bottom:-7px; right:0}
+.network-window input {border:none; background:#182c55; width:192px; padding:9px; color:white}
+.network-window .enter {width:16px; height:20px; background:#051A46 url(../images/icon-enter.png) center left no-repeat; background-size:16px 20px; position:absolute; right:-29px; bottom:0; padding:17px 13px 17px 0; cursor:pointer}
+.network-window button.enter {width:29px; height:54px; background:#051A46 url(../images/icon-enter.png) center left no-repeat; background-size:16px 20px; position:absolute; right:-29px; bottom:0; cursor:pointer; border:0}
+
+
+header {color:#051A46}
+header .avatar {width:47px; height:47px; overflow:hidden; border-radius:27px; border:4px solid white; float:left; margin-right:9px}
+header .avatar img {width:auto; height:47px; margin-left:-34%}
+
+header .info .name {display:block; font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; text-transform:uppercase; font-style:italic; font-size:24px}
+header .info .round-number {font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; color:#0BC5C8; text-transform:uppercase; font-size:15px}
+
+.tut-dialogue {background:#051A46; position:absolute; color:white; font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; font-size:13.5px; width:196px; padding:30px 17px}
+.tut-arrow {position:absolute; bottom:-10px; display:inline-block; width:15px; height:10px}
+.tut-next {color:#0BC5C8; font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; text-transform:uppercase; font-size:14px; display:inline-block; position:absolute; right:8px; bottom:5px; font-style:italic}
+.tut-1 {left:50%; top:-95px; box-shadow:2px 2px 0 rgba(5,26,70,.4)}
+.tut-1 .tut-arrow {left:0; background:url(../images/tut1.png) center center no-repeat; background-size:15px 10px}
+
+.home .button-b {margin-top:-40px}
+
+.lobby .conteudo {position:relative}
+
+.c-new-account {position:absolute; top:50%; margin-top:-210px; left:50%; margin-left:-189px; width:378px}
+.c-new-account form {background:#051A46; margin-top:10px; padding:26px}
+.c-new-account form input {display:block; width:304px; border:0; background:#20335a; padding:12px; color:white; margin-bottom:4px}
+
+.c-new-account form input[type=file] {opacity:0; filter:alpha(opacity=0)}
+.c-new-account form .file-label {position:relative; display:block; cursor:pointer; margin:30px 0 20px}
+.c-new-account form .file-label span {background:#20335a; padding:12px; color:white; position:absolute; top:0; text-transform:uppercase; font-size:12px}
+.c-new-account form a {background:#0BC5C8; text-align:left; position:absolute; bottom:-23px; left:0; width:auto; padding-right:40px}
+.c-new-account form button {background:#0BC5C8; text-align:left; position:absolute; bottom:-23px; left:0; width:auto; padding-right:40px}
+
+
+.c-accept {width:590px; margin:0 auto}
+
+.c-new-account.c-account-edit form {padding:26px 26px 45px}
+.c-new-account.c-account-edit p {color:white; font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; text-transform:none; font-style:normal; margin:22px 0 7px 1px; font-size:12.5px; font-weight:normal}
+.c-new-account.c-account-edit form input[type=password] {margin-bottom:0}
+.c-new-account.c-account-edit form input[type=file] {width:160px}
+.c-new-account.c-account-edit form .avatar {float:left; width:45px; height:45px; overflow:hidden; border-radius:24px; border:3px solid #20335a}
+.c-new-account.c-account-edit form .avatar img {height:45px; margin-left:-30%}
+.c-new-account.c-account-edit form  .file-label span {left:60px; top:7px; text-transform:none; font-size:12px}
+.c-new-account.c-account-edit form .file-label {margin:7px 0 16px}
+
+
+.loading .message {width:100%; position:absolute; top:50%; height:50px; margin-top:-25px; left:0}
+.loading .message .inner {display:block; padding:0 52px; text-align:center}
+.loading .message h1 {font-size:22px; margin-bottom:16px}
+.loading .message .load-bar {background:white; height:2px; border-radius:1px}
+.loading .message .load-bar span {display:inline-block; width:20%; height:2px; background:#0BC5C8; float:left}
+
+
+.round-closed .message {width:400px; margin:3% auto 0; text-align:center}
+.round-closed h1 {font-size:28px}
+.round-closed h1 small {text-transform:lowercase}
+.round-closed p {color:white; margin-top:19px; border-top:2px solid #0BC5C8; display:inline-block; padding:20px 30px 0; font-size:16px; font-weight:normal}
+.round-closed .my-answer {position:absolute; top:50%; left:50%; margin-top:-44px; margin-left:-44px}
+.round-closed .my-answer img {width:88px; height:auto}
+
+.round-closed .button {position:absolute; top:50%; right:0; margin-top:-23px}
+.round-closed .button:hover {right:18px}
+
+.round-closed .finish-message {position:absolute; top:50%; left:50%; margin-top:-34px; margin-left:-150px; width:300px; height:68px; text-align:center}
+
+.questionnaire .contentor {padding:0; height:100%}
+.questionnaire .conteudo {height:100%; display:table; width:590px; margin:0 auto}
+/*.questionnaire form {width:590px; display:table-cell; vertical-align:middle; position:relative; color:#051A46; padding-bottom:20%}
+.questionnaire h1 {text-align:center; position:absolute; top:52px; width:100%}*/
+.questionnaire form {width:590px; display:block; position:absolute; color:#051A46; top:50%; margin-top:-200px}
+.questionnaire h1 {text-align:center; position:absolute; top:-90px; width:100%}
+
+.questionnaire form header {display:table; width:100%; height:42px}
+.questionnaire form header div {display:table-cell; width:92px; vertical-align:bottom}
+.questionnaire form header div span {display:inline-block; width:100%; height:42px; text-align:center; border-bottom:10px solid #051A46; color:#0BC5C8; font-size:0; font-weight:bold}
+.questionnaire form header span.on {border-bottom:10px solid #0BC5C8}
+.questionnaire form header span.active {font-size:30px}
+.questionnaire form .box {background:white; padding:25px; position:relative}
+.questionnaire form label {display:block; padding-bottom:22px}
+.questionnaire form input[type=text] {padding:12px; width:515px; margin-bottom:25px; font-size:12px}
+.questionnaire form textarea {padding:12px; width:515px; margin-bottom:25px; font-size:12px}
+.questionnaire form .button {position:absolute; left:0; bottom:-23px}
+.questionnaire canvas {margin-bottom:25px; background:#f2f2f2; border:1px solid #243A5B; border-left-width:2px; border-bottom-width:2px}
+.questionnaire form input[type=range] {width:100%; margin-bottom:5px; display:inline}
+.questionnaire form .slider-subs {margin-bottom:53px; padding:6px 6px 0; font-size:14px}
+.questionnaire form table .player-name {white-space: nowrap; width: 1%}
+
+.questionnaire .slider-subs span:first-child {width:50%; display:inline-block; text-align:left}
+.questionnaire .slider-subs span {width:49%; display:inline-block; text-align:right}
+.questionnaire .slider-subs output {display:inline-block; position:absolute; width:38px; height:33px; left:50%; margin-left:-19px; background:#f0f0f0; border-radius:19px; text-align:center; padding-top:5px; font-size:23px; bottom:34px}
+
+
+.finish .button.middle-left-side {right:auto; left:0}
+.finish .button.middle-left-side:after {display:none}
+.finish .button.middle-left-side:before {content:" "; width:0; height:0; border-top:23px solid transparent; border-bottom:23px solid transparent; border-right:18px solid #0BC5C8; position:absolute; top:50%; margin-top:-23px; left:-18px; transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}
+.finish .button.middle-left-side:hover {left:18px}
+.finish .button.middle-left-side:hover:before {border-right:18px solid #586AC5}
+
+
+
+/**** ERROR MESSAGE ****/
+.error-wrap {position:fixed; left:0; top:0; right:0; bottom:0; background:rgba(241,241,241,.85); z-index:100}
+.error-wrap .error-center-out {display:table; width:100%; height:100%}
+.error-wrap .error-center-in {display:table-cell; vertical-align:middle}
+.error-wrap p {width:100%; padding:0; background:#051A46; color:white; text-align:center; font-size:16px; font-weight:normal}
+.error-wrap button {border:0; background:#0EC1C1; color:white; padding:42px 17px 40px; font-size:16px; margin-left:17px; cursor:pointer; font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-style:italic}
+.error-wrap button:hover {background:#586AC5}
+
+
+/**** 404 ****/
+.dark .text-link {color:#0BC5C8; text-transform:uppercase; font-style:italic; margin-bottom:4px; display:inline-block}
+.dark .text-link:hover {color:white}
+
+
+/**** ANIMATIONS ****/
+.countdown {position:absolute; top:50%; left:50%; margin-left:-133px; margin-top:-150px; width:267px; height:300px}
+.countdown:before {
+    content: '321';
+	position:absolute;
+	top:-150px;
+    
+	font-size:400px;
+	text-indent:-3ch;
+    font-family:'arial black', monospace; color:#011744;
+    display:inline-block;
+    width:1ch;
+    overflow:hidden;
+    
+    -webkit-animation:countdowns 4s steps(3) 2.5s 1;
+    -moz-animation:countdowns 4s steps(3) 2.5s 1;
+    -ms-animation:countdowns 4s steps(3) 2.5s 1;
+    -o-animation:countdowns 4s steps(3) 2.5s 1;
+    animation:countdowns 4s steps(3) 2.5s 1;
+}
+
+@-webkit-keyframes countdowns {
+    0% {text-indent:0}
+    100% {text-indent:-3ch;}
+}
+@-moz-keyframes countdowns {
+    0% {text-indent:0}
+    100% {text-indent:-3ch;}
+}
+@-ms-keyframes countdowns {
+    0% {text-indent:0}
+    100% {text-indent:-3ch;}
+}
+@-o-keyframes countdowns {
+    0% {text-indent:0}
+    100% {text-indent:-3ch;}
+}
+@keyframes countdowns {
+    0% {text-indent:0}
+    100% {text-indent:-3ch;}
+}
+
+
+
+
+.get-ready {
+    background:#011744;
+    
+    -webkit-animation:bgc 4s linear 2.5s 1;
+    -moz-animation:bgc 4s linear 2.5s 1;
+    -ms-animation:bgc 4s linear 2.5s 1;
+    -o-animation:bgc 4s linear 2.5s 1;
+    animation:bgc 4s linear 2.5s 1;
+}
+
+@-webkit-keyframes bgc {
+    0% {background:#ffffff}
+	32.99% {background:#011744}
+	33% {background:#ffffff}
+	65.99% {background:#011744}
+	66% {background:#ffffff}
+	99.99% {background:#011744}
+    100% {background:#ffffff}
+}
+@-moz-keyframes bgc {
+    0% {background:#ffffff}
+	32.99% {background:#011744}
+	33% {background:#ffffff}
+	65.99% {background:#011744}
+	66% {background:#ffffff}
+	99.99% {background:#011744}
+    100% {background:#ffffff}
+}
+@-ms-keyframes bgc {
+    0% {background:#ffffff}
+	32.99% {background:#011744}
+	33% {background:#ffffff}
+	65.99% {background:#011744}
+	66% {background:#ffffff}
+	99.99% {background:#011744}
+    100% {background:#ffffff}
+}
+@-o-keyframes bgc {
+    0% {background:#ffffff}
+	32.99% {background:#011744}
+	33% {background:#ffffff}
+	65.99% {background:#011744}
+	66% {background:#ffffff}
+	99.99% {background:#011744}
+    100% {background:#ffffff}
+}
+@keyframes bgc {
+    0% {background:#ffffff}
+	32.99% {background:#011744}
+	33% {background:#ffffff}
+	65.99% {background:#011744}
+	66% {background:#ffffff}
+	99.99% {background:#011744}
+    100% {background:#ffffff}
+}
+
+
+
+
+
+
+
+/**** SLIDER STYLE ****/
+input[type=range] {
+  -webkit-appearance: none;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 7px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  background: #051A46;
+  border-radius: 25px;
+  border: 0px solid #000101;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 0px solid #000000;
+  height: 21px;
+  width: 21px;
+  border-radius: 11px;
+  background: #0BC5C8;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -7px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #051A46;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 7px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  background: #051A46;
+  border-radius: 4px;
+  border: 0px solid #000101;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 0px solid #000000;
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  background: #0BC5C8;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 7px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  border-width: 21px 0;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #051A46;
+  border: 0px solid #000101;
+  border-radius: 50px;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+}
+input[type=range]::-ms-fill-upper {
+  background: #051A46;
+  border: 0px solid #000101;
+  border-radius: 50px;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 0px solid #000000;
+  height: 21px;
+  width: 21px;
+  border-radius: 11px;
+  background: #0BC5C8;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #051A46;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #051A46;
+}
+
+
+/**** TUTORIAL ****/
+.tutorial {display:table; width:100%}
+.tutorial .contentor {display:table-cell; height:100%; vertical-align:middle}
+
+.tutorial h1 {text-align:center; background:url(../images/hr-color.png) center bottom no-repeat; background-size:170px 2px; padding-bottom:25px; margin-bottom:25px}
+.tutorial p {text-transform:none; font-size:16px; color:#051A46; font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; font-style:normal; max-width:570px; margin:0 auto; text-align:center; line-height:165%; font-weight:normal}
+
+.tutorial .tut-slides {max-width:1200px; margin:70px auto 0}
+.tutorial .tut-slide {position:relative; float:left; display:inline-block; width:27.333%; text-align:center; margin:0 3%}
+.tutorial .tut-slide img {margin-bottom:35px; max-width:100%; height:auto}
+.tutorial .tut-slide h2 {font-size:24px; margin-bottom:15px}
+.tutorial .tut-slide p {font-size:14px; max-width:220px; margin:0 auto; font-weight:normal}
+
+.tutorial .button {position:fixed; right:0; top:0}
+.tutorial .button:hover {right:18px}
+
+.tutorial2 {display:table; width:100%}
+.tutorial2 .contentor {display:table-cell; height:100%; vertical-align:middle}
+.tutorial2 .conteudo {z-index:1; position:relative; max-width:750px; margin:0 auto}
+.tutorial2 h1 {background:url(../images/hr-color.png) left bottom no-repeat; background-size:170px 2px; padding-bottom:25px; margin-bottom:25px; margin-top:45px; display:inline-block; min-width:170px}
+.tutorial2 p {text-transform:none; font-size:16px; color:#051A46; font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; font-style:normal; text-align:left; line-height:165%; font-weight:normal}
+.tutorial2 .tut-slide img {margin-right:80px; max-width:354px; height:auto; float:left}
+
+.tutorial2 .button {position:fixed; right:0; top:50%; margin-top:-23px}
+.tutorial2 .button:hover {right:18px}
+
+
+
+
+/**** 16/06/14 UPDATE ****/
+.challenge .contentor > header {float:right; text-align:right; max-width:180px}
+header .avatar {float:none; display:inline-block; margin-right:0}
+header .help {background:#0BC5C8; color:white; text-transform:uppercase; padding:6px 8px 4px; display:inline-block; font-size:12px; font-style:italic; margin-top:7px}
+
+.challenge .box .inner-box {height:134px}
+.challenge .submition-dots {top:3px}
+.challenge .submition-dots span {width:8px; height:8px; border-radius:4px; margin-bottom:1px}
+.challenge .submition-dots h3 {color:#051A46; font-size:12px; position:absolute; left:-125px; text-align:left; width:132px; top:2px}
+
+
+.card1 {width:60%; max-width:1080px}
+.challenge .cards {margin-top:0}
+.inner-box span a.active {background:rgba(255,255,255,.2); border-radius:100%}
+.photo-icons span a {position:relative; width:70px; height:70px; border:3px solid #33468c; border-radius:43px; padding:0; overflow:hidden}
+.photo-icons span a.active:hover, 
+.photo-icons span a:hover {border-color:#586AC5}
+.photo-icons span a.active {border-color:white!important}
+.photo-icons i {position:absolute; width:180px; height:100%; display:block; left:50%; margin-left:-90px}
+.challenge .box .photo-icons img {height:100%; width:auto}
+.challenge .button-reconsider {text-align:right}
+
+
+.challenge .network {min-width:17%}
+.challenge .network .inner {background:#586AC5; padding:17px 25px 20px}
+.challenge .network a {display:block}
+.challenge .network a .avatar {width:30px; height:30px; margin-left:13px; margin-right:0; float:right}
+.challenge .network a .avatar img {max-height:30px}
+.challenge .network a .avatar img.default {width:29px}
+.challenge .network a .net-name {font-size:13px; margin:8px 0}
+.light .network h2 {color:#586AC5; text-align:right}
+
+.challenge .network-wrap {padding:0 52px 0 0; height:400px}
+.network-window {height:400px; margin-left:52px}
+.network-window .dialogue-box {max-height:305px}
+.network-window button.enter:hover {background:#051A46 url(../images/icon-enter-on.png) center left no-repeat; background-size:16px 20px}
+.network-window-inner {padding:14px 17px 17px 17px}
+
+.overlay {position:fixed; background:rgba(5,26,70,.91); left:0; top:0; width:100%; height:100%}
+.overlay h1 {position:absolute; width:420px; left:50%; margin-left:-210px; top:50%; margin-top:-31px; text-align:center; color:white}
+.overlay h1::after {content:" "; display:block; width:170px; height:1.5px; background:#0BC5C8; margin:20px auto 0}
+.overlay .button {position:absolute; top:50%; right:0; margin-top:-23px}
+.overlay .button:hover {right:20px; background:#586AC5}
+.overlay .button-a:hover:after {border-left:18px solid #586AC5}
+
+
+
+
+@media only screen
+and (max-width : 1100px) { 
+.challenge .contentor > header {max-width:165px}
+.challenge .contentor {padding:31px 40px 40px}
+.card1 {width:57%}
+.card1 .box {padding:25px 18px}
+.challenge .box .inner-box span {padding:10px}
+header .info .name {font-size:22px}
+header .info .round-number {font-size:14px}
+.network-window:first-child {margin-left:40px}
+}
+
+@media only screen
+and (max-height : 690px) { 
+.challenge .network .inner {padding:11px 20px 12px}
+.challenge .network a .avatar {width:27px; height:27px}
+.challenge .network a .net-name {margin:6px 0}
+}
+
+@media only screen
+and (max-height : 656px) {
+.network-window:first-child {margin-left:0}
+}
+
+/** END OF UPDATE **/
+
+
+
+@media only screen
+and (max-height : 690px) { 
+.challenge .card1 .box, .challenge .card2 .box {padding:10px 25px}
+
+}
+
+
+@media only screen
+and (max-height : 656px) {
+body > div:first-child, .dark, .light {height:auto}
+.challenge .contentor {padding-bottom:0; min-height:100%}
+.challenge .network-wrap {position:relative; margin-top:30px; padding-left:0}
+
+}
+
+
+/* NEW STYLING */
+
+.task-network-container {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.task-container {
+    display: flex;
+    flex-direction: row;;
+    width: 70%;
+}
+
+.task-response-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* MY CARD & SUBMITTED ANSWERS */
+.task-response-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.task-response-header .header {
+    margin-bottom: 0px;
+    margin-right: 10px;
+}
+
+/* SYMBOLS */
+.task-response-body {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--darkblue); 
+}
+
+.submission-message-container {
+    color: white;
+    display: flex;
+    padding: 25px 25px 0px 25px;
+
+}
+
+.task-response {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 100px 25px;
+}
+
+
+
+.symbol-container {
+    border-radius: 100px;
+}
+
+.button-container {
+    display: flex;
+    flex-direction:row;
+    justify-content:space-between;
+}
+
+a, button {text-decoration:none; transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}
+
+/* Styling an arrow button */
+.arrow-button {padding:15px 23px 13px; font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-style:italic; text-transform:uppercase; color:white; display:block; width:201px; position:relative; font-size:15.5px; height:46px; border:0; cursor:pointer;}
+.arrow-button::after {content:" "; width:0; height:0; border-top:23px solid transparent; border-bottom:23px solid transparent; position:absolute; top:50%; margin-top:-23px; right:-18px}
+.arrow-button::before {content:" "; width:0; height:0; border-top:23px solid transparent; border-bottom:23px solid transparent; position:absolute; top:50%; margin-top:-23px; left:-18px;}
+.arrow-button:disabled { cursor: default }
+
+/* Offset the submit button by half its height to be centerd on the task box*/
+.button-submit {
+    text-align:left;
+    background: var(--turquoise); 
+    margin-top: -23px} 
+.button-submit:hover {background:var(--darkblue)}
+/* Shows the triangle */
+.button-submit:after {border-left:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}
+.button-submit:hover:after {border-left:21px solid var(--darkblue)}
+
+/* :after does not have disabled tag, so made new class with different colored :after */
+.button-submit-disabled {
+    text-align:left;
+    background: lightgrey;
+    margin-top: -23px
+}
+.button-submit-disabled:disabled {
+    text-align:left;
+    background: lightgrey;
+    margin-top: -23px
+}
+.button-submit-disabled:after {border-left:21px solid lightgrey}
+
+
+/* Reonsider button (:before = triangle left of button) */
+.button-reconsider {text-align: right; background:var(--turquoise); margin-top: -23px;}
+.button-reconsider:before {border-right:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}
+.button-reconsider:hover {background:var(--darkblue)}
+.button-reconsider:hover:before {border-right:21px solid #051A46}
+.button-reconsider:disabled {background: lightgrey};
+.button-reconsider:disabled:before {border-right:21px solid lightgrey}
+
+.button-reconsider-disabled {
+    text-align:left;
+    background: lightgrey;
+    margin-top: -23px
+}
+.button-reconsider-disabled:disabled {
+    text-align:left;
+    background: lightgrey;
+    margin-top: -23px
+}
+.button-reconsider-disabled:before {border-right:21px solid lightgrey}
+
+
+
+.submission-dots-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.filled-dot {
+    height: 8px;
+    width: 8px;
+    background-color: var(--darkblue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    margin: 0px 2px 0px 2px;
+}
+
+.empty-dot {
+    height: 8px;
+    width: 8px;
+    background-color: lightgrey;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    margin: 0px 2px 0px 2px;
+}
+
+
+
+/* -----------------
+- Styling the button -
+----------------- */
+
+.symbolButtonUnselected{
+    padding: 0.8rem 1.0rem;
+    border-radius: 50%;
+    border: 5px solid rgb(53, 70, 124);
+    background-color: rgba(58, 73, 105, 0);
+}
+
+.symbolButtonUnselected:hover {
+    background-color: #ddd;
+    background-color: rgba(58, 73, 105, 0.70);
+}
+  
+.symbolButtonSelected {
+    padding: 0.8rem 1.0rem;
+    border-radius: 50%;
+    border: 5px solid white;
+    background-color: rgba(58, 73, 105, 0.95);
+}
+
+.symbolButtonSelected:hover {
+    background-color: rgba(35, 55, 99, 0.95)
+}
+
+/* -----------------
+- Styling Network Tab -
+----------------- */
+
+.network-container {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+.network-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: 0px 0px;
+}
+
+.network-all-players-container {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--periwinkle);
+}
+
+.network-player-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px 15px 15px 15px;
+}
+
+.network-name-container {
+    display: flex;
+    color: white;
+    cursor: pointer;
+}
+
+.network-name-container:hover {
+    text-decoration: 2px solid white underline;
+}
+
+.network-avatar-container {
+    display: flex;
+}

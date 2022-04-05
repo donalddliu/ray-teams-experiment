@@ -1,0 +1,15 @@
+{
+    "admins": [
+      {
+        "username": "admin",
+        "password": "U77jbjacxce!!"
+      }
+    ],
+    "galaxy.meteor.com": {
+      "env": {
+        "MONGO_URL":   "mongodb+srv://donaldl:U77jbjacxce-@rayexperiment.aydmy.mongodb.net/experimentDB1?retryWrites=true&w=majority",
+        "MONGO_OPLOG_URL": "mongodb+srv://oploguser:simplePassword@rayexperiment.aydmy.mongodb.net/local"
+      }
+    }
+  }
+
