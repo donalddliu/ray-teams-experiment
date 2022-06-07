@@ -1,0 +1,367 @@
+/* Network Survey */
+.network-survey-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+}
+
+.network-survey-container p {
+    display: flex;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.network-survey-header p {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--darkblue);
+    font-size: 16px;
+    padding: 2em;
+}
+
+.network-survey-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2em;
+    width: 60%;
+    margin: auto;
+}
+
+.network-survey-body p  {
+    text-transform: none;
+    font-weight: normal;
+    color: var(--darkblue);
+    font-size: 16px;
+}
+
+.network-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2em;
+    width: 100%;
+}
+
+.input-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 50%;
+}
+
+.dropdown-input-label {
+    display: flex;
+    width: 70%;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-label {
+    display: flex;
+    margin-right: 10px;
+}
+
+.network-button-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    margin-top: 23px;
+}
+
+.network-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-transform: none;
+    max-width: 75%;
+    margin: auto;
+}
+
+.network-list li {
+    display: list-item;
+    margin-left: 10px;
+    list-style-type: disc;
+    width: 100%;
+    padding: 1em 2em;
+    text-transform: none;
+    font-style: italic;
+    font-weight: normal;
+    color: var(--darkblue);
+    font-size: 16px;
+}
+
+.dropdown-select-input {
+    font-size: 14px;
+    color: var(--darkblue);
+    margin: 2px;
+    border-radius: 5px;
+}
+
+.name-matrix-table {
+    width: 60%;
+    margin: 0px auto 2em;
+    font-size: 16px;
+}
+
+thead, tbody, tfoot { vertical-align: middle } /* add this rule*/
+td, th, tr { vertical-align: inherit } /* add this rule */
+
+/* Tutorial */
+
+.tutorial-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.title-static-image {
+    display: flex;
+    justify-content: flex-start;
+    padding: 30px 15px;
+}
+
+.two-col {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 60%;
+}
+
+.tutorial-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.tutorial-static-image {
+    display:flex;
+    margin-right: 40px;
+    width: 45%;
+    justify-content: center;
+    align-items: center;
+}
+
+.tutorial-info {
+    width: 50%;
+}
+
+.intro-heading {
+    font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; 
+    font-style:italic; 
+    text-transform:uppercase; 
+    font-weight:normal;
+    margin: 0px 0px;
+    font-size: 26px;
+    color: var(--darkblue);
+}
+
+.tutorial-body {
+    font-size: 16px;
+    word-spacing: 0.3em;
+    margin-top: 1rem;
+    color: var(--darkblue);
+}
+
+/* BUTTON STYLING AND POSITIONING */
+
+.tutorial-next-btn {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    text-align:left;
+    background: var(--turquoise); 
+
+}
+
+.tutorial-next-btn:hover {
+    margin-right: 20px;
+    background:var(--periwinkle)
+}
+
+.tutorial-next-btn:after {border-left:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}
+.tutorial-next-btn:hover:after {border-left:21px solid var(--periwinkle)}
+
+.tutorial-prev-btn {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    text-align:right;
+    background: var(--turquoise); 
+}
+
+.tutorial-prev-btn:hover {
+    margin-left: 20px;
+    background:var(--periwinkle)
+}
+
+.tutorial-prev-btn:before {border-right:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}
+.tutorial-prev-btn:hover:before {border-right:21px solid var(--periwinkle)}
+
+
+
+
+/* QUESTIONNAIRE STYLING */
+
+.questionnaire-radio {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.questionnaire-radio .quiz-button {
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.questionnaire-heading {
+    margin: 10% auto 5% auto;
+    display: flex;
+    justify-content: center;
+    width: 590px;
+    text-align: center;
+}
+
+.question-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 15px;
+}
+
+.questionnaire-question {
+    padding-bottom: 20px;
+}
+
+.questionnaire-content-container {
+    display:flex;
+    flex-direction:column;
+    align-items: flex-start;
+    width: 590px;
+}
+
+.questionnaire-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: white;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    color: var(--darkblue);
+    width: 100%;
+    font-size: 15px;
+    padding: 25px;
+}
+
+.questionnaire-btn-container {
+    display: flex;
+}
+
+.progress-bar {
+    display: flex;
+    flex-direction:row;
+    align-items: flex-end;
+}
+
+.completed-heading {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    color: var(--turquoise);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.completed-bar {
+    display: flex;
+    flex-direction: column;
+}
+
+.slider-value-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.slider-value {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid lightgrey;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: lightgrey;
+}
+
+/* Customizing SLIDER */
+
+.player-slider-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 15px 0px;
+}
+
+.player-label {
+    display: flex;
+    width: 25%;
+    padding: 5px 5px;
+    overflow-wrap: anywhere;
+}
+
+.empirica-slider {
+    width: 100%;
+}
+
+.bp3-slider-axis {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bp3-slider-label {
+    transform: translate(0%, 20px);
+    display: flex;
+    position: static;
+    padding: 2px 5px;
+    vertical-align: top;
+    line-height: 1;
+    font-size: 12px;
+}
+
+.bp3-slider-track {
+    background-color: var(--darkblue);
+}
+
+.bp3-slider-handle {
+    background-color: var(--turquoise);
+    border: 1px solid var(--turquoise);
+    border-radius: 50%;
+    background-image: none;
+    box-shadow: none;
+    width: 20px;
+    height: 20px;
+}
+
+/* Turn off label that appears below slider handle */
+.bp3-slider-handle .bp3-slider-label {
+    display: none;
+}
+
+
+.survey-textarea {
+    width: 100%;
+    resize: vertical;
+    padding: 5px 5px 5px 5px;
+    margin-bottom: 30px;
+}
+
+
+

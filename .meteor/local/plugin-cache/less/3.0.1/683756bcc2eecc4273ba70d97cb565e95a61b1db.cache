@@ -1,0 +1,2 @@
+{"{empirica:slider}/slider.less":"683756bcc2eecc4273ba70d97cb565e95a61b1db"}
+{"css":".empirica-slider.empty .bp3-slider-handle {\n  visibility: hidden;\n}\n","sourceMap":{"version":3,"sources":["packages/empirica:slider/slider.less"],"names":[],"mappings":"AACE,gBAAC,MACC;EACE,kBAAA","sourcesContent":[".empirica-slider {\n  &.empty {\n    .bp3-slider-handle {\n      visibility: hidden;\n    }\n  }\n}\n"]}}

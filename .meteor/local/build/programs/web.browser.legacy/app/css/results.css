@@ -1,0 +1,97 @@
+/* -----------------
+- Styling Results Tab -
+----------------- */
+
+.results-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--mediumblue);
+}
+
+.results-text {
+
+    font-size: 20px;
+}
+
+.results-content {
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 400px;
+    background-color: var(--mediumblue);
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    color: white;
+    padding: 25px 25px;
+}
+
+/* .results-content {
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    width: 590px;
+    background-color: var(--mediumblue);
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    color: white;
+    padding: 25px 25px;
+} */
+
+/* -----------------
+- Styling Survey Wait Tab -
+----------------- */
+
+.survey-wait-static-image {
+    display: flex;
+    padding: 30px 30px;
+}
+
+.survey-wait-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: var(--darkblue);
+}
+
+.survey-wait-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 25px 25px;
+    background-color: var(--darkblue);
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    color: white;
+
+}
+
+/* -----------------
+- Failed Attention Check -
+----------------- */
+
+.failed-attention-container {
+    display: flex;
+    width: 590px;
+    padding: 100px;
+    margin-top: 20%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--darkblue);
+
+}
+
+.failed-attention-text {
+    color: var(--turquoise);
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-size: 16px;
+}

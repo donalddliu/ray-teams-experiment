@@ -1,0 +1,64 @@
+.dark-bg {
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100%;
+    z-index: 7;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+  }
+  
+  .modal-centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: 30%;
+  }
+
+  .modal {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+    background: var(--darkblue);
+    color: var(--turquoise);
+    z-index: 10;
+    padding: 5% 5%;
+    box-shadow: 0 5px 20px 0 rgba(255, 255, 255, 0.25);
+    text-align: center;
+  }
+
+  .modal-content {
+    text-align: center;
+  }
+
+  .modal-button {
+    padding:5px 10px 5px; 
+    font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-style:italic; 
+    text-transform:uppercase; 
+    background-color: var(--turquoise);
+    color:white; 
+    display:flex; 
+    justify-content: center;
+    align-items: center;
+    font-size:15.5px; 
+    height:46px; 
+    border:0; 
+    cursor:pointer;
+  }
+
+  .modal-button:hover{
+    background-color: #03999b;
+  }
+
+  .attention-check-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+  }

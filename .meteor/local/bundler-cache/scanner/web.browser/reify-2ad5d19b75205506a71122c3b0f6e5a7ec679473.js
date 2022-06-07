@@ -1,0 +1,27 @@
+module.export({BrowserRouter:()=>_BrowserRouter,HashRouter:()=>_HashRouter,Link:()=>_Link,MemoryRouter:()=>_MemoryRouter,NavLink:()=>_NavLink,Prompt:()=>_Prompt,Redirect:()=>_Redirect,Route:()=>_Route,Router:()=>_Router,StaticRouter:()=>_StaticRouter,Switch:()=>_Switch,generatePath:()=>_generatePath,matchPath:()=>_matchPath,withRouter:()=>_withRouter});let _BrowserRouter;module.link("./BrowserRouter",{default(v){_BrowserRouter=v}},0);let _HashRouter;module.link("./HashRouter",{default(v){_HashRouter=v}},1);let _Link;module.link("./Link",{default(v){_Link=v}},2);let _MemoryRouter;module.link("./MemoryRouter",{default(v){_MemoryRouter=v}},3);let _NavLink;module.link("./NavLink",{default(v){_NavLink=v}},4);let _Prompt;module.link("./Prompt",{default(v){_Prompt=v}},5);let _Redirect;module.link("./Redirect",{default(v){_Redirect=v}},6);let _Route;module.link("./Route",{default(v){_Route=v}},7);let _Router;module.link("./Router",{default(v){_Router=v}},8);let _StaticRouter;module.link("./StaticRouter",{default(v){_StaticRouter=v}},9);let _Switch;module.link("./Switch",{default(v){_Switch=v}},10);let _generatePath;module.link("./generatePath",{default(v){_generatePath=v}},11);let _matchPath;module.link("./matchPath",{default(v){_matchPath=v}},12);let _withRouter;module.link("./withRouter",{default(v){_withRouter=v}},13);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
