@@ -1,4 +1,6 @@
 import React from "react";
+import Timer from "./Timer.jsx";
+
 
 import { Centered } from "meteor/empirica:core";
 
@@ -17,6 +19,7 @@ export default class Round extends React.Component {
         <div className="results-content">
             <h1 className="results-text"> {result ? correctMessage : incorrectMessage} </h1>
             <img src={`images/hr-color.png`} width="200px" height="3px" />
+            <Timer stage={stage}/>
         </div>
       </div>
     );

@@ -3,7 +3,7 @@ import "./bots.js";
 import "./callbacks.js";
 
 import { testSymbols, testTangrams } from "./constants"; 
-import { getNeighbors } from "./util";
+import { getNeighbors, getFullyConnectedLayer } from "./util";
 
 // gameInit is where the structure of a game is defined.
 // Just before every game starts, once all the players needed are ready, this
@@ -17,13 +17,25 @@ Empirica.gameInit(game => {
     treatment: {
       playerCount,
       networkStructure,
-      numRounds,
-      setSize,
+      numTaskRounds,
+      numSurveyRounds,
+      setSizeBasedOnPlayerCount,
+      userInactivityDuration,
+      taskDuration,
+      defaultSetSize,
+      surveyDuration,
+      resultsDuration,
+      maxNumOverlap,
     },
   } = game;
 
 
   const symbolSet = testTangrams;
+  const setSize = setSizeBasedOnPlayerCount ? playerCount + 1 : defaultSetSize; //TODO: can change default value in settings
+  const numRoundsBeforeSurvey = numTaskRounds/numSurveyRounds;
+
+  const colors = ["Green", "Red", "Yellow", "Blue", "Purlpe", "White", "Black"]
+
 
   game.players.forEach((player, i) => {
     player.set("avatar", `/avatars/jdenticon/${player._id}`);
@@ -32,41 +44,53 @@ Empirica.gameInit(game => {
     // Give each player a nodeId based on their position (indexed at 1)
     player.set("nodeId", i + 1);
     player.set("name", player.id);
+    player.set("anonymousName", colors[i])
   });
 
-  game.players.forEach((p) => {
-    p.set("neighbors", getNeighbors(networkStructure, p));
-    console.log(p.get("neighbors"));
-  });
+
+  if (game.players.length < game.treatment.playerCount) {
+    getFullyConnectedLayer(game);
+    game.players.forEach((p) => {
+      console.log(p.get("neighbors"));
+    });
+  } else {
+    game.players.forEach((p) => {
+      p.set("neighbors", getNeighbors(networkStructure, p));
+      console.log(p.get("neighbors"));
+    });
+  }
 
   // For each round, add all the symbols, randomly select a correct answer and
   // Constraints: Must ensure that everyone has only one symbol in common
-  _.times( numRounds, i => {
+  _.times( numTaskRounds, i => {
     const round = game.addRound();
-    if (i+1 % 2 === 0) { // After 5 task rounds, add a survey round
-      const surveyStages = round.addStage({
+
+    const {symbols, taskName, answer} = symbolSet[i];
+
+    const taskStage = round.addStage({
+      name: "Task",
+      displayName: taskName,
+      answer: answer,
+      durationInSeconds: taskDuration
+    });
+    taskStage.set("task", symbolSet[i]);
+    getSymbolsForPlayers(symbols, answer, setSize, taskName, game, maxNumOverlap)
+    taskStage.set("answer", symbolSet[i].answer)
+
+    const resultStage = round.addStage({
+      name: "Result",
+      displayName: "Result",
+      durationInSeconds: resultsDuration
+    });
+    
+    if ((i+1) % numRoundsBeforeSurvey === 0) { // After 5 task rounds, add a survey round
+      const surveyRound = game.addRound();
+
+      const surveyStages = surveyRound.addStage({
         name: "Survey",
         displayName: "Survey",
-        durationInSeconds: 3000000
+        durationInSeconds: surveyDuration
       })
-    } else {
-      const {symbols, taskName, answer} = symbolSet[i];
-
-      const taskStage = round.addStage({
-        name: "Task",
-        displayName: taskName,
-        answer: answer,
-        durationInSeconds: 3000000
-      });
-      taskStage.set("task", symbolSet[i]);
-      getSymbolsForPlayers(symbols, answer, setSize, taskName, game)
-      taskStage.set("answer", symbolSet[i].answer)
-
-      const resultStage = round.addStage({
-        name: "Result",
-        displayName: "Result",
-        durationInSeconds: 5
-      });
     }
 
 
@@ -143,12 +167,13 @@ Empirica.gameInit(game => {
 
   // }
 
-  function getSymbolsForPlayers(symbolSet, answer, setSize, taskName, game, numOverlap = 2) {
+  function getSymbolsForPlayers(symbolSet, answer, setSize, taskName, game, maxNumOverlap) {
       let symbolsWithoutAnswer = symbolSet.filter(symbol => symbol !== answer);
       symbolsWithoutAnswer = shuffle(symbolsWithoutAnswer);
       let numPlayers = game.players.length;
+      let numOverlap = 0;
 
-      console.log(taskName);
+
       // Create a dictionary to keep track of how many times symbol has been used
       let symbolFreq = {}
       for (let i = 0; i < symbolsWithoutAnswer.length; i++) {
@@ -164,19 +189,29 @@ Empirica.gameInit(game => {
         for (let i = 0; i < symbolsWithoutAnswer.length; i++) {
           let symbol = symbolsWithoutAnswer[i]
           if (symbolsPicked.length < setSize - 1) { // Add symbols until setSize - 1 for answer
-            symbolsPicked.push(symbol);
-            symbolFreq[symbol] -= 1;
+            if (symbolFreq[symbol] - 1 === 0) { // This symbol will overlap
+                if (numOverlap < maxNumOverlap ) { // Only add if less than max overlap
+                  symbolsPicked.push(symbol);
+                  symbolFreq[symbol] -= 1;
+                  numOverlap += 1
+                }
+            } else {
+              symbolsPicked.push(symbol);
+              symbolFreq[symbol] -= 1;
+            }
           }
         }
         symbolsPicked.push(answer); // Add the answer
         for (var symbolToRemove of symbolsPicked) {
           if (symbolFreq[symbolToRemove] === 0) { // If symbol has been picked n-1 players times, remove it from the set
             symbolsWithoutAnswer = symbolsWithoutAnswer.filter(symbol => symbol !== symbolToRemove);
+
           }
         }
 
+        symbolsPicked = shuffle(symbolsPicked);
+
         player.set(taskName, symbolsPicked);
-        console.log(symbolsPicked);
       })
 
 

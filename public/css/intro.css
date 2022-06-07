@@ -133,7 +133,7 @@ td, th, tr { vertical-align: inherit } /* add this rule */
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 40%;
+    width: 60%;
 }
 
 .tutorial-content {
@@ -231,6 +231,13 @@ td, th, tr { vertical-align: inherit } /* add this rule */
     text-align: center;
 }
 
+.question-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 15px;
+}
+
 .questionnaire-question {
     padding-bottom: 20px;
 }
@@ -307,6 +314,7 @@ td, th, tr { vertical-align: inherit } /* add this rule */
     display: flex;
     width: 25%;
     padding: 5px 5px;
+    overflow-wrap: anywhere;
 }
 
 .empirica-slider {

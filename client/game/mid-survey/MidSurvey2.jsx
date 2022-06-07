@@ -1,7 +1,8 @@
 import React from "react";
 import Slider from "meteor/empirica:slider";
 
-
+import { TimeSync } from "meteor/mizzao:timesync";
+import moment from "moment";
 import { Centered } from "meteor/empirica:core";
 
 export default class MidSurveyTwo extends React.Component {
@@ -11,7 +12,7 @@ export default class MidSurveyTwo extends React.Component {
     const { game, round, stage, player } = this.props;
 
     player.get("neighbors").forEach(otherNodeId => {
-        const otherPlayerId = game.players.find(p => p.get("nodeId") === parseInt(otherNodeId)).id
+        const otherPlayerId = game.players.find(p => p.get("nodeId") === parseInt(otherNodeId)).get("anonymousName")
         this.setState({[otherPlayerId] : 0});
     })
   }
@@ -34,6 +35,8 @@ export default class MidSurveyTwo extends React.Component {
     event.preventDefault();
     // TODO: log player response to survey question
     player.round.set(`survey_${surveyNumber}`, this.state);
+    player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+
 
     onNext();
   };
@@ -66,15 +69,19 @@ export default class MidSurveyTwo extends React.Component {
                 <div className="questionnaire-body">
                     <label className="questionnaire-question"> Please rate how well you have been working with each teammate in the recent trials?</label>
                     {network.map(otherNodeId => {
-                        const otherPlayerId = game.players.find(p => p.get("nodeId") === parseInt(otherNodeId)).id
+                        const otherPlayer = game.players.find(p => p.get("nodeId") === parseInt(otherNodeId));
+                        const otherPlayerId = otherPlayer.get("anonymousName");
+                        const playerIsOnline = otherPlayer.online === true && !otherPlayer.get("inactive");
                         const handleSliderChange = (num) => {
                             // Rounding the number to 2 decimals max
                             this.setState({[otherPlayerId] : num});
+                            player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+
                           };
                         
                         return (
                             <div className="player-slider-container">
-                                <div className="player-label"> {otherPlayerId} </div>
+                                <div className="player-label"> {otherPlayerId} {playerIsOnline ? "" : " (offline)"} </div>
                                 <Slider
                                     key={otherNodeId}
                                     min={0}
@@ -94,9 +101,6 @@ export default class MidSurveyTwo extends React.Component {
                             )
                         })
                     }
-                    {/* <div className="slider-value-container"> 
-                        <div className="slider-value">{sliderValue} </div>
-                    </div> */}
 
                 </div>
                 <form className="questionnaire-btn-container" onSubmit={this.handleSubmit}>

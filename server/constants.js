@@ -4,51 +4,6 @@ const allSymbols = ["t1", "t2", "t3", "t4", "t5", "t6", "t7","t8","t9","t10","t1
 // n = number of people , p = number of symbols
 // (n-1)*p + 1
 // i.e. n = 3, p = 3 : 7
-export const testSymbols = [
-  {
-    _id: "0",
-    taskName: "Easy 1",
-    symbols: ["A", "B", "C", "D", "E", "F", "G"],
-    answer: "C",
-  },
-  {
-    _id: "1",
-    taskName: "Easy 2",
-    symbols: ["A", "B", "C", "D", "E", "F", "G"],
-    answer: "D",
-  },
-  {
-    _id: "2",
-    taskName: "Easy 3",
-    symbols: ["E", "O", "C", "R", "D", "E", "F",],
-    answer: "F",
-  },
-  // {
-  //   _id: "3",
-  //   taskName: "Easy 4",
-  //   symbols: ["Z", "X", "Y", "V", "W", "C"],
-  //   answer: "C",
-  // },
-  // {
-  //   _id: "4",
-  //   taskName: "Easy 5",
-  //   symbols: ["G", "H", "I", "J", "K", "C"],
-  //   answer: "K",
-  // },
-  // {
-  //   _id: "5",
-  //   taskName: "Easy 6",
-  //   symbols: ["O", "P", "L", "O", "Q", "U", "T"],
-  //   answer: "Q",
-  // },
-  // {
-  //   _id: "6",
-  //   taskName: "Easy 7",
-  //   symbols: ["A", "B", "C", "L", "M", "I", "N"],
-  //   answer: "L",
-  // },
-
-];
 
 export const testTangrams = [
   {
@@ -141,31 +96,5 @@ export const testTangrams = [
     symbols: allSymbols,
     answer: "t3",
   },
-
-
-  // {
-  //   _id: "3",
-  //   taskName: "Easy 4",
-  //   symbols: ["Z", "X", "Y", "V", "W", "C"],
-  //   answer: "C",
-  // },
-  // {
-  //   _id: "4",
-  //   taskName: "Easy 5",
-  //   symbols: ["G", "H", "I", "J", "K", "C"],
-  //   answer: "K",
-  // },
-  // {
-  //   _id: "5",
-  //   taskName: "Easy 6",
-  //   symbols: ["O", "P", "L", "O", "Q", "U", "T"],
-  //   answer: "Q",
-  // },
-  // {
-  //   _id: "6",
-  //   taskName: "Easy 7",
-  //   symbols: ["A", "B", "C", "L", "M", "I", "N"],
-  //   answer: "L",
-  // },
 
 ];

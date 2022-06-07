@@ -577,13 +577,21 @@ body > div:first-child, .dark, .light {height:auto}
 .task-network-container {
     display: flex;
     flex-direction: row;
+    height: 45%;
 }
 
+.round-task-container {
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    width: 100%;
+}
 
 .task-container {
     display: flex;
     flex-direction: row;;
-    width: 70%;
+    width: 100%;
+    height: 100%;
 }
 
 .task-response-container {
@@ -609,6 +617,7 @@ body > div:first-child, .dark, .light {height:auto}
     display: flex;
     flex-direction: column;
     background-color: var(--darkblue); 
+    height: 100%;
 }
 
 .submission-message-container {
@@ -622,7 +631,9 @@ body > div:first-child, .dark, .light {height:auto}
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    padding: 100px 25px;
+    align-items: center;
+    height: 100%;
+    padding: 0px 25px;
 }
 
 
@@ -640,7 +651,7 @@ body > div:first-child, .dark, .light {height:auto}
 a, button {text-decoration:none; transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}
 
 /* Styling an arrow button */
-.arrow-button {padding:15px 23px 13px; font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-style:italic; text-transform:uppercase; color:white; display:block; width:201px; position:relative; font-size:15.5px; height:46px; border:0; cursor:pointer;}
+.arrow-button {padding:15px 23px 13px; font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-style:italic; text-transform:uppercase; color:white; display:block; width:201px; position:relative; font-size:15.5px; height:46px; border:0; cursor:pointer; z-index: 5;}
 .arrow-button::after {content:" "; width:0; height:0; border-top:23px solid transparent; border-bottom:23px solid transparent; position:absolute; top:50%; margin-top:-23px; right:-18px}
 .arrow-button::before {content:" "; width:0; height:0; border-top:23px solid transparent; border-bottom:23px solid transparent; position:absolute; top:50%; margin-top:-23px; left:-18px;}
 .arrow-button:disabled { cursor: default }
@@ -723,11 +734,19 @@ a, button {text-decoration:none; transition:.35s ease; -moz-transition:.35s ease
 - Styling the button -
 ----------------- */
 
+.symbol-container {
+    display: flex;
+    height: 100%;
+    max-height: 50%;
+}
+
 .symbolButtonUnselected{
     padding: 0.8rem 1.0rem;
     border-radius: 50%;
     border: 5px solid rgb(53, 70, 124);
     background-color: rgba(58, 73, 105, 0);
+    width: 100%;
+    height: 100%;
 }
 
 .symbolButtonUnselected:hover {
@@ -740,6 +759,12 @@ a, button {text-decoration:none; transition:.35s ease; -moz-transition:.35s ease
     border-radius: 50%;
     border: 5px solid white;
     background-color: rgba(58, 73, 105, 0.95);
+    width: 100%;
+    height: 100%;
+}
+
+.noHover {
+    pointer-events: none;
 }
 
 .symbolButtonSelected:hover {

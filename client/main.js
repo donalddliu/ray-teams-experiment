@@ -17,6 +17,7 @@ import TutorialPageTwo from "./intro/TutorialPageTwo";
 import TutorialPageThree from "./intro/TutorialPageThree";
 import TutorialPageFour from "./intro/TutorialPageFour";
 
+import AllQuiz from "./intro/quiz/AllQuiz";
 import QuizOne from "./intro/quiz/QuizOne";
 import QuizTwo from "./intro/quiz/QuizTwo";
 import QuizThree from "./intro/quiz/QuizThree";
@@ -54,7 +55,8 @@ Empirica.introSteps((game, treatment) => {
   // MidSurveyFive, MidSurveyFour, MidSurveyThree, MidSurveyTwo, MidSurveyOne,
   const networkSurvey = [NetworkSurveyOne, NetworkSurveyTwo, NetworkSurveyThree]
   const tutorialSteps = [TutorialPageOne, TutorialPageTwo, TutorialPageThree, TutorialPageFour,];
-  const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,]
+  // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
+  const quizSteps = [AllQuiz];
   const steps = networkSurvey.concat(tutorialSteps,quizSteps);
 
   if (treatment.skipIntro) {
