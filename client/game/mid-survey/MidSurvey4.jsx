@@ -1,7 +1,8 @@
 import React from "react";
 import Slider from "meteor/empirica:slider";
 
-
+import { TimeSync } from "meteor/mizzao:timesync";
+import moment from "moment";
 import { Centered } from "meteor/empirica:core";
 
 export default class MidSurveyFour extends React.Component {
@@ -12,6 +13,8 @@ export default class MidSurveyFour extends React.Component {
     // Rounding the number to 2 decimals max
     this.setState({sliderValue : num}) 
     player.stage.set("sliderValue", num);
+    player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+
   };
 
   renderLabels = (val) => {
@@ -32,6 +35,8 @@ export default class MidSurveyFour extends React.Component {
     event.preventDefault();
     // TODO: log player response to survey question
     player.round.set(`survey_${surveyNumber}`, this.state);
+    player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+
     onNext();
   };
 

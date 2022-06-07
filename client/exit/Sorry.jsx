@@ -10,7 +10,7 @@ export default class Sorry extends Component {
     render() {
         const { player, game } = this.props;
         let msg;
-        console.log(player);
+
         switch (player.exitStatus) {
             case "gameFull":
                 msg = "All games you are eligible for have filled up too fast...";
@@ -28,6 +28,12 @@ export default class Sorry extends Component {
         }
         if (player.exitReason === "failedQuestion") {
             return <FailedAttentionCheck />
+        }
+        if (player.exitReason === "inactive") {
+            msg = "You were inactive for too long";
+        }
+        if (player.exitReason === "someoneInactive") {
+            msg = "A player was inactive for too long, and we had to end the game.";
         }
         // Only for dev
         if (!game && Meteor.isDevelopment) {

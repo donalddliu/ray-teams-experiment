@@ -9,6 +9,8 @@
     display: flex;
     flex-direction: column;
     padding: 30px 1.5rem 6rem;
+    padding: 30px 1.5rem 0rem;
+
 
   }
 
@@ -105,6 +107,36 @@
         justify-content: center;
       }
     }
+  }
+
+  .metadata-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .player-avatar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    border-radius: 50px;
+  }
+
+  .player-name-container {
+    font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; 
+    font-style:italic; 
+    text-transform:uppercase; 
+    font-weight:normal;
+    color: var(--darkblue);
+  }
+
+  .round-number-container {
+    font-family:"Trebuchet MS", Arial, Helvetica, sans-serif; 
+    font-style:normal; 
+    font-size:16px;
+    color:var(--turquoise); 
   }
 }
 

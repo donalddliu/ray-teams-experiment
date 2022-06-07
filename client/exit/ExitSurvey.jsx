@@ -41,10 +41,10 @@ export default class ExitSurvey extends React.Component {
             Please submit the following code to receive your bonus:{" "}
             <strong>{player._id}</strong>.
           </p>
-          <p>
+          {/* <p>
             You final <strong>bonus</strong> is in addition of the{" "}
             <strong>1 base reward</strong> for completing the HIT.
-          </p>
+          </p> */}
           <br />
           <p>
             Please answer the following short survey. You do not have to provide

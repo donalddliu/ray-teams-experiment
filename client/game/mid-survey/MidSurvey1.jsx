@@ -1,9 +1,10 @@
 import React from "react";
 
-
+import { TimeSync } from "meteor/mizzao:timesync";
+import moment from "moment";
 import { Centered } from "meteor/empirica:core";
 
-const Radio = ({ selected, name, value, label, onChange }) => (
+const Radio = ({ selected, name, value, label, playerIsOnline, onChange }) => (
     <label className="questionnaire-radio">
         <input
         className="quiz-button"
@@ -13,7 +14,7 @@ const Radio = ({ selected, name, value, label, onChange }) => (
         checked={selected === value}
         onChange={onChange}
         />
-        {label}
+        {label} {playerIsOnline ? "" : " (offline)"}
     </label>
 );
 
@@ -21,8 +22,12 @@ export default class MidSurveyOne extends React.Component {
   state = { };
 
   handleChange = event => {
+    const { player } = this.props;
+
     const el = event.currentTarget;
     this.setState({ [el.name]: el.value });
+    player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+
   };
 
   handleSubmit = event => {
@@ -32,6 +37,8 @@ export default class MidSurveyOne extends React.Component {
     event.preventDefault();
     // TODO: log player response to survey question
     player.round.set(`survey_${surveyNumber}`, this.state);
+    player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+
     onNext();
   };
 
@@ -60,7 +67,9 @@ export default class MidSurveyOne extends React.Component {
                 <div className="questionnaire-body">
                     <label className="questionnaire-question"> Did your group have a leader? If so, who?</label>
                     {network.map(otherNodeId => {
-                        const otherPlayerId = game.players.find(p => p.get("nodeId") === parseInt(otherNodeId)).id
+                        const otherPlayer = game.players.find(p => p.get("nodeId") === parseInt(otherNodeId));
+                        const otherPlayerId = otherPlayer.get("anonymousName");
+                        const playerIsOnline = otherPlayer.online === true && !otherPlayer.get("inactive");
                         return (
                             <Radio
                                 selected={response}
@@ -68,6 +77,7 @@ export default class MidSurveyOne extends React.Component {
                                 name="response"
                                 value={otherPlayerId}
                                 label={otherPlayerId}
+                                playerIsOnline={playerIsOnline}
                                 onChange={this.handleChange}
                             />
                         )
@@ -78,6 +88,7 @@ export default class MidSurveyOne extends React.Component {
                         name="response"
                         value="myself"
                         label="Myself"
+                        playerIsOnline={true}
                         onChange={this.handleChange}
                     />
                     <Radio
@@ -85,6 +96,7 @@ export default class MidSurveyOne extends React.Component {
                         name="response"
                         value="team"
                         label="We worked as a team"
+                        playerIsOnline={true}
                         onChange={this.handleChange}
                     />
                     <Radio
@@ -92,6 +104,7 @@ export default class MidSurveyOne extends React.Component {
                         name="response"
                         value="none"
                         label="Our team did not have a leader"
+                        playerIsOnline={true}
                         onChange={this.handleChange}
                     />
                 </div>

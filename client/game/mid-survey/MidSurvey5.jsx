@@ -1,7 +1,8 @@
 import React from "react";
 import Slider from "meteor/empirica:slider";
 
-
+import { TimeSync } from "meteor/mizzao:timesync";
+import moment from "moment";
 import { Centered } from "meteor/empirica:core";
 import PlayerTab from "../PlayerTab";
 
@@ -18,6 +19,7 @@ export default class MidSurveyFive extends React.Component {
     // Rounding the number to 2 decimals max
     this.setState({sliderValue : num}) 
     player.stage.set("sliderValue", num);
+
   };
 
   renderLabels = (val) => {
@@ -38,6 +40,8 @@ export default class MidSurveyFive extends React.Component {
     event.preventDefault();
     // TODO: log player response to survey question
     player.round.set(`survey_${surveyNumber}`, this.state);
+    player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+
     player.set("submitted", true);
   };
   
@@ -66,7 +70,7 @@ export default class MidSurveyFive extends React.Component {
                     <img src={`images/hr-color-dark.png`} width={`${uncompletedWidth} px`} height="7px" />
                 </div>
                 <div className="questionnaire-body">
-                    <label className="questionnaire-question"> On the scale below, rate how your team has been working in the recent trials </label>
+                    <label className="questionnaire-question"> Do you think your group could improve its efficiency? If so, how? </label>
                     <textarea
                         className="survey-textarea"
                         dir="auto"

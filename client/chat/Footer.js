@@ -3,6 +3,9 @@ import "./style.less";
 import PropTypes from "prop-types";
 import React from "react";
 
+import { TimeSync } from "meteor/mizzao:timesync";
+import moment from "moment";
+
 export default class Footer extends React.Component {
   state = { comment: "", rows: 1, minRows: 1, maxRows: 5, buttonHeight: 30 };
 
@@ -29,6 +32,8 @@ export default class Footer extends React.Component {
     }
 
     onNewMessage(msg);
+    player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+    console.log("messaged")
 
     this.setState({ comment: "" });
   };

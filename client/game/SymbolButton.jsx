@@ -11,19 +11,21 @@ export default class SymbolButton extends React.Component {
   // When button is selected, player sets the id of the button he selected
   handleClick = () => {
       const { game, player, stage, name, handleButtonSelect } = this.props;
-      player.set("symbolSelected", name);
-      handleButtonSelect(name);
-      console.log(`${player.get("nodeId")} selected ${name}`);
+      if (!player.get("submitted")) {
+        player.set("symbolSelected", name);
+        handleButtonSelect(name);
+      }
+      // console.log(`${player.get("nodeId")} selected ${name}`);
   }
 
   render() {
-    const { game, stage, player, name, selected} = this.props;
-
-
+    const { game, stage, player, name, selected, totalSymbols} = this.props;
+    const size = 100/totalSymbols;
     return (
       <div className="symbol-container">
-        <button className={selected ? "symbolButtonSelected" : "symbolButtonUnselected"} onClick={this.handleClick}>
-            <img src={`images/symbols/tangrams/${name}.png`} height="80px" width="80px"/>
+        <button className={`${selected ? "symbolButtonSelected" : "symbolButtonUnselected"} ${player.get("submitted") ? "noHover" : ""}` } 
+          onClick={this.handleClick}>
+            <img src={`images/symbols/tangrams/${name}.png`} style={{maxWidth:"100%", maxHeight:`100%`}}/>
         </button>
      </div>
     );
