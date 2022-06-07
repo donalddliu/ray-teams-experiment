@@ -9,20 +9,26 @@ import ChatHeader from "./ChatHeader";
 import ErrorBoundary from "./ErrorBoundary";
 
 export default class ChatContainer extends React.PureComponent {
-  state = { 
-    isActive: true,
-    isOpen: true,
-  };
+  // state = { 
+  //   isActive: true,
+  //   isOpen: this.props.isOpen,
+  // };
 
   onTitleClick = () => {
-    this.setState({ isOpen: !this.state.isOpen});
+    const {isOpen, customKey, onOpenChat, onCloseChat} = this.props;
+    if (!isOpen) {
+      onOpenChat(customKey);
+    } else {
+      onCloseChat(customKey);
+    }
+    // this.setState({ isOpen: !this.state.isOpen});
   };
 
-  onXClick = () => {
-    const {customKey, onCloseChat} = this.props;
-    onCloseChat(customKey);
-    // this.setState({ isActive: !this.state.isActive})
-  };
+  // onXClick = () => {
+  //   const {customKey, onCloseChat} = this.props;
+  //   onCloseChat(customKey);
+  //   // this.setState({ isActive: !this.state.isActive})
+  // };
 
   onNewMessage = (msg) => {
     const { onNewMessage, scope, customKey } = this.props;
@@ -30,6 +36,7 @@ export default class ChatContainer extends React.PureComponent {
     if (onNewMessage) {
       msg = onNewMessage(msg);
       if (!msg) {
+        console.log("new");
         return;
       }
     }
@@ -40,14 +47,10 @@ export default class ChatContainer extends React.PureComponent {
   componentDidMount = () => {
     const { dockStartOpen, docked } = this.props;
     if (docked && !dockStartOpen) {
-      this.setState({
-        isOpen: false,
-      });
     }
   };
 
   render() {
-    const { isOpen, forceOpen } = this.state;
     const {
       player,
       scope,
@@ -62,26 +65,25 @@ export default class ChatContainer extends React.PureComponent {
       header: HeaderComp,
       message: MessageComp,
       footer: FooterComp,
-      isActive,
+      isOpen,
+      playerIsOnline,
+      onOpenChat,
       onCloseChat,
       ...rest
     } = this.props;
 
     const common = { player, scope, customKey };
-    if (!isActive) {
-      return null;
-    }
 
     return (
       <ErrorBoundary>
         <div
           className={`${
             customClassName ? customClassName : "empirica-chat-container"
-          } ${docked ? "undocked" : "undocked"}`}
+          } ${docked ? "undocked" : "undocked"} ${isOpen ? "open" : "closed"}`}
         >
-          <div className={`chat ${isOpen ? "open" : ""}`}>
+          <div className={`chat ${isOpen ? "open" : "closed"}`}>
             {docked && (
-              <HeaderComp {...common} otherPlayer={otherPlayer} onTitleClick={this.onTitleClick} onXClick={this.onXClick} isOpen={isOpen} />
+              <HeaderComp {...common} otherPlayer={otherPlayer} onTitleClick={this.onTitleClick} onXClick={this.onXClick} isOpen={isOpen} playerIsOnline={playerIsOnline} />
             )}
             {isOpen ? (
               <>

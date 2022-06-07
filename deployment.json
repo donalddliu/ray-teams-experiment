@@ -2,14 +2,27 @@
     "admins": [
       {
         "username": "admin",
-        "password": "U77jbjacxce!!"
+        "password": "ray2022"
       }
     ],
     "galaxy.meteor.com": {
       "env": {
-        "MONGO_URL":   "mongodb+srv://donaldl:U77jbjacxce-@rayexperiment.aydmy.mongodb.net/experimentDB1?retryWrites=true&w=majority",
-        "MONGO_OPLOG_URL": "mongodb+srv://oploguser:simplePassword@rayexperiment.aydmy.mongodb.net/local"
+        "MONGO_URL": "mongodb+srv://donaldl:U77jbjacxce@rayexperiment.tviyn.mongodb.net/experimentDB?retryWrites=true&w=majority",
+        "MONGO_OPLOG_URL": "mongodb+srv://oploguser:simplePassword@rayexperiment.tviyn.mongodb.net/local"
       }
+    },
+    "public": {
+      "playerIdParam": "workerId",
+  
+      "playerIdParamExclusive": false,
+  
+      "debug_newPlayer": false,
+  
+      "debug_resetSession": false,
+  
+      "debug_resetDatabase": true,
+  
+      "debug_gameDebugMode": true
     }
   }
 

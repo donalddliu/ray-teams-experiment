@@ -25,6 +25,7 @@ export default class TaskResponse extends React.Component {
       at: moment(TimeSync.serverTime(null, 1000)),
     })
     player.set("submitted", true);
+    player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
   };
 
   handleReconsider = event => {
@@ -40,6 +41,7 @@ export default class TaskResponse extends React.Component {
       object: true,
       at: moment(TimeSync.serverTime(null, 1000)),
     })
+    player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
 
     // this.setState({selectedButton: ""});
 
@@ -56,6 +58,7 @@ export default class TaskResponse extends React.Component {
       object: symbolName,
       at: moment(TimeSync.serverTime(null, 1000)),
     });
+    player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
 
   }
 
@@ -99,6 +102,7 @@ export default class TaskResponse extends React.Component {
         stage={stage}
         game={game}
         player={player}
+        totalSymbols={task.length}
       />
       )
     );
@@ -113,7 +117,11 @@ export default class TaskResponse extends React.Component {
 
     // Create a list of dots to show how many players submitted
     const playersSubmitted = round.get("numPlayersSubmitted");
-    const playersNotSubmitted = game.players.length - playersSubmitted;
+    // const numActivePlayers = game.players.filter(p => p.online === true && !p.get("inactive")).length;
+    const numActivePlayers = game.players.filter(p => !p.get("inactive")).length;
+
+    // console.log(numActivePlayers);
+    const playersNotSubmitted = numActivePlayers - playersSubmitted;
     let filledDots = [];
     let unfilledDots = [];
     for (let i = 0; i < playersSubmitted; i++) {

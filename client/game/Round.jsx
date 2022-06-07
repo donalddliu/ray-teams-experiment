@@ -3,9 +3,9 @@ import React from "react";
 import PlayerProfile from "./PlayerProfile.jsx";
 import SocialExposure from "./SocialExposure.jsx";
 import MyNetwork from "./MyNetwork.jsx";
+import RoundMetaData from './RoundMetaData.jsx';
 import Results from "./Results.jsx";
 import Task from "./Task.jsx";
-import Timer from "./Timer.jsx";
 
 import MidSurveyOne from "./mid-survey/MidSurvey1";
 import MidSurveyTwo from "./mid-survey/MidSurvey2";
@@ -13,33 +13,57 @@ import MidSurveyThree from "./mid-survey/MidSurvey3";
 import MidSurveyFour from "./mid-survey/MidSurvey4";
 import MidSurveyFive from "./mid-survey/MidSurvey5";
 
+import InactiveTimer from "./InactiveTimer.jsx";
+import Modal from "./Modal";
+
+import { TimeSync } from "meteor/mizzao:timesync";
+import moment from "moment";
+
 export default class Round extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeChats : [],
+      // activeChats : [],
+      modalIsOpen: false,
     }
 }
 
-  onOpenChat = (otherPlayerNodeId) => {
+  componentDidMount() {
     const {player} = this.props;
-    var pairOfPlayers = [player.get("nodeId"), parseInt(otherPlayerNodeId)];
-    pairOfPlayers.sort((p1,p2) => p1 - p2);
-    var customKey = `${pairOfPlayers[0]}-${pairOfPlayers[1]}`;
-    console.log(this.state);
-    console.log(this.state.activeChats);
-    if (!this.state.activeChats.includes(customKey)) {
-      this.state.activeChats.push(customKey);
-    }
-
-    console.log(this.state);
+    // Set the player's first activity at the start of the round
+    player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
   }
 
-  onCloseChat = (customKey) => {
-    const newActiveChats = this.state.activeChats.filter((chat) => chat !== customKey);
-    this.setState({activeChats : newActiveChats});
-    console.log(this.state);
+  onOpenModal = () => {
+    this.setState({modalIsOpen: true});
   }
+
+  onCloseModal = () => {
+    const {player} = this.props;
+    this.setState({modalIsOpen: false});
+    player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+  }
+
+  // onOpenChat = (otherPlayerNodeId) => {
+  //   const {player} = this.props;
+  //   var pairOfPlayers = [player.get("nodeId"), parseInt(otherPlayerNodeId)];
+  //   pairOfPlayers.sort((p1,p2) => p1 - p2);
+  //   var customKey = `${pairOfPlayers[0]}-${pairOfPlayers[1]}`;
+  //   // console.log(this.state);
+  //   // console.log(this.state.activeChats);
+  //   if (!this.state.activeChats.includes(customKey)) {
+  //     this.state.activeChats.push(customKey);
+  //   }
+  //   player.set("activeChats", this.state.activeChats);
+  // }
+
+  // onCloseChat = (customKey) => {
+  //   const {player} = this.props;
+  //   const newActiveChats = this.state.activeChats.filter((chat) => chat !== customKey);
+  //   this.setState({activeChats : newActiveChats});
+  //   player.set("activeChats", newActiveChats);
+  //   // console.log(this.state);
+  // }
 
   onNext = () => {
     const { player } = this.props;
@@ -55,7 +79,10 @@ export default class Round extends React.Component {
     // const uncompletedWidth = 590 - completedWidth;
 
     const windowOffset = 75;
-    let completedWidth = (window.innerWidth/game.players.length * round.get("numPlayersSubmitted"));
+    // const numActivePlayers = game.players.filter(p => p.online === true && !p.get("inactive")).length;
+    const numActivePlayers = game.players.filter(p => !p.get("inactive")).length;
+
+    let completedWidth = (window.innerWidth/numActivePlayers * round.get("numPlayersSubmitted"));
     let uncompletedWidth = (window.innerWidth - completedWidth);
 
     completedWidth -= windowOffset;
@@ -80,7 +107,7 @@ export default class Round extends React.Component {
   }
 
   renderSurvey = () => {
-    const { player } = this.props;
+    const { game, player } = this.props;
     const submitted = player.get("submitted");
     if (submitted) {
       return this.renderSubmitted();
@@ -88,47 +115,52 @@ export default class Round extends React.Component {
 
     const surveyNumber = player.get("surveyNumber");
     if (surveyNumber === 1) {
-      return <MidSurveyOne {...this.props} onNext={this.onNext}/>
+      return (
+      <>
+        <MidSurveyOne {...this.props} onNext={this.onNext}/>
+        <InactiveTimer game={game} player={player} />
+      </>
+      )
     } else if (surveyNumber === 2) {
-      return <MidSurveyTwo {...this.props} onNext={this.onNext}/>
+      return (
+      <>
+        <MidSurveyTwo {...this.props} onNext={this.onNext}/>
+        <InactiveTimer game={game} player={player} />
+      </>
+      )
     } else if (surveyNumber === 3) {
-      return <MidSurveyThree {...this.props} onNext={this.onNext}/>
+      return (
+        <>
+          <MidSurveyThree {...this.props} onNext={this.onNext}/>
+          <InactiveTimer game={game} player={player} />
+        </>
+      )    
     } else if (surveyNumber === 4) {
-      return <MidSurveyFour {...this.props} onNext={this.onNext}/>
+      return (
+        <>
+          <MidSurveyFour {...this.props} onNext={this.onNext}/>
+          <InactiveTimer game={game} player={player} />
+        </>
+     )    
     } else if (surveyNumber === 5) {
-      return <MidSurveyFive {...this.props} onNext={this.onNext}/>
+      return (
+        <>
+          <MidSurveyFive {...this.props} onNext={this.onNext}/>
+          <InactiveTimer game={game} player={player} />
+        </>
+      )    
     }
   }
 
   render() {
     const { stage, round, player, game } = this.props;
-
-    // Create a list of dots to show how many players submitted
-    const playersSubmitted = round.get("numPlayersSubmitted");
-    const playersNotSubmitted = game.players.length - playersSubmitted;
-    let filledDots = [];
-    let unfilledDots = [];
-    for (let i = 0; i < playersSubmitted; i++) {
-      filledDots.push(<span className="filled-dot"></span>)
-    }
-    for (let i = 0; i < playersNotSubmitted; i++) {
-      unfilledDots.push(<span className="empty-dot"></span>)
-    }
-
-    // if (showResults) {
-    //   const result = stage.get("result")
-    //   return (
-    //   <div>
-    //     <StageResult stage={stage} showResults={showResults} result={result} timer={10}/>
-    //   </div>
-    //   )
-    // }
+    // const numActivePlayers = game.players.filter(p => p.online === true && !p.get("inactive")).length;
+    const numActivePlayers = game.players.filter(p => !p.get("inactive")).length;
 
     if (stage.name === "Result") {
       return (
         <div className="round">
           <Results game={game} round={round} stage={stage}/> 
-          {/* <Timer stage={stage}/> */}
         </div>
       )
     } else if (stage.name === "Survey"){
@@ -139,13 +171,19 @@ export default class Round extends React.Component {
       return (
         <div className="round">
           <div className="content">
-            {/* <PlayerProfile player={player} stage={stage} game={game} /> */}
-            <div className="task-network-container">
+            <div className="round-task-container">
+              <RoundMetaData game={game} round={round} stage={stage} player={player} />
               <Task game={game} round={round} stage={stage} player={player} />
-              <MyNetwork game={game} round={round} stage={stage} player={player} onOpenChat={(otherPlayerNodeId) => this.onOpenChat(otherPlayerNodeId)}/>
+
             </div>
-            <SocialExposure game={game} round={round} stage={stage} player={player} onCloseChat={(customKey) => this.onCloseChat(customKey)} activeChats={this.state.activeChats} />
-            {/* <Timer stage={stage} /> */}
+            {/* <PlayerProfile player={player} stage={stage} game={game} /> */}
+              {/* <MyNetwork game={game} round={round} stage={stage} player={player} onOpenChat={(otherPlayerNodeId) => this.onOpenChat(otherPlayerNodeId)}/> */}
+            <SocialExposure 
+              game={game} round={round} stage={stage} player={player} 
+              // onOpenChat = {(otherPlayerNodeId) => this.onOpenChat(otherPlayerNodeId)} 
+              // onCloseChat={(customKey) => this.onCloseChat(customKey)} 
+              activeChats={this.state.activeChats} 
+            />
           </div>
         </div>
       );

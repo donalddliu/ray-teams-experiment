@@ -11,51 +11,116 @@ import Slider from "meteor/empirica:slider";
 
 
 export default class SocialExposure extends React.Component {
-  renderSocialInteraction(otherPlayer) {
-    const value = otherPlayer.round.get("value");
-    return (
-      <div className="alter" key={otherPlayer._id}>
-        <img src={otherPlayer.get("avatar")} className="profile-avatar" />
-        <div className="range">
-          <Slider
-            min={0}
-            max={1}
-            stepSize={0.01}
-            value={value}
-            disabled
-            hideHandleOnEmpty
-          />
-        </div>
-      </div>
-    );
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeChats: [],
+    }
   }
+
+  componentDidMount() {
+    const {player} = this.props;
+    // Set the player's first activity at the start of the round
+    const activeChats = player.get("activeChats");
+    this.setState({activeChats: activeChats});
+  }
+
+  onOpenChat = (customKey) => {
+    const {player} = this.props;
+    // var pairOfPlayers = [player.get("nodeId"), parseInt(otherPlayerNodeId)];
+    // pairOfPlayers.sort((p1,p2) => p1 - p2);
+    // var customKey = `${pairOfPlayers[0]}-${pairOfPlayers[1]}`;
+    // console.log(this.state);
+    // console.log(this.state.activeChats);
+    if (!this.state.activeChats.includes(customKey)) {
+      this.state.activeChats.push(customKey);
+      player.set("activeChats", this.state.activeChats);
+    }
+    console.log("Open Chat");
+  }
+
+  onCloseChat = (customKey) => {
+    const {player} = this.props;
+    const newActiveChats = this.state.activeChats.filter((chat) => chat !== customKey);
+    this.setState({activeChats : newActiveChats});
+    player.set("activeChats", newActiveChats);
+    console.log("Close chat");
+    console.log(this.state);
+  }
+
+
+  audio = new Audio(`sounds/notification-sound-7062.mp3`);
+
 
   logIncomingMessage = (msgs, customKey) => {
     const {game, round, stage, player} = this.props;
 
     const messages = round.get(`${customKey}`)
     const mostRecentMsg = messages[messages.length -1];
-    const receiver = mostRecentMsg.player._id;
+    console.log(mostRecentMsg);
+    const sender = mostRecentMsg.player._id;
 
     // TODO: Check if this only appends if player chat is open
     // onIncomingMessage logs the message for both sender and receiver
     // Only log one copy of the message
-    if (player._id === receiver) {
+    if (player._id === sender) {
+
+      console.log(customKey);
+      const pairOfPlayers = customKey.split("-");
+      console.log(customKey);
+      console.log(pairOfPlayers);
+      console.log(`My nodeId = ${player.get("nodeId")}`);
+      const receiverId = pairOfPlayers.filter((id) => parseInt(id) !== player.get("nodeId")); 
+      const receiver = game.players.find(p => p.get("nodeId") === parseInt(receiverId));
+      console.log(receiver);
+      const receiverChats = receiver.get("activeChats");
+      console.log(`Receiver Chats: ${receiverChats}`);
+      console.log(`custom Key : ${customKey}`);
+      if (!receiverChats.includes(customKey)) {
+        const newReceiverChats = [...receiverChats, customKey];
+        // const newReceiverChats = receiverChats.push(customKey);
+        console.log(newReceiverChats);
+        receiver.set("activeChats", newReceiverChats);
+        receiver.set("getNotified", true);
+      }
+      
+      console.log(receiver.id);
+      console.log(receiver.get("activeChats"));
+    }
+
+    if (player._id !== sender) {
       stage.append("log", {
         verb: "messageLog",
         subjectId: player.id,
         object: mostRecentMsg,
         at: moment(TimeSync.serverTime(null, 1000)),
       })
+      console.log("Message was sent");
+      const activeChats = player.get("activeChats");
+
+      if (!activeChats.includes(customKey)) {
+        console.log("Chat closed but message delivered");
+      }
+
+      this.audio.play();
+
     }
   }
 
   render() {
-    const { game, round, player, onCloseChat, activeChats } = this.props;
+    const { game, round, player, activeChats } = this.props;
 
     const network = player.get("neighbors");
     // reactive time value only updates at 1000 ms
     const timeStamp = new Date(TimeSync.serverTime(null, 1000));
+
+
+    const colors = ["Green", "Red", "Yellow", "Blue", "Purlpe", "White", "Black"]
+
+    if (player.get("getNotified")) {
+      this.audio.play();
+      player.set("getNotified", false);
+    }
 
     if (network.length === 0) {
       return null;
@@ -66,23 +131,25 @@ export default class SocialExposure extends React.Component {
         {/* <p>
           <strong>There are {network.length} other players:</strong>
         </p> */}
-        {/* {otherPlayers.map(p => this.renderSocialInteraction(p))} */}
         {/* <Chat player={player} scope={round} /> */}
 
         {network.map(otherNodeId => {
           var pairOfPlayers = [player.get("nodeId"), parseInt(otherNodeId)];
           pairOfPlayers.sort((p1,p2) => p1 - p2);
-          const otherPlayerId = game.players.find(p => p.get("nodeId") === parseInt(otherNodeId)).id
+          const otherPlayer = game.players.find(p => p.get("nodeId") === parseInt(otherNodeId));
+          const otherPlayerId = otherPlayer.get("anonymousName");
+          const playerIsOnline = otherPlayer.online === true && !otherPlayer.get("inactive");
           const chatKey = `${pairOfPlayers[0]}-${pairOfPlayers[1]}`;
+          const activeChats = player.get("activeChats");
+
           return (
-            <div>
-              {/* <h2>{otherPlayerId}</h2> */}
+            // <div style={{height: "80%"}}>
               <ChatContainer
                 docked={true}
                 key={otherNodeId}
                 player={player}
                 otherPlayer={otherPlayerId}
-                scope={game}  
+                scope={round}  
                 timeStamp={timeStamp}
                 customClassName={"ray-chat-container"}
                 message={Message}
@@ -90,18 +157,12 @@ export default class SocialExposure extends React.Component {
                 onIncomingMessage={this.logIncomingMessage}           
                 customKey={chatKey}
                 // isActive={activeChats.includes(chatKey)}
-                isActive={true}
-                onCloseChat={onCloseChat}
+                isOpen={activeChats.includes(chatKey)}
+                playerIsOnline={playerIsOnline}
+                onOpenChat = {(customKey) => this.onOpenChat(customKey)} 
+                onCloseChat={(customKey) => this.onCloseChat(customKey)} 
               />
-           {/* <ChatContainer
-            //     key={otherNodeId}
-            //     player={player}
-            //     scope={round}  
-            //     timeStamp={timeStamp}
-            //     onIncomingMessage={this.logIncomingMessage}           
-            //     customKey={`${pairOfPlayers[0]}-${pairOfPlayers[1]}`}
-            //   /> */}
-             </div>
+              // </div>
             )
           }
         )}

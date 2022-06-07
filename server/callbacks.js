@@ -1,10 +1,30 @@
 import Empirica from "meteor/empirica:core";
 
+import { getFullyConnectedLayer } from "./util";
+
+
 // onGameStart is triggered opnce per game before the game starts, and before
 // the first onRoundStart. It receives the game and list of all the players in
 // the game.
 Empirica.onGameStart(game => {
   console.log("Game started");
+  game.players.forEach((player) => {
+    player.set("inactive", false);
+    const network = player.get("neighbors");
+    const activeChats = [];
+    network.map(otherNodeId => {
+      var pairOfPlayers = [player.get("nodeId"), parseInt(otherNodeId)];
+      pairOfPlayers.sort((p1,p2) => p1 - p2);
+      const otherPlayer = game.players.find(p => p.get("nodeId") === parseInt(otherNodeId));
+      // const otherPlayerId = otherPlayer.id;
+      const chatKey = `${pairOfPlayers[0]}-${pairOfPlayers[1]}`;
+      activeChats.push(chatKey);
+    });
+    // Default all chats to be open when game starts
+    player.set("activeChats", activeChats);
+    console.log(player.get("activeChats"));
+  });
+  game.set("previousNumActivePlayers", game.players.length);
 });
 
 // onRoundStart is triggered before each round starts, and before onStageStart.
@@ -16,16 +36,41 @@ Empirica.onRoundStart((game, round) => {
   });
   round.set("result", false);
   round.set("numPlayersSubmitted", 0);
+  // const activePlayers = game.players.filter(p => p.online === true && !p.get("inactive"));
+  const activePlayers = game.players.filter(p => !p.get("inactive"));
+
+  if (activePlayers.length < game.get("previousNumActivePlayers") ) { // Someone left in the middle of the round
+    if (game.treatment.endGameIfPlayerIdle) {
+      activePlayers.forEach((p) => {
+        p.exit("someoneInactive");
+      })
+    } else {
+      getFullyConnectedLayer(game); // Updates the neighbors to be fully connected
+    }
+  
+  }
+  game.set("previousNumActivePlayers", activePlayers.length);
 
   console.log("Round Started");
+
 });
 
 // onStageStart is triggered before each stage starts.
 // It receives the same options as onRoundStart, and the stage that is starting.
 Empirica.onStageStart((game, round, stage) => {
   console.log("Stage Started")
+  // const activePlayers = game.players.filter(p => p.online === true && !p.get("inactive"));
+  const activePlayers = game.players.filter(p => !p.get("inactive"));
+
+  if (stage.name === "Task") {
+    activePlayers.forEach((player) => {
+      console.log(player.id);
+      console.log( `Symbols : ${player.get(`${stage.displayName}`)}`);
+    });
+    console.log(`Answer: ${stage.get("answer")}`);
+  }
   if (stage.name === "Survey") {
-    game.players.forEach((player) => {
+    activePlayers.forEach((player) => {
       player.set("surveyNumber" , 1)
     });
   }
@@ -41,6 +86,7 @@ Empirica.onStageStart((game, round, stage) => {
 // It receives the same options as onRoundEnd, and the stage that just ended.
 Empirica.onStageEnd((game, round, stage) =>{
   console.log("Stage Ended")
+  
 });
 
 // onRoundEnd is triggered after each round.
@@ -108,6 +154,9 @@ Empirica.onSet((
   prevValue // Previous value
 ) => {
   const players = game.players;
+  // const activePlayers = game.players.filter(p => p.online === true && !p.get("inactive"));
+  const activePlayers = game.players.filter(p => !p.get("inactive"));
+
   // Some player decides to reconsider their answer
   console.log("key", key);
   if (key === "submitted") { 
@@ -115,7 +164,7 @@ Empirica.onSet((
     // Checks if everyone has submitted their answer and if so, submit the stage
     let allSubmitted = true;
     let numPlayersSubmitted = 0;
-    players.forEach((player) => {
+    activePlayers.forEach((player) => {
       if (player.get("submitted")) {
         numPlayersSubmitted += 1;
       }
@@ -124,8 +173,9 @@ Empirica.onSet((
     round.set("numPlayersSubmitted", numPlayersSubmitted);
     if (allSubmitted) {
       const log = stage.get("log");
-      computeScore(game, stage, round);
-      players.forEach((player) => {
+      computeScore(activePlayers, stage, round);
+      // Need to submit for submit the stage for every player
+      game.players.forEach((player) => {
         player.stage.submit();
       })
     }
@@ -144,16 +194,21 @@ Empirica.onSet((
   //   }
   }
 
+  // else if (key === "inactive") {
+    // getFullyConnectedLayer(game);
+  // }
+
   return;
 
 });
 
-function computeScore(game, stage, round) {
+function computeScore(activePlayers, stage, round) {
   let success = true;
   console.log("CORRECT ANSWER:")
   console.log(stage.get("answer"));
   console.log("Players guessed:")
-  game.players.forEach(player => {
+
+  activePlayers.forEach(player => {
     const submission = player.get("symbolSelected");
     console.log(submission);
     if (submission !== stage.get("answer")) {
@@ -162,7 +217,7 @@ function computeScore(game, stage, round) {
   })
   round.set("result", success);
   if (success) {
-    game.players.forEach(player => {
+    activePlayers.forEach(player => {
       const prevScore = player.get("score") || 0;
       player.set("score", prevScore + 1);
     })
@@ -188,7 +243,6 @@ function computeScore(game, stage, round) {
 // });
 
 
-// TODO: Move display results here
 // // onChange is called when the experiment code call the `.set()` or the
 // // `.append()` method on games, rounds, stages, players, playerRounds or
 // // playerStages.

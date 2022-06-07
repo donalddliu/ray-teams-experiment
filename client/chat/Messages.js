@@ -29,6 +29,7 @@ class Messages extends React.Component {
     this.setState({ messageLength: this.props.messages.length });
   }
 
+
   componentDidUpdate(prevProps) {
     const { messageLength } = this.state;
     const {

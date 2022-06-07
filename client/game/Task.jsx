@@ -1,7 +1,6 @@
 import React from "react";
 
 import TaskResponse from "./TaskResponse";
-import TaskStimulus from "./TaskStimulus";
 
 export default class Task extends React.Component {
   render() {
@@ -9,7 +8,6 @@ export default class Task extends React.Component {
 
     return (
       <div className="task-container">
-        {/* <TaskStimulus {...this.props} /> */}
         <TaskResponse {...this.props} />
       </div>
     );
