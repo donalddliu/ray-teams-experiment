@@ -2370,9 +2370,9 @@ class NetworkSurveyOne extends React.Component {
       } = this.props;
       event.preventDefault(); // TODO: log player response to survey question
 
-      const networkSurveyResponse = this.state;
       player.set("name", player.id);
-      player.set("networkResponse", networkSurveyResponse);
+      const networkSurveyResponse = this.state;
+      player.set("networkResponse1", networkSurveyResponse);
       onNext();
     };
   }
@@ -2864,11 +2864,18 @@ class AllQuiz extends React.Component {
       event.preventDefault();
 
       if (this.allCorrect()) {
+        const currentTriesLeft = player.get("attentionCheckTries");
+        const attentionCheckAnswers = this.state;
+        player.set("attentionCheck-".concat(currentTriesLeft), attentionCheckAnswers);
         onNext();
       } else {
-        const currentTriesLeft = player.get("attentionCheckTries");
+        const currentTriesLeft = player.get("attentionCheckTries"); // Log the attention check answers
+
+        const attentionCheckAnswers = this.state;
+        player.set("attentionCheck-".concat(currentTriesLeft), attentionCheckAnswers); // Log how many tries they have left
+
         player.set("attentionCheckTries", currentTriesLeft - 1);
-        console.log("You have ".concat(player.get("attentionCheckTries"), " tries left."));
+        console.log("You have ".concat(player.get("attentionCheckTries"), " tries left.")); // If player uses all their attention check tries, they fail; otherwise show them how many tries they have left
 
         if (player.get("attentionCheckTries") === 0) {
           player.exit("failedQuestion");

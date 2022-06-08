@@ -2978,9 +2978,9 @@ var NetworkSurveyOne = /*#__PURE__*/function (_React$Component) {
           player = _this$props.player;
       event.preventDefault(); // TODO: log player response to survey question
 
-      var networkSurveyResponse = _this.state;
       player.set("name", player.id);
-      player.set("networkResponse", networkSurveyResponse);
+      var networkSurveyResponse = _this.state;
+      player.set("networkResponse1", networkSurveyResponse);
       onNext();
     };
 
@@ -3571,11 +3571,19 @@ var AllQuiz = /*#__PURE__*/function (_React$Component) {
       event.preventDefault();
 
       if (_this.allCorrect()) {
+        var currentTriesLeft = player.get("attentionCheckTries");
+        var attentionCheckAnswers = _this.state;
+        player.set("attentionCheck-" + currentTriesLeft, attentionCheckAnswers);
         onNext();
       } else {
-        var currentTriesLeft = player.get("attentionCheckTries");
-        player.set("attentionCheckTries", currentTriesLeft - 1);
-        console.log("You have " + player.get("attentionCheckTries") + " tries left.");
+        var _currentTriesLeft = player.get("attentionCheckTries"); // Log the attention check answers
+
+
+        var _attentionCheckAnswers = _this.state;
+        player.set("attentionCheck-" + _currentTriesLeft, _attentionCheckAnswers); // Log how many tries they have left
+
+        player.set("attentionCheckTries", _currentTriesLeft - 1);
+        console.log("You have " + player.get("attentionCheckTries") + " tries left."); // If player uses all their attention check tries, they fail; otherwise show them how many tries they have left
 
         if (player.get("attentionCheckTries") === 0) {
           player.exit("failedQuestion");
