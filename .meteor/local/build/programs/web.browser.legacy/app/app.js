@@ -2978,8 +2978,8 @@ var NetworkSurveyOne = /*#__PURE__*/function (_React$Component) {
           player = _this$props.player;
       event.preventDefault(); // TODO: log player response to survey question
 
-      player.set("name", player.id);
       var networkSurveyResponse = _this.state;
+      player.set("name", player.id);
       player.set("networkResponse1", networkSurveyResponse);
       onNext();
     };
@@ -3209,8 +3209,10 @@ var NetworkSurveyTwo = /*#__PURE__*/function (_React$Component) {
       var _this$props = _this.props,
           onNext = _this$props.onNext,
           player = _this$props.player;
+      var networkSurveyResponse = _this.state;
       event.preventDefault(); // TODO: log player response to survey question
 
+      player.set("networkResponse2", networkSurveyResponse);
       onNext();
     };
 
@@ -3226,11 +3228,9 @@ var NetworkSurveyTwo = /*#__PURE__*/function (_React$Component) {
           round = _this$props2.round,
           stage = _this$props2.stage,
           player = _this$props2.player;
-      console.log(player.get("networkResponse")); // const { name1, name2, name3, name4, name5 } = {name1: "w", name2: "a", name3: "s", name4: "d", name5:"f"};
-
       var filledOut = true;
 
-      var _player$get = player.get("networkResponse"),
+      var _player$get = player.get("networkResponse1"),
           name1 = _player$get.name1,
           name2 = _player$get.name2,
           name3 = _player$get.name3,
@@ -3383,7 +3383,9 @@ var NetworkSurveyThree = /*#__PURE__*/function (_React$Component) {
       var _this$props = _this.props,
           onNext = _this$props.onNext,
           player = _this$props.player;
-      event.preventDefault(); // TODO: log player response to survey question
+      event.preventDefault();
+      var networkSurveyResponse = _this.state;
+      player.set("networkResponse2", networkSurveyResponse); // TODO: log player response to survey question
 
       onNext();
     };
@@ -3399,12 +3401,11 @@ var NetworkSurveyThree = /*#__PURE__*/function (_React$Component) {
           game = _this$props2.game,
           round = _this$props2.round,
           stage = _this$props2.stage,
-          player = _this$props2.player;
-      console.log(player.get("networkResponse")); // const { name1, name2, name3, name4, name5 } = {name1: "w", name2: "a", name3: "s", name4: "d", name5:"f"};
+          player = _this$props2.player; // const { name1, name2, name3, name4, name5 } = {name1: "w", name2: "a", name3: "s", name4: "d", name5:"f"};
 
       var filledOut = true;
 
-      var _player$get = player.get("networkResponse"),
+      var _player$get = player.get("networkResponse1"),
           name1 = _player$get.name1,
           name2 = _player$get.name2,
           name3 = _player$get.name3,

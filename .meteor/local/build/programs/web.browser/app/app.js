@@ -2370,8 +2370,8 @@ class NetworkSurveyOne extends React.Component {
       } = this.props;
       event.preventDefault(); // TODO: log player response to survey question
 
-      player.set("name", player.id);
       const networkSurveyResponse = this.state;
+      player.set("name", player.id);
       player.set("networkResponse1", networkSurveyResponse);
       onNext();
     };
@@ -2568,8 +2568,10 @@ class NetworkSurveyTwo extends React.Component {
         onNext,
         player
       } = this.props;
+      const networkSurveyResponse = this.state;
       event.preventDefault(); // TODO: log player response to survey question
 
+      player.set("networkResponse2", networkSurveyResponse);
       onNext();
     };
   }
@@ -2581,8 +2583,6 @@ class NetworkSurveyTwo extends React.Component {
       stage,
       player
     } = this.props;
-    console.log(player.get("networkResponse")); // const { name1, name2, name3, name4, name5 } = {name1: "w", name2: "a", name3: "s", name4: "d", name5:"f"};
-
     const filledOut = true;
     const {
       name1,
@@ -2590,7 +2590,7 @@ class NetworkSurveyTwo extends React.Component {
       name3,
       name4,
       name5
-    } = player.get("networkResponse");
+    } = player.get("networkResponse1");
     return /*#__PURE__*/React.createElement("div", {
       className: "network-survey-container"
     }, /*#__PURE__*/React.createElement("div", {
@@ -2707,7 +2707,9 @@ class NetworkSurveyThree extends React.Component {
         onNext,
         player
       } = this.props;
-      event.preventDefault(); // TODO: log player response to survey question
+      event.preventDefault();
+      const networkSurveyResponse = this.state;
+      player.set("networkResponse2", networkSurveyResponse); // TODO: log player response to survey question
 
       onNext();
     };
@@ -2719,8 +2721,7 @@ class NetworkSurveyThree extends React.Component {
       round,
       stage,
       player
-    } = this.props;
-    console.log(player.get("networkResponse")); // const { name1, name2, name3, name4, name5 } = {name1: "w", name2: "a", name3: "s", name4: "d", name5:"f"};
+    } = this.props; // const { name1, name2, name3, name4, name5 } = {name1: "w", name2: "a", name3: "s", name4: "d", name5:"f"};
 
     const filledOut = true;
     const {
@@ -2729,7 +2730,7 @@ class NetworkSurveyThree extends React.Component {
       name3,
       name4,
       name5
-    } = player.get("networkResponse");
+    } = player.get("networkResponse1");
     return /*#__PURE__*/React.createElement("div", {
       className: "network-survey-container"
     }, /*#__PURE__*/React.createElement("div", {

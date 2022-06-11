@@ -2,7 +2,15 @@
 
 _This project was generated with [create-empirica-app](https://github.com/empiricaly/create-empirica-app)._
 
+This is an experiment powered by [Empirica](https://empirica.ly/) (here is a basic [tutorial](https://www.youtube.com/watch?v=K2YhEZey_58&list=PLPQelvUwyVgiawBDk3Sp74QMfL8RPgORW&index=2&ab_channel=Empirica) on how to set-up Empirica). Through this study, we want to investigate **how communication affects team performance**. The task requires that multiple people work together identifying symbols for multiple trials. 
+
 *Add a description of your Empirica app*
+
+# Experiment Details:
+## The task
+
+## Procedure
+
 
 # Running this App Locally
 

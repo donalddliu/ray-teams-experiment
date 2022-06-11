@@ -21,9 +21,10 @@ export default class NetworkSurveyOne extends React.Component {
     const { onNext, player } = this.props;
     event.preventDefault();
     // TODO: log player response to survey question
-    player.set("name", player.id);
     const networkSurveyResponse = this.state;
+    player.set("name", player.id);
     player.set("networkResponse1", networkSurveyResponse);
+    
     onNext();
   };
 

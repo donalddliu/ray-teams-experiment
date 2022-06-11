@@ -7,3 +7,6 @@ staging.json
 development.json
 dev.json
 local.json
+deployment.json
+.DS_Store
+._.DS_Store
