@@ -4,12 +4,12 @@ _This project was generated with [create-empirica-app](https://github.com/empiri
 
 This is an experiment powered by [Empirica](https://empirica.ly/) (here is a basic [tutorial](https://www.youtube.com/watch?v=K2YhEZey_58&list=PLPQelvUwyVgiawBDk3Sp74QMfL8RPgORW&index=2&ab_channel=Empirica) on how to set-up Empirica). Through this study, we want to investigate **how communication affects team performance**. The task requires that multiple people work together identifying symbols for multiple trials. 
 
-*Add a description of your Empirica app*
 
 # Experiment Details:
 ## The task
+In this this experiment, participants are placed into teams of N people. Participants are assigned a set of symbols. One and only one of those symbols will be shared among the players. The participants task is to discover the shared symbol by communiucating with each other. Participants should communicate until they feel they have received enough information to correctly guess what the common symbol is. After a participant submits their guess, they are allowed to reconsider their answer in the case they change their mind.
 
-## Procedure
+After everyone on the team has submitted, the team will be told if everyone chose the right answer or not. Then, they move on to the next trial of the experiment. Throughout the experiements, there will be mid-game surveys for participants to fill out. They will be asked to describe the leadership dynamics of their group, how satisfied they are with their teammates, their personal performance. 
 
 
 # Running this App Locally
@@ -21,29 +21,57 @@ If you haven't already:
 - Install `Meteor` here: [https://www.meteor.com/install](https://www.meteor.com/install)
 
 ## Preparing this app
+1. Download the repository (and unzip). Alternatively, from terminal just run `git clone https://github.com/itzdonaldxd/ray-experiment.git`
+2. Go into the folder with `meteor npm install`
 
-If you have just downloaded, pulled, or cloned this app, you should run this in the command line to install all the Node packages:
+3. Install the required dependencies with `meteor npm install`
+
+4. Create a settings file. i.e.`settings.json`. Within this file, add a JSON object. Fill in all of the data marked <>. The fields within the admins object are for accessing the admin page in the Empirica application. The fields within the galaxy.meteor.com object are for accessing the application's database (More details within the deployment guide)
 
 ```
-meteor npm install
+{
+    "admins": [
+      {
+        "username": "admin",
+        "password": <password>
+      }
+    ],
+    "galaxy.meteor.com": {
+      "env": {
+        "MONGO_URL": "mongodb+srv://<read&write username>:<read&write password>@<connection>/<database name>?retryWrites=true&w=majority",
+        "MONGO_OPLOG_URL": "mongodb+srv://<oplog username>:<oplog password>@<connection>/local"
+      }
+    },
+    "public": {
+      "playerIdParam": "workerId",
+  
+      "playerIdParamExclusive": false,
+  
+      "debug_newPlayer": false,
+  
+      "debug_resetSession": false,
+  
+      "debug_resetDatabase": true,
+  
+      "debug_gameDebugMode": true
+    }
+  }
+
 ```
 
 ## Launching the app
 
-You can now run the app on your local machine with:
+1. You can now run the app on your local machine with: This can take a few minutes.
 
 ```
-meteor
+meteor --settings settings.json
 ```
-This can take a few minutes.
 
-This will start the app that you can access as a participant:
+2. This will start the app that you can access as a participant:
 [https:/localhost:3000/](https:/localhost:3000/)
 
-You can access the admin panel here:
-[https:/localhost:3000/admin](https:/localhost:3000/admin)
-
-Log in with the *username* and *password* provided in the command line.
+3. You can access the admin panel here:
+[https:/localhost:3000/admin](https:/localhost:3000/admin). Log in with the credentials username: `admin` and the password you have in local.json
 
 ## Loading the factors and treatments
 
