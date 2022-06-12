@@ -15,6 +15,8 @@ After everyone on the team has submitted, the team will be told if everyone chos
 # Running this App Locally
 
 ## General  Setup
+If you are using a windows operation system, follow the instructions [here](https://docsv1.empirica.ly/getting-started/setup/windows-instructions) to set up a Windows Subsystem for Linux (WSL). Empirica is built on industry-standard open-source web technologies which run best in Unix-like operating systems such as Linux and MacOS. 
+
 If you haven't already:
 
 - Install `Node.js` and `npm` here: [https://nodejs.org/en/](https://nodejs.org/en/)
