@@ -34,8 +34,8 @@ Empirica.gameInit(game => {
   const setSize = setSizeBasedOnPlayerCount ? playerCount + 1 : defaultSetSize; //TODO: can change default value in settings
   const numRoundsBeforeSurvey = numTaskRounds/numSurveyRounds;
 
-  const colors = ["Green", "Red", "Yellow", "Blue", "Purlpe", "White", "Black"]
-
+  let colors = ["Green", "Red", "Yellow", "Blue", "Purlpe", "White", "Black"]
+  colors = shuffle(colors);
 
   game.players.forEach((player, i) => {
     player.set("avatar", `/avatars/jdenticon/${player._id}`);
@@ -48,7 +48,7 @@ Empirica.gameInit(game => {
   });
 
 
-  if (game.players.length < game.treatment.playerCount) {
+  if (game.players.length < game.treatment.playerCount) { // if not a full game, default to fully connected layer
     getFullyConnectedLayer(game);
     game.players.forEach((p) => {
       console.log(p.get("neighbors"));
