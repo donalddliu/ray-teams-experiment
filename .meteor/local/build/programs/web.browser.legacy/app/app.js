@@ -1519,7 +1519,6 @@ var PlayerTab = /*#__PURE__*/function (_React$Component) {
     _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
 
     _this.handleOpenChat = function () {
-      console.log(_this.props);
       var _this$props = _this.props,
           otherPlayerNodeId = _this$props.otherPlayerNodeId,
           openChat = _this$props.openChat;
@@ -2189,19 +2188,13 @@ var SocialExposure = /*#__PURE__*/function (_React$Component) {
     _this = _React$Component.call(this, props) || this;
 
     _this.onOpenChat = function (customKey) {
-      var player = _this.props.player; // var pairOfPlayers = [player.get("nodeId"), parseInt(otherPlayerNodeId)];
-      // pairOfPlayers.sort((p1,p2) => p1 - p2);
-      // var customKey = `${pairOfPlayers[0]}-${pairOfPlayers[1]}`;
-      // console.log(this.state);
-      // console.log(this.state.activeChats);
+      var player = _this.props.player;
 
       if (!_this.state.activeChats.includes(customKey)) {
         _this.state.activeChats.push(customKey);
 
         player.set("activeChats", _this.state.activeChats);
       }
-
-      console.log("Open Chat");
     };
 
     _this.onCloseChat = function (customKey) {
@@ -2216,8 +2209,6 @@ var SocialExposure = /*#__PURE__*/function (_React$Component) {
       });
 
       player.set("activeChats", newActiveChats);
-      console.log("Close chat");
-      console.log(_this.state);
     };
 
     _this.audio = new Audio("sounds/notification-sound-7062.mp3");
@@ -2230,38 +2221,25 @@ var SocialExposure = /*#__PURE__*/function (_React$Component) {
           player = _this$props.player;
       var messages = round.get("" + customKey);
       var mostRecentMsg = messages[messages.length - 1];
-      console.log(mostRecentMsg);
       var sender = mostRecentMsg.player._id; // TODO: Check if this only appends if player chat is open
       // onIncomingMessage logs the message for both sender and receiver
       // Only log one copy of the message
 
       if (player._id === sender) {
-        console.log(customKey);
         var pairOfPlayers = customKey.split("-");
-        console.log(customKey);
-        console.log(pairOfPlayers);
-        console.log("My nodeId = " + player.get("nodeId"));
         var receiverId = pairOfPlayers.filter(function (id) {
           return parseInt(id) !== player.get("nodeId");
         });
         var receiver = game.players.find(function (p) {
           return p.get("nodeId") === parseInt(receiverId);
         });
-        console.log(receiver);
         var receiverChats = receiver.get("activeChats");
-        console.log("Receiver Chats: " + receiverChats);
-        console.log("custom Key : " + customKey);
 
         if (!receiverChats.includes(customKey)) {
-          var newReceiverChats = [].concat(_toConsumableArray(receiverChats), [customKey]); // const newReceiverChats = receiverChats.push(customKey);
-
-          console.log(newReceiverChats);
+          var newReceiverChats = [].concat(_toConsumableArray(receiverChats), [customKey]);
           receiver.set("activeChats", newReceiverChats);
           receiver.set("getNotified", true);
         }
-
-        console.log(receiver.id);
-        console.log(receiver.get("activeChats"));
       }
 
       if (player._id !== sender) {
@@ -2271,7 +2249,6 @@ var SocialExposure = /*#__PURE__*/function (_React$Component) {
           object: mostRecentMsg,
           at: moment(TimeSync.serverTime(null, 1000))
         });
-        console.log("Message was sent");
         var activeChats = player.get("activeChats");
 
         if (!activeChats.includes(customKey)) {
@@ -2315,7 +2292,6 @@ var SocialExposure = /*#__PURE__*/function (_React$Component) {
       var network = player.get("neighbors"); // reactive time value only updates at 1000 ms
 
       var timeStamp = new Date(TimeSync.serverTime(null, 1000));
-      var colors = ["Green", "Red", "Yellow", "Blue", "Purlpe", "White", "Black"];
 
       if (player.get("getNotified")) {
         this.audio.play();
@@ -2437,8 +2413,7 @@ var SymbolButton = /*#__PURE__*/function (_React$Component) {
       if (!player.get("submitted")) {
         player.set("symbolSelected", name);
         handleButtonSelect(name);
-      } // console.log(`${player.get("nodeId")} selected ${name}`);
-
+      }
     };
 
     return _this;
@@ -2639,7 +2614,6 @@ var TaskResponse = /*#__PURE__*/function (_React$Component) {
           player = _this$props2.player,
           game = _this$props2.game;
       event.preventDefault();
-      console.log("Reconsidering...");
       player.set("submitted", false);
       stage.append("log", {
         verb: "playerReconsidered",
@@ -2747,8 +2721,7 @@ var TaskResponse = /*#__PURE__*/function (_React$Component) {
 
       var numActivePlayers = game.players.filter(function (p) {
         return !p.get("inactive");
-      }).length; // console.log(numActivePlayers);
-
+      }).length;
       var playersNotSubmitted = numActivePlayers - playersSubmitted;
       var filledDots = [];
       var unfilledDots = [];
@@ -3616,7 +3589,6 @@ var AllQuiz = /*#__PURE__*/function (_React$Component) {
       var player = this.props.player;
 
       if (!player.get("attentionCheckTries")) {
-        console.log("Mounted");
         player.set("attentionCheckTries", 3);
       }
     }
@@ -3641,8 +3613,7 @@ var AllQuiz = /*#__PURE__*/function (_React$Component) {
           q8 = _this$state.q8;
       var allSelected = Object.keys(this.state).every(function (key) {
         return _this2.state[key] !== "";
-      }); // console.log(allSelected);
-
+      });
       return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
         className: "intro-heading questionnaire-heading"
       }, " Questionnaire "), /*#__PURE__*/React.createElement("div", {
@@ -3839,7 +3810,6 @@ var AttentionCheckModal = /*#__PURE__*/function (_React$Component) {
           onPrev = _this$props.onPrev,
           onCloseModal = _this$props.onCloseModal;
       var triesLeft = player.get("attentionCheckTries");
-      console.log(onPrev);
       return /*#__PURE__*/React.createElement("div", {
         className: "dark-bg",
         onClick: onCloseModal
@@ -6143,7 +6113,6 @@ var Footer = /*#__PURE__*/function (_React$Component) {
 
       onNewMessage(msg);
       player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
-      console.log("messaged");
 
       _this.setState({
         comment: ""
@@ -7354,10 +7323,8 @@ module.exports = require("meteor/modules").addStyles(
     ".js",
     ".json",
     ".html",
-    ".less",
-    ".css",
-    ".mjs",
-    ".jsx"
+    ".jsx",
+    ".less"
   ]
 });
 
