@@ -44,27 +44,6 @@ export default class Round extends React.Component {
     player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
   }
 
-  // onOpenChat = (otherPlayerNodeId) => {
-  //   const {player} = this.props;
-  //   var pairOfPlayers = [player.get("nodeId"), parseInt(otherPlayerNodeId)];
-  //   pairOfPlayers.sort((p1,p2) => p1 - p2);
-  //   var customKey = `${pairOfPlayers[0]}-${pairOfPlayers[1]}`;
-  //   // console.log(this.state);
-  //   // console.log(this.state.activeChats);
-  //   if (!this.state.activeChats.includes(customKey)) {
-  //     this.state.activeChats.push(customKey);
-  //   }
-  //   player.set("activeChats", this.state.activeChats);
-  // }
-
-  // onCloseChat = (customKey) => {
-  //   const {player} = this.props;
-  //   const newActiveChats = this.state.activeChats.filter((chat) => chat !== customKey);
-  //   this.setState({activeChats : newActiveChats});
-  //   player.set("activeChats", newActiveChats);
-  //   // console.log(this.state);
-  // }
-
   onNext = () => {
     const { player } = this.props;
     const curSurveyNumber = player.get("surveyNumber");

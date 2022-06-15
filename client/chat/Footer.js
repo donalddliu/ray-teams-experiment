@@ -33,7 +33,6 @@ export default class Footer extends React.Component {
 
     onNewMessage(msg);
     player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
-    console.log("messaged")
 
     this.setState({ comment: "" });
   };

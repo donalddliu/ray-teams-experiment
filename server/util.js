@@ -44,6 +44,5 @@ export function getFullyConnectedLayer(game) {
       // Show everyone, mark offline people as offline
       const newNeighbors = allNodes.filter(id => parseInt(id) !== p.get("nodeId"))
       p.set("neighbors", newNeighbors);
-      console.log(p.get("neighbors"));
     })
 }

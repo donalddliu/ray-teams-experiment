@@ -93,79 +93,9 @@ Empirica.gameInit(game => {
       })
     }
 
-
-    // Question: What's the difference between setting something and
-    // adding it into add stage
   });
 
 
-
-  // function getSymbolsForPlayers(symbolSet, answer, size, taskName, game) {
-  //   let symbolsWithoutAnswer = symbolSet.filter(symbol => symbol !== answer);
-  //   let shuffledSymbols = shuffle(symbolsWithoutAnswer);
-
-  //   // game.players.forEach((p) => {
-  //   //   // Finding a random splice of symbols without the answer (hence -2)
-  //   //   const randomIndex = Math.floor(Math.random() * (symbolsWithoutAnswer.length + size - 2));
-  //   //   let subset = shuffledSymbols.splice(randomIndex, randomIndex + size)
-      
-  //   //   // Adding in the answer in a random spot
-  //   //   subset.splice(randomIndex % size, 0, answer);
-  //   //   p.set(`${taskName}`, subset);
-  //   // })
-
-  //   let symbolFreq = {}
-  //   for (let i = 0; i < symbolsWithoutAnswer.length; i++) {
-  //     const symbol = symbolsWithoutAnswer[i]
-  //     // console.log(!symbolFreq.hasOwnProperty(symbol));
-  //     if (!symbolFreq.hasOwnProperty(symbol)) {
-  //       symbolFreq[symbol] = 0
-  //     }
-  //   }
-
-  //   let subsetsToCreate = game.players.length;
-  //   let subsetArray = []
-  //   let subset = []
-  //   let maxFreq = 0;
-  //   let allSameFreq = true;
-  //   // console.log(subsetsToCreate);
-  //   // console.log("Hi");
-  //   // console.log(symbolFreq);
-  //   while (subsetsToCreate > 0) {
-  //     if (allSameFreq) {
-  //       maxFreq += 1
-  //     }
-  //     for (let i = 0; i < symbolsWithoutAnswer.length; i++) {
-  //       const symbol = symbolsWithoutAnswer[i]
-  //       if (symbolFreq[symbol] < maxFreq && !subset.includes(symbol)) { // Add symbols to subset based on the symbol freq
-  //         symbolFreq[symbol] += 1
-  //         subset.push(symbol);
-  //         allSameFreq = false;
-
-  //       }
-  //       // Subset is only missing answer => add answer
-  //       // Add subset to overall array and reset 
-  //       if (subset.length === size - 1) { 
-  //         const randomIndex = Math.floor(Math.random() * (size- 1));
-  //         subset.splice(randomIndex, 0, answer);
-  //         subsetArray.push(subset);
-  //         console.log(subset);
-  //         subsetsToCreate -= 1;
-  //         subset = []
-  //       }
-  //     }
-  //     // Check the frequencies of the symbols
-  //     allSameFreq = Object.keys(symbolFreq).every((key) => symbolFreq[key] === maxFreq);
-  //     // console.log("Same freq");
-  //     // console.log(allSameFreq);
-  //   }
-  //   let i = 0;
-  //   game.players.forEach((p) => {
-  //     p.set(`${taskName}`, subsetArray[i]);
-  //     i += 1;
-  //   })
-
-  // }
 
   function getSymbolsForPlayers(symbolSet, answer, setSize, taskName, game, maxNumOverlap) {
       let symbolsWithoutAnswer = symbolSet.filter(symbol => symbol !== answer);
@@ -178,7 +108,6 @@ Empirica.gameInit(game => {
       let symbolFreq = {}
       for (let i = 0; i < symbolsWithoutAnswer.length; i++) {
         let symbol = symbolsWithoutAnswer[i]
-        // console.log(!symbolFreq.hasOwnProperty(symbol));
         if (!symbolFreq.hasOwnProperty(symbol)) {
           symbolFreq[symbol] = numPlayers - 1; // Total time a symbol can be used 
         }

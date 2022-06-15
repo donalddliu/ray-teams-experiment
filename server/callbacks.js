@@ -64,7 +64,6 @@ Empirica.onStageStart((game, round, stage) => {
 
   if (stage.name === "Task") {
     activePlayers.forEach((player) => {
-      console.log(player.id);
       console.log( `Symbols : ${player.get(`${stage.displayName}`)}`);
     });
     console.log(`Answer: ${stage.get("answer")}`);
@@ -160,7 +159,6 @@ Empirica.onSet((
   // Some player decides to reconsider their answer
   console.log("key", key);
   if (key === "submitted") { 
-    console.log("Updated a submission");
     // Checks if everyone has submitted their answer and if so, submit the stage
     let allSubmitted = true;
     let numPlayersSubmitted = 0;

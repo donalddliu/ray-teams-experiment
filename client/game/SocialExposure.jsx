@@ -27,16 +27,10 @@ export default class SocialExposure extends React.Component {
 
   onOpenChat = (customKey) => {
     const {player} = this.props;
-    // var pairOfPlayers = [player.get("nodeId"), parseInt(otherPlayerNodeId)];
-    // pairOfPlayers.sort((p1,p2) => p1 - p2);
-    // var customKey = `${pairOfPlayers[0]}-${pairOfPlayers[1]}`;
-    // console.log(this.state);
-    // console.log(this.state.activeChats);
     if (!this.state.activeChats.includes(customKey)) {
       this.state.activeChats.push(customKey);
       player.set("activeChats", this.state.activeChats);
     }
-    console.log("Open Chat");
   }
 
   onCloseChat = (customKey) => {
@@ -44,8 +38,6 @@ export default class SocialExposure extends React.Component {
     const newActiveChats = this.state.activeChats.filter((chat) => chat !== customKey);
     this.setState({activeChats : newActiveChats});
     player.set("activeChats", newActiveChats);
-    console.log("Close chat");
-    console.log(this.state);
   }
 
 
@@ -57,7 +49,6 @@ export default class SocialExposure extends React.Component {
 
     const messages = round.get(`${customKey}`)
     const mostRecentMsg = messages[messages.length -1];
-    console.log(mostRecentMsg);
     const sender = mostRecentMsg.player._id;
 
     // TODO: Check if this only appends if player chat is open
@@ -65,27 +56,15 @@ export default class SocialExposure extends React.Component {
     // Only log one copy of the message
     if (player._id === sender) {
 
-      console.log(customKey);
       const pairOfPlayers = customKey.split("-");
-      console.log(customKey);
-      console.log(pairOfPlayers);
-      console.log(`My nodeId = ${player.get("nodeId")}`);
       const receiverId = pairOfPlayers.filter((id) => parseInt(id) !== player.get("nodeId")); 
       const receiver = game.players.find(p => p.get("nodeId") === parseInt(receiverId));
-      console.log(receiver);
       const receiverChats = receiver.get("activeChats");
-      console.log(`Receiver Chats: ${receiverChats}`);
-      console.log(`custom Key : ${customKey}`);
       if (!receiverChats.includes(customKey)) {
         const newReceiverChats = [...receiverChats, customKey];
-        // const newReceiverChats = receiverChats.push(customKey);
-        console.log(newReceiverChats);
         receiver.set("activeChats", newReceiverChats);
         receiver.set("getNotified", true);
       }
-      
-      console.log(receiver.id);
-      console.log(receiver.get("activeChats"));
     }
 
     if (player._id !== sender) {
@@ -95,7 +74,6 @@ export default class SocialExposure extends React.Component {
         object: mostRecentMsg,
         at: moment(TimeSync.serverTime(null, 1000)),
       })
-      console.log("Message was sent");
       const activeChats = player.get("activeChats");
 
       if (!activeChats.includes(customKey)) {
@@ -114,8 +92,6 @@ export default class SocialExposure extends React.Component {
     // reactive time value only updates at 1000 ms
     const timeStamp = new Date(TimeSync.serverTime(null, 1000));
 
-
-    const colors = ["Green", "Red", "Yellow", "Blue", "Purlpe", "White", "Black"]
 
     if (player.get("getNotified")) {
       this.audio.play();

@@ -15,7 +15,6 @@ export default class SymbolButton extends React.Component {
         player.set("symbolSelected", name);
         handleButtonSelect(name);
       }
-      // console.log(`${player.get("nodeId")} selected ${name}`);
   }
 
   render() {

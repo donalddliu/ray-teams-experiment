@@ -3,7 +3,6 @@ import React from 'react';
 export default class PlayerTab extends React.Component {
 
     handleOpenChat = () => {
-        console.log(this.props);
         const {otherPlayerNodeId, openChat} = this.props;
         openChat(otherPlayerNodeId);
     }

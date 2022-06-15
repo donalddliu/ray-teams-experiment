@@ -24,7 +24,6 @@ export default class AllQuiz extends React.Component {
   componentDidMount() {
     const {player} = this.props;
     if (!player.get("attentionCheckTries")) {
-        console.log("Mounted");
         player.set("attentionCheckTries", 3);
     } 
   }
@@ -87,7 +86,6 @@ export default class AllQuiz extends React.Component {
 
 
     const allSelected = Object.keys(this.state).every(key => this.state[key] !== "")
-    // console.log(allSelected);
     return (
       <Centered>
         <div className="intro-heading questionnaire-heading"> Questionnaire </div>

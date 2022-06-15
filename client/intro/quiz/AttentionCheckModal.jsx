@@ -5,7 +5,6 @@ export default class AttentionCheckModal extends React.Component {
     render() {
         const {player, onPrev, onCloseModal} = this.props;
         const triesLeft = player.get("attentionCheckTries");
-        console.log(onPrev);
         return (
             <div className="dark-bg" onClick={onCloseModal}>
                 <div className="modal-centered">

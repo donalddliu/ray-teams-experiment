@@ -32,7 +32,6 @@ export default class TaskResponse extends React.Component {
     const { stage, player, game } = this.props;
 
     event.preventDefault();
-    console.log("Reconsidering...");
     player.set("submitted", false);
 
     stage.append("log", {
@@ -120,7 +119,6 @@ export default class TaskResponse extends React.Component {
     // const numActivePlayers = game.players.filter(p => p.online === true && !p.get("inactive")).length;
     const numActivePlayers = game.players.filter(p => !p.get("inactive")).length;
 
-    // console.log(numActivePlayers);
     const playersNotSubmitted = numActivePlayers - playersSubmitted;
     let filledDots = [];
     let unfilledDots = [];
