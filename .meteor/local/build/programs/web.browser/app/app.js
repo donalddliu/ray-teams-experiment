@@ -5882,8 +5882,10 @@ module.exports = require("meteor/modules").addStyles(
     ".js",
     ".json",
     ".html",
-    ".jsx",
-    ".less"
+    ".less",
+    ".css",
+    ".mjs",
+    ".jsx"
   ]
 });
 
