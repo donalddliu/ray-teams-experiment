@@ -5339,7 +5339,8 @@ class ExitSurvey extends React.Component {
       dir: "auto",
       name: "age",
       value: age,
-      onChange: this.handleChange
+      onChange: this.handleChange,
+      required: true
     }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "gender"
     }, "Gender"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
@@ -5349,6 +5350,7 @@ class ExitSurvey extends React.Component {
       name: "gender",
       value: gender,
       onChange: this.handleChange,
+      required: true,
       autoComplete: "off"
     })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "Highest Education Qualification"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Radio, {
       selected: education,
@@ -5383,7 +5385,8 @@ class ExitSurvey extends React.Component {
       id: "strength",
       name: "strength",
       value: strength,
-      onChange: this.handleChange
+      onChange: this.handleChange,
+      required: true
     }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "fair"
     }, "Do you feel the pay was fair?"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
@@ -5391,7 +5394,8 @@ class ExitSurvey extends React.Component {
       id: "fair",
       name: "fair",
       value: fair,
-      onChange: this.handleChange
+      onChange: this.handleChange,
+      required: true
     }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "feedback"
     }, "Feedback, including problems you encountered."), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
@@ -5399,7 +5403,8 @@ class ExitSurvey extends React.Component {
       id: "feedback",
       name: "feedback",
       value: feedback,
-      onChange: this.handleChange
+      onChange: this.handleChange,
+      required: true
     })))), /*#__PURE__*/React.createElement("button", {
       type: "submit"
     }, "Submit"))));
@@ -5824,7 +5829,7 @@ Empirica.newPlayer(NewPlayer); // Introduction pages to show before they play th
 Empirica.introSteps((game, treatment) => {
   // MidSurveyFive, MidSurveyFour, MidSurveyThree, MidSurveyTwo, MidSurveyOne,
   const networkSurvey = [NetworkSurveyOne, NetworkSurveyTwo, NetworkSurveyThree];
-  const tutorialSteps = [TutorialPageOne, TutorialPageTwo, TutorialPageThree, TutorialPageFour]; // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
+  const tutorialSteps = [TutorialPageOne, TutorialPageThree, TutorialPageFour]; // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
 
   const quizSteps = [AllQuiz];
   const steps = networkSurvey.concat(tutorialSteps, quizSteps);

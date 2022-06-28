@@ -65,6 +65,7 @@ export default class ExitSurvey extends React.Component {
                     name="age"
                     value={age}
                     onChange={this.handleChange}
+                    required
                   />
                 </div>
               </div>
@@ -78,6 +79,7 @@ export default class ExitSurvey extends React.Component {
                     name="gender"
                     value={gender}
                     onChange={this.handleChange}
+                    required
                     autoComplete="off"
                   />
                 </div>
@@ -130,6 +132,7 @@ export default class ExitSurvey extends React.Component {
                     name="strength"
                     value={strength}
                     onChange={this.handleChange}
+                    required
                   />
                 </div>
               </div>
@@ -142,6 +145,7 @@ export default class ExitSurvey extends React.Component {
                     name="fair"
                     value={fair}
                     onChange={this.handleChange}
+                    required
                   />
                 </div>
               </div>
@@ -156,6 +160,7 @@ export default class ExitSurvey extends React.Component {
                     name="feedback"
                     value={feedback}
                     onChange={this.handleChange}
+                    required
                   />
                 </div>
               </div>

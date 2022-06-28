@@ -6720,7 +6720,8 @@ var ExitSurvey = /*#__PURE__*/function (_React$Component) {
         dir: "auto",
         name: "age",
         value: age,
-        onChange: this.handleChange
+        onChange: this.handleChange,
+        required: true
       }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
         htmlFor: "gender"
       }, "Gender"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
@@ -6730,6 +6731,7 @@ var ExitSurvey = /*#__PURE__*/function (_React$Component) {
         name: "gender",
         value: gender,
         onChange: this.handleChange,
+        required: true,
         autoComplete: "off"
       })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "Highest Education Qualification"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Radio, {
         selected: education,
@@ -6764,7 +6766,8 @@ var ExitSurvey = /*#__PURE__*/function (_React$Component) {
         id: "strength",
         name: "strength",
         value: strength,
-        onChange: this.handleChange
+        onChange: this.handleChange,
+        required: true
       }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
         htmlFor: "fair"
       }, "Do you feel the pay was fair?"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
@@ -6772,7 +6775,8 @@ var ExitSurvey = /*#__PURE__*/function (_React$Component) {
         id: "fair",
         name: "fair",
         value: fair,
-        onChange: this.handleChange
+        onChange: this.handleChange,
+        required: true
       }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
         htmlFor: "feedback"
       }, "Feedback, including problems you encountered."), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
@@ -6780,7 +6784,8 @@ var ExitSurvey = /*#__PURE__*/function (_React$Component) {
         id: "feedback",
         name: "feedback",
         value: feedback,
-        onChange: this.handleChange
+        onChange: this.handleChange,
+        required: true
       })))), /*#__PURE__*/React.createElement("button", {
         type: "submit"
       }, "Submit"))));
@@ -7265,7 +7270,7 @@ Empirica.newPlayer(NewPlayer); // Introduction pages to show before they play th
 Empirica.introSteps(function (game, treatment) {
   // MidSurveyFive, MidSurveyFour, MidSurveyThree, MidSurveyTwo, MidSurveyOne,
   var networkSurvey = [NetworkSurveyOne, NetworkSurveyTwo, NetworkSurveyThree];
-  var tutorialSteps = [TutorialPageOne, TutorialPageTwo, TutorialPageThree, TutorialPageFour]; // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
+  var tutorialSteps = [TutorialPageOne, TutorialPageThree, TutorialPageFour]; // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
 
   var quizSteps = [AllQuiz];
   var steps = networkSurvey.concat(tutorialSteps, quizSteps);

@@ -54,7 +54,7 @@ Empirica.newPlayer(NewPlayer);
 Empirica.introSteps((game, treatment) => {
   // MidSurveyFive, MidSurveyFour, MidSurveyThree, MidSurveyTwo, MidSurveyOne,
   const networkSurvey = [NetworkSurveyOne, NetworkSurveyTwo, NetworkSurveyThree]
-  const tutorialSteps = [TutorialPageOne, TutorialPageTwo, TutorialPageThree, TutorialPageFour,];
+  const tutorialSteps = [TutorialPageOne, TutorialPageThree, TutorialPageFour,];
   // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
   const quizSteps = [AllQuiz];
   const steps = networkSurvey.concat(tutorialSteps,quizSteps);
