@@ -34,7 +34,7 @@ Empirica.gameInit(game => {
   const setSize = setSizeBasedOnPlayerCount ? playerCount + 1 : defaultSetSize; //TODO: can change default value in settings
   const numRoundsBeforeSurvey = numTaskRounds/numSurveyRounds;
 
-  let colors = ["Green", "Red", "Yellow", "Blue", "Purlpe", "White", "Black"]
+  let colors = ["Green", "Red", "Yellow", "Blue", "Purple", "White", "Black"]
   colors = shuffle(colors);
 
   game.players.forEach((player, i) => {

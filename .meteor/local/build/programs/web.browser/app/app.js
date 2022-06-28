@@ -1193,7 +1193,6 @@ class PlayerTab extends React.Component {
     super(...arguments);
 
     this.handleOpenChat = () => {
-      console.log(this.props);
       const {
         otherPlayerNodeId,
         openChat
@@ -1757,18 +1756,12 @@ class SocialExposure extends React.Component {
     this.onOpenChat = customKey => {
       const {
         player
-      } = this.props; // var pairOfPlayers = [player.get("nodeId"), parseInt(otherPlayerNodeId)];
-      // pairOfPlayers.sort((p1,p2) => p1 - p2);
-      // var customKey = `${pairOfPlayers[0]}-${pairOfPlayers[1]}`;
-      // console.log(this.state);
-      // console.log(this.state.activeChats);
+      } = this.props;
 
       if (!this.state.activeChats.includes(customKey)) {
         this.state.activeChats.push(customKey);
         player.set("activeChats", this.state.activeChats);
       }
-
-      console.log("Open Chat");
     };
 
     this.onCloseChat = customKey => {
@@ -1780,8 +1773,6 @@ class SocialExposure extends React.Component {
         activeChats: newActiveChats
       });
       player.set("activeChats", newActiveChats);
-      console.log("Close chat");
-      console.log(this.state);
     };
 
     this.audio = new Audio("sounds/notification-sound-7062.mp3");
@@ -1795,34 +1786,21 @@ class SocialExposure extends React.Component {
       } = this.props;
       const messages = round.get("".concat(customKey));
       const mostRecentMsg = messages[messages.length - 1];
-      console.log(mostRecentMsg);
       const sender = mostRecentMsg.player._id; // TODO: Check if this only appends if player chat is open
       // onIncomingMessage logs the message for both sender and receiver
       // Only log one copy of the message
 
       if (player._id === sender) {
-        console.log(customKey);
         const pairOfPlayers = customKey.split("-");
-        console.log(customKey);
-        console.log(pairOfPlayers);
-        console.log("My nodeId = ".concat(player.get("nodeId")));
         const receiverId = pairOfPlayers.filter(id => parseInt(id) !== player.get("nodeId"));
         const receiver = game.players.find(p => p.get("nodeId") === parseInt(receiverId));
-        console.log(receiver);
         const receiverChats = receiver.get("activeChats");
-        console.log("Receiver Chats: ".concat(receiverChats));
-        console.log("custom Key : ".concat(customKey));
 
         if (!receiverChats.includes(customKey)) {
-          const newReceiverChats = [...receiverChats, customKey]; // const newReceiverChats = receiverChats.push(customKey);
-
-          console.log(newReceiverChats);
+          const newReceiverChats = [...receiverChats, customKey];
           receiver.set("activeChats", newReceiverChats);
           receiver.set("getNotified", true);
         }
-
-        console.log(receiver.id);
-        console.log(receiver.get("activeChats"));
       }
 
       if (player._id !== sender) {
@@ -1832,7 +1810,6 @@ class SocialExposure extends React.Component {
           object: mostRecentMsg,
           at: moment(TimeSync.serverTime(null, 1000))
         });
-        console.log("Message was sent");
         const activeChats = player.get("activeChats");
 
         if (!activeChats.includes(customKey)) {
@@ -1869,7 +1846,6 @@ class SocialExposure extends React.Component {
     const network = player.get("neighbors"); // reactive time value only updates at 1000 ms
 
     const timeStamp = new Date(TimeSync.serverTime(null, 1000));
-    const colors = ["Green", "Red", "Yellow", "Blue", "Purlpe", "White", "Black"];
 
     if (player.get("getNotified")) {
       this.audio.play();
@@ -1958,8 +1934,7 @@ class SymbolButton extends React.Component {
       if (!player.get("submitted")) {
         player.set("symbolSelected", name);
         handleButtonSelect(name);
-      } // console.log(`${player.get("nodeId")} selected ${name}`);
-
+      }
     };
   } // When button is selected, player sets the id of the button he selected
 
@@ -2107,7 +2082,6 @@ class TaskResponse extends React.Component {
         game
       } = this.props;
       event.preventDefault();
-      console.log("Reconsidering...");
       player.set("submitted", false);
       stage.append("log", {
         verb: "playerReconsidered",
@@ -2195,8 +2169,7 @@ class TaskResponse extends React.Component {
 
     const playersSubmitted = round.get("numPlayersSubmitted"); // const numActivePlayers = game.players.filter(p => p.online === true && !p.get("inactive")).length;
 
-    const numActivePlayers = game.players.filter(p => !p.get("inactive")).length; // console.log(numActivePlayers);
-
+    const numActivePlayers = game.players.filter(p => !p.get("inactive")).length;
     const playersNotSubmitted = numActivePlayers - playersSubmitted;
     let filledDots = [];
     let unfilledDots = [];
@@ -2905,7 +2878,6 @@ class AllQuiz extends React.Component {
     } = this.props;
 
     if (!player.get("attentionCheckTries")) {
-      console.log("Mounted");
       player.set("attentionCheckTries", 3);
     }
   }
@@ -2924,8 +2896,7 @@ class AllQuiz extends React.Component {
       q7,
       q8
     } = this.state;
-    const allSelected = Object.keys(this.state).every(key => this.state[key] !== ""); // console.log(allSelected);
-
+    const allSelected = Object.keys(this.state).every(key => this.state[key] !== "");
     return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
       className: "intro-heading questionnaire-heading"
     }, " Questionnaire "), /*#__PURE__*/React.createElement("div", {
@@ -3092,7 +3063,6 @@ class AttentionCheckModal extends React.Component {
       onCloseModal
     } = this.props;
     const triesLeft = player.get("attentionCheckTries");
-    console.log(onPrev);
     return /*#__PURE__*/React.createElement("div", {
       className: "dark-bg",
       onClick: onCloseModal
@@ -4882,7 +4852,6 @@ class Footer extends React.Component {
 
       onNewMessage(msg);
       player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
-      console.log("messaged");
       this.setState({
         comment: ""
       });
