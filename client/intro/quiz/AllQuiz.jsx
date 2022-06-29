@@ -81,9 +81,8 @@ export default class AllQuiz extends React.Component {
   }
 
   render() {
-    const { onPrev, player } = this.props;
-    const { q1, q2, q4, q5, q6, q7, q8 } = this.state;
-
+    const { game, onPrev, player } = this.props;
+    const { q1, q2, q4, q5, q6, q7, q8 } = this.state;    
 
     const allSelected = Object.keys(this.state).every(key => this.state[key] !== "")
     return (
@@ -110,7 +109,7 @@ export default class AllQuiz extends React.Component {
                     </div>
 
                     <div className="question-section">
-                    <label className="questionnaire-question">If you do not interact with the application for 5 minutes your session will timeout, and the experiment will end for everyone in your team. 1 minute before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer. If you allow your session to timeout your HIT will not be accepted. If a team member causes a timeout you will be sent to the end of challenge page, and your HIT will be accepted.</label>
+                    <label className="questionnaire-question">If you do not interact with the application for a while, your session will timeout and the experiment will end for EVERYONE in your team. 1 minute before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer. If you allow your session to timeout, your HIT will not be accepted. If a team member causes a timeout you will be sent to the end of challenge page, and your HIT will be accepted.</label>
                     <Radio
                         selected={q2}
                         name="q2"
@@ -146,7 +145,7 @@ export default class AllQuiz extends React.Component {
                     </div>
 
                     <div className="question-section">
-                    <label className="questionnaire-question">Is the following statement true or false? If any member of my team doesn't register a guess or communicate with a colleague for five minutes, the task will end and the entire 5-person team (including myself) will be sent to the exit page of the survey.</label>
+                    <label className="questionnaire-question">Is the following statement true or false? If any member of my team doesn't register a guess or communicate with a colleague for long time, the task will end and the entire team (including myself) will be sent to the exit page of the survey.</label>
                     <Radio
                         selected={q4}
                         name="q4"
@@ -182,7 +181,7 @@ export default class AllQuiz extends React.Component {
                     </div>
 
                     <div className="question-section">
-                    <label className="questionnaire-question">Is the following statement true or false? I will be able to communicate with my team members using a group chat and I will always be able to communicate with every member of my team.</label>
+                    <label className="questionnaire-question">Is the following statement true or false? I will be able to communicate with my team members using an overall group chat.</label>
                     <Radio
                         selected={q6}
                         name="q6"
@@ -218,7 +217,7 @@ export default class AllQuiz extends React.Component {
                     </div>
 
                     <div className="question-section">  
-                    <label className="questionnaire-question">If you pass the attention check, you may participate in this task. You will receive a flat fee of $2 for participating. You will also receive $1 bonus each time your team correctly identifies the shared symbol. If you complete all 6 trials of the experiment, you could earn up to $8.</label>
+                    <label className="questionnaire-question">If you pass the attention check, you may participate in this task. You will receive a flat fee of $2 for participating. You will also receive $1 bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to $8.</label>
                     <Radio
                         selected={q8}
                         name="q8"

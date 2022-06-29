@@ -1,19 +1,19 @@
 export function getNeighbors(structure, player) {
     const neighbors = [];
     let network = structure.split(",");
+    const playerIndex = player.get("nodeId");
 
     network.forEach((n) => {
       const connection = n.split("-");
-      const playerIndex = player.get("nodeId");
-  
+
       if (playerIndex === parseInt(connection[0])) {
-        neighbors.push(connection[1]);
+        neighbors.push(connection[1].replace(/\s/g, ''));
       } else if (playerIndex === parseInt(connection[1])) {
-        neighbors.push(connection[0]);
+        neighbors.push(connection[0].replace(/\s/g, ''));
       }
     });
   
-    return _.uniq(neighbors, true);
+    return [... new Set(neighbors)];
   }
 
 export function getFullyConnectedLayer(game) {

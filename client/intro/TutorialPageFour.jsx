@@ -21,7 +21,7 @@ export default class TutorialPageFour extends React.Component {
               <div className="intro-heading"> RECONSIDER</div>
               <img src={`images/hr-color.png`} width="180px" height="2px"/>
               <div className="tutorial-body">
-                You guess the symbol by selecting it and then selecting the submit answer button. While you are waiting for your team members to submit an answer, you will have an opportunity  to reconsider your choice. The reconsider button does not indicate you have made an incorrect choice
+                You guess the symbol by selecting it and then selecting the submit answer button. While you are waiting for your team members to submit an answer, you will have an opportunity to reconsider your choice. The reconsider button does not indicate you have made an incorrect choice.
               </div>
             </div>
           </div>

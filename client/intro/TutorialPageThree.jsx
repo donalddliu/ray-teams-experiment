@@ -21,7 +21,7 @@ export default class TutorialPageThree extends React.Component {
               <div className="intro-heading"> NETWORK CONVERSATIONS </div>
               <img src={`images/hr-color.png`} width="180px" height="2px"/>
               <div className="tutorial-body">
-                  Each member of your network has an unique dialogue box and so you can have multiple dialogue boxes open on your screen as you communicate during a trial. You can open or close a box. You can also scroll up and down within a box to view the messages you have exchanged with a specific contact.
+                  Each player will have a network of people they can talk to through individual chats. Each member of your network has an unique dialogue box and you can have multiple dialogue boxes open on your screen as you communicate during a trial. You can open or close a box. You can also scroll up and down within a box to view the messages you have exchanged with a specific contact. There will be no overall team chat where you can talk to everyone at once.
               </div>
             </div>
           </div>
