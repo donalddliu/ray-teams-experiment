@@ -28,10 +28,19 @@ export default class Round extends React.Component {
     }
 }
 
+
+  audio = new Audio(`sounds/Game Start Countdown Sound.wav`);
+
   componentDidMount() {
-    const {player} = this.props;
+    const {round, stage, player} = this.props;
     // Set the player's first activity at the start of the round
     player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+
+    if (round.index === 0 && stage.index === 0) {
+      // Play game start sound cue
+      this.audio.play();
+    }
+
   }
 
   onOpenModal = () => {

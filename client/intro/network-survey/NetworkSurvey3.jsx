@@ -26,7 +26,7 @@ export default class NetworkSurveyThree extends React.Component {
     const { onNext, player } = this.props;
     event.preventDefault();
     const networkSurveyResponse = this.state;
-    player.set("networkResponse2", networkSurveyResponse);
+    player.set("networkResponse3", networkSurveyResponse);
 
     // TODO: log player response to survey question
     onNext();

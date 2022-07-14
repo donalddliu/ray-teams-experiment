@@ -1421,6 +1421,7 @@ module.link("moment", {
 class Round extends React.Component {
   constructor(props) {
     super(props);
+    this.audio = new Audio("sounds/Game Start Countdown Sound.wav");
 
     this.onOpenModal = () => {
       this.setState({
@@ -1505,10 +1506,17 @@ class Round extends React.Component {
 
   componentDidMount() {
     const {
+      round,
+      stage,
       player
     } = this.props; // Set the player's first activity at the start of the round
 
     player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+
+    if (round.index === 0 && stage.index === 0) {
+      // Play game start sound cue
+      this.audio.play();
+    }
   }
 
   renderSubmitted() {
@@ -2682,7 +2690,7 @@ class NetworkSurveyThree extends React.Component {
       } = this.props;
       event.preventDefault();
       const networkSurveyResponse = this.state;
-      player.set("networkResponse2", networkSurveyResponse); // TODO: log player response to survey question
+      player.set("networkResponse3", networkSurveyResponse); // TODO: log player response to survey question
 
       onNext();
     };
@@ -2878,7 +2886,7 @@ class AllQuiz extends React.Component {
     } = this.props;
 
     if (!player.get("attentionCheckTries")) {
-      player.set("attentionCheckTries", 3);
+      player.set("attentionCheckTries", 2);
     }
   }
 
@@ -2924,7 +2932,11 @@ class AllQuiz extends React.Component {
       className: "question-section"
     }, /*#__PURE__*/React.createElement("label", {
       className: "questionnaire-question"
-    }, "If you do not interact with the application for a while, your session will timeout and the experiment will end for EVERYONE in your team. 1 minute before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer. If you allow your session to timeout, your HIT will not be accepted. If a team member causes a timeout you will be sent to the end of challenge page, and your HIT will be accepted."), /*#__PURE__*/React.createElement(Radio, {
+    }, "If you do not interact with the application for a while, your session will timeout and the experiment will end for EVERYONE in your team. 1 minute before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer.", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontWeight: 'bolder'
+      }
+    }, " NOTE: If you allow your session to timeout, your HIT will not be accepted. If a team member causes a timeout you will be sent to the end of challenge page, and your HIT will be accepted.")), /*#__PURE__*/React.createElement(Radio, {
       selected: q2,
       name: "q2",
       value: "yes",
@@ -3073,15 +3085,12 @@ class AttentionCheckModal extends React.Component {
       className: "modal"
     }, /*#__PURE__*/React.createElement("div", {
       className: "modal-content"
-    }, "You have failed the attention check. You have ", triesLeft, " tries left. You can choose to try again, or go back to reread the instructions."), /*#__PURE__*/React.createElement("div", {
+    }, "You have failed the attention check. You have ", triesLeft, " tries left. Please go back and reread the instructions."), /*#__PURE__*/React.createElement("div", {
       className: "attention-check-button-container"
     }, /*#__PURE__*/React.createElement("button", {
       className: "modal-button",
       onClick: onPrev
-    }, "Review"), /*#__PURE__*/React.createElement("button", {
-      className: "modal-button",
-      onClick: onCloseModal
-    }, "Try Again")))));
+    }, "Review")))));
   }
 
 }
@@ -5540,11 +5549,11 @@ class Sorry extends Component {
     }
 
     if (player.exitReason === "inactive") {
-      msg = "You were inactive for too long";
+      msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid the base amount including any bonuses for teh rounds you successfully passed. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
     }
 
     if (player.exitReason === "someoneInactive") {
-      msg = "A player was inactive for too long, and we had to end the game.";
+      msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly. ";
     } // Only for dev
 
 

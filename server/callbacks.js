@@ -2,7 +2,6 @@ import Empirica from "meteor/empirica:core";
 
 import { getFullyConnectedLayer } from "./util";
 
-
 // onGameStart is triggered opnce per game before the game starts, and before
 // the first onRoundStart. It receives the game and list of all the players in
 // the game.

@@ -24,7 +24,7 @@ export default class AllQuiz extends React.Component {
   componentDidMount() {
     const {player} = this.props;
     if (!player.get("attentionCheckTries")) {
-        player.set("attentionCheckTries", 3);
+        player.set("attentionCheckTries", 2);
     } 
   }
 
@@ -109,7 +109,11 @@ export default class AllQuiz extends React.Component {
                     </div>
 
                     <div className="question-section">
-                    <label className="questionnaire-question">If you do not interact with the application for a while, your session will timeout and the experiment will end for EVERYONE in your team. 1 minute before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer. If you allow your session to timeout, your HIT will not be accepted. If a team member causes a timeout you will be sent to the end of challenge page, and your HIT will be accepted.</label>
+                    <label className="questionnaire-question">
+                        If you do not interact with the application for a while, your session will timeout and the experiment will end for EVERYONE in your team. 1 minute before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer. 
+                        <br></br>
+                        <span style={{fontWeight: 'bolder'}}> NOTE: If you allow your session to timeout, your HIT will not be accepted. If a team member causes a timeout you will be sent to the end of challenge page, and your HIT will be accepted.</span>
+                    </label>
                     <Radio
                         selected={q2}
                         name="q2"

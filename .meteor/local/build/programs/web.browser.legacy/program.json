@@ -780,12 +780,12 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/app/app.js?hash=829869b97a1f39c5692d2032d6a64ac91f05a603",
+      "url": "/app/app.js?hash=7da41e486f52191d239fc28e2b04792d679fed7b",
       "sourceMap": "app/app.js.map",
-      "sourceMapUrl": "/app/829869b97a1f39c5692d2032d6a64ac91f05a603.map",
-      "size": 252852,
-      "hash": "829869b97a1f39c5692d2032d6a64ac91f05a603",
-      "sri": "O1A64RCRSh8Qsa/EAi/WKTFCCAZOgOZcpvMbYD8ZZIVP1TX3dpMQHhnQwLeyhAEmnY3tY9U/p13OppktIrArEA=="
+      "sourceMapUrl": "/app/7da41e486f52191d239fc28e2b04792d679fed7b.map",
+      "size": 253672,
+      "hash": "7da41e486f52191d239fc28e2b04792d679fed7b",
+      "sri": "A5PwCFagr0bW4iuSHKG5aOwZ6l3GJWa0p96MX0hs0jkfyuKwDxFVAXg/A3WFcykUcXyCOnMeuDOLItzprMYEYw=="
     },
     {
       "path": "packages/service-configuration.js",
@@ -1197,6 +1197,26 @@
       "url": "/images/tut3-slide4.png",
       "size": 33100,
       "hash": "db66115def4ec1c4e1702b624c2d9d289f2bf79f",
+      "sri": null
+    },
+    {
+      "path": "app/sounds/Game Start Countdown Sound.wav",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/sounds/Game Start Countdown Sound.wav",
+      "size": 569850,
+      "hash": "d1675c01ec0a2ee242c5d32f93f2399f045265aa",
+      "sri": null
+    },
+    {
+      "path": "app/sounds/Game Start Countdown Sound.wav_Zone.Identifier",
+      "where": "client",
+      "type": "asset",
+      "cacheable": false,
+      "url": "/sounds/Game Start Countdown Sound.wav_Zone.Identifier",
+      "size": 184,
+      "hash": "efbc2f6a4eaa4029c378421798e75811f03cfef1",
       "sri": null
     },
     {

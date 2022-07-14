@@ -30,10 +30,10 @@ export default class Sorry extends Component {
             return <FailedAttentionCheck />
         }
         if (player.exitReason === "inactive") {
-            msg = "You were inactive for too long";
+            msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid the base amount including any bonuses for teh rounds you successfully passed. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
         }
         if (player.exitReason === "someoneInactive") {
-            msg = "A player was inactive for too long, and we had to end the game.";
+            msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly. ";
         }
         // Only for dev
         if (!game && Meteor.isDevelopment) {

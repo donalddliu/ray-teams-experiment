@@ -10,15 +10,15 @@ export default class AttentionCheckModal extends React.Component {
                 <div className="modal-centered">
                     <div className="modal">
                         <div className="modal-content">
-                            You have failed the attention check. You have {triesLeft} tries left. You can choose to try again, or go back to reread the instructions.
+                            You have failed the attention check. You have {triesLeft} tries left. Please go back and reread the instructions.
                         </div>
                         <div className="attention-check-button-container">
                             <button className="modal-button" onClick={onPrev}> 
                                 Review
                             </button>
-                            <button className="modal-button" onClick={onCloseModal}>
+                            {/* <button className="modal-button" onClick={onCloseModal}>
                                 Try Again
-                            </button>
+                            </button> */}
                         </div>
 
                     </div>

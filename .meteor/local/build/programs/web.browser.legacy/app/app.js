@@ -1791,6 +1791,7 @@ var Round = /*#__PURE__*/function (_React$Component) {
     var _this;
 
     _this = _React$Component.call(this, props) || this;
+    _this.audio = new Audio("sounds/Game Start Countdown Sound.wav");
 
     _this.onOpenModal = function () {
       _this.setState({
@@ -1875,9 +1876,17 @@ var Round = /*#__PURE__*/function (_React$Component) {
 
   _proto.componentDidMount = function () {
     function componentDidMount() {
-      var player = this.props.player; // Set the player's first activity at the start of the round
+      var _this$props2 = this.props,
+          round = _this$props2.round,
+          stage = _this$props2.stage,
+          player = _this$props2.player; // Set the player's first activity at the start of the round
 
       player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+
+      if (round.index === 0 && stage.index === 0) {
+        // Play game start sound cue
+        this.audio.play();
+      }
     }
 
     return componentDidMount;
@@ -1885,11 +1894,11 @@ var Round = /*#__PURE__*/function (_React$Component) {
 
   _proto.renderSubmitted = function () {
     function renderSubmitted() {
-      var _this$props2 = this.props,
-          stage = _this$props2.stage,
-          round = _this$props2.round,
-          player = _this$props2.player,
-          game = _this$props2.game; // Create a list of dots to show how many players submitted
+      var _this$props3 = this.props,
+          stage = _this$props3.stage,
+          round = _this$props3.round,
+          player = _this$props3.player,
+          game = _this$props3.game; // Create a list of dots to show how many players submitted
       // const completedWidth = 590/game.players.length * round.get("numPlayersSubmitted");
       // const uncompletedWidth = 590 - completedWidth;
 
@@ -1938,11 +1947,11 @@ var Round = /*#__PURE__*/function (_React$Component) {
 
   _proto.render = function () {
     function render() {
-      var _this$props3 = this.props,
-          stage = _this$props3.stage,
-          round = _this$props3.round,
-          player = _this$props3.player,
-          game = _this$props3.game; // const numActivePlayers = game.players.filter(p => p.online === true && !p.get("inactive")).length;
+      var _this$props4 = this.props,
+          stage = _this$props4.stage,
+          round = _this$props4.round,
+          player = _this$props4.player,
+          game = _this$props4.game; // const numActivePlayers = game.players.filter(p => p.online === true && !p.get("inactive")).length;
 
       var numActivePlayers = game.players.filter(function (p) {
         return !p.get("inactive");
@@ -3358,7 +3367,7 @@ var NetworkSurveyThree = /*#__PURE__*/function (_React$Component) {
           player = _this$props.player;
       event.preventDefault();
       var networkSurveyResponse = _this.state;
-      player.set("networkResponse2", networkSurveyResponse); // TODO: log player response to survey question
+      player.set("networkResponse3", networkSurveyResponse); // TODO: log player response to survey question
 
       onNext();
     };
@@ -3589,7 +3598,7 @@ var AllQuiz = /*#__PURE__*/function (_React$Component) {
       var player = this.props.player;
 
       if (!player.get("attentionCheckTries")) {
-        player.set("attentionCheckTries", 3);
+        player.set("attentionCheckTries", 2);
       }
     }
 
@@ -3641,7 +3650,11 @@ var AllQuiz = /*#__PURE__*/function (_React$Component) {
         className: "question-section"
       }, /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
-      }, "If you do not interact with the application for a while, your session will timeout and the experiment will end for EVERYONE in your team. 1 minute before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer. If you allow your session to timeout, your HIT will not be accepted. If a team member causes a timeout you will be sent to the end of challenge page, and your HIT will be accepted."), /*#__PURE__*/React.createElement(Radio, {
+      }, "If you do not interact with the application for a while, your session will timeout and the experiment will end for EVERYONE in your team. 1 minute before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer.", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontWeight: 'bolder'
+        }
+      }, " NOTE: If you allow your session to timeout, your HIT will not be accepted. If a team member causes a timeout you will be sent to the end of challenge page, and your HIT will be accepted.")), /*#__PURE__*/React.createElement(Radio, {
         selected: q2,
         name: "q2",
         value: "yes",
@@ -3820,15 +3833,12 @@ var AttentionCheckModal = /*#__PURE__*/function (_React$Component) {
         className: "modal"
       }, /*#__PURE__*/React.createElement("div", {
         className: "modal-content"
-      }, "You have failed the attention check. You have ", triesLeft, " tries left. You can choose to try again, or go back to reread the instructions."), /*#__PURE__*/React.createElement("div", {
+      }, "You have failed the attention check. You have ", triesLeft, " tries left. Please go back and reread the instructions."), /*#__PURE__*/React.createElement("div", {
         className: "attention-check-button-container"
       }, /*#__PURE__*/React.createElement("button", {
         className: "modal-button",
         onClick: onPrev
-      }, "Review"), /*#__PURE__*/React.createElement("button", {
-        className: "modal-button",
-        onClick: onCloseModal
-      }, "Try Again")))));
+      }, "Review")))));
     }
 
     return render;
@@ -6975,11 +6985,11 @@ var Sorry = /*#__PURE__*/function (_Component) {
       }
 
       if (player.exitReason === "inactive") {
-        msg = "You were inactive for too long";
+        msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid the base amount including any bonuses for teh rounds you successfully passed. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
       }
 
       if (player.exitReason === "someoneInactive") {
-        msg = "A player was inactive for too long, and we had to end the game.";
+        msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly. ";
       } // Only for dev
 
 
