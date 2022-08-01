@@ -13,24 +13,24 @@ export default class Sorry extends Component {
 
         switch (player.exitStatus) {
             case "gameFull":
-                msg = "All games you are eligible for have filled up too fast...";
+                msg = "All games you are eligible for have filled up too fast... Sorry, there will be no more games in the near future.";
                 break;
             case "gameLobbyTimedOut":
-                msg = "There were NOT enough players for the game to start...";
+                msg = "There were NOT enough players for the game to start... Thank you for participating in this game, you will still get paid the base amount for passing the attention check. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
                 break;
             case "playerEndedLobbyWait":
                 msg =
                     "You decided to stop waiting, we are sorry it was too long a wait.";
                 break;
             default:
-                msg = "Unfortunately the Game was cancelled...";
+                msg = "Unfortunately the Game was cancelled... Thank you for participating in this game, please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly.";
                 break;
         }
         if (player.exitReason === "failedQuestion") {
             return <FailedAttentionCheck />
         }
         if (player.exitReason === "inactive") {
-            msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid the base amount including any bonuses for teh rounds you successfully passed. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
+            msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
         }
         if (player.exitReason === "someoneInactive") {
             msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly. ";

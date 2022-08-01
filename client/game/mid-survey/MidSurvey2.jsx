@@ -71,7 +71,9 @@ export default class MidSurveyTwo extends React.Component {
                     {network.map(otherNodeId => {
                         const otherPlayer = game.players.find(p => p.get("nodeId") === parseInt(otherNodeId));
                         const otherPlayerId = otherPlayer.get("anonymousName");
-                        const playerIsOnline = otherPlayer.online === true && !otherPlayer.get("inactive");
+                        // const playerIsOnline = otherPlayer.online === true && !otherPlayer.get("inactive");
+                        const playerIsOnline = !otherPlayer.get("inactive");
+
                         const handleSliderChange = (num) => {
                             // Rounding the number to 2 decimals max
                             this.setState({[otherPlayerId] : num});

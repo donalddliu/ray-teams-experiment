@@ -1,6 +1,10 @@
 import Empirica from "meteor/empirica:core";
 
 import { getFullyConnectedLayer } from "./util";
+import moment from "moment";
+import { TimeSync } from "meteor/mizzao:timesync";
+
+
 
 // onGameStart is triggered opnce per game before the game starts, and before
 // the first onRoundStart. It receives the game and list of all the players in
@@ -9,6 +13,7 @@ Empirica.onGameStart(game => {
   console.log("Game started");
   game.players.forEach((player) => {
     player.set("inactive", false);
+    player.set("lastActive", player.lastActivityAt);
     const network = player.get("neighbors");
     const activeChats = [];
     network.map(otherNodeId => {

@@ -114,7 +114,9 @@ export default class SocialExposure extends React.Component {
           pairOfPlayers.sort((p1,p2) => p1 - p2);
           const otherPlayer = game.players.find(p => p.get("nodeId") === parseInt(otherNodeId));
           const otherPlayerId = otherPlayer.get("anonymousName");
-          const playerIsOnline = otherPlayer.online === true && !otherPlayer.get("inactive");
+          // const playerIsOnline = otherPlayer.online === true && !otherPlayer.get("inactive");
+          const playerIsOnline = !otherPlayer.get("inactive");
+
           const chatKey = `${pairOfPlayers[0]}-${pairOfPlayers[1]}`;
           const activeChats = player.get("activeChats");
 

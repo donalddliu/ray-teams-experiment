@@ -158,8 +158,9 @@ var MidSurveyOne = /*#__PURE__*/function (_React$Component) {
         var otherPlayer = game.players.find(function (p) {
           return p.get("nodeId") === parseInt(otherNodeId);
         });
-        var otherPlayerId = otherPlayer.get("anonymousName");
-        var playerIsOnline = otherPlayer.online === true && !otherPlayer.get("inactive");
+        var otherPlayerId = otherPlayer.get("anonymousName"); // const playerIsOnline = otherPlayer.online === true && !otherPlayer.get("inactive");
+
+        var playerIsOnline = !otherPlayer.get("inactive");
         return /*#__PURE__*/React.createElement(Radio, {
           selected: response,
           key: otherPlayerId,
@@ -380,8 +381,9 @@ var MidSurveyTwo = /*#__PURE__*/function (_React$Component) {
         var otherPlayer = game.players.find(function (p) {
           return p.get("nodeId") === parseInt(otherNodeId);
         });
-        var otherPlayerId = otherPlayer.get("anonymousName");
-        var playerIsOnline = otherPlayer.online === true && !otherPlayer.get("inactive");
+        var otherPlayerId = otherPlayer.get("anonymousName"); // const playerIsOnline = otherPlayer.online === true && !otherPlayer.get("inactive");
+
+        var playerIsOnline = !otherPlayer.get("inactive");
 
         var handleSliderChange = function (num) {
           var _this3$setState;
@@ -1175,6 +1177,7 @@ var inactiveTimer = /*#__PURE__*/function (_React$Component) {
       var activePlayers = game.players.filter(function (p) {
         return !p.get("inactive");
       });
+      console.log(activePlayers);
       activePlayers.forEach(function (p) {
         var playerLastActive = p.get("lastActive");
         var timeDiff = currentTime.diff(playerLastActive, 'seconds');
@@ -2321,8 +2324,9 @@ var SocialExposure = /*#__PURE__*/function (_React$Component) {
         var otherPlayer = game.players.find(function (p) {
           return p.get("nodeId") === parseInt(otherNodeId);
         });
-        var otherPlayerId = otherPlayer.get("anonymousName");
-        var playerIsOnline = otherPlayer.online === true && !otherPlayer.get("inactive");
+        var otherPlayerId = otherPlayer.get("anonymousName"); // const playerIsOnline = otherPlayer.online === true && !otherPlayer.get("inactive");
+
+        var playerIsOnline = !otherPlayer.get("inactive");
         var chatKey = pairOfPlayers[0] + "-" + pairOfPlayers[1];
         var activeChats = player.get("activeChats");
         return (
@@ -3650,11 +3654,11 @@ var AllQuiz = /*#__PURE__*/function (_React$Component) {
         className: "question-section"
       }, /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
-      }, "If you do not interact with the application for a while, your session will timeout and the experiment will end for EVERYONE in your team. 1 minute before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer.", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+      }, game.treatment.endGameIfPlayerIdle ? /*#__PURE__*/React.createElement("span", null, "If you do not interact with the application for a while, your session will timeout and the experiment will end for EVERYONE in your team. 1 minute before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer.") : /*#__PURE__*/React.createElement("span", null, "If you do not interact with the application for a while, your session will timeout and you will be kicked out from the game. 1 minute before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
         style: {
           fontWeight: 'bolder'
         }
-      }, " NOTE: If you allow your session to timeout, your HIT will not be accepted. If a team member causes a timeout you will be sent to the end of challenge page, and your HIT will be accepted.")), /*#__PURE__*/React.createElement(Radio, {
+      }, game.treatment.endGameIfPlayerIdle ? /*#__PURE__*/React.createElement("span", null, "NOTE: If you allow your session to timeout, your HIT will not be accepted. If a team member causes a timeout you will be sent to the end of challenge page, and your HIT will be accepted.") : /*#__PURE__*/React.createElement("span", null, "NOTE: If you allow your session to timeout, your HIT will not be accepted."))), /*#__PURE__*/React.createElement(Radio, {
         selected: q2,
         name: "q2",
         value: "yes",
@@ -3674,7 +3678,7 @@ var AllQuiz = /*#__PURE__*/function (_React$Component) {
         className: "question-section"
       }, /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
-      }, "Is the following statement true or false? If any member of my team doesn't register a guess or communicate with a colleague for long time, the task will end and the entire team (including myself) will be sent to the exit page of the survey."), /*#__PURE__*/React.createElement(Radio, {
+      }, "Is the following statement true or false?", game.treatment.endGameIfPlayerIdle ? /*#__PURE__*/React.createElement("span", null, " If any member of my team doesn't register a guess or communicate with a colleague for long time, the task will end and the entire team (including myself) will be sent to the exit page of the survey.") : /*#__PURE__*/React.createElement("span", null, " If a member of my team doesn't register a guess or communicate with a colleague for long time, the inactive player will be kicked and the task will continue for the rest of the team.")), /*#__PURE__*/React.createElement(Radio, {
         selected: q4,
         name: "q4",
         value: "yes",
@@ -6964,11 +6968,11 @@ var Sorry = /*#__PURE__*/function (_Component) {
 
       switch (player.exitStatus) {
         case "gameFull":
-          msg = "All games you are eligible for have filled up too fast...";
+          msg = "All games you are eligible for have filled up too fast... Sorry, there will be no more games in the near future.";
           break;
 
         case "gameLobbyTimedOut":
-          msg = "There were NOT enough players for the game to start...";
+          msg = "There were NOT enough players for the game to start... Thank you for participating in this game, you will still get paid the base amount for passing the attention check. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
           break;
 
         case "playerEndedLobbyWait":
@@ -6976,7 +6980,7 @@ var Sorry = /*#__PURE__*/function (_Component) {
           break;
 
         default:
-          msg = "Unfortunately the Game was cancelled...";
+          msg = "Unfortunately the Game was cancelled... Thank you for participating in this game, please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly.";
           break;
       }
 
@@ -6985,7 +6989,7 @@ var Sorry = /*#__PURE__*/function (_Component) {
       }
 
       if (player.exitReason === "inactive") {
-        msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid the base amount including any bonuses for teh rounds you successfully passed. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
+        msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
       }
 
       if (player.exitReason === "someoneInactive") {
@@ -7065,7 +7069,7 @@ var Thanks = /*#__PURE__*/function (_React$Component) {
     function render() {
       return /*#__PURE__*/React.createElement("div", {
         className: "finished"
-      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Finished!"), /*#__PURE__*/React.createElement("p", null, "Thank you for participating!")));
+      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Finished!"), /*#__PURE__*/React.createElement("p", null, "Thank you for participating! If you missed the code from the previous page, please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly.")));
     }
 
     return render;
