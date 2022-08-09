@@ -36,7 +36,6 @@ export default class ChatContainer extends React.PureComponent {
     if (onNewMessage) {
       msg = onNewMessage(msg);
       if (!msg) {
-        console.log("new");
         return;
       }
     }

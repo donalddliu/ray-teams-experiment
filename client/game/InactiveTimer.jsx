@@ -39,7 +39,6 @@ class inactiveTimer extends React.Component {
         const currentTime = moment(TimeSync.serverTime(null, 1000));
         const inactiveDuration = game.treatment.userInactivityDuration;
         const activePlayers = game.players.filter(p => !p.get("inactive"));
-        console.log(activePlayers);
 
         activePlayers.forEach((p) => {
             const playerLastActive = p.get("lastActive");
