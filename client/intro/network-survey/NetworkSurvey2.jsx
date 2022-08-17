@@ -4,9 +4,9 @@ import React from "react";
 import { Centered } from "meteor/empirica:core";
 import { HTMLSelect } from "@blueprintjs/core";
 
-const DropdownSelect = () => (
+const DropdownSelect = ({id, name, handleChange}) => (
     <div className="bp4-html-select">
-        <select className="dropdown-select-input" defaultValue="">
+        <select className="dropdown-select-input" defaultValue="" id={id} name={name} onChange={handleChange} required>
             <option value="" disbaled="true" hidden></option>
             <option value="daily">Daily</option>
             <option value="weekly">Weekly</option>
@@ -17,6 +17,14 @@ const DropdownSelect = () => (
 
 export default class NetworkSurveyTwo extends React.Component {
 
+  state = {
+    tie1 : "", 
+    tie2 : "",
+    tie3 : "",
+    tie4 : "",
+    tie5 : "",
+  };
+  
   handleChange = event => {
     const el = event.currentTarget;
     this.setState({ [el.name]: el.value });
@@ -34,9 +42,12 @@ export default class NetworkSurveyTwo extends React.Component {
 
   render() {
     const { game, round, stage, player } = this.props;
-    const filledOut = true;
+    const {tie1, tie2, tie3, tie4, tie5} = this.state;
+    const filledOut = tie1 && tie2 && tie3 && tie4 && tie5;
     const {name1, name2, name3, name4, name5} = player.get("networkResponse1");
     
+    console.log(this.state);
+
     return (
           <div className="network-survey-container">
                 <div className="network-survey-header">
@@ -61,27 +72,27 @@ export default class NetworkSurveyTwo extends React.Component {
                     <form className="network-form" onSubmit={this.handleSubmit}>
                         <p> How often do you communicate with _ ? </p>
                         <div className="input-row">
-                            <label className="dropdown-input-label" htmlFor="name1"> <p>{name1}</p> </label>
-                            <DropdownSelect></DropdownSelect>
+                            <label className="dropdown-input-label" htmlFor="tie1"> <p>{name1}</p> </label>
+                            <DropdownSelect id="tie1" name="tie1" handleChange={this.handleChange}></DropdownSelect>
                         </div>
                         <div className="input-row">
-                            <label className="dropdown-input-label" htmlFor="name2"> <p>{name2}</p> </label>
-                            <DropdownSelect></DropdownSelect>
+                            <label className="dropdown-input-label" htmlFor="tie2"> <p>{name2}</p> </label>
+                            <DropdownSelect id="tie2" name="tie2" handleChange={this.handleChange}></DropdownSelect>
 
                         </div>
                         <div className="input-row">
-                            <label className="dropdown-input-label" htmlFor="name3"> <p>{name3}</p> </label>
-                            <DropdownSelect></DropdownSelect>
+                            <label className="dropdown-input-label" htmlFor="tie3"> <p>{name3}</p> </label>
+                            <DropdownSelect id="tie3" name="tie3" handleChange={this.handleChange}></DropdownSelect>
 
                         </div>
                         <div className="input-row">
-                            <label className="dropdown-input-label" htmlFor="name4"> <p>{name4}</p> </label>
-                            <DropdownSelect></DropdownSelect>
+                            <label className="dropdown-input-label" htmlFor="tie4"> <p>{name4}</p> </label>
+                            <DropdownSelect id="tie4" name="tie4" handleChange={this.handleChange}></DropdownSelect>
 
                         </div>
                         <div className="input-row">
-                            <label className="dropdown-input-label" htmlFor="name5"> <p>{name5}</p> </label>
-                            <DropdownSelect></DropdownSelect>
+                            <label className="dropdown-input-label" htmlFor="tie5"> <p>{name5}</p> </label>
+                            <DropdownSelect id="tie5" name="tie5" handleChange={this.handleChange}></DropdownSelect>
 
                         </div>
                         <div className="network-button-container">

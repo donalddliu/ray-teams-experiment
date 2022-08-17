@@ -51,23 +51,23 @@ export default class NetworkSurveyOne extends React.Component {
                     <form className="network-form" onSubmit={this.handleSubmit}>
                         <p>
                             <label className="input-label" htmlFor="name1"> Name: </label>
-                            <input type="text" id="name1" name="name1" onChange={this.handleChange}/>
+                            <input type="text" id="name1" name="name1" onChange={this.handleChange} required/>
                         </p>
                         <p>
                             <label className="input-label" htmlFor="name2"> Name: </label>
-                            <input type="text" id="name2" name="name2" onChange={this.handleChange}/>
+                            <input type="text" id="name2" name="name2" onChange={this.handleChange} required/>
                         </p>
                         <p>
                             <label className="input-label" htmlFor="name3"> Name: </label>
-                            <input type="text" id="name3" name="name3" onChange={this.handleChange}/>
+                            <input type="text" id="name3" name="name3" onChange={this.handleChange} required/>
                         </p>
                         <p>
                             <label className="input-label" htmlFor="name4"> Name: </label>
-                            <input type="text" id="name4" name="name4" onChange={this.handleChange}/>
+                            <input type="text" id="name4" name="name4" onChange={this.handleChange} required/>
                         </p>
                         <p>
                             <label className="input-label" htmlFor="name5"> Name: </label>
-                            <input type="text" id="name5" name="name5" onChange={this.handleChange}/>
+                            <input type="text" id="name5" name="name5" onChange={this.handleChange} required/>
                         </p>
                         <div className="network-button-container">
                             <button 

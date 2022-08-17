@@ -1177,7 +1177,6 @@ var inactiveTimer = /*#__PURE__*/function (_React$Component) {
       var activePlayers = game.players.filter(function (p) {
         return !p.get("inactive");
       });
-      console.log(activePlayers);
       activePlayers.forEach(function (p) {
         var playerLastActive = p.get("lastActive");
         var timeDiff = currentTime.diff(playerLastActive, 'seconds');
@@ -3007,7 +3006,8 @@ var NetworkSurveyOne = /*#__PURE__*/function (_React$Component) {
         type: "text",
         id: "name1",
         name: "name1",
-        onChange: this.handleChange
+        onChange: this.handleChange,
+        required: true
       })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
         className: "input-label",
         htmlFor: "name2"
@@ -3015,7 +3015,8 @@ var NetworkSurveyOne = /*#__PURE__*/function (_React$Component) {
         type: "text",
         id: "name2",
         name: "name2",
-        onChange: this.handleChange
+        onChange: this.handleChange,
+        required: true
       })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
         className: "input-label",
         htmlFor: "name3"
@@ -3023,7 +3024,8 @@ var NetworkSurveyOne = /*#__PURE__*/function (_React$Component) {
         type: "text",
         id: "name3",
         name: "name3",
-        onChange: this.handleChange
+        onChange: this.handleChange,
+        required: true
       })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
         className: "input-label",
         htmlFor: "name4"
@@ -3031,7 +3033,8 @@ var NetworkSurveyOne = /*#__PURE__*/function (_React$Component) {
         type: "text",
         id: "name4",
         name: "name4",
-        onChange: this.handleChange
+        onChange: this.handleChange,
+        required: true
       })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
         className: "input-label",
         htmlFor: "name5"
@@ -3039,7 +3042,8 @@ var NetworkSurveyOne = /*#__PURE__*/function (_React$Component) {
         type: "text",
         id: "name5",
         name: "name5",
-        onChange: this.handleChange
+        onChange: this.handleChange,
+        required: true
       })), /*#__PURE__*/React.createElement("div", {
         className: "network-button-container"
       }, /*#__PURE__*/React.createElement("button", {
@@ -3150,12 +3154,19 @@ module.link("@blueprintjs/core", {
   }
 }, 2);
 
-var DropdownSelect = function () {
+var DropdownSelect = function (_ref) {
+  var id = _ref.id,
+      name = _ref.name,
+      handleChange = _ref.handleChange;
   return /*#__PURE__*/React.createElement("div", {
     className: "bp4-html-select"
   }, /*#__PURE__*/React.createElement("select", {
     className: "dropdown-select-input",
-    defaultValue: ""
+    defaultValue: "",
+    id: id,
+    name: name,
+    onChange: handleChange,
+    required: true
   }, /*#__PURE__*/React.createElement("option", {
     value: "",
     disbaled: "true",
@@ -3182,6 +3193,13 @@ var NetworkSurveyTwo = /*#__PURE__*/function (_React$Component) {
     }
 
     _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+    _this.state = {
+      tie1: "",
+      tie2: "",
+      tie3: "",
+      tie4: "",
+      tie5: ""
+    };
 
     _this.handleChange = function (event) {
       var _this$setState;
@@ -3214,7 +3232,13 @@ var NetworkSurveyTwo = /*#__PURE__*/function (_React$Component) {
           round = _this$props2.round,
           stage = _this$props2.stage,
           player = _this$props2.player;
-      var filledOut = true;
+      var _this$state = this.state,
+          tie1 = _this$state.tie1,
+          tie2 = _this$state.tie2,
+          tie3 = _this$state.tie3,
+          tie4 = _this$state.tie4,
+          tie5 = _this$state.tie5;
+      var filledOut = tie1 && tie2 && tie3 && tie4 && tie5;
 
       var _player$get = player.get("networkResponse1"),
           name1 = _player$get.name1,
@@ -3223,6 +3247,7 @@ var NetworkSurveyTwo = /*#__PURE__*/function (_React$Component) {
           name4 = _player$get.name4,
           name5 = _player$get.name5;
 
+      console.log(this.state);
       return /*#__PURE__*/React.createElement("div", {
         className: "network-survey-container"
       }, /*#__PURE__*/React.createElement("div", {
@@ -3240,28 +3265,48 @@ var NetworkSurveyTwo = /*#__PURE__*/function (_React$Component) {
         className: "input-row"
       }, /*#__PURE__*/React.createElement("label", {
         className: "dropdown-input-label",
-        htmlFor: "name1"
-      }, " ", /*#__PURE__*/React.createElement("p", null, name1), " "), /*#__PURE__*/React.createElement(DropdownSelect, null)), /*#__PURE__*/React.createElement("div", {
+        htmlFor: "tie1"
+      }, " ", /*#__PURE__*/React.createElement("p", null, name1), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+        id: "tie1",
+        name: "tie1",
+        handleChange: this.handleChange
+      })), /*#__PURE__*/React.createElement("div", {
         className: "input-row"
       }, /*#__PURE__*/React.createElement("label", {
         className: "dropdown-input-label",
-        htmlFor: "name2"
-      }, " ", /*#__PURE__*/React.createElement("p", null, name2), " "), /*#__PURE__*/React.createElement(DropdownSelect, null)), /*#__PURE__*/React.createElement("div", {
+        htmlFor: "tie2"
+      }, " ", /*#__PURE__*/React.createElement("p", null, name2), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+        id: "tie2",
+        name: "tie2",
+        handleChange: this.handleChange
+      })), /*#__PURE__*/React.createElement("div", {
         className: "input-row"
       }, /*#__PURE__*/React.createElement("label", {
         className: "dropdown-input-label",
-        htmlFor: "name3"
-      }, " ", /*#__PURE__*/React.createElement("p", null, name3), " "), /*#__PURE__*/React.createElement(DropdownSelect, null)), /*#__PURE__*/React.createElement("div", {
+        htmlFor: "tie3"
+      }, " ", /*#__PURE__*/React.createElement("p", null, name3), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+        id: "tie3",
+        name: "tie3",
+        handleChange: this.handleChange
+      })), /*#__PURE__*/React.createElement("div", {
         className: "input-row"
       }, /*#__PURE__*/React.createElement("label", {
         className: "dropdown-input-label",
-        htmlFor: "name4"
-      }, " ", /*#__PURE__*/React.createElement("p", null, name4), " "), /*#__PURE__*/React.createElement(DropdownSelect, null)), /*#__PURE__*/React.createElement("div", {
+        htmlFor: "tie4"
+      }, " ", /*#__PURE__*/React.createElement("p", null, name4), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+        id: "tie4",
+        name: "tie4",
+        handleChange: this.handleChange
+      })), /*#__PURE__*/React.createElement("div", {
         className: "input-row"
       }, /*#__PURE__*/React.createElement("label", {
         className: "dropdown-input-label",
-        htmlFor: "name5"
-      }, " ", /*#__PURE__*/React.createElement("p", null, name5), " "), /*#__PURE__*/React.createElement(DropdownSelect, null)), /*#__PURE__*/React.createElement("div", {
+        htmlFor: "tie5"
+      }, " ", /*#__PURE__*/React.createElement("p", null, name5), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+        id: "tie5",
+        name: "tie5",
+        handleChange: this.handleChange
+      })), /*#__PURE__*/React.createElement("div", {
         className: "network-button-container"
       }, /*#__PURE__*/React.createElement("button", {
         className: !filledOut ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
@@ -3324,12 +3369,19 @@ module.link("@blueprintjs/core", {
   }
 }, 2);
 
-var DropdownSelect = function () {
+var DropdownSelect = function (_ref) {
+  var id = _ref.id,
+      name = _ref.name,
+      handleChange = _ref.handleChange;
   return /*#__PURE__*/React.createElement("div", {
     className: "bp4-html-select"
   }, /*#__PURE__*/React.createElement("select", {
     className: "dropdown-select-input",
-    defaultValue: ""
+    defaultValue: "",
+    id: id,
+    name: name,
+    onChange: handleChange,
+    required: true
   }, /*#__PURE__*/React.createElement("option", {
     value: "",
     disbaled: "true",
@@ -3356,6 +3408,18 @@ var NetworkSurveyThree = /*#__PURE__*/function (_React$Component) {
     }
 
     _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+    _this.state = {
+      tie12: "",
+      tie13: "",
+      tie14: "",
+      tie15: "",
+      tie23: "",
+      tie24: "",
+      tie25: "",
+      tie34: "",
+      tie35: "",
+      tie45: ""
+    };
 
     _this.handleChange = function (event) {
       var _this$setState;
@@ -3383,13 +3447,25 @@ var NetworkSurveyThree = /*#__PURE__*/function (_React$Component) {
 
   _proto.render = function () {
     function render() {
+      var _this2 = this;
+
       var _this$props2 = this.props,
           game = _this$props2.game,
           round = _this$props2.round,
           stage = _this$props2.stage,
-          player = _this$props2.player; // const { name1, name2, name3, name4, name5 } = {name1: "w", name2: "a", name3: "s", name4: "d", name5:"f"};
-
-      var filledOut = true;
+          player = _this$props2.player;
+      var _this$state = this.state,
+          tie12 = _this$state.tie12,
+          tie13 = _this$state.tie13,
+          tie14 = _this$state.tie14,
+          tie15 = _this$state.tie15,
+          tie23 = _this$state.tie23,
+          tie24 = _this$state.tie24,
+          tie25 = _this$state.tie25,
+          tie34 = _this$state.tie34,
+          tie35 = _this$state.tie35,
+          tie45 = _this$state.tie45;
+      var filledOut = tie12 && tie13 && tie14 && tie15 && tie23 && tie24 && tie25 && tie34 && tie35 && tie45;
 
       var _player$get = player.get("networkResponse1"),
           name1 = _player$get.name1,
@@ -3398,6 +3474,7 @@ var NetworkSurveyThree = /*#__PURE__*/function (_React$Component) {
           name4 = _player$get.name4,
           name5 = _player$get.name5;
 
+      console.log(this.state);
       return /*#__PURE__*/React.createElement("div", {
         className: "network-survey-container"
       }, /*#__PURE__*/React.createElement("div", {
@@ -3414,21 +3491,44 @@ var NetworkSurveyThree = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/React.createElement("table", {
         className: "name-matrix-table"
       }, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "How often does __ communicate with __ ?"), /*#__PURE__*/React.createElement("th", null, name2), /*#__PURE__*/React.createElement("th", null, name3), /*#__PURE__*/React.createElement("th", null, name4), /*#__PURE__*/React.createElement("th", null, name5)), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, " ", name1), _.times(4, function (i) {
-        return /*#__PURE__*/React.createElement("td", {
-          key: i
-        }, /*#__PURE__*/React.createElement(DropdownSelect, null), " ");
+        return (
+          /*#__PURE__*/
+          // tie12, tie13, tie14, tie15
+          React.createElement("td", {
+            key: "tie1" + (i + 2)
+          }, /*#__PURE__*/React.createElement(DropdownSelect, {
+            id: "tie1" + (i + 2),
+            name: "tie1" + (i + 2),
+            handleChange: _this2.handleChange
+          }), " ")
+        );
       })), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, " ", name2), _.times(4, function (i) {
+        // tie23, tie24, tie25
         return i > 0 ? /*#__PURE__*/React.createElement("td", {
-          key: i
-        }, /*#__PURE__*/React.createElement(DropdownSelect, null), " ") : /*#__PURE__*/React.createElement("td", null);
+          key: "tie2" + (i + 2)
+        }, /*#__PURE__*/React.createElement(DropdownSelect, {
+          id: "tie2" + (i + 2),
+          name: "tie2" + (i + 2),
+          handleChange: _this2.handleChange
+        }), " ") : /*#__PURE__*/React.createElement("td", null);
       })), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, " ", name3), _.times(4, function (i) {
+        // tie34, tie35
         return i > 1 ? /*#__PURE__*/React.createElement("td", {
-          key: i
-        }, /*#__PURE__*/React.createElement(DropdownSelect, null), " ") : /*#__PURE__*/React.createElement("td", null);
+          key: "tie3" + (i + 2)
+        }, /*#__PURE__*/React.createElement(DropdownSelect, {
+          id: "tie3" + (i + 2),
+          name: "tie3" + (i + 2),
+          handleChange: _this2.handleChange
+        }), " ") : /*#__PURE__*/React.createElement("td", null);
       })), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, " ", name4), _.times(4, function (i) {
+        // tie45
         return i > 2 ? /*#__PURE__*/React.createElement("td", {
-          key: i
-        }, /*#__PURE__*/React.createElement(DropdownSelect, null), " ") : /*#__PURE__*/React.createElement("td", null);
+          key: "tie4" + (i + 2)
+        }, /*#__PURE__*/React.createElement(DropdownSelect, {
+          id: "tie4" + (i + 2),
+          name: "tie4" + (i + 2),
+          handleChange: _this2.handleChange
+        }), " ") : /*#__PURE__*/React.createElement("td", null);
       })))), /*#__PURE__*/React.createElement("div", {
         className: "network-button-container"
       }, /*#__PURE__*/React.createElement("button", {
@@ -5738,7 +5838,6 @@ var ChatContainer = /*#__PURE__*/function (_React$PureComponent) {
         msg = onNewMessage(msg);
 
         if (!msg) {
-          console.log("new");
           return;
         }
       }
