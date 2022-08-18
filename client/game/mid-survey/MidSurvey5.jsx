@@ -83,8 +83,8 @@ export default class MidSurveyFive extends React.Component {
                 </div>
                 <form className="questionnaire-btn-container" onSubmit={this.handleSubmit}>
                     <button 
-                        className="arrow-button button-submit"
-                        type="submit"> Submit </button> 
+                        className={!response ? "arrow-button button-submit-disabled" : "arrow-button button-submit"}
+                        disabled={!response} type="submit"> Submit </button> 
                 </form>
             </div>
       </Centered>

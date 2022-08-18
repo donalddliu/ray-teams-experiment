@@ -42,8 +42,6 @@ export default class NetworkSurveyThree extends React.Component {
     const {tie12, tie13, tie14, tie15, tie23, tie24, tie25, tie34, tie35, tie45} = this.state;
     const filledOut = tie12 && tie13 && tie14 && tie15 && tie23 && tie24 && tie25 && tie34 && tie35 && tie45;
     const {name1, name2, name3, name4, name5} = player.get("networkResponse1");
-
-    console.log(this.state);
     
     return (
           <div className="network-survey-container">

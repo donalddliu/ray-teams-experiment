@@ -614,6 +614,7 @@ class MidSurveyFour extends React.Component {
       event.preventDefault(); // TODO: log player response to survey question
 
       player.round.set("survey_".concat(surveyNumber), this.state);
+      stage.set("survey_".concat(surveyNumber), this.state);
       player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
       onNext();
     };
@@ -845,7 +846,8 @@ class MidSurveyFive extends React.Component {
       className: "questionnaire-btn-container",
       onSubmit: this.handleSubmit
     }, /*#__PURE__*/React.createElement("button", {
-      className: "arrow-button button-submit",
+      className: !response ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+      disabled: !response,
       type: "submit"
     }, " Submit "))));
   }
@@ -951,10 +953,11 @@ class inactiveTimer extends React.Component {
       player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
     };
 
-    this.onPlayerInactive = player => {
+    this.onPlayerInactive = (player, game) => {
       if (player.get("inactive") === false) {
         player.set("inactive", true);
         player.set("submitted", false);
+        game.set("checkForSimilarSymbol", true);
       }
     };
 
@@ -978,7 +981,7 @@ class inactiveTimer extends React.Component {
       const timeDiff = currentTime.diff(playerLastActive, 'seconds');
 
       if (timeDiff >= inactiveDuration) {
-        this.onPlayerInactive(p);
+        this.onPlayerInactive(p, game);
         p.exit("inactive"); // this.onPlayerInactive();
       } else if (timeDiff > inactiveDuration - game.treatment.idleWarningTime) {
         if (!this.state.modalIsOpen && p._id === player._id) {
@@ -2605,7 +2608,6 @@ class NetworkSurveyTwo extends React.Component {
       name4,
       name5
     } = player.get("networkResponse1");
-    console.log(this.state);
     return /*#__PURE__*/React.createElement("div", {
       className: "network-survey-container"
     }, /*#__PURE__*/React.createElement("div", {
@@ -2800,7 +2802,6 @@ class NetworkSurveyThree extends React.Component {
       name4,
       name5
     } = player.get("networkResponse1");
-    console.log(this.state);
     return /*#__PURE__*/React.createElement("div", {
       className: "network-survey-container"
     }, /*#__PURE__*/React.createElement("div", {

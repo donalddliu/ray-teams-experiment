@@ -732,6 +732,7 @@ var MidSurveyFour = /*#__PURE__*/function (_React$Component) {
       event.preventDefault(); // TODO: log player response to survey question
 
       player.round.set("survey_" + surveyNumber, _this.state);
+      stage.set("survey_" + surveyNumber, _this.state);
       player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
       onNext();
     };
@@ -992,7 +993,8 @@ var MidSurveyFive = /*#__PURE__*/function (_React$Component) {
         className: "questionnaire-btn-container",
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/React.createElement("button", {
-        className: "arrow-button button-submit",
+        className: !response ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+        disabled: !response,
         type: "submit"
       }, " Submit "))));
     }
@@ -1148,10 +1150,11 @@ var inactiveTimer = /*#__PURE__*/function (_React$Component) {
       player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
     };
 
-    _this.onPlayerInactive = function (player) {
+    _this.onPlayerInactive = function (player, game) {
       if (player.get("inactive") === false) {
         player.set("inactive", true);
         player.set("submitted", false);
+        game.set("checkForSimilarSymbol", true);
       }
     };
 
@@ -1182,7 +1185,7 @@ var inactiveTimer = /*#__PURE__*/function (_React$Component) {
         var timeDiff = currentTime.diff(playerLastActive, 'seconds');
 
         if (timeDiff >= inactiveDuration) {
-          _this2.onPlayerInactive(p);
+          _this2.onPlayerInactive(p, game);
 
           p.exit("inactive"); // this.onPlayerInactive();
         } else if (timeDiff > inactiveDuration - game.treatment.idleWarningTime) {
@@ -3247,7 +3250,6 @@ var NetworkSurveyTwo = /*#__PURE__*/function (_React$Component) {
           name4 = _player$get.name4,
           name5 = _player$get.name5;
 
-      console.log(this.state);
       return /*#__PURE__*/React.createElement("div", {
         className: "network-survey-container"
       }, /*#__PURE__*/React.createElement("div", {
@@ -3474,7 +3476,6 @@ var NetworkSurveyThree = /*#__PURE__*/function (_React$Component) {
           name4 = _player$get.name4,
           name5 = _player$get.name5;
 
-      console.log(this.state);
       return /*#__PURE__*/React.createElement("div", {
         className: "network-survey-container"
       }, /*#__PURE__*/React.createElement("div", {

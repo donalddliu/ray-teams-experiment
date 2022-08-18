@@ -35,6 +35,7 @@ Empirica.gameInit(game => {
   const numRoundsBeforeSurvey = numTaskRounds/numSurveyRounds;
 
   let colors = ["Green", "Red", "Yellow", "Blue", "Purple", "White", "Black"]
+  let surveyNum = 1
   colors = shuffle(colors);
 
   game.players.forEach((player, i) => {
@@ -88,9 +89,11 @@ Empirica.gameInit(game => {
 
       const surveyStages = surveyRound.addStage({
         name: "Survey",
-        displayName: "Survey",
+        displayName: "Survey " + surveyNum,
         durationInSeconds: surveyDuration
       })
+      
+      surveyNum++;
     }
 
   });

@@ -46,8 +46,6 @@ export default class NetworkSurveyTwo extends React.Component {
     const filledOut = tie1 && tie2 && tie3 && tie4 && tie5;
     const {name1, name2, name3, name4, name5} = player.get("networkResponse1");
     
-    console.log(this.state);
-
     return (
           <div className="network-survey-container">
                 <div className="network-survey-header">

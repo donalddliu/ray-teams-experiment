@@ -50,6 +50,7 @@ Empirica.onRoundStart((game, round) => {
       })
     } else {
       getFullyConnectedLayer(game); // Updates the neighbors to be fully connected
+      game.set("checkForSimilarSymbol", true);
     }
   
   }
@@ -175,7 +176,7 @@ Empirica.onSet((
     round.set("numPlayersSubmitted", numPlayersSubmitted);
     if (allSubmitted) {
       const log = stage.get("log");
-      computeScore(activePlayers, stage, round);
+      computeScore(activePlayers, game, stage, round);
       // Need to submit for submit the stage for every player
       game.players.forEach((player) => {
         player.stage.submit();
@@ -204,19 +205,32 @@ Empirica.onSet((
 
 });
 
-function computeScore(activePlayers, stage, round) {
+function computeScore(activePlayers, game, stage, round) {
   let success = true;
   console.log("CORRECT ANSWER:")
   console.log(stage.get("answer"));
   console.log("Players guessed:")
 
+  let playerAnswers = [];
+  const allAnswersEqual = arr => arr.every( v => v === arr[0] ) //Func to check if all player answers are equal
+
   activePlayers.forEach(player => {
     const submission = player.get("symbolSelected");
     console.log(submission);
+    if (game.get("checkForSimilarSymbol")) {
+      playerAnswers.push(submission);
+    }
     if (submission !== stage.get("answer")) {
-      success = false
+      success = false;
     }
   })
+
+  if (game.get("checkForSimilarSymbol")) {
+    if (allAnswersEqual(playerAnswers)) {
+      success = true;
+    }
+  }
+
   round.set("result", success);
   if (success) {
     activePlayers.forEach(player => {

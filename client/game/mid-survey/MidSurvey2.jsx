@@ -46,7 +46,6 @@ export default class MidSurveyTwo extends React.Component {
   render() {
     const { game, round, stage, player } = this.props;
     const { response } = this.state;
-
     const network = player.get("neighbors");
 
     const surveyNumber = player.get("surveyNumber");

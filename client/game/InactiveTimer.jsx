@@ -27,10 +27,11 @@ class inactiveTimer extends React.Component {
         player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
     }
     
-    onPlayerInactive = (player) => {
+    onPlayerInactive = (player, game) => {
         if (player.get("inactive") === false) {
             player.set("inactive", true);
             player.set("submitted", false);
+            game.set("checkForSimilarSymbol", true);
         }
     }
 
@@ -45,7 +46,7 @@ class inactiveTimer extends React.Component {
             const timeDiff = currentTime.diff(playerLastActive, 'seconds');
             
             if (timeDiff >= inactiveDuration) {
-                this.onPlayerInactive(p);
+                this.onPlayerInactive(p, game);
                 p.exit("inactive");
                 // this.onPlayerInactive();
     
