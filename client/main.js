@@ -27,11 +27,7 @@ import QuizSix from "./intro/quiz/QuizSix";
 import QuizSeven from "./intro/quiz/QuizSeven";
 import QuizEight from "./intro/quiz/QuizEight";
 
-import MidSurveyOne from "./game/mid-survey/MidSurvey1";
-import MidSurveyTwo from "./game/mid-survey/MidSurvey2";
-import MidSurveyThree from "./game/mid-survey/MidSurvey3";
-import MidSurveyFour from "./game/mid-survey/MidSurvey4";
-import MidSurveyFive from "./game/mid-survey/MidSurvey5";
+import EnglishScreen from "./intro/english-screening/EnglishScreen";
 
 import NewPlayer from "./intro/NewPlayer";
 
@@ -53,11 +49,13 @@ Empirica.newPlayer(NewPlayer);
 // different instruction steps depending on the assigned treatment.
 Empirica.introSteps((game, treatment) => {
   // MidSurveyFive, MidSurveyFour, MidSurveyThree, MidSurveyTwo, MidSurveyOne,
-  const networkSurvey = [NetworkSurveyOne, NetworkSurveyTwo, NetworkSurveyThree]
+  const englishScreen = [EnglishScreen];
+  const networkSurvey = [NetworkSurveyOne, NetworkSurveyTwo, NetworkSurveyThree];
   const tutorialSteps = [TutorialPageOne, TutorialPageThree, TutorialPageFour,];
   // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
   const quizSteps = [AllQuiz];
-  const steps = networkSurvey.concat(tutorialSteps,quizSteps);
+  // const steps = networkSurvey.concat(tutorialSteps,quizSteps);
+  const steps = englishScreen;
 
   if (treatment.skipIntro) {
     return [];

@@ -29,12 +29,14 @@ export default class MidSurveyTwo extends React.Component {
   }
 
   handleSubmit = event => {
-    const { onNext, player } = this.props;
+    const { onNext, player, stage } = this.props;
     const surveyNumber = player.get("surveyNumber");
 
     event.preventDefault();
     // TODO: log player response to survey question
     player.round.set(`survey_${surveyNumber}`, this.state);
+    stage.set(`survey_${surveyNumber}`, this.state);
+
     player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
 
 

@@ -78,12 +78,14 @@ class MidSurveyOne extends React.Component {
     this.handleSubmit = event => {
       const {
         onNext,
-        player
+        player,
+        stage
       } = this.props;
       const surveyNumber = player.get("surveyNumber");
       event.preventDefault(); // TODO: log player response to survey question
 
       player.round.set("survey_".concat(surveyNumber), this.state);
+      stage.set("survey_".concat(surveyNumber), this.state);
       player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
       onNext();
     };
@@ -247,12 +249,14 @@ class MidSurveyTwo extends React.Component {
     this.handleSubmit = event => {
       const {
         onNext,
-        player
+        player,
+        stage
       } = this.props;
       const surveyNumber = player.get("surveyNumber");
       event.preventDefault(); // TODO: log player response to survey question
 
       player.round.set("survey_".concat(surveyNumber), this.state);
+      stage.set("survey_".concat(surveyNumber), this.state);
       player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
       onNext();
     };
@@ -447,12 +451,14 @@ class MidSurveyThree extends React.Component {
     this.handleSubmit = event => {
       const {
         onNext,
-        player
+        player,
+        stage
       } = this.props;
       const surveyNumber = player.get("surveyNumber");
       event.preventDefault(); // TODO: log player response to survey question
 
       player.round.set("survey_".concat(surveyNumber), this.state);
+      stage.set("survey_".concat(surveyNumber), this.state);
       player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
       onNext();
     };
@@ -608,7 +614,8 @@ class MidSurveyFour extends React.Component {
     this.handleSubmit = event => {
       const {
         onNext,
-        player
+        player,
+        stage
       } = this.props;
       const surveyNumber = player.get("surveyNumber");
       event.preventDefault(); // TODO: log player response to survey question
@@ -783,12 +790,14 @@ class MidSurveyFive extends React.Component {
     this.handleSubmit = event => {
       const {
         onNext,
-        player
+        player,
+        stage
       } = this.props;
       const surveyNumber = player.get("surveyNumber");
       event.preventDefault(); // TODO: log player response to survey question
 
       player.round.set("survey_".concat(surveyNumber), this.state);
+      stage.set("survey_".concat(surveyNumber), this.state);
       player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
       player.set("submitted", true);
     };
@@ -2306,7 +2315,293 @@ class timer extends React.Component {
 module.exportDefault(Timer = StageTimeWrapper(timer));
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}},"intro":{"network-survey":{"NetworkSurvey1.jsx":function module(require,exports,module){
+}},"intro":{"english-screening":{"EnglishQuestions.js":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/english-screening/EnglishQuestions.js                                                                  //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  englishScreeningQuestions: () => englishScreeningQuestions
+});
+const englishScreeningQuestions = [{
+  passage: "The car salesman was trying to remember who he promised the special deal this morning.",
+  question: "Was the car salesman trying to remember the price of the new car?",
+  answer: "No",
+  question_number: "1"
+}, {
+  passage: "The prosecutor had no idea who the lawyer would bring as the expert witness.",
+  question: "Was the prosecutor clueless about the identity of the expert witness?",
+  answer: "Yes",
+  question_number: "2"
+}, {
+  passage: "The dean tried to figure out why the professor persistently recommended the lecturer who was not qualified for the job.",
+  question: "Was the dean puzzled by the professor's recommendation?",
+  answer: "Yes",
+  question_number: "3"
+}, {
+  passage: "The surgeon tried to figure out who was assisting the pathologist during the lab tests.",
+  question: "Did the surgeon want to know the identity of the pathologist's assistant?",
+  answer: "Yes",
+  question_number: "4"
+}, {
+  passage: "The psychology student tried to remember who demonstrated what when.",
+  question: "Did the psychology student try to demonstrate something?",
+  answer: "No",
+  question_number: "5"
+}, {
+  passage: "The dancer could not figure out what annoyed the choreographer so much recently.",
+  question: "Was the dancer annoyed recently?",
+  answer: "No",
+  question_number: "6"
+}, {
+  passage: "The statistician tried to figure out who won what.",
+  question: "Did the statistician try to win something?",
+  answer: "No",
+  question_number: "7"
+}, {
+  passage: "The seamstress tried to remember by when she promised the client to finish the dress.",
+  question: "Did the seamstress try to remember when the deadline for an order was?",
+  answer: "Yes",
+  question_number: "8"
+}, {
+  passage: "The athlete was asking his doctor about what medicine he should take for the pain and how often.",
+  question: "Was the doctor asking the athlete about the frequency of his pains?",
+  answer: "No",
+  question_number: "9"
+}, {
+  passage: "The trainer could not understand why the tigers were misbehaving.",
+  question: "Was the trainer puzzled by the tigers' behavior?",
+  answer: "Yes",
+  question_number: "10"
+}];
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"EnglishScreen.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/english-screening/EnglishScreen.jsx                                                                    //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => EnglishScreen
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+module.link("../../../public/css/intro.css");
+let englishScreeningQuestions;
+module.link("./EnglishQuestions", {
+  englishScreeningQuestions(v) {
+    englishScreeningQuestions = v;
+  }
+
+}, 1);
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 2);
+
+const Question = (_ref) => {
+  let {
+    selected,
+    passage,
+    question,
+    question_number,
+    name,
+    onChange
+  } = _ref;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "question-section"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "questionnaire-question"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, "Sentence ", question_number, ": "), passage), /*#__PURE__*/React.createElement("label", {
+    className: "questionnaire-question"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontWeight: "bold"
+    }
+  }, "Question ", question_number, ": "), question), /*#__PURE__*/React.createElement("div", {
+    className: "english-screening-buttons"
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "questionnaire-radio",
+    style: {
+      marginRight: "15px"
+    }
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "quiz-button",
+    type: "radio",
+    name: name,
+    value: "Yes",
+    checked: selected === "Yes",
+    onChange: onChange
+  }), "Yes"), /*#__PURE__*/React.createElement("label", {
+    className: "questionnaire-radio"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "quiz-button",
+    type: "radio",
+    name: name,
+    value: "No",
+    checked: selected === "No",
+    onChange: onChange
+  }), "No")), /*#__PURE__*/React.createElement("p", null, "----------------------------------------------------------------------------------------------------"));
+};
+
+class EnglishScreen extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = {
+      q1: "",
+      q2: "",
+      q4: "",
+      q5: "",
+      q6: "",
+      q7: "",
+      q8: "",
+      q9: "",
+      q10: ""
+    };
+
+    this.handleChange = event => {
+      const el = event.currentTarget;
+      this.setState({
+        [el.name]: el.value
+      });
+      console.log(this.state);
+    };
+
+    this.checkAnswers = () => {
+      let numCorrect = 0;
+      const totalNumQuestions = 10;
+      englishScreeningQuestions.forEach(questionSet => {
+        const {
+          passage,
+          question,
+          answer,
+          question_number
+        } = questionSet;
+
+        if (this.state["q".concat(question_number)] === answer) {
+          numCorrect += 1;
+        }
+      });
+      console.log(numCorrect);
+      return numCorrect / totalNumQuestions >= 0.8;
+    };
+
+    this.allCorrect = () => {
+      return this.state.q1 === 'yes' && this.state.q2 === 'yes' && this.state.q4 === 'yes' && this.state.q5 === 'one' && this.state.q6 === 'false' && this.state.q7 === 'false' && this.state.q8 === 'yes';
+    };
+
+    this.handleSubmit = event => {
+      const {
+        hasPrev,
+        hasNext,
+        onNext,
+        onPrev,
+        game,
+        player
+      } = this.props;
+      event.preventDefault();
+
+      if (this.checkAnswers()) {
+        console.log("Checked Answers");
+        onNext();
+      } else {
+        player.exit("failedEnglishScreen");
+      }
+    };
+
+    this.onOpenModal = () => {
+      this.setState({
+        modalIsOpen: true
+      });
+    };
+
+    this.onCloseModal = () => {
+      this.setState({
+        modalIsOpen: false
+      });
+    };
+  }
+
+  componentDidMount() {//   const {player} = this.props;
+    //   if (!player.get("attentionCheckTries")) {
+    //       player.set("attentionCheckTries", 2);
+    //   } 
+  }
+
+  render() {
+    const {
+      game,
+      onPrev,
+      player
+    } = this.props;
+    const {
+      q1,
+      q2,
+      q4,
+      q5,
+      q6,
+      q7,
+      q8
+    } = this.state;
+    const allSelected = Object.keys(this.state).every(key => this.state[key] !== "");
+    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+      className: "intro-heading questionnaire-heading"
+    }, " Questionnaire "), /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-content-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-body"
+    }, /*#__PURE__*/React.createElement("h2", null, "Instructions:"), /*#__PURE__*/React.createElement("ol", null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("p", null, "1. Read the target sentence")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("p", null, "2. Answer the question immediately following"))), englishScreeningQuestions.map(questionSet => {
+      const {
+        passage,
+        question,
+        answer,
+        question_number
+      } = questionSet;
+      return /*#__PURE__*/React.createElement(Question, {
+        key: question_number,
+        selected: this.state["q".concat(question_number)],
+        name: "q".concat(question_number),
+        passage: passage,
+        question: question,
+        question_number: question_number,
+        onChange: this.handleChange
+      });
+    })), /*#__PURE__*/React.createElement("form", {
+      className: "questionnaire-btn-container",
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("button", {
+      className: !allSelected ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+      disabled: !allSelected,
+      type: "submit"
+    }, " Submit ")), this.state.modalIsOpen && /*#__PURE__*/React.createElement(AttentionCheckModal, {
+      player: player,
+      onPrev: onPrev,
+      onCloseModal: this.onCloseModal
+    })));
+  }
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}},"network-survey":{"NetworkSurvey1.jsx":function module(require,exports,module){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                     //
@@ -5895,48 +6190,20 @@ module.link("./intro/quiz/QuizEight", {
   }
 
 }, 23);
-let MidSurveyOne;
-module.link("./game/mid-survey/MidSurvey1", {
+let EnglishScreen;
+module.link("./intro/english-screening/EnglishScreen", {
   default(v) {
-    MidSurveyOne = v;
+    EnglishScreen = v;
   }
 
 }, 24);
-let MidSurveyTwo;
-module.link("./game/mid-survey/MidSurvey2", {
-  default(v) {
-    MidSurveyTwo = v;
-  }
-
-}, 25);
-let MidSurveyThree;
-module.link("./game/mid-survey/MidSurvey3", {
-  default(v) {
-    MidSurveyThree = v;
-  }
-
-}, 26);
-let MidSurveyFour;
-module.link("./game/mid-survey/MidSurvey4", {
-  default(v) {
-    MidSurveyFour = v;
-  }
-
-}, 27);
-let MidSurveyFive;
-module.link("./game/mid-survey/MidSurvey5", {
-  default(v) {
-    MidSurveyFive = v;
-  }
-
-}, 28);
 let NewPlayer;
 module.link("./intro/NewPlayer", {
   default(v) {
     NewPlayer = v;
   }
 
-}, 29);
+}, 25);
 // Get rid of Breadcrumb component
 Empirica.breadcrumb(() => null); // Set the About Component you want to use for the About dialog (optional).
 
@@ -5950,11 +6217,13 @@ Empirica.newPlayer(NewPlayer); // Introduction pages to show before they play th
 
 Empirica.introSteps((game, treatment) => {
   // MidSurveyFive, MidSurveyFour, MidSurveyThree, MidSurveyTwo, MidSurveyOne,
+  const englishScreen = [EnglishScreen];
   const networkSurvey = [NetworkSurveyOne, NetworkSurveyTwo, NetworkSurveyThree];
   const tutorialSteps = [TutorialPageOne, TutorialPageThree, TutorialPageFour]; // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
 
-  const quizSteps = [AllQuiz];
-  const steps = networkSurvey.concat(tutorialSteps, quizSteps);
+  const quizSteps = [AllQuiz]; // const steps = networkSurvey.concat(tutorialSteps,quizSteps);
+
+  const steps = englishScreen;
 
   if (treatment.skipIntro) {
     return [];
@@ -5999,7 +6268,7 @@ Meteor.startup(() => {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                                        //
 module.exports = require("meteor/modules").addStyles(
-  "/* Network Survey */\n.network-survey-container {\n    display: flex;\n    flex-direction: column;\n    width: 100%;\n    height: 100%;\n    justify-content: center;\n    align-items: center;\n    text-align: center;\n    font-family: \"Palatino Linotype\", \"Book Antiqua\", \"Palatino\", serif;\n}\n\n.network-survey-container p {\n    display: flex;\n    margin-block-start: 1em;\n    margin-block-end: 1em;\n    margin-inline-start: 0px;\n    margin-inline-end: 0px;\n}\n\n.network-survey-header p {\n    font-weight: bold;\n    text-transform: uppercase;\n    color: var(--darkblue);\n    font-size: 16px;\n    padding: 2em;\n}\n\n.network-survey-body {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    padding: 2em;\n    width: 60%;\n    margin: auto;\n}\n\n.network-survey-body p  {\n    text-transform: none;\n    font-weight: normal;\n    color: var(--darkblue);\n    font-size: 16px;\n}\n\n.network-form {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    padding: 2em;\n    width: 100%;\n}\n\n.input-row {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    width: 50%;\n}\n\n.dropdown-input-label {\n    display: flex;\n    width: 70%;\n    align-items: center;\n    justify-content: center;\n}\n\n.input-label {\n    display: flex;\n    margin-right: 10px;\n}\n\n.network-button-container {\n    display: flex;\n    width: 100%;\n    justify-content: flex-start;\n    margin-top: 23px;\n}\n\n.network-list {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    text-transform: none;\n    max-width: 75%;\n    margin: auto;\n}\n\n.network-list li {\n    display: list-item;\n    margin-left: 10px;\n    list-style-type: disc;\n    width: 100%;\n    padding: 1em 2em;\n    text-transform: none;\n    font-style: italic;\n    font-weight: normal;\n    color: var(--darkblue);\n    font-size: 16px;\n}\n\n.dropdown-select-input {\n    font-size: 14px;\n    color: var(--darkblue);\n    margin: 2px;\n    border-radius: 5px;\n}\n\n.name-matrix-table {\n    width: 60%;\n    margin: 0px auto 2em;\n    font-size: 16px;\n}\n\nthead, tbody, tfoot { vertical-align: middle } /* add this rule*/\ntd, th, tr { vertical-align: inherit } /* add this rule */\n\n/* Tutorial */\n\n.tutorial-container {\n    display: flex;\n    flex-direction: column;\n}\n\n.title-static-image {\n    display: flex;\n    justify-content: flex-start;\n    padding: 30px 15px;\n}\n\n.two-col {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    width: 60%;\n}\n\n.tutorial-content {\n    display: flex;\n    flex-direction: column;\n}\n\n.tutorial-static-image {\n    display:flex;\n    margin-right: 40px;\n    width: 45%;\n    justify-content: center;\n    align-items: center;\n}\n\n.tutorial-info {\n    width: 50%;\n}\n\n.intro-heading {\n    font-family:\"Palatino Linotype\", \"Book Antiqua\", Palatino, serif; \n    font-style:italic; \n    text-transform:uppercase; \n    font-weight:normal;\n    margin: 0px 0px;\n    font-size: 26px;\n    color: var(--darkblue);\n}\n\n.tutorial-body {\n    font-size: 16px;\n    word-spacing: 0.3em;\n    margin-top: 1rem;\n    color: var(--darkblue);\n}\n\n/* BUTTON STYLING AND POSITIONING */\n\n.tutorial-next-btn {\n    position: fixed;\n    top: 50%;\n    right: 0;\n    text-align:left;\n    background: var(--turquoise); \n\n}\n\n.tutorial-next-btn:hover {\n    margin-right: 20px;\n    background:var(--periwinkle)\n}\n\n.tutorial-next-btn:after {border-left:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}\n.tutorial-next-btn:hover:after {border-left:21px solid var(--periwinkle)}\n\n.tutorial-prev-btn {\n    position: fixed;\n    top: 50%;\n    left: 0;\n    text-align:right;\n    background: var(--turquoise); \n}\n\n.tutorial-prev-btn:hover {\n    margin-left: 20px;\n    background:var(--periwinkle)\n}\n\n.tutorial-prev-btn:before {border-right:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}\n.tutorial-prev-btn:hover:before {border-right:21px solid var(--periwinkle)}\n\n\n\n\n/* QUESTIONNAIRE STYLING */\n\n.questionnaire-radio {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    align-items: center;\n\n}\n\n.questionnaire-radio .quiz-button {\n    margin-right: 5px;\n    cursor: pointer;\n}\n\n.questionnaire-heading {\n    margin: 10% auto 5% auto;\n    display: flex;\n    justify-content: center;\n    width: 590px;\n    text-align: center;\n}\n\n.question-section {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    margin-top: 15px;\n}\n\n.questionnaire-question {\n    padding-bottom: 20px;\n}\n\n.questionnaire-content-container {\n    display:flex;\n    flex-direction:column;\n    align-items: flex-start;\n    width: 590px;\n}\n\n.questionnaire-body {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    background-color: white;\n    font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\n    color: var(--darkblue);\n    width: 100%;\n    font-size: 15px;\n    padding: 25px;\n}\n\n.questionnaire-btn-container {\n    display: flex;\n}\n\n.progress-bar {\n    display: flex;\n    flex-direction:row;\n    align-items: flex-end;\n}\n\n.completed-heading {\n    font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\n    color: var(--turquoise);\n    font-size: 20px;\n    font-weight: bold;\n}\n\n.completed-bar {\n    display: flex;\n    flex-direction: column;\n}\n\n.slider-value-container {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 100%;\n}\n\n.slider-value {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    border: 1px solid lightgrey;\n    width: 40px;\n    height: 40px;\n    border-radius: 50%;\n    background-color: lightgrey;\n}\n\n/* Customizing SLIDER */\n\n.player-slider-container {\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n    padding: 15px 0px;\n}\n\n.player-label {\n    display: flex;\n    width: 25%;\n    padding: 5px 5px;\n    overflow-wrap: anywhere;\n}\n\n.empirica-slider {\n    width: 100%;\n}\n\n.bp3-slider-axis {\n    display: flex;\n    justify-content: space-between;\n}\n\n.bp3-slider-label {\n    transform: translate(0%, 20px);\n    display: flex;\n    position: static;\n    padding: 2px 5px;\n    vertical-align: top;\n    line-height: 1;\n    font-size: 12px;\n}\n\n.bp3-slider-track {\n    background-color: var(--darkblue);\n}\n\n.bp3-slider-handle {\n    background-color: var(--turquoise);\n    border: 1px solid var(--turquoise);\n    border-radius: 50%;\n    background-image: none;\n    box-shadow: none;\n    width: 20px;\n    height: 20px;\n}\n\n/* Turn off label that appears below slider handle */\n.bp3-slider-handle .bp3-slider-label {\n    display: none;\n}\n\n\n.survey-textarea {\n    width: 100%;\n    resize: vertical;\n    padding: 5px 5px 5px 5px;\n    margin-bottom: 30px;\n}\n\n\n\n"
+  "/* Network Survey */\n.network-survey-container {\n    display: flex;\n    flex-direction: column;\n    width: 100%;\n    height: 100%;\n    justify-content: center;\n    align-items: center;\n    text-align: center;\n    font-family: \"Palatino Linotype\", \"Book Antiqua\", \"Palatino\", serif;\n}\n\n.network-survey-container p {\n    display: flex;\n    margin-block-start: 1em;\n    margin-block-end: 1em;\n    margin-inline-start: 0px;\n    margin-inline-end: 0px;\n}\n\n.network-survey-header p {\n    font-weight: bold;\n    text-transform: uppercase;\n    color: var(--darkblue);\n    font-size: 16px;\n    padding: 2em;\n}\n\n.network-survey-body {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    padding: 2em;\n    width: 60%;\n    margin: auto;\n}\n\n.network-survey-body p  {\n    text-transform: none;\n    font-weight: normal;\n    color: var(--darkblue);\n    font-size: 16px;\n}\n\n.network-form {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    padding: 2em;\n    width: 100%;\n}\n\n.input-row {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    width: 50%;\n}\n\n.dropdown-input-label {\n    display: flex;\n    width: 70%;\n    align-items: center;\n    justify-content: center;\n}\n\n.input-label {\n    display: flex;\n    margin-right: 10px;\n}\n\n.network-button-container {\n    display: flex;\n    width: 100%;\n    justify-content: flex-start;\n    margin-top: 23px;\n}\n\n.network-list {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    text-transform: none;\n    max-width: 75%;\n    margin: auto;\n}\n\n.network-list li {\n    display: list-item;\n    margin-left: 10px;\n    list-style-type: disc;\n    width: 100%;\n    padding: 1em 2em;\n    text-transform: none;\n    font-style: italic;\n    font-weight: normal;\n    color: var(--darkblue);\n    font-size: 16px;\n}\n\n.dropdown-select-input {\n    font-size: 14px;\n    color: var(--darkblue);\n    margin: 2px;\n    border-radius: 5px;\n}\n\n.name-matrix-table {\n    width: 60%;\n    margin: 0px auto 2em;\n    font-size: 16px;\n}\n\nthead, tbody, tfoot { vertical-align: middle } /* add this rule*/\ntd, th, tr { vertical-align: inherit } /* add this rule */\n\n/* Tutorial */\n\n.tutorial-container {\n    display: flex;\n    flex-direction: column;\n}\n\n.title-static-image {\n    display: flex;\n    justify-content: flex-start;\n    padding: 30px 15px;\n}\n\n.two-col {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    width: 60%;\n}\n\n.tutorial-content {\n    display: flex;\n    flex-direction: column;\n}\n\n.tutorial-static-image {\n    display:flex;\n    margin-right: 40px;\n    width: 45%;\n    justify-content: center;\n    align-items: center;\n}\n\n.tutorial-info {\n    width: 50%;\n}\n\n.intro-heading {\n    font-family:\"Palatino Linotype\", \"Book Antiqua\", Palatino, serif; \n    font-style:italic; \n    text-transform:uppercase; \n    font-weight:normal;\n    margin: 0px 0px;\n    font-size: 26px;\n    color: var(--darkblue);\n}\n\n.tutorial-body {\n    font-size: 16px;\n    word-spacing: 0.3em;\n    margin-top: 1rem;\n    color: var(--darkblue);\n}\n\n/* BUTTON STYLING AND POSITIONING */\n\n.tutorial-next-btn {\n    position: fixed;\n    top: 50%;\n    right: 0;\n    text-align:left;\n    background: var(--turquoise); \n\n}\n\n.tutorial-next-btn:hover {\n    margin-right: 20px;\n    background:var(--periwinkle)\n}\n\n.tutorial-next-btn:after {border-left:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}\n.tutorial-next-btn:hover:after {border-left:21px solid var(--periwinkle)}\n\n.tutorial-prev-btn {\n    position: fixed;\n    top: 50%;\n    left: 0;\n    text-align:right;\n    background: var(--turquoise); \n}\n\n.tutorial-prev-btn:hover {\n    margin-left: 20px;\n    background:var(--periwinkle)\n}\n\n.tutorial-prev-btn:before {border-right:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}\n.tutorial-prev-btn:hover:before {border-right:21px solid var(--periwinkle)}\n\n\n\n\n/* QUESTIONNAIRE STYLING */\n\n.questionnaire-radio {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    align-items: center;\n\n}\n\n.questionnaire-radio .quiz-button {\n    margin-right: 5px;\n    cursor: pointer;\n}\n\n.english-screening-buttons {\n    display: flex;\n    flex-direction: row;w\n}\n\n.english-screening-horizontal-bar {\n    display: flex;\n}\n\n.questionnaire-heading {\n    margin: 10% auto 5% auto;\n    display: flex;\n    justify-content: center;\n    width: 590px;\n    text-align: center;\n}\n\n.question-section {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    margin-top: 15px;\n}\n\n.questionnaire-question {\n    padding-bottom: 20px;\n}\n\n.questionnaire-content-container {\n    display:flex;\n    flex-direction:column;\n    align-items: flex-start;\n    width: 590px;\n}\n\n.questionnaire-body {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    background-color: white;\n    font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\n    color: var(--darkblue);\n    width: 100%;\n    font-size: 15px;\n    padding: 25px;\n}\n\n.questionnaire-btn-container {\n    display: flex;\n}\n\n.progress-bar {\n    display: flex;\n    flex-direction:row;\n    align-items: flex-end;\n}\n\n.completed-heading {\n    font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\n    color: var(--turquoise);\n    font-size: 20px;\n    font-weight: bold;\n}\n\n.completed-bar {\n    display: flex;\n    flex-direction: column;\n}\n\n.slider-value-container {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 100%;\n}\n\n.slider-value {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    border: 1px solid lightgrey;\n    width: 40px;\n    height: 40px;\n    border-radius: 50%;\n    background-color: lightgrey;\n}\n\n/* Customizing SLIDER */\n\n.player-slider-container {\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n    padding: 15px 0px;\n}\n\n.player-label {\n    display: flex;\n    width: 25%;\n    padding: 5px 5px;\n    overflow-wrap: anywhere;\n}\n\n.empirica-slider {\n    width: 100%;\n}\n\n.bp3-slider-axis {\n    display: flex;\n    justify-content: space-between;\n}\n\n.bp3-slider-label {\n    transform: translate(0%, 20px);\n    display: flex;\n    position: static;\n    padding: 2px 5px;\n    vertical-align: top;\n    line-height: 1;\n    font-size: 12px;\n}\n\n.bp3-slider-track {\n    background-color: var(--darkblue);\n}\n\n.bp3-slider-handle {\n    background-color: var(--turquoise);\n    border: 1px solid var(--turquoise);\n    border-radius: 50%;\n    background-image: none;\n    box-shadow: none;\n    width: 20px;\n    height: 20px;\n}\n\n/* Turn off label that appears below slider handle */\n.bp3-slider-handle .bp3-slider-label {\n    display: none;\n}\n\n\n.survey-textarea {\n    width: 100%;\n    resize: vertical;\n    padding: 5px 5px 5px 5px;\n    margin-bottom: 30px;\n}\n\n\n\n"
 );
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

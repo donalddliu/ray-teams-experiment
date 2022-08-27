@@ -29,7 +29,7 @@ export default class MidSurveyFour extends React.Component {
   }
 
   handleSubmit = event => {
-    const { onNext, player } = this.props;
+    const { onNext, player, stage } = this.props;
     const surveyNumber = player.get("surveyNumber");
 
     event.preventDefault();

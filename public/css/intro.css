@@ -223,6 +223,15 @@ td, th, tr { vertical-align: inherit } /* add this rule */
     cursor: pointer;
 }
 
+.english-screening-buttons {
+    display: flex;
+    flex-direction: row;w
+}
+
+.english-screening-horizontal-bar {
+    display: flex;
+}
+
 .questionnaire-heading {
     margin: 10% auto 5% auto;
     display: flex;
