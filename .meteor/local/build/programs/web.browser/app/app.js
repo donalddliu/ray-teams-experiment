@@ -2468,6 +2468,7 @@ class EnglishScreen extends React.Component {
     this.state = {
       q1: "",
       q2: "",
+      q3: "",
       q4: "",
       q5: "",
       q6: "",
@@ -2482,10 +2483,12 @@ class EnglishScreen extends React.Component {
       this.setState({
         [el.name]: el.value
       });
-      console.log(this.state);
     };
 
-    this.checkAnswers = () => {
+    this.passCorrectThreshold = () => {
+      const {
+        player
+      } = this.props;
       let numCorrect = 0;
       const totalNumQuestions = 10;
       englishScreeningQuestions.forEach(questionSet => {
@@ -2500,12 +2503,8 @@ class EnglishScreen extends React.Component {
           numCorrect += 1;
         }
       });
-      console.log(numCorrect);
+      player.set("englishScreenPercentage", numCorrect / totalNumQuestions);
       return numCorrect / totalNumQuestions >= 0.8;
-    };
-
-    this.allCorrect = () => {
-      return this.state.q1 === 'yes' && this.state.q2 === 'yes' && this.state.q4 === 'yes' && this.state.q5 === 'one' && this.state.q6 === 'false' && this.state.q7 === 'false' && this.state.q8 === 'yes';
     };
 
     this.handleSubmit = event => {
@@ -2519,10 +2518,11 @@ class EnglishScreen extends React.Component {
       } = this.props;
       event.preventDefault();
 
-      if (this.checkAnswers()) {
-        console.log("Checked Answers");
+      if (this.passCorrectThreshold()) {
+        player.set("englishScreenPassed", this.state);
         onNext();
       } else {
+        player.set("englishScreenFailed", this.state);
         player.exit("failedEnglishScreen");
       }
     };
@@ -2552,15 +2552,6 @@ class EnglishScreen extends React.Component {
       onPrev,
       player
     } = this.props;
-    const {
-      q1,
-      q2,
-      q4,
-      q5,
-      q6,
-      q7,
-      q8
-    } = this.state;
     const allSelected = Object.keys(this.state).every(key => this.state[key] !== "");
     return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
       className: "intro-heading questionnaire-heading"
@@ -5961,6 +5952,10 @@ class Sorry extends Component {
 
     if (player.exitReason === "someoneInactive") {
       msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly. ";
+    }
+
+    if (player.exitReason === "failedEnglishScreen") {
+      msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game.";
     } // Only for dev
 
 

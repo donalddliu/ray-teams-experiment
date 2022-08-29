@@ -43,7 +43,7 @@ const Question = ({ selected, passage, question, question_number, name, onChange
 );
 
 export default class EnglishScreen extends React.Component {
-    state = { q1: "", q2: "", q4: "", q5: "", q6: "", q7: "", q8: "", q9:"", q10:""};
+    state = { q1: "", q2: "", q3:"", q4: "", q5: "", q6: "", q7: "", q8: "", q9:"", q10:""};
   
     componentDidMount() {
     //   const {player} = this.props;

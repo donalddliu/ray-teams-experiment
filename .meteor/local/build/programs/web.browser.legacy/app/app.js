@@ -3076,6 +3076,7 @@ var EnglishScreen = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       q1: "",
       q2: "",
+      q3: "",
       q4: "",
       q5: "",
       q6: "",
@@ -3091,11 +3092,10 @@ var EnglishScreen = /*#__PURE__*/function (_React$Component) {
       var el = event.currentTarget;
 
       _this.setState((_this$setState = {}, _this$setState[el.name] = el.value, _this$setState));
-
-      console.log(_this.state);
     };
 
-    _this.checkAnswers = function () {
+    _this.passCorrectThreshold = function () {
+      var player = _this.props.player;
       var numCorrect = 0;
       var totalNumQuestions = 10;
       englishScreeningQuestions.forEach(function (questionSet) {
@@ -3108,12 +3108,8 @@ var EnglishScreen = /*#__PURE__*/function (_React$Component) {
           numCorrect += 1;
         }
       });
-      console.log(numCorrect);
+      player.set("englishScreenPercentage", numCorrect / totalNumQuestions);
       return numCorrect / totalNumQuestions >= 0.8;
-    };
-
-    _this.allCorrect = function () {
-      return _this.state.q1 === 'yes' && _this.state.q2 === 'yes' && _this.state.q4 === 'yes' && _this.state.q5 === 'one' && _this.state.q6 === 'false' && _this.state.q7 === 'false' && _this.state.q8 === 'yes';
     };
 
     _this.handleSubmit = function (event) {
@@ -3126,10 +3122,11 @@ var EnglishScreen = /*#__PURE__*/function (_React$Component) {
           player = _this$props.player;
       event.preventDefault();
 
-      if (_this.checkAnswers()) {
-        console.log("Checked Answers");
+      if (_this.passCorrectThreshold()) {
+        player.set("englishScreenPassed", _this.state);
         onNext();
       } else {
+        player.set("englishScreenFailed", _this.state);
         player.exit("failedEnglishScreen");
       }
     };
@@ -3169,14 +3166,6 @@ var EnglishScreen = /*#__PURE__*/function (_React$Component) {
           game = _this$props2.game,
           onPrev = _this$props2.onPrev,
           player = _this$props2.player;
-      var _this$state = this.state,
-          q1 = _this$state.q1,
-          q2 = _this$state.q2,
-          q4 = _this$state.q4,
-          q5 = _this$state.q5,
-          q6 = _this$state.q6,
-          q7 = _this$state.q7,
-          q8 = _this$state.q8;
       var allSelected = Object.keys(this.state).every(function (key) {
         return _this2.state[key] !== "";
       });
@@ -7425,6 +7414,10 @@ var Sorry = /*#__PURE__*/function (_Component) {
 
       if (player.exitReason === "someoneInactive") {
         msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly. ";
+      }
+
+      if (player.exitReason === "failedEnglishScreen") {
+        msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game.";
       } // Only for dev
 
 
