@@ -35,6 +35,9 @@ export default class Sorry extends Component {
         if (player.exitReason === "someoneInactive") {
             msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly. ";
         }
+        if (player.exitReason === "failedEnglishScreen") {
+            msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game."
+        }
         // Only for dev
         if (!game && Meteor.isDevelopment) {
             msg =

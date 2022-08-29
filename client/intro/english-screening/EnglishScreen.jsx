@@ -55,10 +55,10 @@ export default class EnglishScreen extends React.Component {
     handleChange = event => {
         const el = event.currentTarget;
         this.setState({ [el.name]: el.value });
-        console.log(this.state);
     };
 
-    checkAnswers = () => {
+    passCorrectThreshold = () => {
+        const {player} = this.props;
         let numCorrect = 0
         const totalNumQuestions = 10
         englishScreeningQuestions.forEach((questionSet) => {
@@ -67,29 +67,18 @@ export default class EnglishScreen extends React.Component {
                 numCorrect += 1
             }
         })
-        console.log(numCorrect);
+        player.set("englishScreenPercentage", numCorrect/totalNumQuestions);
         return numCorrect/totalNumQuestions >= 0.8;
-    }
-  
-    allCorrect = () => {
-        return (
-          this.state.q1 === 'yes' &&
-          this.state.q2 === 'yes' &&
-          this.state.q4 === 'yes' &&
-          this.state.q5 === 'one' &&
-          this.state.q6 === 'false' &&
-          this.state.q7 === 'false' &&
-          this.state.q8 === 'yes'
-        )
     }
   
     handleSubmit = event => {
       const { hasPrev, hasNext, onNext, onPrev, game, player } = this.props;
       event.preventDefault();
-      if (this.checkAnswers()) {
-            console.log("Checked Answers")
+      if (this.passCorrectThreshold()) {
+            player.set("englishScreenPassed", this.state);
             onNext();
       } else {
+            player.set("englishScreenFailed", this.state);
             player.exit("failedEnglishScreen");
       }
     };
@@ -104,7 +93,6 @@ export default class EnglishScreen extends React.Component {
   
     render() {
       const { game, onPrev, player } = this.props;
-      const { q1, q2, q4, q5, q6, q7, q8 } = this.state;    
   
       const allSelected = Object.keys(this.state).every(key => this.state[key] !== "")
       return (
