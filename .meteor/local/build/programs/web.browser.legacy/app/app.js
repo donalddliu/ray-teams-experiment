@@ -3131,18 +3131,6 @@ var EnglishScreen = /*#__PURE__*/function (_React$Component) {
       }
     };
 
-    _this.onOpenModal = function () {
-      _this.setState({
-        modalIsOpen: true
-      });
-    };
-
-    _this.onCloseModal = function () {
-      _this.setState({
-        modalIsOpen: false
-      });
-    };
-
     return _this;
   }
 
@@ -3175,7 +3163,11 @@ var EnglishScreen = /*#__PURE__*/function (_React$Component) {
         className: "questionnaire-content-container"
       }, /*#__PURE__*/React.createElement("div", {
         className: "questionnaire-body"
-      }, /*#__PURE__*/React.createElement("h2", null, "Instructions:"), /*#__PURE__*/React.createElement("ol", null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("p", null, "1. Read the target sentence")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("p", null, "2. Answer the question immediately following"))), englishScreeningQuestions.map(function (questionSet) {
+      }, /*#__PURE__*/React.createElement("h2", null, " This game will require heavy communication in English with other players. Thus, we will begin with a quick questionnaire to test your English fluency. "), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("h2", null, "Instructions:"), /*#__PURE__*/React.createElement("ol", null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("p", null, "1. Read the target sentence")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("p", null, "2. Answer the question immediately following"))), /*#__PURE__*/React.createElement("div", null, "Because some Mechanical Turk users answer questions randomly, we will reject users with error rates of 25% or larger. Consequently, if you cannot answer 75% of the questions correctly, please do not fill out the survey."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", null, "Note: ", /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontWeight: "bold"
+        }
+      }, "Please read the sentence "), " before answering the question!"), englishScreeningQuestions.map(function (questionSet) {
         var passage = questionSet.passage,
             question = questionSet.question,
             answer = questionSet.answer,
@@ -3196,11 +3188,7 @@ var EnglishScreen = /*#__PURE__*/function (_React$Component) {
         className: !allSelected ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
         disabled: !allSelected,
         type: "submit"
-      }, " Submit ")), this.state.modalIsOpen && /*#__PURE__*/React.createElement(AttentionCheckModal, {
-        player: player,
-        onPrev: onPrev,
-        onCloseModal: this.onCloseModal
-      })));
+      }, " Submit "))));
     }
 
     return render;
@@ -7688,9 +7676,8 @@ Empirica.introSteps(function (game, treatment) {
   var networkSurvey = [NetworkSurveyOne, NetworkSurveyTwo, NetworkSurveyThree];
   var tutorialSteps = [TutorialPageOne, TutorialPageThree, TutorialPageFour]; // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
 
-  var quizSteps = [AllQuiz]; // const steps = networkSurvey.concat(tutorialSteps,quizSteps);
-
-  var steps = englishScreen;
+  var quizSteps = [AllQuiz];
+  var steps = englishScreen.concat(networkSurvey, tutorialSteps, quizSteps);
 
   if (treatment.skipIntro) {
     return [];

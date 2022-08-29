@@ -2526,18 +2526,6 @@ class EnglishScreen extends React.Component {
         player.exit("failedEnglishScreen");
       }
     };
-
-    this.onOpenModal = () => {
-      this.setState({
-        modalIsOpen: true
-      });
-    };
-
-    this.onCloseModal = () => {
-      this.setState({
-        modalIsOpen: false
-      });
-    };
   }
 
   componentDidMount() {//   const {player} = this.props;
@@ -2559,7 +2547,11 @@ class EnglishScreen extends React.Component {
       className: "questionnaire-content-container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "questionnaire-body"
-    }, /*#__PURE__*/React.createElement("h2", null, "Instructions:"), /*#__PURE__*/React.createElement("ol", null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("p", null, "1. Read the target sentence")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("p", null, "2. Answer the question immediately following"))), englishScreeningQuestions.map(questionSet => {
+    }, /*#__PURE__*/React.createElement("h2", null, " This game will require heavy communication in English with other players. Thus, we will begin with a quick questionnaire to test your English fluency. "), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("h2", null, "Instructions:"), /*#__PURE__*/React.createElement("ol", null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("p", null, "1. Read the target sentence")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("p", null, "2. Answer the question immediately following"))), /*#__PURE__*/React.createElement("div", null, "Because some Mechanical Turk users answer questions randomly, we will reject users with error rates of 25% or larger. Consequently, if you cannot answer 75% of the questions correctly, please do not fill out the survey."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", null, "Note: ", /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontWeight: "bold"
+      }
+    }, "Please read the sentence "), " before answering the question!"), englishScreeningQuestions.map(questionSet => {
       const {
         passage,
         question,
@@ -2582,11 +2574,7 @@ class EnglishScreen extends React.Component {
       className: !allSelected ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
       disabled: !allSelected,
       type: "submit"
-    }, " Submit ")), this.state.modalIsOpen && /*#__PURE__*/React.createElement(AttentionCheckModal, {
-      player: player,
-      onPrev: onPrev,
-      onCloseModal: this.onCloseModal
-    })));
+    }, " Submit "))));
   }
 
 }
@@ -6216,9 +6204,8 @@ Empirica.introSteps((game, treatment) => {
   const networkSurvey = [NetworkSurveyOne, NetworkSurveyTwo, NetworkSurveyThree];
   const tutorialSteps = [TutorialPageOne, TutorialPageThree, TutorialPageFour]; // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
 
-  const quizSteps = [AllQuiz]; // const steps = networkSurvey.concat(tutorialSteps,quizSteps);
-
-  const steps = englishScreen;
+  const quizSteps = [AllQuiz];
+  const steps = englishScreen.concat(networkSurvey, tutorialSteps, quizSteps);
 
   if (treatment.skipIntro) {
     return [];

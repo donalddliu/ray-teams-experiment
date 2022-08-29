@@ -83,14 +83,6 @@ export default class EnglishScreen extends React.Component {
       }
     };
   
-    onOpenModal = () => {
-      this.setState({modalIsOpen: true});
-    }
-  
-    onCloseModal = () => {
-      this.setState({modalIsOpen: false});
-    }
-  
     render() {
       const { game, onPrev, player } = this.props;
   
@@ -100,6 +92,8 @@ export default class EnglishScreen extends React.Component {
           <div className="intro-heading questionnaire-heading"> Questionnaire </div>
                 <div className="questionnaire-content-container">
                     <div className="questionnaire-body">
+                        <h2> This game will require heavy communication in English with other players. Thus, we will begin with a quick questionnaire to test your English fluency. </h2>
+                        <br></br>
                         <h2>Instructions:</h2>
                         <ol>
                             <li>
@@ -109,7 +103,9 @@ export default class EnglishScreen extends React.Component {
                                 <p>2. Answer the question immediately following</p>
                             </li>
                         </ol>
-
+                        <div>Because some Mechanical Turk users answer questions randomly, we will reject users with error rates of 25% or larger. Consequently, if you cannot answer 75% of the questions correctly, please do not fill out the survey.</div>
+                        <br></br>
+                        <div>Note: <span style={{fontWeight: "bold"}}>Please read the sentence </span> before answering the question!</div>
                             {
                                 englishScreeningQuestions.map((questionSet) => {
                                     const {passage, question, answer, question_number} = questionSet;
@@ -132,7 +128,6 @@ export default class EnglishScreen extends React.Component {
                             className={!allSelected ? "arrow-button button-submit-disabled" : "arrow-button button-submit"}
                             disabled={!allSelected} type="submit"> Submit </button> 
                     </form>
-                    {this.state.modalIsOpen && <AttentionCheckModal player={player} onPrev={onPrev} onCloseModal={this.onCloseModal} /> }
                 </div>
         </Centered>
       );

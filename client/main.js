@@ -54,8 +54,7 @@ Empirica.introSteps((game, treatment) => {
   const tutorialSteps = [TutorialPageOne, TutorialPageThree, TutorialPageFour,];
   // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
   const quizSteps = [AllQuiz];
-  // const steps = networkSurvey.concat(tutorialSteps,quizSteps);
-  const steps = englishScreen;
+  const steps = englishScreen.concat(networkSurvey,tutorialSteps,quizSteps);
 
   if (treatment.skipIntro) {
     return [];
