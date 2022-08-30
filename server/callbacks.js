@@ -175,8 +175,9 @@ Empirica.onSet((
     })
     round.set("numPlayersSubmitted", numPlayersSubmitted);
     if (allSubmitted) {
-      const log = stage.get("log");
-      computeScore(activePlayers, game, stage, round);
+      if (stage.name === "Task") {
+        computeScore(activePlayers, game, stage, round);
+      }
       // Need to submit for submit the stage for every player
       game.players.forEach((player) => {
         player.stage.submit();
