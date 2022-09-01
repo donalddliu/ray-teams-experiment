@@ -35,7 +35,12 @@ export default class MidSurveyFour extends React.Component {
     event.preventDefault();
     // TODO: log player response to survey question
     player.round.set(`survey_${surveyNumber}`, this.state);
-    stage.set(`survey_${surveyNumber}`, this.state);
+    stage.append("log", {
+        verb: `survey_${surveyNumber}`,
+        subjectId: player.id,
+        object: this.state,
+        at: moment(TimeSync.serverTime(null, 1000)),
+    })
     player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
 
     onNext();
