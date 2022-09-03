@@ -105,7 +105,12 @@ var MidSurveyOne = /*#__PURE__*/function (_React$Component) {
       event.preventDefault(); // TODO: log player response to survey question
 
       player.round.set("survey_" + surveyNumber, _this.state);
-      stage.set("survey_" + surveyNumber, _this.state);
+      stage.append("log", {
+        verb: "survey_" + surveyNumber,
+        subjectId: player.id,
+        object: _this.state,
+        at: moment(TimeSync.serverTime(null, 1000))
+      });
       player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
       onNext();
     };
@@ -307,7 +312,12 @@ var MidSurveyTwo = /*#__PURE__*/function (_React$Component) {
       event.preventDefault(); // TODO: log player response to survey question
 
       player.round.set("survey_" + surveyNumber, _this.state);
-      stage.set("survey_" + surveyNumber, _this.state);
+      stage.append("log", {
+        verb: "survey_" + surveyNumber,
+        subjectId: player.id,
+        object: _this.state,
+        at: moment(TimeSync.serverTime(null, 1000))
+      });
       player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
       onNext();
     };
@@ -549,7 +559,12 @@ var MidSurveyThree = /*#__PURE__*/function (_React$Component) {
       event.preventDefault(); // TODO: log player response to survey question
 
       player.round.set("survey_" + surveyNumber, _this.state);
-      stage.set("survey_" + surveyNumber, _this.state);
+      stage.append("log", {
+        verb: "survey_" + surveyNumber,
+        subjectId: player.id,
+        object: _this.state,
+        at: moment(TimeSync.serverTime(null, 1000))
+      });
       player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
       onNext();
     };
@@ -739,7 +754,12 @@ var MidSurveyFour = /*#__PURE__*/function (_React$Component) {
       event.preventDefault(); // TODO: log player response to survey question
 
       player.round.set("survey_" + surveyNumber, _this.state);
-      stage.set("survey_" + surveyNumber, _this.state);
+      stage.append("log", {
+        verb: "survey_" + surveyNumber,
+        subjectId: player.id,
+        object: _this.state,
+        at: moment(TimeSync.serverTime(null, 1000))
+      });
       player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
       onNext();
     };
@@ -942,7 +962,12 @@ var MidSurveyFive = /*#__PURE__*/function (_React$Component) {
       event.preventDefault(); // TODO: log player response to survey question
 
       player.round.set("survey_" + surveyNumber, _this.state);
-      stage.set("survey_" + surveyNumber, _this.state);
+      stage.append("log", {
+        verb: "survey_" + surveyNumber,
+        subjectId: player.id,
+        object: _this.state,
+        at: moment(TimeSync.serverTime(null, 1000))
+      });
       player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
       player.set("submitted", true);
     };
@@ -4047,7 +4072,7 @@ var AllQuiz = /*#__PURE__*/function (_React$Component) {
         className: "question-section"
       }, /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
-      }, "Are you willing to participate in an online team exercise that could last for approximately 60 minutes?"), /*#__PURE__*/React.createElement(Radio, {
+      }, "Are you willing to participate in an online team exercise that could last for approximately 45-75 minutes?"), /*#__PURE__*/React.createElement(Radio, {
         selected: q1,
         name: "q1",
         value: "yes",
@@ -4151,7 +4176,7 @@ var AllQuiz = /*#__PURE__*/function (_React$Component) {
         className: "question-section"
       }, /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
-      }, "If you pass the attention check, you may participate in this task. You will receive a flat fee of $2 for participating. You will also receive $1 bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to $8."), /*#__PURE__*/React.createElement(Radio, {
+      }, "If you pass the attention check, you may participate in this task. You will receive a flat fee of $2 for participating. You will also receive $1.50 bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to $24.5."), /*#__PURE__*/React.createElement(Radio, {
         selected: q8,
         name: "q8",
         value: "yes",

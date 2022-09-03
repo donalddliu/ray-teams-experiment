@@ -91,7 +91,7 @@ export default class AllQuiz extends React.Component {
             <div className="questionnaire-content-container">
                 <div className="questionnaire-body">
                     <div className="question-section">
-                        <label className="questionnaire-question">Are you willing to participate in an online team exercise that could last for approximately 60 minutes?</label>
+                        <label className="questionnaire-question">Are you willing to participate in an online team exercise that could last for approximately 45-75 minutes?</label>
                         <Radio
                             selected={q1}
                             name="q1"
@@ -235,7 +235,7 @@ export default class AllQuiz extends React.Component {
                     </div>
 
                     <div className="question-section">  
-                    <label className="questionnaire-question">If you pass the attention check, you may participate in this task. You will receive a flat fee of $2 for participating. You will also receive $1 bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to $8.</label>
+                    <label className="questionnaire-question">If you pass the attention check, you may participate in this task. You will receive a flat fee of $2 for participating. You will also receive $1.50 bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to $24.5.</label>
                     <Radio
                         selected={q8}
                         name="q8"
