@@ -1098,6 +1098,109 @@ var About = /*#__PURE__*/function (_React$Component) {
 }(React.Component);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+},"GameTimer.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/game/GameTimer.jsx                                                                                           //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+var _createSuper;
+
+module.link("@babel/runtime/helpers/createSuper", {
+  default: function (v) {
+    _createSuper = v;
+  }
+}, 0);
+
+var _inheritsLoose;
+
+module.link("@babel/runtime/helpers/inheritsLoose", {
+  default: function (v) {
+    _inheritsLoose = v;
+  }
+}, 1);
+var StageTimeWrapper;
+module.link("meteor/empirica:core", {
+  StageTimeWrapper: function (v) {
+    StageTimeWrapper = v;
+  }
+}, 0);
+var React;
+module.link("react", {
+  "default": function (v) {
+    React = v;
+  }
+}, 1);
+var TimeSync;
+module.link("meteor/mizzao:timesync", {
+  TimeSync: function (v) {
+    TimeSync = v;
+  }
+}, 2);
+var moment;
+module.link("moment", {
+  "default": function (v) {
+    moment = v;
+  }
+}, 3);
+
+var timer = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(timer, _React$Component);
+
+  var _super = _createSuper(timer);
+
+  function timer() {
+    return _React$Component.apply(this, arguments) || this;
+  }
+
+  var _proto = timer.prototype;
+
+  _proto.render = function () {
+    function render() {
+      var _this$props = this.props,
+          remainingSeconds = _this$props.remainingSeconds,
+          game = _this$props.game;
+      var classes = ["timer"];
+
+      if (remainingSeconds <= 5) {
+        classes.push("lessThan5");
+      } else if (remainingSeconds <= 10) {
+        classes.push("lessThan10");
+      }
+
+      var gameStartTime = moment(game.get("gameStartTime"));
+      var gameEndTime = moment(game.get("gameEndTime"));
+      var currentTime = moment(TimeSync.serverTime(null, 1000));
+      var timeDiff = gameEndTime.diff(currentTime, 'seconds');
+      var activePlayers = game.players.filter(function (p) {
+        return !p.get("inactive");
+      });
+
+      if (timeDiff < 0) {
+        activePlayers.forEach(function (p) {
+          p.exit("maxGameTimeReached");
+        });
+      }
+
+      return /*#__PURE__*/React.createElement(React.Fragment, null) //   <div className={classes.join(" ")} style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+      //     <div>
+      //     <h1 className="results-text" style={{margin: "0px 0px"}}>Time Left: {timeDiff}</h1>
+      //     </div>
+      //   </div>
+      ;
+    }
+
+    return render;
+  }();
+
+  return timer;
+}(React.Component);
+
+module.exportDefault(GameTimer = StageTimeWrapper(timer));
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 },"InactiveTimer.jsx":function module(require,exports,module){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1820,6 +1923,12 @@ module.link("moment", {
     moment = v;
   }
 }, 15);
+var GameTimer;
+module.link("./GameTimer.jsx", {
+  "default": function (v) {
+    GameTimer = v;
+  }
+}, 16);
 
 var Round = /*#__PURE__*/function (_React$Component) {
   _inheritsLoose(Round, _React$Component);
@@ -2012,7 +2121,9 @@ var Round = /*#__PURE__*/function (_React$Component) {
           className: "round"
         }, /*#__PURE__*/React.createElement("div", {
           className: "content"
-        }, /*#__PURE__*/React.createElement("div", {
+        }, /*#__PURE__*/React.createElement(GameTimer, {
+          game: game
+        }), /*#__PURE__*/React.createElement("div", {
           className: "round-task-container"
         }, /*#__PURE__*/React.createElement(RoundMetaData, {
           game: game,
@@ -7723,6 +7834,10 @@ Empirica.round(Round); // End of Game pages. These may vary depending on player 
 // exit screen will be shown.
 
 Empirica.exitSteps(function (game, player) {
+  if (player.exitStatus && player.exitStatus == "custom" && player.exitReason == "maxGameTimeReached") {
+    return [ExitSurvey, Thanks];
+  }
+
   if (!game || player.exitStatus && player.exitStatus !== "finished" && player.exitReason !== "playerQuit") {
     return [Sorry];
   }

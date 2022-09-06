@@ -18,6 +18,7 @@ import Modal from "./Modal";
 
 import { TimeSync } from "meteor/mizzao:timesync";
 import moment from "moment";
+import GameTimer from "./GameTimer.jsx";
 
 export default class Round extends React.Component {
   constructor(props) {
@@ -159,6 +160,7 @@ export default class Round extends React.Component {
       return (
         <div className="round">
           <div className="content">
+            <GameTimer game={game}/>
             <div className="round-task-container">
               <RoundMetaData game={game} round={round} stage={stage} player={player} />
               <Task game={game} round={round} stage={stage} player={player} />

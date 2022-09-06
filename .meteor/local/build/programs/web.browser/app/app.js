@@ -916,6 +916,82 @@ class About extends React.Component {
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+},"GameTimer.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/game/GameTimer.jsx                                                                                           //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+let StageTimeWrapper;
+module.link("meteor/empirica:core", {
+  StageTimeWrapper(v) {
+    StageTimeWrapper = v;
+  }
+
+}, 0);
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 1);
+let TimeSync;
+module.link("meteor/mizzao:timesync", {
+  TimeSync(v) {
+    TimeSync = v;
+  }
+
+}, 2);
+let moment;
+module.link("moment", {
+  default(v) {
+    moment = v;
+  }
+
+}, 3);
+
+class timer extends React.Component {
+  render() {
+    const {
+      remainingSeconds,
+      game
+    } = this.props;
+    const classes = ["timer"];
+
+    if (remainingSeconds <= 5) {
+      classes.push("lessThan5");
+    } else if (remainingSeconds <= 10) {
+      classes.push("lessThan10");
+    }
+
+    const gameStartTime = moment(game.get("gameStartTime"));
+    const gameEndTime = moment(game.get("gameEndTime"));
+    const currentTime = moment(TimeSync.serverTime(null, 1000));
+    const timeDiff = gameEndTime.diff(currentTime, 'seconds');
+    const activePlayers = game.players.filter(p => !p.get("inactive"));
+
+    if (timeDiff < 0) {
+      activePlayers.forEach(p => {
+        p.exit("maxGameTimeReached");
+      });
+    }
+
+    return /*#__PURE__*/React.createElement(React.Fragment, null) //   <div className={classes.join(" ")} style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+    //     <div>
+    //     <h1 className="results-text" style={{margin: "0px 0px"}}>Time Left: {timeDiff}</h1>
+    //     </div>
+    //   </div>
+    ;
+  }
+
+}
+
+module.exportDefault(GameTimer = StageTimeWrapper(timer));
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 },"InactiveTimer.jsx":function module(require,exports,module){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1456,6 +1532,13 @@ module.link("moment", {
   }
 
 }, 15);
+let GameTimer;
+module.link("./GameTimer.jsx", {
+  default(v) {
+    GameTimer = v;
+  }
+
+}, 16);
 
 class Round extends React.Component {
   constructor(props) {
@@ -1632,7 +1715,9 @@ class Round extends React.Component {
         className: "round"
       }, /*#__PURE__*/React.createElement("div", {
         className: "content"
-      }, /*#__PURE__*/React.createElement("div", {
+      }, /*#__PURE__*/React.createElement(GameTimer, {
+        game: game
+      }), /*#__PURE__*/React.createElement("div", {
         className: "round-task-container"
       }, /*#__PURE__*/React.createElement(RoundMetaData, {
         game: game,
@@ -6251,6 +6336,10 @@ Empirica.round(Round); // End of Game pages. These may vary depending on player 
 // exit screen will be shown.
 
 Empirica.exitSteps((game, player) => {
+  if (player.exitStatus && player.exitStatus == "custom" && player.exitReason == "maxGameTimeReached") {
+    return [ExitSurvey, Thanks];
+  }
+
   if (!game || player.exitStatus && player.exitStatus !== "finished" && player.exitReason !== "playerQuit") {
     return [Sorry];
   }

@@ -13,7 +13,7 @@ Empirica.onGameStart(game => {
   console.log("Game started");
   game.players.forEach((player) => {
     player.set("inactive", false);
-    player.set("lastActive", Date.now());
+    player.set("lastActive", moment(Date.now()));
     const network = player.get("neighbors");
     const activeChats = [];
     network.map(otherNodeId => {
@@ -29,6 +29,8 @@ Empirica.onGameStart(game => {
     console.log(player.get("activeChats"));
   });
   game.set("previousNumActivePlayers", game.players.length);
+  game.set("gameStartTime", moment(Date.now()));
+  game.set("gameEndTime", moment(Date.now()).add(2, 'm'))
 });
 
 // onRoundStart is triggered before each round starts, and before onStageStart.
