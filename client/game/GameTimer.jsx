@@ -14,7 +14,7 @@ class timer extends React.Component {
     }
 
     const gameStartTime = moment(game.get("gameStartTime"));
-    const gameEndTime = moment(game.get("gameEndTime"));
+    const gameEndTime = moment(game.get("maxGameEndTime"));
     const currentTime =  moment(TimeSync.serverTime(null, 1000));
 
     const timeDiff = gameEndTime.diff(currentTime, 'seconds');
@@ -28,12 +28,11 @@ class timer extends React.Component {
 
 
     return (
-        <></>
-    //   <div className={classes.join(" ")} style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-    //     <div>
-    //     <h1 className="results-text" style={{margin: "0px 0px"}}>Time Left: {timeDiff}</h1>
-    //     </div>
-    //   </div>
+        <div className={classes.join(" ")} style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+          <div>
+          <h1 className="results-text" style={{margin: "0px 0px"}}>Total Game Time Left: {timeDiff}</h1>
+          </div>
+        </div>
     );
   }
 }

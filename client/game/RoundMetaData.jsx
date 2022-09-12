@@ -1,5 +1,6 @@
 import React from 'react';
 import Timer from "./Timer.jsx";
+import TaskTimer from './TaskTimer.jsx';
 
 import InactiveTimer from './InactiveTimer';
 
@@ -7,6 +8,7 @@ export default class RoundMetaData extends React.Component {
 
     render() {
         const {game, round, stage, player} = this.props; 
+        const taskWarningTime = game.treatment.taskWarningTime;
 
         const playerId = player.id;
         const taskName = stage.displayName;
@@ -36,7 +38,7 @@ export default class RoundMetaData extends React.Component {
                     Your player name is {player.get("anonymousName")}
                 </p>
                 <div style={{display: "flex", flexDirection:"column"}}>
-                    <Timer stage={stage}/>
+                    {taskWarningTime && <TaskTimer game={game} stage={stage} player={player}/>}
                     <InactiveTimer game={game} player={player} />
                 </div>
             </div>

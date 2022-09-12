@@ -30,7 +30,10 @@ Empirica.onGameStart(game => {
   });
   game.set("previousNumActivePlayers", game.players.length);
   game.set("gameStartTime", moment(Date.now()));
-  game.set("gameEndTime", moment(Date.now()).add(2, 'm'))
+  if (game.treatment.maxGameTime) {
+    game.set("maxGameEndTime", moment(Date.now()).add(game.treatment.maxGameTime, 'm'))
+
+  }
 });
 
 // onRoundStart is triggered before each round starts, and before onStageStart.
@@ -57,6 +60,12 @@ Empirica.onRoundStart((game, round) => {
   
   }
   game.set("previousNumActivePlayers", activePlayers.length);
+
+  if (game.treatment.minPlayerCount && activePlayers.length < game.treatment.minPlayerCount) {
+    activePlayers.forEach((p) => {
+      p.exit("minPlayerCountNotMaintained");
+    })
+  }
 
   console.log("Round Started");
 

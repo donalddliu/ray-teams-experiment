@@ -23,7 +23,7 @@ export default class Sorry extends Component {
                     "You decided to stop waiting, we are sorry it was too long a wait.";
                 break;
             default:
-                msg = "Unfortunately the Game was cancelled... Thank you for participating in this game, please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly.";
+                msg = "Unfortunately, the Game was cancelled... Thank you for participating in this game, please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly.";
                 break;
         }
         if (player.exitReason === "failedQuestion") {
@@ -37,6 +37,9 @@ export default class Sorry extends Component {
         }
         if (player.exitReason === "failedEnglishScreen") {
             msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game."
+        }
+        if (player.exitReason === "minPlayerCountNotMaintained") {
+            msg = `Unfortunately, there were too few players active in this game and the game had to be cancelled. Thank you for participating in this game, please submit the follow code ${player._id} to the HIT and we will make sure you get paid accordingly. `
         }
         // Only for dev
         if (!game && Meteor.isDevelopment) {

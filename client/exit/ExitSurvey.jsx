@@ -2,7 +2,7 @@ import React from "react";
 
 import { Centered } from "meteor/empirica:core";
 
-const Radio = ({ selected, name, value, label, onChange }) => (
+const Radio = ({ selected, name, value, label, onChange, required }) => (
   <label>
     <input
       type="radio"
@@ -10,6 +10,7 @@ const Radio = ({ selected, name, value, label, onChange }) => (
       value={value}
       checked={selected === value}
       onChange={onChange}
+      required={required ? "required" : ""}
     />
     {label}
   </label>
@@ -30,25 +31,35 @@ export default class ExitSurvey extends React.Component {
   };
 
   render() {
-    const { player } = this.props;
+    const { player, game } = this.props;
     const { age, gender, strength, fair, feedback, education } = this.state;
+    const basePay = game.treatment.basePay;
+    const conversionRate = game.treatment.conversionRate;
 
     return (
       <Centered>
         <div className="exit-survey">
           <h1> Exit Survey </h1>
-          <p>
+          {/* <p>
             Please submit the following code to receive your bonus:{" "}
             <strong>{player._id}</strong>.
-          </p>
-          {/* <p>
-            You final <strong>bonus</strong> is in addition of the{" "}
-            <strong>1 base reward</strong> for completing the HIT.
           </p> */}
+          <p>
+          {player.exitReason === "minPlayerCountNotMaintained" ? 
+            "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""
+          }
+          </p>
+          <p>
+            Your team got a total of <strong>{player.get("score")}</strong> correct.
+
+            {basePay && conversionRate ? 
+              ` You will receive a base pay of $${basePay} and an additional performance bonus of ${player.get("score")} x $${conversionRate}, for a total of $${basePay + parseInt(player.get("score")*conversionRate)}.`
+              : ` You will receive a base pay of $2 and an additional performance bonus of ${player.get("score")} x 1, for a total of ${2 + parseInt(player.get("score"))*1}.`
+            }
+          </p>
           <br />
           <p>
-            Please answer the following short survey. You do not have to provide
-            any information you feel uncomfortable with.
+            Please answer the following short survey.
           </p>
           <form onSubmit={this.handleSubmit}>
             <div className="form-line">
@@ -95,6 +106,7 @@ export default class ExitSurvey extends React.Component {
                   value="high-school"
                   label="High School"
                   onChange={this.handleChange}
+                  required={true}
                 />
                 <Radio
                   selected={education}

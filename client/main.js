@@ -77,7 +77,8 @@ Empirica.round(Round);
 // If you don't return anything, or do not define this function, a default
 // exit screen will be shown.
 Empirica.exitSteps((game, player) => {
-  if (player.exitStatus && player.exitStatus == "custom" && player.exitReason == "maxGameTimeReached") {
+  if (player.exitStatus && player.exitStatus === "custom" && 
+      (player.exitReason === "maxGameTimeReached" || player.exitReason === "minPlayerCountNotMaintained")) {
     return [ExitSurvey, Thanks];
   }
   if (

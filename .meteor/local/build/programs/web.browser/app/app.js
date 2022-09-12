@@ -968,7 +968,7 @@ class timer extends React.Component {
     }
 
     const gameStartTime = moment(game.get("gameStartTime"));
-    const gameEndTime = moment(game.get("gameEndTime"));
+    const gameEndTime = moment(game.get("maxGameEndTime"));
     const currentTime = moment(TimeSync.serverTime(null, 1000));
     const timeDiff = gameEndTime.diff(currentTime, 'seconds');
     const activePlayers = game.players.filter(p => !p.get("inactive"));
@@ -979,12 +979,20 @@ class timer extends React.Component {
       });
     }
 
-    return /*#__PURE__*/React.createElement(React.Fragment, null) //   <div className={classes.join(" ")} style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-    //     <div>
-    //     <h1 className="results-text" style={{margin: "0px 0px"}}>Time Left: {timeDiff}</h1>
-    //     </div>
-    //   </div>
-    ;
+    return /*#__PURE__*/React.createElement("div", {
+      className: classes.join(" "),
+      style: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
+      }
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", {
+      className: "results-text",
+      style: {
+        margin: "0px 0px"
+      }
+    }, "Total Game Time Left: ", timeDiff)));
   }
 
 }
@@ -1715,7 +1723,7 @@ class Round extends React.Component {
         className: "round"
       }, /*#__PURE__*/React.createElement("div", {
         className: "content"
-      }, /*#__PURE__*/React.createElement(GameTimer, {
+      }, game.treatment.maxGameTime && /*#__PURE__*/React.createElement(GameTimer, {
         game: game
       }), /*#__PURE__*/React.createElement("div", {
         className: "round-task-container"
@@ -1769,13 +1777,20 @@ module.link("./Timer.jsx", {
   }
 
 }, 1);
+let TaskTimer;
+module.link("./TaskTimer.jsx", {
+  default(v) {
+    TaskTimer = v;
+  }
+
+}, 2);
 let InactiveTimer;
 module.link("./InactiveTimer", {
   default(v) {
     InactiveTimer = v;
   }
 
-}, 2);
+}, 3);
 
 class RoundMetaData extends React.Component {
   render() {
@@ -1785,6 +1800,7 @@ class RoundMetaData extends React.Component {
       stage,
       player
     } = this.props;
+    const taskWarningTime = game.treatment.taskWarningTime;
     const playerId = player.id;
     const taskName = stage.displayName;
     const totalTaskRounds = game.treatment.numTaskRounds; // const allSymbols = [];
@@ -1801,8 +1817,10 @@ class RoundMetaData extends React.Component {
         display: "flex",
         flexDirection: "column"
       }
-    }, /*#__PURE__*/React.createElement(Timer, {
-      stage: stage
+    }, taskWarningTime && /*#__PURE__*/React.createElement(TaskTimer, {
+      game: game,
+      stage: stage,
+      player: player
     }), /*#__PURE__*/React.createElement(InactiveTimer, {
       game: game,
       player: player
@@ -2355,6 +2373,174 @@ class TaskResponse extends React.Component {
       className: !submitted ? "arrow-button button-reconsider-disabled" : "arrow-button button-reconsider",
       disabled: !submitted ? true : false
     }, " Reconsider "))));
+  }
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"TaskTimer.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/game/TaskTimer.jsx                                                                                           //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+let Timer;
+module.link("./Timer.jsx", {
+  default(v) {
+    Timer = v;
+  }
+
+}, 1);
+let StageTimeWrapper;
+module.link("meteor/empirica:core", {
+  StageTimeWrapper(v) {
+    StageTimeWrapper = v;
+  }
+
+}, 2);
+let TimeSync;
+module.link("meteor/mizzao:timesync", {
+  TimeSync(v) {
+    TimeSync = v;
+  }
+
+}, 3);
+let moment;
+module.link("moment", {
+  default(v) {
+    moment = v;
+  }
+
+}, 4);
+let TaskWarningModal;
+module.link("./TaskWarningModal", {
+  default(v) {
+    TaskWarningModal = v;
+  }
+
+}, 5);
+
+class taskTimer extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.onOpenModal = () => {
+      this.setState({
+        modalIsOpen: true,
+        warningShown: true
+      });
+    };
+
+    this.onCloseModal = () => {
+      const {
+        player
+      } = this.props;
+      this.setState({
+        modalIsOpen: false
+      });
+      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+    };
+
+    this.state = {
+      modalIsOpen: false,
+      warningShown: false
+    };
+  }
+
+  render() {
+    const {
+      game,
+      round,
+      stage,
+      player,
+      remainingSeconds
+    } = this.props;
+    const taskWarningTime = game.treatment.taskWarningTime;
+    const classes = ["timer"];
+
+    if (remainingSeconds <= 5) {
+      classes.push("lessThan5");
+    } else if (remainingSeconds <= 10) {
+      classes.push("lessThan10");
+    }
+
+    if (remainingSeconds <= taskWarningTime && !this.state.modalIsOpen && !this.state.warningShown) {
+      this.onOpenModal();
+    }
+
+    return /*#__PURE__*/React.createElement("div", {
+      className: classes.join(" "),
+      style: {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
+      }
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", {
+      className: "results-text",
+      style: {
+        margin: "0px 0px"
+      }
+    }, "Time Left: ", remainingSeconds)), this.state.modalIsOpen && /*#__PURE__*/React.createElement(TaskWarningModal, {
+      game: game,
+      player: player,
+      onCloseModal: this.onCloseModal
+    }));
+  }
+
+}
+
+module.exportDefault(TaskTimer = StageTimeWrapper(taskTimer));
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"TaskWarningModal.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/game/TaskWarningModal.jsx                                                                                    //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => TaskWarningModal
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+
+class TaskWarningModal extends React.Component {
+  render() {
+    const {
+      game,
+      player,
+      onCloseModal
+    } = this.props;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "dark-bg",
+      onClick: onCloseModal
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "modal-centered"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "modal"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "modal-content"
+    }, "Warning, this round is ending in 30 seconds. Please submit your final answer."), /*#__PURE__*/React.createElement("button", {
+      className: "modal-button",
+      onClick: onCloseModal
+    }, "Okay"))));
   }
 
 }
@@ -5781,14 +5967,16 @@ const Radio = (_ref) => {
     name,
     value,
     label,
-    onChange
+    onChange,
+    required
   } = _ref;
   return /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
     type: "radio",
     name: name,
     value: value,
     checked: selected === value,
-    onChange: onChange
+    onChange: onChange,
+    required: required ? "required" : ""
   }), label);
 };
 
@@ -5818,7 +6006,8 @@ class ExitSurvey extends React.Component {
 
   render() {
     const {
-      player
+      player,
+      game
     } = this.props;
     const {
       age,
@@ -5828,9 +6017,11 @@ class ExitSurvey extends React.Component {
       feedback,
       education
     } = this.state;
+    const basePay = game.treatment.basePay;
+    const conversionRate = game.treatment.conversionRate;
     return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
       className: "exit-survey"
-    }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, "Please submit the following code to receive your bonus:", " ", /*#__PURE__*/React.createElement("strong", null, player._id), "."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey. You do not have to provide any information you feel uncomfortable with."), /*#__PURE__*/React.createElement("form", {
+    }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""), /*#__PURE__*/React.createElement("p", null, "Your team got a total of ", /*#__PURE__*/React.createElement("strong", null, player.get("score")), " correct.", basePay && conversionRate ? " You will receive a base pay of $".concat(basePay, " and an additional performance bonus of ").concat(player.get("score"), " x $").concat(conversionRate, ", for a total of $").concat(basePay + parseInt(player.get("score") * conversionRate), ".") : " You will receive a base pay of $2 and an additional performance bonus of ".concat(player.get("score"), " x 1, for a total of ").concat(2 + parseInt(player.get("score")) * 1, ".")), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
       onSubmit: this.handleSubmit
     }, /*#__PURE__*/React.createElement("div", {
       className: "form-line"
@@ -5863,7 +6054,8 @@ class ExitSurvey extends React.Component {
       name: "education",
       value: "high-school",
       label: "High School",
-      onChange: this.handleChange
+      onChange: this.handleChange,
+      required: true
     }), /*#__PURE__*/React.createElement(Radio, {
       selected: education,
       name: "education",
@@ -6036,7 +6228,7 @@ class Sorry extends Component {
         break;
 
       default:
-        msg = "Unfortunately the Game was cancelled... Thank you for participating in this game, please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly.";
+        msg = "Unfortunately, the Game was cancelled... Thank you for participating in this game, please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly.";
         break;
     }
 
@@ -6054,6 +6246,10 @@ class Sorry extends Component {
 
     if (player.exitReason === "failedEnglishScreen") {
       msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game.";
+    }
+
+    if (player.exitReason === "minPlayerCountNotMaintained") {
+      msg = "Unfortunately, there were too few players active in this game and the game had to be cancelled. Thank you for participating in this game, please submit the follow code ".concat(player._id, " to the HIT and we will make sure you get paid accordingly. ");
     } // Only for dev
 
 
@@ -6097,9 +6293,15 @@ module.link("meteor/empirica:core", {
 
 class Thanks extends React.Component {
   render() {
+    const {
+      player,
+      game
+    } = this.props;
+    const basePay = game.treatment.basePay;
+    const conversionRate = game.treatment.conversionRate;
     return /*#__PURE__*/React.createElement("div", {
       className: "finished"
-    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Finished!"), /*#__PURE__*/React.createElement("p", null, "Thank you for participating! If you missed the code from the previous page, please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly.")));
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Finished!"), /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $".concat(basePay + parseInt(player.get("score") * conversionRate)) : "", ":", " ", /*#__PURE__*/React.createElement("strong", null, player._id))));
   }
 
 }
@@ -6336,7 +6538,7 @@ Empirica.round(Round); // End of Game pages. These may vary depending on player 
 // exit screen will be shown.
 
 Empirica.exitSteps((game, player) => {
-  if (player.exitStatus && player.exitStatus == "custom" && player.exitReason == "maxGameTimeReached") {
+  if (player.exitStatus && player.exitStatus === "custom" && (player.exitReason === "maxGameTimeReached" || player.exitReason === "minPlayerCountNotMaintained")) {
     return [ExitSurvey, Thanks];
   }
 
