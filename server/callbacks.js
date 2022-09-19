@@ -26,13 +26,11 @@ Empirica.onGameStart(game => {
     });
     // Default all chats to be open when game starts
     player.set("activeChats", activeChats);
-    console.log(player.get("activeChats"));
   });
   game.set("previousNumActivePlayers", game.players.length);
   game.set("gameStartTime", moment(Date.now()));
   if (game.treatment.maxGameTime) {
     game.set("maxGameEndTime", moment(Date.now()).add(game.treatment.maxGameTime, 'm'))
-
   }
 });
 
@@ -107,6 +105,7 @@ Empirica.onStageEnd((game, round, stage) =>{
 // onRoundEnd is triggered after each round.
 // It receives the same options as onGameEnd, and the round that just ended.
 Empirica.onRoundEnd((game, round) => {
+  console.log("Round Ended")
   // game.players.forEach(player => {
   //   const value = player.round.get("value") || 0;
   //   const prevScore = player.get("score") || 0;

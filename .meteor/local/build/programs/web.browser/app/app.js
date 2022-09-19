@@ -1641,7 +1641,6 @@ class Round extends React.Component {
       player
     } = this.props; // Set the player's first activity at the start of the round
 
-    console.log("Hello");
     player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
 
     if (round.index === 0 && stage.index === 0) {
