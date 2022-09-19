@@ -19,7 +19,7 @@ class timer extends React.Component {
           <h1 className="results-text" style={{margin: "0px 0px"}}>{remainingSeconds}</h1>
         </div> :
         <div>
-        <h1 className="results-text" style={{margin: "0px 0px"}}>Time Left: {remainingSeconds}</h1>
+        <h1 className="results-text" style={{margin: "0px 0px"}}>Time Left for Task: {remainingSeconds}</h1>
         </div>
         }
       </div>

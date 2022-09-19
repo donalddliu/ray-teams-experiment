@@ -91,7 +91,7 @@ export default class AllQuiz extends React.Component {
             <div className="questionnaire-content-container">
                 <div className="questionnaire-body">
                     <div className="question-section">
-                        <label className="questionnaire-question">Are you willing to participate in an online team exercise that could last for approximately 45-75 minutes?</label>
+                        <label className="questionnaire-question">Are you willing to participate in an online team exercise that could last for approximately 45-90 minutes?</label>
                         <Radio
                             selected={q1}
                             name="q1"
@@ -111,8 +111,8 @@ export default class AllQuiz extends React.Component {
                     <div className="question-section">
                     <label className="questionnaire-question">
                         {game.treatment.endGameIfPlayerIdle ? 
-                        <span>If you do not interact with the application for a while, your session will timeout and the experiment will end for EVERYONE in your team. 1 minute before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer.</span> :
-                        <span>If you do not interact with the application for a while, your session will timeout and you will be kicked out from the game. 1 minute before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer.</span> 
+                        <span>If you do not interact with the application for a while, your session will timeout and the experiment will end for EVERYONE in your team. {game.treatment.idleWarningTime} seconds before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer.</span> :
+                        <span>If you do not interact with the application for a while, your session will timeout and you will be kicked out from the game. {game.treatment.idleWarningTime} seconds before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer.</span> 
                         }
                         <br></br>
                         <span style={{fontWeight: 'bolder'}}> 

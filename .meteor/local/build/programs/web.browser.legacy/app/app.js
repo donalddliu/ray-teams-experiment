@@ -2037,6 +2037,7 @@ var Round = /*#__PURE__*/function (_React$Component) {
           stage = _this$props2.stage,
           player = _this$props2.player; // Set the player's first activity at the start of the round
 
+      console.log("Hello");
       player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
 
       if (round.index === 0 && stage.index === 0) {
@@ -2066,16 +2067,18 @@ var Round = /*#__PURE__*/function (_React$Component) {
       var completedWidth = window.innerWidth / numActivePlayers * round.get("numPlayersSubmitted");
       var uncompletedWidth = window.innerWidth - completedWidth;
       completedWidth -= windowOffset;
-      uncompletedWidth -= windowOffset;
+      uncompletedWidth -= windowOffset; // <div className="completed-bar">
+      //     <img src={`images/hr-color.png`} width={`${completedWidth} px`} height="7px" />
+      // </div>
 
-      /*#__PURE__*/
-      React.createElement("div", {
-        className: "completed-bar"
-      }, /*#__PURE__*/React.createElement("img", {
-        src: "images/hr-color.png",
-        width: completedWidth + " px",
-        height: "7px"
-      }));
+      var currentTime = moment(TimeSync.serverTime(null, 1000));
+      var playerLastActive = player.get("lastActive");
+      var timeDiff = currentTime.diff(playerLastActive, 'seconds');
+
+      if (timeDiff > 10) {
+        player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+      }
+
       return /*#__PURE__*/React.createElement("div", {
         className: "survey-wait-container"
       }, /*#__PURE__*/React.createElement("img", {
@@ -3090,7 +3093,7 @@ var taskTimer = /*#__PURE__*/function (_React$Component) {
         style: {
           margin: "0px 0px"
         }
-      }, "Time Left: ", remainingSeconds)), this.state.modalIsOpen && /*#__PURE__*/React.createElement(TaskWarningModal, {
+      }, "Time Left for Task: ", remainingSeconds)), this.state.modalIsOpen && /*#__PURE__*/React.createElement(TaskWarningModal, {
         game: game,
         player: player,
         onCloseModal: this.onCloseModal
@@ -3260,7 +3263,7 @@ var timer = /*#__PURE__*/function (_React$Component) {
         style: {
           margin: "0px 0px"
         }
-      }, "Time Left: ", remainingSeconds)));
+      }, "Time Left for Task: ", remainingSeconds)));
     }
 
     return render;
@@ -4420,7 +4423,7 @@ var AllQuiz = /*#__PURE__*/function (_React$Component) {
         className: "question-section"
       }, /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
-      }, "Are you willing to participate in an online team exercise that could last for approximately 45-75 minutes?"), /*#__PURE__*/React.createElement(Radio, {
+      }, "Are you willing to participate in an online team exercise that could last for approximately 45-90 minutes?"), /*#__PURE__*/React.createElement(Radio, {
         selected: q1,
         name: "q1",
         value: "yes",
@@ -4436,7 +4439,7 @@ var AllQuiz = /*#__PURE__*/function (_React$Component) {
         className: "question-section"
       }, /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
-      }, game.treatment.endGameIfPlayerIdle ? /*#__PURE__*/React.createElement("span", null, "If you do not interact with the application for a while, your session will timeout and the experiment will end for EVERYONE in your team. 1 minute before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer.") : /*#__PURE__*/React.createElement("span", null, "If you do not interact with the application for a while, your session will timeout and you will be kicked out from the game. 1 minute before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+      }, game.treatment.endGameIfPlayerIdle ? /*#__PURE__*/React.createElement("span", null, "If you do not interact with the application for a while, your session will timeout and the experiment will end for EVERYONE in your team. ", game.treatment.idleWarningTime, " seconds before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer.") : /*#__PURE__*/React.createElement("span", null, "If you do not interact with the application for a while, your session will timeout and you will be kicked out from the game. ", game.treatment.idleWarningTime, " seconds before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
         style: {
           fontWeight: 'bolder'
         }
@@ -7507,7 +7510,7 @@ var ExitSurvey = /*#__PURE__*/function (_React$Component) {
       var conversionRate = game.treatment.conversionRate;
       return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
         className: "exit-survey"
-      }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""), /*#__PURE__*/React.createElement("p", null, "Your team got a total of ", /*#__PURE__*/React.createElement("strong", null, player.get("score")), " correct.", basePay && conversionRate ? " You will receive a base pay of $" + basePay + " and an additional performance bonus of " + player.get("score") + " x $" + conversionRate + ", for a total of $" + (basePay + parseInt(player.get("score") * conversionRate)) + "." : " You will receive a base pay of $2 and an additional performance bonus of " + player.get("score") + " x 1, for a total of " + (2 + parseInt(player.get("score")) * 1) + "."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
+      }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, "Please submit the following code to receive your bonus:", " ", /*#__PURE__*/React.createElement("strong", null, player._id), "."), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""), /*#__PURE__*/React.createElement("p", null, "Your team got a total of ", /*#__PURE__*/React.createElement("strong", null, player.get("score")), " correct.", basePay && conversionRate ? " You will receive a base pay of $" + basePay + " and an additional performance bonus of " + player.get("score") + " x $" + conversionRate + ", for a total of $" + (basePay + parseInt(player.get("score") * conversionRate)) + "." : " You will receive a base pay of $2 and an additional performance bonus of " + player.get("score") + " x 1, for a total of " + (2 + parseInt(player.get("score")) * 1) + "."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/React.createElement("div", {
         className: "form-line"

@@ -47,7 +47,7 @@ class taskTimer extends React.Component {
         return(
             <div className={classes.join(" ")} style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
                 <div>
-                    <h1 className="results-text" style={{margin: "0px 0px"}}>Time Left: {remainingSeconds}</h1>
+                    <h1 className="results-text" style={{margin: "0px 0px"}}>Time Left for Task: {remainingSeconds}</h1>
                 </div>
                 {this.state.modalIsOpen && <TaskWarningModal game={game} player={player} onCloseModal={this.onCloseModal} />}
             </div>

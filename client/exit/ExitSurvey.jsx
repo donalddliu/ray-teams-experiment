@@ -40,10 +40,10 @@ export default class ExitSurvey extends React.Component {
       <Centered>
         <div className="exit-survey">
           <h1> Exit Survey </h1>
-          {/* <p>
+          <p>
             Please submit the following code to receive your bonus:{" "}
             <strong>{player._id}</strong>.
-          </p> */}
+          </p>
           <p>
           {player.exitReason === "minPlayerCountNotMaintained" ? 
             "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""

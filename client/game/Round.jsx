@@ -35,6 +35,7 @@ export default class Round extends React.Component {
   componentDidMount() {
     const {round, stage, player} = this.props;
     // Set the player's first activity at the start of the round
+    console.log("Hello");
     player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
 
     if (round.index === 0 && stage.index === 0) {
@@ -77,9 +78,17 @@ export default class Round extends React.Component {
     completedWidth -= windowOffset;
     uncompletedWidth -= windowOffset;
 
-    <div className="completed-bar">
-        <img src={`images/hr-color.png`} width={`${completedWidth} px`} height="7px" />
-    </div>
+    // <div className="completed-bar">
+    //     <img src={`images/hr-color.png`} width={`${completedWidth} px`} height="7px" />
+    // </div>
+
+    const currentTime = moment(TimeSync.serverTime(null, 1000));
+    const playerLastActive = player.get("lastActive");
+    const timeDiff = currentTime.diff(playerLastActive, 'seconds');
+
+    if (timeDiff > 10) {
+      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+    }
 
     return (
       <div className="survey-wait-container">
@@ -98,6 +107,7 @@ export default class Round extends React.Component {
   renderSurvey = () => {
     const { game, player } = this.props;
     const submitted = player.get("submitted");
+
     if (submitted) {
       return this.renderSubmitted();
     }
