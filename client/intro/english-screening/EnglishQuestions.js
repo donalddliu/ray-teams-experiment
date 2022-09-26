@@ -59,6 +59,66 @@ export const englishScreeningQuestions = [
       answer: "Yes",
       question_number: "10",
     },
+    {
+      passage: "The house owner came downstairs to find out what made such a racket but she didn't see anything suspicious.",
+      question: "Did the house owner make a racket?",
+      answer: "No",
+      question_number: "11",
+    },
+    {
+      passage: "The students could not wait to find out what surprise the teacher was talking about in class.",
+      question: "Were the students preparing a surprise for the teacher??",
+      answer: "No",
+      question_number: "12",
+    },
+    {
+      passage: "The secretary for the clinic tried to figure out who prescribed what.",
+      question: "Did the secretary try to prescribe something?",
+      answer: "No",
+      question_number: "13",
+    },
+    {
+      passage: "The film director could not remember who played the lead role in the film his colleague just finished shooting.",
+      question: "Was the film director trying to remember something about his colleague's film?",
+      answer: "Yes",
+      question_number: "14",
+    },
+    {
+      passage: "The general was trying to decide when would be the best time to attack.",
+      question: "Was the general planning an attack?",
+      answer: "Yes",
+      question_number: "15",
+    },
+    {
+      passage: "The writer could not decide who the main character would marry in the end of the novel.",
+      question: "Was the writer trying to figure out the ending of the novel?",
+      answer: "Yes",
+      question_number: "16",
+    },
+    {
+      passage: "The student tried to find out why he got a bad grade on the test.",
+      question: "Did the student want to know the reason for a bad grade?",
+      answer: "Yes",
+      question_number: "17",
+    },
+    {
+      passage: "The telemarketer asked who the head of the household was, and the man just hung up the phone.",
+      question: "Did the telemarketer hang up the phone?",
+      answer: "No",
+      question_number: "18",
+    },
+    {
+      passage: "The administrator tried to remember what who donated to whom.",
+      question: "Did the administrator try to donate something?",
+      answer: "No",
+      question_number: "19",
+    },
+    {
+      passage: "The farmer was trying to decide what achievement to submit to the fair this year.",
+      question: "Did the farmer decide not to go to the fair this year?",
+      answer: "No",
+      question_number: "20",
+    },
   
   
   ]
