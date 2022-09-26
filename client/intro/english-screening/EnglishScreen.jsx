@@ -60,7 +60,7 @@ export default class EnglishScreen extends React.Component {
     passCorrectThreshold = () => {
         const {player} = this.props;
         let numCorrect = 0
-        const totalNumQuestions = 10
+        const totalNumQuestions = 20
         englishScreeningQuestions.forEach((questionSet) => {
             const {passage, question, answer, question_number} = questionSet;
             if (this.state[`q${question_number}`] === answer) {
