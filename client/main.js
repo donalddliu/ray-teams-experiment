@@ -60,14 +60,12 @@ Empirica.introSteps((game, treatment) => {
   const quizSteps = [AllQuiz];
   let steps;
   if (game.treatment.isPreQualification) {
-    // steps = englishScreen.concat(networkSurvey,tutorialSteps,quizSteps, symbolDescription);
-    steps = quizSteps.concat(symbolDescription);
+    steps = englishScreen.concat(networkSurvey,tutorialSteps,quizSteps, symbolDescription);
+    // steps = quizSteps.concat(symbolDescription);
 
   } else {
     steps = tutorialSteps.concat(quizSteps);
   }
-  // const steps = englishScreen.concat(networkSurvey,tutorialSteps,quizSteps, symbolDescription);
-  // const steps = symbolDescription;
 
   if (treatment.skipIntro) {
     return [];
