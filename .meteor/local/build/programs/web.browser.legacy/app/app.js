@@ -1453,7 +1453,7 @@ var Modal = /*#__PURE__*/function (_React$Component) {
         className: "modal"
       }, /*#__PURE__*/React.createElement("div", {
         className: "modal-content"
-      }, "Warning, you seem to be inactive. You have ", game.treatment.idleWarningTime, " seconds before you will be kicked due to inactivity. Are you still here?"), /*#__PURE__*/React.createElement("button", {
+      }, "Warning, you seem to be inactive. This is your ONE warning. Next time, you will be kicked without a warning. You have ", game.treatment.idleWarningTime, " seconds before you will be kicked due to inactivity. Are you still here?"), /*#__PURE__*/React.createElement("button", {
         className: "modal-button",
         onClick: onCloseModal
       }, "Yes"))));
@@ -4500,9 +4500,11 @@ var AllQuiz = /*#__PURE__*/function (_React$Component) {
         className: "questionnaire-body"
       }, /*#__PURE__*/React.createElement("div", {
         className: "question-section"
-      }, /*#__PURE__*/React.createElement("label", {
+      }, game.treatment.isPreQualification ? /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
-      }, "Are you willing to participate in an online team exercise that could last for approximately 45-90 minutes?"), /*#__PURE__*/React.createElement(Radio, {
+      }, "In the near future, are you willing to participate in an online team exercise that could last for approximately 45-", game.treatment.maxGameTime, " minutes?") : /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, "Are you willing to participate in an online team exercise that could last for approximately 45-", game.treatment.maxGameTime, " minutes?"), /*#__PURE__*/React.createElement(Radio, {
         selected: q1,
         name: "q1",
         value: "yes",
@@ -4518,7 +4520,7 @@ var AllQuiz = /*#__PURE__*/function (_React$Component) {
         className: "question-section"
       }, /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
-      }, game.treatment.endGameIfPlayerIdle ? /*#__PURE__*/React.createElement("span", null, "If you do not interact with the application for a while, your session will timeout and the experiment will end for EVERYONE in your team. ", game.treatment.idleWarningTime, " seconds before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer.") : /*#__PURE__*/React.createElement("span", null, "If you do not interact with the application for a while, your session will timeout and you will be kicked out from the game. ", game.treatment.idleWarningTime, " seconds before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+      }, game.treatment.endGameIfPlayerIdle ? /*#__PURE__*/React.createElement("span", null, "If you do not interact with the application for a while, your session will timeout and the experiment will end for EVERYONE in your team. ", game.treatment.idleWarningTime, " seconds before the timeout you will be notified you are about to timeout, and be given ONE warning and be able to reset this timer.") : /*#__PURE__*/React.createElement("span", null, "If you do not interact with the application for a while, your session will timeout and you will be kicked out from the game. ", game.treatment.idleWarningTime, " seconds before the timeout you will be notified you are about to timeout, and be given a ONE warning and be able to reset this timer."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
         style: {
           fontWeight: 'bolder'
         }
@@ -4604,9 +4606,11 @@ var AllQuiz = /*#__PURE__*/function (_React$Component) {
         onChange: this.handleChange
       })), /*#__PURE__*/React.createElement("div", {
         className: "question-section"
-      }, /*#__PURE__*/React.createElement("label", {
+      }, game.treatment.isPreQualification ? /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
-      }, "If you pass the attention check, you may participate in this task. You will receive a flat fee of $2 for participating. You will also receive $1.50 bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to $24.5."), /*#__PURE__*/React.createElement(Radio, {
+      }, " In the near future, if you pass all the qualifications, you may participate in this game. During that game, you will receive a flat fee of $", game.treatment.basePay, " for participating. You will also receive $", game.treatment.conversionRate, " bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to $", game.treatment.basePay + game.treatment.numTaskRounds * game.treatment.conversionRate, ".") : /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, "If you pass the attention check, you may participate in this task. You will receive a flat fee of $", game.treatment.basePay, " for participating. You will also receive $", game.treatment.conversionRate, " bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to $", game.treatment.basePay + game.treatment.numTaskRounds * game.treatment.conversionRate, "."), /*#__PURE__*/React.createElement(Radio, {
         selected: q8,
         name: "q8",
         value: "yes",
@@ -8499,7 +8503,8 @@ Empirica.introSteps(function (game, treatment) {
   var steps;
 
   if (game.treatment.isPreQualification) {
-    steps = englishScreen.concat(networkSurvey, tutorialSteps, quizSteps, symbolDescription);
+    // steps = englishScreen.concat(networkSurvey,tutorialSteps,quizSteps, symbolDescription);
+    steps = quizSteps.concat(symbolDescription);
   } else {
     steps = tutorialSteps.concat(quizSteps);
   } // const steps = englishScreen.concat(networkSurvey,tutorialSteps,quizSteps, symbolDescription);

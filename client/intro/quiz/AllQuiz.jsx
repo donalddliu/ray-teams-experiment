@@ -91,7 +91,10 @@ export default class AllQuiz extends React.Component {
             <div className="questionnaire-content-container">
                 <div className="questionnaire-body">
                     <div className="question-section">
-                        <label className="questionnaire-question">Are you willing to participate in an online team exercise that could last for approximately 45-90 minutes?</label>
+                        { game.treatment.isPreQualification ? 
+                        <label className="questionnaire-question">In the near future, are you willing to participate in an online team exercise that could last for approximately 45-{game.treatment.maxGameTime} minutes?</label>
+                        : <label className="questionnaire-question">Are you willing to participate in an online team exercise that could last for approximately 45-{game.treatment.maxGameTime} minutes?</label>
+                        }
                         <Radio
                             selected={q1}
                             name="q1"
@@ -111,8 +114,8 @@ export default class AllQuiz extends React.Component {
                     <div className="question-section">
                     <label className="questionnaire-question">
                         {game.treatment.endGameIfPlayerIdle ? 
-                        <span>If you do not interact with the application for a while, your session will timeout and the experiment will end for EVERYONE in your team. {game.treatment.idleWarningTime} seconds before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer.</span> :
-                        <span>If you do not interact with the application for a while, your session will timeout and you will be kicked out from the game. {game.treatment.idleWarningTime} seconds before the timeout you will be notified you are about to timeout, and be given a chance to reset this timer.</span> 
+                        <span>If you do not interact with the application for a while, your session will timeout and the experiment will end for EVERYONE in your team. {game.treatment.idleWarningTime} seconds before the timeout you will be notified you are about to timeout, and be given ONE warning and be able to reset this timer.</span> :
+                        <span>If you do not interact with the application for a while, your session will timeout and you will be kicked out from the game. {game.treatment.idleWarningTime} seconds before the timeout you will be notified you are about to timeout, and be given a ONE warning and be able to reset this timer.</span> 
                         }
                         <br></br>
                         <span style={{fontWeight: 'bolder'}}> 
@@ -235,7 +238,10 @@ export default class AllQuiz extends React.Component {
                     </div>
 
                     <div className="question-section">  
-                    <label className="questionnaire-question">If you pass the attention check, you may participate in this task. You will receive a flat fee of $2 for participating. You will also receive $1.50 bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to $24.5.</label>
+                    { game.treatment.isPreQualification ? 
+                        <label className="questionnaire-question"> In the near future, if you pass all the qualifications, you may participate in this game. During that game, you will receive a flat fee of ${game.treatment.basePay} for participating. You will also receive ${game.treatment.conversionRate} bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to ${game.treatment.basePay + game.treatment.numTaskRounds * game.treatment.conversionRate}.</label>
+                        : <label className="questionnaire-question">If you pass the attention check, you may participate in this task. You will receive a flat fee of ${game.treatment.basePay} for participating. You will also receive ${game.treatment.conversionRate} bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to ${game.treatment.basePay + game.treatment.numTaskRounds * game.treatment.conversionRate}.</label>
+                    }
                     <Radio
                         selected={q8}
                         name="q8"
