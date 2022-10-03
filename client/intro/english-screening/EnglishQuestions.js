@@ -67,7 +67,7 @@ export const englishScreeningQuestions = [
     },
     {
       passage: "The students could not wait to find out what surprise the teacher was talking about in class.",
-      question: "Were the students preparing a surprise for the teacher??",
+      question: "Were the students preparing a surprise for the teacher?",
       answer: "No",
       question_number: "12",
     },

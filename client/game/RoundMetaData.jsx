@@ -34,9 +34,12 @@ export default class RoundMetaData extends React.Component {
                 <div className="round-number-container">
                     {taskName} of {totalTaskRounds}
                 </div>
-                <p>
-                    Your player name is {player.get("anonymousName")}
-                </p>
+                <div style={{display: "flex", flexDirection:"column", alignItems: "center"}}>
+                    {game.treatment.maxGameTime && <GameTimer game={game}/>}
+                    <p>
+                        Your player name is {player.get("anonymousName")}
+                    </p>
+                </div>
                 <div style={{display: "flex", flexDirection:"column"}}>
                     {taskWarningTime && <TaskTimer game={game} stage={stage} player={player}/>}
                     <InactiveTimer game={game} player={player} />

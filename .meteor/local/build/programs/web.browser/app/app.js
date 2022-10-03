@@ -1068,7 +1068,11 @@ class inactiveTimer extends React.Component {
       this.setState({
         modalIsOpen: false
       });
-      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+
+      if (!player.get("inactiveWarningUsed")) {
+        player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+        player.set("inactiveWarningUsed", true);
+      }
     };
 
     this.onPlayerInactive = (player, game) => {
@@ -1093,19 +1097,40 @@ class inactiveTimer extends React.Component {
     } = this.props;
     const currentTime = moment(TimeSync.serverTime(null, 1000));
     const inactiveDuration = game.treatment.userInactivityDuration;
+    const inactiveDurationPlus30 = inactiveDuration + game.treatment.idleWarningTime;
     const activePlayers = game.players.filter(p => !p.get("inactive"));
     activePlayers.forEach(p => {
       const playerLastActive = p.get("lastActive");
       const timeDiff = currentTime.diff(playerLastActive, 'seconds');
 
-      if (timeDiff >= inactiveDuration) {
-        this.onPlayerInactive(p, game);
-        p.exit("inactive"); // this.onPlayerInactive();
-      } else if (timeDiff > inactiveDuration - game.treatment.idleWarningTime) {
-        if (!this.state.modalIsOpen && p._id === player._id) {
-          this.onOpenModal();
+      if (!p.get("inactiveWarningUsed")) {
+        if (timeDiff >= inactiveDurationPlus30) {
+          this.onPlayerInactive(p, game);
+          p.exit("inactive");
+        } else if (timeDiff >= inactiveDuration) {
+          if (!this.state.modalIsOpen && p._id === player._id) {
+            this.onOpenModal();
+          }
         }
-      }
+      } else {
+        if (timeDiff >= inactiveDuration) {
+          this.onPlayerInactive(p, game);
+          p.exit("inactive");
+        }
+      } // if (timeDiff >= inactiveDuration) {
+      //     this.onPlayerInactive(p, game);
+      //     p.exit("inactive");
+      //     // this.onPlayerInactive();
+      // } else if (timeDiff > inactiveDuration - game.treatment.idleWarningTime) {
+      //     if (!this.state.modalIsOpen && p._id === player._id) {
+      //         if (!p.get("inactiveWarningUsed")) {
+      //             this.onOpenModal();
+      //         } else if (p.get("inactiveWarningUsed") && (timeDiff % 5 === 0)) {
+      //             this.onOpenModal();
+      //         }
+      //     }
+      // }
+
     }); // const playerLastActive = player.get("lastActive");
     // const inactiveDuration = game.treatment.userInactivityDuration;
     // const timeDiff = currentTime.diff(playerLastActive, 'seconds');
@@ -1725,9 +1750,7 @@ class Round extends React.Component {
         className: "round"
       }, /*#__PURE__*/React.createElement("div", {
         className: "content"
-      }, game.treatment.maxGameTime && /*#__PURE__*/React.createElement(GameTimer, {
-        game: game
-      }), /*#__PURE__*/React.createElement("div", {
+      }, /*#__PURE__*/React.createElement("div", {
         className: "round-task-container"
       }, /*#__PURE__*/React.createElement(RoundMetaData, {
         game: game,
@@ -1814,7 +1837,15 @@ class RoundMetaData extends React.Component {
       className: "metadata-container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "round-number-container"
-    }, taskName, " of ", totalTaskRounds), /*#__PURE__*/React.createElement("p", null, "Your player name is ", player.get("anonymousName")), /*#__PURE__*/React.createElement("div", {
+    }, taskName, " of ", totalTaskRounds), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center"
+      }
+    }, game.treatment.maxGameTime && /*#__PURE__*/React.createElement(GameTimer, {
+      game: game
+    }), /*#__PURE__*/React.createElement("p", null, "Your player name is ", player.get("anonymousName"))), /*#__PURE__*/React.createElement("div", {
       style: {
         display: "flex",
         flexDirection: "column"
@@ -2681,7 +2712,7 @@ const englishScreeningQuestions = [{
   question_number: "11"
 }, {
   passage: "The students could not wait to find out what surprise the teacher was talking about in class.",
-  question: "Were the students preparing a surprise for the teacher??",
+  question: "Were the students preparing a surprise for the teacher?",
   answer: "No",
   question_number: "12"
 }, {
@@ -2876,10 +2907,11 @@ class EnglishScreen extends React.Component {
     };
   }
 
-  componentDidMount() {//   const {player} = this.props;
-    //   if (!player.get("attentionCheckTries")) {
-    //       player.set("attentionCheckTries", 2);
-    //   } 
+  componentDidMount() {
+    const {
+      player
+    } = this.props;
+    player.set("passedPreQual", false);
   }
 
   render() {
@@ -4817,6 +4849,122 @@ class Consent extends React.Component {
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+},"DescribeSymbolQuestion.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/DescribeSymbolQuestion.jsx                                                                             //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => DescribeSymbolQuestion
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+module.link("../../public/css/intro.css");
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 1);
+let FLEX_EXPANDER;
+module.link("@blueprintjs/core/lib/esm/common/classes", {
+  FLEX_EXPANDER(v) {
+    FLEX_EXPANDER = v;
+  }
+
+}, 2);
+
+class DescribeSymbolQuestion extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = {
+      response: ""
+    };
+
+    this.handleChange = event => {
+      const el = event.currentTarget;
+      this.setState({
+        [el.name]: el.value
+      });
+    };
+
+    this.handleSubmit = event => {
+      const {
+        onNext,
+        player,
+        stage
+      } = this.props;
+      event.preventDefault(); // TODO: log player response to survey question
+
+      player.set("symbolDescription", this.state.response);
+      player.set("passedPreQual", true);
+      player.exit("preQualSuccess");
+    };
+  }
+
+  render() {
+    const {
+      game,
+      onPrev,
+      player
+    } = this.props;
+    const {
+      response
+    } = this.state;
+    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+      className: "intro-heading questionnaire-heading"
+    }, " Questionnaire "), /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-content-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-body"
+    }, /*#__PURE__*/React.createElement("h2", null, " Please describe the following symbol below as if you were trying to explain it to another player. Try to be more descriptive than not."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
+      className: "symbol-container",
+      style: {
+        width: "100%",
+        backgroundColor: "#051A46",
+        borderRadius: "0%",
+        display: "flex",
+        justifyContent: "center"
+      }
+    }, /*#__PURE__*/React.createElement("img", {
+      src: "images/symbols/tangrams/t6.png"
+    })), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("form", {
+      className: "questionnaire-btn-container",
+      style: {
+        flexDirection: "column",
+        width: "100%"
+      },
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("textarea", {
+      className: "survey-textarea",
+      dir: "auto",
+      id: "response",
+      name: "response",
+      value: response,
+      onChange: this.handleChange,
+      required: true
+    }), /*#__PURE__*/React.createElement("button", {
+      className: response === "" ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+      disabled: response === "",
+      style: {
+        marginLeft: "auto"
+      },
+      type: "submit"
+    }, " Submit")))));
+  }
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 },"NewPlayer.jsx":function module(require,exports,module){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -6214,6 +6362,163 @@ class FailedAttentionCheck extends Component {
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+},"PreQualExitSurvey.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/PreQualExitSurvey.jsx                                                                                   //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => PreQualExitSurvey
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 1);
+
+const Radio = (_ref) => {
+  let {
+    selected,
+    name,
+    value,
+    label,
+    onChange,
+    required
+  } = _ref;
+  return /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
+    type: "radio",
+    name: name,
+    value: value,
+    checked: selected === value,
+    onChange: onChange,
+    required: required ? "required" : ""
+  }), label);
+};
+
+class PreQualExitSurvey extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = {
+      age: "",
+      gender: "",
+      email: "",
+      feedback: ""
+    };
+
+    this.handleChange = event => {
+      const el = event.currentTarget;
+      this.setState({
+        [el.name]: el.value
+      });
+    };
+
+    this.handleSubmit = event => {
+      event.preventDefault();
+      this.props.onSubmit(this.state);
+    };
+  }
+
+  render() {
+    const {
+      player,
+      game
+    } = this.props;
+    const {
+      age,
+      gender,
+      feedback,
+      education
+    } = this.state;
+    const basePay = game.treatment.basePay;
+    const conversionRate = game.treatment.conversionRate;
+    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+      className: "exit-survey"
+    }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, "Please submit the following code to receive your bonus:", " ", /*#__PURE__*/React.createElement("strong", null, player._id), "."), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""), /*#__PURE__*/React.createElement("p", null, "Thank you for taking time to take this pre-qualification survey ! We will finish screening all the players and send out a date and time to those that qualify for our future game.", basePay && conversionRate ? " You will receive a base pay of $".concat(basePay, " for taking this pre-qualification.") : " You will receive a base pay of $2 for taking this pre-qualification."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "form-line"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "age"
+    }, "Age"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
+      id: "age",
+      type: "number",
+      min: "0",
+      max: "150",
+      step: "1",
+      dir: "auto",
+      name: "age",
+      value: age,
+      onChange: this.handleChange,
+      required: true
+    }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "gender"
+    }, "Gender"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
+      id: "gender",
+      type: "text",
+      dir: "auto",
+      name: "gender",
+      value: gender,
+      onChange: this.handleChange,
+      required: true,
+      autoComplete: "off"
+    })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "Highest Education Qualification"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Radio, {
+      selected: education,
+      name: "education",
+      value: "high-school",
+      label: "High School",
+      onChange: this.handleChange,
+      required: true
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: education,
+      name: "education",
+      value: "bachelor",
+      label: "US Bachelor's Degree",
+      onChange: this.handleChange
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: education,
+      name: "education",
+      value: "master",
+      label: "Master's or higher",
+      onChange: this.handleChange
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: education,
+      name: "education",
+      value: "other",
+      label: "Other",
+      onChange: this.handleChange
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "form-line thirds"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "feedback"
+    }, "Feedback, including problems you encountered."), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
+      dir: "auto",
+      id: "feedback",
+      name: "feedback",
+      value: feedback,
+      onChange: this.handleChange,
+      required: true
+    })))), /*#__PURE__*/React.createElement("button", {
+      type: "submit"
+    }, "Submit"))));
+  }
+
+}
+
+PreQualExitSurvey.stepName = "ExitSurvey";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 },"Sorry.jsx":function module(require,exports,module){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -6353,7 +6658,7 @@ class Thanks extends React.Component {
     const conversionRate = game.treatment.conversionRate;
     return /*#__PURE__*/React.createElement("div", {
       className: "finished"
-    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Finished!"), /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $".concat(basePay + parseInt(player.get("score") * conversionRate)) : "", ":", " ", /*#__PURE__*/React.createElement("strong", null, player._id))));
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Finished!"), player.exitReason === "preQualSuccess" ? /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $".concat(basePay, " : ") : " ", /*#__PURE__*/React.createElement("strong", null, player._id)) : /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $".concat(basePay + parseInt(player.get("score") * conversionRate), " : ") : " ", /*#__PURE__*/React.createElement("strong", null, player._id))));
   }
 
 }
@@ -6390,167 +6695,181 @@ module.link("./exit/ExitSurvey", {
   }
 
 }, 2);
+let PreQualExitSurvey;
+module.link("./exit/PreQualExitSurvey", {
+  default(v) {
+    PreQualExitSurvey = v;
+  }
+
+}, 3);
 let Thanks;
 module.link("./exit/Thanks", {
   default(v) {
     Thanks = v;
   }
 
-}, 3);
+}, 4);
 let Sorry;
 module.link("./exit/Sorry", {
   default(v) {
     Sorry = v;
   }
 
-}, 4);
+}, 5);
 let About;
 module.link("./game/About", {
   default(v) {
     About = v;
   }
 
-}, 5);
+}, 6);
 let Round;
 module.link("./game/Round", {
   default(v) {
     Round = v;
   }
 
-}, 6);
+}, 7);
 let Consent;
 module.link("./intro/Consent", {
   default(v) {
     Consent = v;
   }
 
-}, 7);
+}, 8);
 let NetworkSurveyOne;
 module.link("./intro/network-survey/NetworkSurvey1", {
   default(v) {
     NetworkSurveyOne = v;
   }
 
-}, 8);
+}, 9);
 let NetworkSurveyTwo;
 module.link("./intro/network-survey/NetworkSurvey2", {
   default(v) {
     NetworkSurveyTwo = v;
   }
 
-}, 9);
+}, 10);
 let NetworkSurveyThree;
 module.link("./intro/network-survey/NetworkSurvey3", {
   default(v) {
     NetworkSurveyThree = v;
   }
 
-}, 10);
+}, 11);
 let TutorialPageOne;
 module.link("./intro/TutorialPageOne", {
   default(v) {
     TutorialPageOne = v;
   }
 
-}, 11);
+}, 12);
 let TutorialPageTwo;
 module.link("./intro/TutorialPageTwo", {
   default(v) {
     TutorialPageTwo = v;
   }
 
-}, 12);
+}, 13);
 let TutorialPageThree;
 module.link("./intro/TutorialPageThree", {
   default(v) {
     TutorialPageThree = v;
   }
 
-}, 13);
+}, 14);
 let TutorialPageFour;
 module.link("./intro/TutorialPageFour", {
   default(v) {
     TutorialPageFour = v;
   }
 
-}, 14);
+}, 15);
 let AllQuiz;
 module.link("./intro/quiz/AllQuiz", {
   default(v) {
     AllQuiz = v;
   }
 
-}, 15);
+}, 16);
 let QuizOne;
 module.link("./intro/quiz/QuizOne", {
   default(v) {
     QuizOne = v;
   }
 
-}, 16);
+}, 17);
 let QuizTwo;
 module.link("./intro/quiz/QuizTwo", {
   default(v) {
     QuizTwo = v;
   }
 
-}, 17);
+}, 18);
 let QuizThree;
 module.link("./intro/quiz/QuizThree", {
   default(v) {
     QuizThree = v;
   }
 
-}, 18);
+}, 19);
 let QuizFour;
 module.link("./intro/quiz/QuizFour", {
   default(v) {
     QuizFour = v;
   }
 
-}, 19);
+}, 20);
 let QuizFive;
 module.link("./intro/quiz/QuizFive", {
   default(v) {
     QuizFive = v;
   }
 
-}, 20);
+}, 21);
 let QuizSix;
 module.link("./intro/quiz/QuizSix", {
   default(v) {
     QuizSix = v;
   }
 
-}, 21);
+}, 22);
 let QuizSeven;
 module.link("./intro/quiz/QuizSeven", {
   default(v) {
     QuizSeven = v;
   }
 
-}, 22);
+}, 23);
 let QuizEight;
 module.link("./intro/quiz/QuizEight", {
   default(v) {
     QuizEight = v;
   }
 
-}, 23);
+}, 24);
 let EnglishScreen;
 module.link("./intro/english-screening/EnglishScreen", {
   default(v) {
     EnglishScreen = v;
   }
 
-}, 24);
+}, 25);
+let DescribeSymbolQuestion;
+module.link("./intro/DescribeSymbolQuestion", {
+  default(v) {
+    DescribeSymbolQuestion = v;
+  }
+
+}, 26);
 let NewPlayer;
 module.link("./intro/NewPlayer", {
   default(v) {
     NewPlayer = v;
   }
 
-}, 25);
+}, 27);
 // Get rid of Breadcrumb component
 Empirica.breadcrumb(() => null); // Set the About Component you want to use for the About dialog (optional).
 
@@ -6566,10 +6885,19 @@ Empirica.introSteps((game, treatment) => {
   // MidSurveyFive, MidSurveyFour, MidSurveyThree, MidSurveyTwo, MidSurveyOne,
   const englishScreen = [EnglishScreen];
   const networkSurvey = [NetworkSurveyOne, NetworkSurveyTwo, NetworkSurveyThree];
-  const tutorialSteps = [TutorialPageOne, TutorialPageThree, TutorialPageFour]; // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
+  const tutorialSteps = [TutorialPageOne, TutorialPageThree, TutorialPageFour];
+  const symbolDescription = [DescribeSymbolQuestion]; // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
 
   const quizSteps = [AllQuiz];
-  const steps = englishScreen.concat(networkSurvey, tutorialSteps, quizSteps);
+  let steps;
+
+  if (game.treatment.isPreQualification) {
+    steps = englishScreen.concat(networkSurvey, tutorialSteps, quizSteps, symbolDescription);
+  } else {
+    steps = tutorialSteps.concat(quizSteps);
+  } // const steps = englishScreen.concat(networkSurvey,tutorialSteps,quizSteps, symbolDescription);
+  // const steps = symbolDescription;
+
 
   if (treatment.skipIntro) {
     return [];
@@ -6592,6 +6920,10 @@ Empirica.round(Round); // End of Game pages. These may vary depending on player 
 Empirica.exitSteps((game, player) => {
   if (player.exitStatus && player.exitStatus === "custom" && (player.exitReason === "maxGameTimeReached" || player.exitReason === "minPlayerCountNotMaintained")) {
     return [ExitSurvey, Thanks];
+  }
+
+  if (player.exitStatus && player.exitStatus === "custom" && player.exitReason === "preQualSuccess") {
+    return [PreQualExitSurvey, Thanks];
   }
 
   if (!game || player.exitStatus && player.exitStatus !== "finished" && player.exitReason !== "playerQuit") {

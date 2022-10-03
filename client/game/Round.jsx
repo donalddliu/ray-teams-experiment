@@ -169,7 +169,7 @@ export default class Round extends React.Component {
       return (
         <div className="round">
           <div className="content">
-            {game.treatment.maxGameTime && <GameTimer game={game}/>}
+            {/* {game.treatment.maxGameTime && <GameTimer game={game}/>} */}
             <div className="round-task-container">
               <RoundMetaData game={game} round={round} stage={stage} player={player} />
               <Task game={game} round={round} stage={stage} player={player} />

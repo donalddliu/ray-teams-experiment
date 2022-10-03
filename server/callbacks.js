@@ -13,6 +13,7 @@ Empirica.onGameStart(game => {
   console.log("Game started");
   game.players.forEach((player) => {
     player.set("inactive", false);
+    player.set("inactiveWarningUsed", false);
     player.set("lastActive", moment(Date.now()));
     const network = player.get("neighbors");
     const activeChats = [];

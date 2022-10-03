@@ -46,10 +46,8 @@ export default class EnglishScreen extends React.Component {
     state = { q1: "", q2: "", q3:"", q4: "", q5: "", q6: "", q7: "", q8: "", q9:"", q10:""};
   
     componentDidMount() {
-    //   const {player} = this.props;
-    //   if (!player.get("attentionCheckTries")) {
-    //       player.set("attentionCheckTries", 2);
-    //   } 
+      const {player} = this.props;
+      player.set("passedPreQual", false);
     }
   
     handleChange = event => {

@@ -24,7 +24,10 @@ class inactiveTimer extends React.Component {
     onCloseModal = () => {
         const {player} = this.props;
         this.setState({modalIsOpen: false});
-        player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+        if (!player.get("inactiveWarningUsed")) {
+            player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+            player.set("inactiveWarningUsed", true);
+        }
     }
     
     onPlayerInactive = (player, game) => {
@@ -39,22 +42,44 @@ class inactiveTimer extends React.Component {
         const {game, round, stage, player} = this.props; 
         const currentTime = moment(TimeSync.serverTime(null, 1000));
         const inactiveDuration = game.treatment.userInactivityDuration;
+        const inactiveDurationPlus30 = inactiveDuration + game.treatment.idleWarningTime;
         const activePlayers = game.players.filter(p => !p.get("inactive"));
 
         activePlayers.forEach((p) => {
             const playerLastActive = p.get("lastActive");
             const timeDiff = currentTime.diff(playerLastActive, 'seconds');
-            
-            if (timeDiff >= inactiveDuration) {
-                this.onPlayerInactive(p, game);
-                p.exit("inactive");
-                // this.onPlayerInactive();
-    
-            } else if (timeDiff > inactiveDuration - game.treatment.idleWarningTime) {
-                if (!this.state.modalIsOpen && p._id === player._id) {
-                    this.onOpenModal();
+
+            if (!p.get("inactiveWarningUsed")) {
+                if (timeDiff >= inactiveDurationPlus30) {
+                    this.onPlayerInactive(p,game);
+                    p.exit("inactive");
+                }
+                else if (timeDiff >= inactiveDuration) {
+                    if (!this.state.modalIsOpen && p._id === player._id){
+                        this.onOpenModal();
+                    }
+                }
+            } else {
+                if (timeDiff >= inactiveDuration) {
+                    this.onPlayerInactive(p,game);
+                    p.exit("inactive");
                 }
             }
+            // if (timeDiff >= inactiveDuration) {
+            //     this.onPlayerInactive(p, game);
+            //     p.exit("inactive");
+            //     // this.onPlayerInactive();
+    
+            // } else if (timeDiff > inactiveDuration - game.treatment.idleWarningTime) {
+            //     if (!this.state.modalIsOpen && p._id === player._id) {
+            //         if (!p.get("inactiveWarningUsed")) {
+            //             this.onOpenModal();
+            //         } else if (p.get("inactiveWarningUsed") && (timeDiff % 5 === 0)) {
+            //             this.onOpenModal();
+            //         }
+
+            //     }
+            // }
         })
         // const playerLastActive = player.get("lastActive");
         // const inactiveDuration = game.treatment.userInactivityDuration;

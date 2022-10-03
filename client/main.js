@@ -1,6 +1,7 @@
 import Empirica from "meteor/empirica:core";
 import { render } from "react-dom";
 import ExitSurvey from "./exit/ExitSurvey";
+import PreQualExitSurvey from "./exit/PreQualExitSurvey";
 import Thanks from "./exit/Thanks";
 import Sorry from "./exit/Sorry";
 import About from "./game/About";
@@ -29,6 +30,8 @@ import QuizEight from "./intro/quiz/QuizEight";
 
 import EnglishScreen from "./intro/english-screening/EnglishScreen";
 
+import DescribeSymbolQuestion from "./intro/DescribeSymbolQuestion";
+
 import NewPlayer from "./intro/NewPlayer";
 
 
@@ -52,9 +55,17 @@ Empirica.introSteps((game, treatment) => {
   const englishScreen = [EnglishScreen];
   const networkSurvey = [NetworkSurveyOne, NetworkSurveyTwo, NetworkSurveyThree];
   const tutorialSteps = [TutorialPageOne, TutorialPageThree, TutorialPageFour,];
+  const symbolDescription = [DescribeSymbolQuestion];
   // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
   const quizSteps = [AllQuiz];
-  const steps = englishScreen.concat(networkSurvey,tutorialSteps,quizSteps);
+  let steps;
+  if (game.treatment.isPreQualification) {
+    steps = englishScreen.concat(networkSurvey,tutorialSteps,quizSteps, symbolDescription);
+  } else {
+    steps = tutorialSteps.concat(quizSteps);
+  }
+  // const steps = englishScreen.concat(networkSurvey,tutorialSteps,quizSteps, symbolDescription);
+  // const steps = symbolDescription;
 
   if (treatment.skipIntro) {
     return [];
@@ -81,6 +92,11 @@ Empirica.exitSteps((game, player) => {
       (player.exitReason === "maxGameTimeReached" || player.exitReason === "minPlayerCountNotMaintained")) {
     return [ExitSurvey, Thanks];
   }
+  if (player.exitStatus && player.exitStatus === "custom" &&
+      (player.exitReason === "preQualSuccess")) {
+        return [PreQualExitSurvey, Thanks];
+  }
+
   if (
     !game ||
     (player.exitStatus &&
