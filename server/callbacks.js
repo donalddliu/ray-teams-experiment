@@ -50,7 +50,8 @@ Empirica.onRoundStart((game, round) => {
   if (activePlayers.length < game.get("previousNumActivePlayers") ) { // Someone left in the middle of the round
     if (game.treatment.endGameIfPlayerIdle) {
       activePlayers.forEach((p) => {
-        p.exit("someoneInactive");
+        // p.exit("someoneInactive");
+        p.exit("minPlayerCountNotMaintained");
       })
     } else {
       getFullyConnectedLayer(game); // Updates the neighbors to be fully connected

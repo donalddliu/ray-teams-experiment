@@ -27,6 +27,7 @@ import QuizFive from "./intro/quiz/QuizFive";
 import QuizSix from "./intro/quiz/QuizSix";
 import QuizSeven from "./intro/quiz/QuizSeven";
 import QuizEight from "./intro/quiz/QuizEight";
+import QuizOverview from "./intro/quiz/QuizOverview";
 
 import EnglishScreen from "./intro/english-screening/EnglishScreen";
 
@@ -58,13 +59,14 @@ Empirica.introSteps((game, treatment) => {
   const symbolDescription = [DescribeSymbolQuestion];
   // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
   const quizSteps = [AllQuiz];
+  const quizOverview = [QuizOverview];
   let steps;
   if (game.treatment.isPreQualification) {
     steps = englishScreen.concat(networkSurvey,tutorialSteps,quizSteps, symbolDescription);
     // steps = quizSteps.concat(symbolDescription);
 
   } else {
-    steps = tutorialSteps.concat(quizSteps);
+    steps = tutorialSteps.concat(quizOverview);
   }
 
   if (treatment.skipIntro) {

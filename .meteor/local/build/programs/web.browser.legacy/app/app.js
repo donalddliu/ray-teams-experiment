@@ -1293,7 +1293,7 @@ var inactiveTimer = /*#__PURE__*/function (_React$Component) {
       });
 
       if (!player.get("inactiveWarningUsed")) {
-        player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+        player.set("lastActive", moment(TimeSync.serverTime(null, 1000)).subtract(30, 'seconds'));
         player.set("inactiveWarningUsed", true);
       }
     };
@@ -1453,7 +1453,7 @@ var Modal = /*#__PURE__*/function (_React$Component) {
         className: "modal"
       }, /*#__PURE__*/React.createElement("div", {
         className: "modal-content"
-      }, "Warning, you seem to be inactive. This is your ONE warning. Next time, you will be kicked without a warning. You have ", game.treatment.idleWarningTime, " seconds before you will be kicked due to inactivity. Are you still here?"), /*#__PURE__*/React.createElement("button", {
+      }, "Warning, you seem to be inactive. This was your ONE warning. Next time, you will be kicked without a warning. If you are still inactive in the next ", game.treatment.idleWarningTime, " seconds, you will be kicked. Do you understand?"), /*#__PURE__*/React.createElement("button", {
         className: "modal-button",
         onClick: onCloseModal
       }, "Yes"))));
@@ -4436,7 +4436,7 @@ var AllQuiz = /*#__PURE__*/function (_React$Component) {
         player.set("attentionCheckTries", _currentTriesLeft - 1);
         console.log("You have " + player.get("attentionCheckTries") + " tries left."); // If player uses all their attention check tries, they fail; otherwise show them how many tries they have left
 
-        if (player.get("attentionCheckTries") === 0) {
+        if (player.get("attentionCheckTries") <= 0) {
           player.exit("failedQuestion");
         } else {
           _this.onOpenModal();
@@ -5301,6 +5301,147 @@ var QuizOne = /*#__PURE__*/function (_React$Component) {
   }();
 
   return QuizOne;
+}(React.Component);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"QuizOverview.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/quiz/QuizOverview.jsx                                                                                  //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+var _createSuper;
+
+module.link("@babel/runtime/helpers/createSuper", {
+  default: function (v) {
+    _createSuper = v;
+  }
+}, 0);
+
+var _inheritsLoose;
+
+module.link("@babel/runtime/helpers/inheritsLoose", {
+  default: function (v) {
+    _inheritsLoose = v;
+  }
+}, 1);
+module.export({
+  "default": function () {
+    return QuizOverview;
+  }
+});
+var React;
+module.link("react", {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+module.link("../../../public/css/intro.css");
+var Centered;
+module.link("meteor/empirica:core", {
+  Centered: function (v) {
+    Centered = v;
+  }
+}, 1);
+
+var QuizOverview = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(QuizOverview, _React$Component);
+
+  var _super = _createSuper(QuizOverview);
+
+  function QuizOverview() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+
+    _this.handleSubmit = function (event) {
+      var _this$props = _this.props,
+          hasPrev = _this$props.hasPrev,
+          hasNext = _this$props.hasNext,
+          onNext = _this$props.onNext,
+          onPrev = _this$props.onPrev,
+          game = _this$props.game,
+          player = _this$props.player;
+      event.preventDefault();
+      onNext();
+    };
+
+    return _this;
+  }
+
+  var _proto = QuizOverview.prototype;
+
+  _proto.render = function () {
+    function render() {
+      var _this$props2 = this.props,
+          game = _this$props2.game,
+          onPrev = _this$props2.onPrev,
+          player = _this$props2.player;
+      return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+        className: "intro-heading questionnaire-heading"
+      }, " Important Game Overview "), /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-content-container"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-body"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "question-section"
+      }, /*#__PURE__*/React.createElement("p", {
+        className: "questionnaire-question"
+      }, " PLEASE READ THE FOLLOWING CAREFULLY "), /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, "1. This game may last up to ", /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontWeight: 'bolder'
+        }
+      }, "  60 minutes "), ". If you cannot make this commitment, please leave and wait for the next session."), /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, "2. If you are inactive for longer than ", /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontWeight: 'bolder'
+        }
+      }, "  1 minute "), ", you will be kicked from the game. You will only get ", /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontWeight: 'bolder'
+        }
+      }, " ONE warning "), " about your inactivity. Thus, actively speak with your teammates until everyone has submitted."), /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, "3. If a player is kicked from the game, the ", /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontWeight: 'bolder'
+        }
+      }, " entire game for everyone will end "), "."), /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, "4. For each trial, there will be ", /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontWeight: 'bolder'
+        }
+      }, " only 1 common symbol "), " amongst everyone. Some symbols may be the same amongst a few of you, but only one that you all share."), /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, "5. Each player will have different 1-on-1 chats with people to communicate with. You may not have the same chats as others."), /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, "6. After selecting a symbol and submitting it, you are allowed to reconsider your answer if you find more information from your team."), game.treatment.conversionRate && game.treatment.basePay ? /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, "7. You will receive a flat fee of $", game.treatment.basePay, " for participating. You will also receive $", game.treatment.conversionRate, " bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to $", game.treatment.basePay + game.treatment.numTaskRounds * game.treatment.conversionRate, ".") : /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, "7. You will receive a flat fee of $2 for participating. You will also receive $1 bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to $", 2 + game.treatment.numTaskRounds * 1, "."), /*#__PURE__*/React.createElement("br", null)), /*#__PURE__*/React.createElement("form", {
+        className: "questionnaire-btn-container",
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/React.createElement("button", {
+        className: "arrow-button button-submit",
+        type: "submit"
+      }, " Proceed ")))));
+    }
+
+    return render;
+  }();
+
+  return QuizOverview;
 }(React.Component);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -8461,24 +8602,30 @@ module.link("./intro/quiz/QuizEight", {
     QuizEight = v;
   }
 }, 24);
+var QuizOverview;
+module.link("./intro/quiz/QuizOverview", {
+  "default": function (v) {
+    QuizOverview = v;
+  }
+}, 25);
 var EnglishScreen;
 module.link("./intro/english-screening/EnglishScreen", {
   "default": function (v) {
     EnglishScreen = v;
   }
-}, 25);
+}, 26);
 var DescribeSymbolQuestion;
 module.link("./intro/DescribeSymbolQuestion", {
   "default": function (v) {
     DescribeSymbolQuestion = v;
   }
-}, 26);
+}, 27);
 var NewPlayer;
 module.link("./intro/NewPlayer", {
   "default": function (v) {
     NewPlayer = v;
   }
-}, 27);
+}, 28);
 // Get rid of Breadcrumb component
 Empirica.breadcrumb(function () {
   return null;
@@ -8500,12 +8647,13 @@ Empirica.introSteps(function (game, treatment) {
   var symbolDescription = [DescribeSymbolQuestion]; // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
 
   var quizSteps = [AllQuiz];
+  var quizOverview = [QuizOverview];
   var steps;
 
   if (game.treatment.isPreQualification) {
     steps = englishScreen.concat(networkSurvey, tutorialSteps, quizSteps, symbolDescription); // steps = quizSteps.concat(symbolDescription);
   } else {
-    steps = tutorialSteps.concat(quizSteps);
+    steps = tutorialSteps.concat(quizOverview);
   }
 
   if (treatment.skipIntro) {

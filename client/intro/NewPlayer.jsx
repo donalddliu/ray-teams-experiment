@@ -28,7 +28,7 @@ export default class NewPlayer extends Component {
 
             <p>
               Please enter your Mechanical Turk Worker ID:
-                        </p>
+            </p>
 
             <input
               dir="auto"

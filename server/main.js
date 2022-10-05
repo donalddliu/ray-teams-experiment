@@ -48,7 +48,6 @@ Empirica.gameInit(game => {
     player.set("anonymousName", colors[i])
   });
 
-
   if (game.players.length < game.treatment.playerCount) { // if not a full game, default to fully connected layer
     getFullyConnectedLayer(game);
     game.players.forEach((p) => {

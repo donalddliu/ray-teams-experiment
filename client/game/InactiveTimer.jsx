@@ -25,7 +25,7 @@ class inactiveTimer extends React.Component {
         const {player} = this.props;
         this.setState({modalIsOpen: false});
         if (!player.get("inactiveWarningUsed")) {
-            player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+            player.set("lastActive", moment(TimeSync.serverTime(null, 1000)).subtract(30, 'seconds'));
             player.set("inactiveWarningUsed", true);
         }
     }

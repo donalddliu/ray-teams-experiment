@@ -64,7 +64,7 @@ export default class AllQuiz extends React.Component {
         console.log(`You have ${player.get("attentionCheckTries")} tries left.`);
 
         // If player uses all their attention check tries, they fail; otherwise show them how many tries they have left
-        if (player.get("attentionCheckTries") === 0) {
+        if (player.get("attentionCheckTries") <= 0) {
             player.exit("failedQuestion");
         } else {
             this.onOpenModal();
