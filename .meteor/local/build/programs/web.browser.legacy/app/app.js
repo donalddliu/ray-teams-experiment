@@ -8405,12 +8405,18 @@ module.link("react", {
     React = v;
   }
 }, 0);
+var moment;
+module.link("moment", {
+  "default": function (v) {
+    moment = v;
+  }
+}, 1);
 var Centered;
 module.link("meteor/empirica:core", {
   Centered: function (v) {
     Centered = v;
   }
-}, 1);
+}, 2);
 
 var Thanks = /*#__PURE__*/function (_React$Component) {
   _inheritsLoose(Thanks, _React$Component);
@@ -8430,9 +8436,10 @@ var Thanks = /*#__PURE__*/function (_React$Component) {
           game = _this$props.game;
       var basePay = game.treatment.basePay;
       var conversionRate = game.treatment.conversionRate;
+      console.log(player.get("nodeId"));
       return /*#__PURE__*/React.createElement("div", {
         className: "finished"
-      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Finished!"), player.exitReason === "preQualSuccess" ? /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $" + basePay + " : " : " ", /*#__PURE__*/React.createElement("strong", null, player._id)) : /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $" + (basePay + parseInt(player.get("score") * conversionRate)) + " : " : " ", /*#__PURE__*/React.createElement("strong", null, player._id))));
+      }, /*#__PURE__*/React.createElement("div", null, player.get("nodeId") ? /*#__PURE__*/React.createElement("p", null, " If you are receiving this message, it means you have participated in one of our symbol task games before. As mentioned in out HIT expectations, if you've participated in one of our HIT sessions before, you cannot participate in another. We are trying to gather new players for each game. If you think this is a mistake, please do no hesistate to reach out.") : /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Finished!"), player.exitReason === "preQualSuccess" ? /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $" + basePay + " : " : " ", /*#__PURE__*/React.createElement("strong", null, player._id)) : /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $" + (basePay + parseInt(player.get("score") * conversionRate)) + " : " : " ", /*#__PURE__*/React.createElement("strong", null, player._id)))));
     }
 
     return render;
