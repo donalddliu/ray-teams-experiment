@@ -26,9 +26,14 @@ export default class NewPlayer extends Component {
           <form onSubmit={this.handleSubmit}>
             <h1>Identification</h1>
 
-            <p>
+            {/* TODO: MTURK */}
+            {/* <p>
               Please enter your Mechanical Turk Worker ID:
+            </p> */}
+            <p>
+              Please enter your Prolific ID:
             </p>
+
 
             <input
               dir="auto"

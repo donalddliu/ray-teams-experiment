@@ -22,9 +22,16 @@ export default class Thanks extends React.Component {
           <div>
             <h4>Finished!</h4>
               {player.exitReason === "preQualSuccess" ? 
-                <p>Thank you for participating! Please submit the following code to receive your bonus 
-                { basePay && conversionRate ? ` of $${basePay} : ` : " "} 
-                <strong>{player._id}</strong>
+                // TODO: mturk
+                // <p>Thank you for participating! Please submit the following code to receive your bonus 
+                // { basePay && conversionRate ? ` of $${basePay} : ` : " "} 
+                // <strong>{player._id}</strong>
+                // </p> 
+
+                // TODO: Prolific
+                <p>Thank you for participating! Please submit the following code: C2NSYBWZ
+                {/* { basePay && conversionRate ? ` of $${basePay} : ` : " "} 
+                <strong>{player._id}</strong> */}
                 </p> 
                 
                 : 

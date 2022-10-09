@@ -61,7 +61,6 @@ export default class AllQuiz extends React.Component {
         player.set(`attentionCheck-${currentTriesLeft}`, attentionCheckAnswers);
         // Log how many tries they have left
         player.set("attentionCheckTries", currentTriesLeft-1);
-        console.log(`You have ${player.get("attentionCheckTries")} tries left.`);
 
         // If player uses all their attention check tries, they fail; otherwise show them how many tries they have left
         if (player.get("attentionCheckTries") <= 0) {
@@ -114,14 +113,20 @@ export default class AllQuiz extends React.Component {
                     <div className="question-section">
                     <label className="questionnaire-question">
                         {game.treatment.endGameIfPlayerIdle ? 
-                        <span>If you do not interact with the application for a while, your session will timeout and the experiment will end for EVERYONE in your team. {game.treatment.idleWarningTime} seconds before the timeout you will be notified you are about to timeout, and be given ONE warning and be able to reset this timer.</span> :
+                        <span>If you do not interact with the application for a while, your session will timeout and the game will end for EVERYONE in your team. {game.treatment.idleWarningTime} seconds before the timeout you will be notified you are about to timeout, and be given ONE warning and be able to reset this timer.</span> :
                         <span>If you do not interact with the application for a while, your session will timeout and you will be kicked out from the game. {game.treatment.idleWarningTime} seconds before the timeout you will be notified you are about to timeout, and be given a ONE warning and be able to reset this timer.</span> 
                         }
                         <br></br>
                         <span style={{fontWeight: 'bolder'}}> 
                         {game.treatment.endGameIfPlayerIdle ? 
-                        <span>NOTE: If you allow your session to timeout, your HIT will not be accepted. If a team member causes a timeout you will be sent to the end of challenge page, and your HIT will be accepted.</span> :
-                        <span>NOTE: If you allow your session to timeout, your HIT will not be accepted.</span>
+                        // TODO: MTurk
+                        // <span>NOTE: If you allow your session to timeout, your HIT will not be accepted. If a team member causes a timeout you will be sent to the end of challenge page, and your HIT will be accepted.</span> :
+                        // <span>NOTE: If you allow your session to timeout, your HIT will not be accepted.</span>
+
+                        // TODO: Prolific
+                        <span>NOTE: If you allow your session to timeout, your submission will not be accepted. If a team member causes a timeout you will be sent to the end of challenge page, and your submission will be accepted.</span> :
+                        <span>NOTE: If you allow your session to timeout, your submission will not be accepted.</span>
+                        
                         }
                         </span>
                     </label>
@@ -239,8 +244,15 @@ export default class AllQuiz extends React.Component {
 
                     <div className="question-section">  
                     { game.treatment.isPreQualification ? 
-                        <label className="questionnaire-question"> In the near future, if you pass all the qualifications, you may participate in this game. During that game, you will receive a flat fee of ${game.treatment.basePay} for participating. You will also receive ${game.treatment.conversionRate} bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to ${game.treatment.basePay + game.treatment.numTaskRounds * game.treatment.conversionRate}.</label>
-                        : <label className="questionnaire-question">If you pass the attention check, you may participate in this task. You will receive a flat fee of ${game.treatment.basePay} for participating. You will also receive ${game.treatment.conversionRate} bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to ${game.treatment.basePay + game.treatment.numTaskRounds * game.treatment.conversionRate}.</label>
+                        // TODO: MTurk
+                        // <label className="questionnaire-question"> In the near future, if you pass all the qualifications, you may participate in this game. During that game, you will receive a flat fee of ${game.treatment.basePay} for participating. You will also receive ${game.treatment.conversionRate} bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to ${game.treatment.basePay + game.treatment.numTaskRounds * game.treatment.conversionRate}.</label>
+                        
+                        // TODO: Prolific
+                        <label className="questionnaire-question"> In the near future, if you pass all the qualifications, you may participate in this game. During that game, you will receive the hourly wage for participating. You will also receive a small bonus each time your team correctly identifies the shared symbol. (Amount TBD)</label>
+
+                        : 
+                        // TODO  MTurk
+                        <label className="questionnaire-question">If you pass the attention check, you may participate in this task. You will receive a flat fee of ${game.treatment.basePay} for participating. You will also receive ${game.treatment.conversionRate} bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to ${game.treatment.basePay + game.treatment.numTaskRounds * game.treatment.conversionRate}.</label>
                     }
                     <Radio
                         selected={q8}

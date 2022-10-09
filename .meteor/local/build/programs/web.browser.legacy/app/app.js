@@ -4433,8 +4433,7 @@ var AllQuiz = /*#__PURE__*/function (_React$Component) {
         var _attentionCheckAnswers = _this.state;
         player.set("attentionCheck-" + _currentTriesLeft, _attentionCheckAnswers); // Log how many tries they have left
 
-        player.set("attentionCheckTries", _currentTriesLeft - 1);
-        console.log("You have " + player.get("attentionCheckTries") + " tries left."); // If player uses all their attention check tries, they fail; otherwise show them how many tries they have left
+        player.set("attentionCheckTries", _currentTriesLeft - 1); // If player uses all their attention check tries, they fail; otherwise show them how many tries they have left
 
         if (player.get("attentionCheckTries") <= 0) {
           player.exit("failedQuestion");
@@ -4520,11 +4519,17 @@ var AllQuiz = /*#__PURE__*/function (_React$Component) {
         className: "question-section"
       }, /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
-      }, game.treatment.endGameIfPlayerIdle ? /*#__PURE__*/React.createElement("span", null, "If you do not interact with the application for a while, your session will timeout and the experiment will end for EVERYONE in your team. ", game.treatment.idleWarningTime, " seconds before the timeout you will be notified you are about to timeout, and be given ONE warning and be able to reset this timer.") : /*#__PURE__*/React.createElement("span", null, "If you do not interact with the application for a while, your session will timeout and you will be kicked out from the game. ", game.treatment.idleWarningTime, " seconds before the timeout you will be notified you are about to timeout, and be given a ONE warning and be able to reset this timer."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
+      }, game.treatment.endGameIfPlayerIdle ? /*#__PURE__*/React.createElement("span", null, "If you do not interact with the application for a while, your session will timeout and the game will end for EVERYONE in your team. ", game.treatment.idleWarningTime, " seconds before the timeout you will be notified you are about to timeout, and be given ONE warning and be able to reset this timer.") : /*#__PURE__*/React.createElement("span", null, "If you do not interact with the application for a while, your session will timeout and you will be kicked out from the game. ", game.treatment.idleWarningTime, " seconds before the timeout you will be notified you are about to timeout, and be given a ONE warning and be able to reset this timer."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("span", {
         style: {
           fontWeight: 'bolder'
         }
-      }, game.treatment.endGameIfPlayerIdle ? /*#__PURE__*/React.createElement("span", null, "NOTE: If you allow your session to timeout, your HIT will not be accepted. If a team member causes a timeout you will be sent to the end of challenge page, and your HIT will be accepted.") : /*#__PURE__*/React.createElement("span", null, "NOTE: If you allow your session to timeout, your HIT will not be accepted."))), /*#__PURE__*/React.createElement(Radio, {
+      }, game.treatment.endGameIfPlayerIdle ?
+      /*#__PURE__*/
+      // TODO: MTurk
+      // <span>NOTE: If you allow your session to timeout, your HIT will not be accepted. If a team member causes a timeout you will be sent to the end of challenge page, and your HIT will be accepted.</span> :
+      // <span>NOTE: If you allow your session to timeout, your HIT will not be accepted.</span>
+      // TODO: Prolific
+      React.createElement("span", null, "NOTE: If you allow your session to timeout, your submission will not be accepted. If a team member causes a timeout you will be sent to the end of challenge page, and your submission will be accepted.") : /*#__PURE__*/React.createElement("span", null, "NOTE: If you allow your session to timeout, your submission will not be accepted."))), /*#__PURE__*/React.createElement(Radio, {
         selected: q2,
         name: "q2",
         value: "yes",
@@ -4606,9 +4611,17 @@ var AllQuiz = /*#__PURE__*/function (_React$Component) {
         onChange: this.handleChange
       })), /*#__PURE__*/React.createElement("div", {
         className: "question-section"
-      }, game.treatment.isPreQualification ? /*#__PURE__*/React.createElement("label", {
+      }, game.treatment.isPreQualification ?
+      /*#__PURE__*/
+      // TODO: MTurk
+      // <label className="questionnaire-question"> In the near future, if you pass all the qualifications, you may participate in this game. During that game, you will receive a flat fee of ${game.treatment.basePay} for participating. You will also receive ${game.treatment.conversionRate} bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to ${game.treatment.basePay + game.treatment.numTaskRounds * game.treatment.conversionRate}.</label>
+      // TODO: Prolific
+      React.createElement("label", {
         className: "questionnaire-question"
-      }, " In the near future, if you pass all the qualifications, you may participate in this game. During that game, you will receive a flat fee of $", game.treatment.basePay, " for participating. You will also receive $", game.treatment.conversionRate, " bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to $", game.treatment.basePay + game.treatment.numTaskRounds * game.treatment.conversionRate, ".") : /*#__PURE__*/React.createElement("label", {
+      }, " In the near future, if you pass all the qualifications, you may participate in this game. During that game, you will receive the hourly wage for participating. You will also receive a small bonus each time your team correctly identifies the shared symbol. (Amount TBD)") :
+      /*#__PURE__*/
+      // TODO  MTurk
+      React.createElement("label", {
         className: "questionnaire-question"
       }, "If you pass the attention check, you may participate in this task. You will receive a flat fee of $", game.treatment.basePay, " for participating. You will also receive $", game.treatment.conversionRate, " bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to $", game.treatment.basePay + game.treatment.numTaskRounds * game.treatment.conversionRate, "."), /*#__PURE__*/React.createElement(Radio, {
         selected: q8,
@@ -6203,7 +6216,7 @@ var DescribeSymbolQuestion = /*#__PURE__*/function (_React$Component) {
         className: "questionnaire-content-container"
       }, /*#__PURE__*/React.createElement("div", {
         className: "questionnaire-body"
-      }, /*#__PURE__*/React.createElement("h2", null, " Please describe the following symbol below as if you were trying to explain it to another player. Try to be more descriptive than not."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
+      }, /*#__PURE__*/React.createElement("h2", null, " Please describe the following symbol below as if you were trying to explain it to another player. Try to be more descriptive than not.", /*#__PURE__*/React.createElement("br", null), "Note: If there are too many participants filling out the survey at once, there may be some server delays. If you click submit and you do not immediately proceed to the exit stage, please be patient as it will eventually submit."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
         className: "symbol-container",
         style: {
           width: "100%",
@@ -6334,7 +6347,7 @@ var NewPlayer = /*#__PURE__*/function (_Component) {
       var id = this.state.id;
       return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("form", {
         onSubmit: this.handleSubmit
-      }, /*#__PURE__*/React.createElement("h1", null, "Identification"), /*#__PURE__*/React.createElement("p", null, "Please enter your Mechanical Turk Worker ID:"), /*#__PURE__*/React.createElement("input", {
+      }, /*#__PURE__*/React.createElement("h1", null, "Identification"), /*#__PURE__*/React.createElement("p", null, "Please enter your Prolific ID:"), /*#__PURE__*/React.createElement("input", {
         dir: "auto",
         type: "text",
         name: "id",
@@ -7291,6 +7304,7 @@ var Footer = /*#__PURE__*/function (_React$Component) {
     _this.handleChange = function (e) {
       var _this$setState;
 
+      var player = _this.props.player;
       var el = e.currentTarget;
       var textareaLineHeight = 24;
       var _this$state = _this.state,
@@ -7311,6 +7325,7 @@ var Footer = /*#__PURE__*/function (_React$Component) {
       }
 
       var usedRows = currentRows < maxRows ? currentRows : maxRows;
+      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
 
       _this.setState((_this$setState = {}, _this$setState[el.name] = el.value, _this$setState.rows = usedRows, _this$setState), function () {
         _this.setState({
@@ -8043,7 +8058,7 @@ var FailedAttentionCheck = /*#__PURE__*/function (_Component) {
         className: "failed-attention-container"
       }, /*#__PURE__*/React.createElement("h2", {
         className: "failed-attention-text"
-      }, "YOU FAILED THE ATTENTION CHECK, AND HAVE NOT BEEN SELECTED TO PLAY. PLEASE DO NOT TRY TO COMPLETE THE TASK AGAIN AS YOU WILL NOT GET PAID. THANK YOU FOR YOUR TIME.")));
+      }, "YOU FAILED THE ATTENTION CHECK, AND HAVE NOT BEEN SELECTED TO PLAY. PLEASE DO NOT TRY TO COMPLETE THE TASK AGAIN. THANK YOU FOR YOUR TIME. HERE IS YOUR COMPLETION CODE: C150JEXN")));
     }
 
     return render;
@@ -8164,7 +8179,7 @@ var PreQualExitSurvey = /*#__PURE__*/function (_React$Component) {
       var conversionRate = game.treatment.conversionRate;
       return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
         className: "exit-survey"
-      }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, "Please submit the following code to receive your bonus:", " ", /*#__PURE__*/React.createElement("strong", null, player._id), "."), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""), /*#__PURE__*/React.createElement("p", null, "Thank you for taking time to take this pre-qualification survey ! We will finish screening all the players and send out a date and time to those that qualify for our future game.", basePay && conversionRate ? " You will receive a base pay of $" + basePay + " for taking this pre-qualification." : " You will receive a base pay of $2 for taking this pre-qualification."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
+      }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, "Please submit the following code:", " ", /*#__PURE__*/React.createElement("strong", null, " C2NSYBWZ ")), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""), /*#__PURE__*/React.createElement("p", null, "Thank you for taking time to take this pre-qualification survey ! We will finish screening all the players and send out a date and time to those that qualify for our future game.", basePay && conversionRate ? " You will receive a base pay of $" + basePay + " for taking this pre-qualification." : " You will receive a base pay of $2 for taking this pre-qualification."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/React.createElement("div", {
         className: "form-line"
@@ -8347,7 +8362,8 @@ var Sorry = /*#__PURE__*/function (_Component) {
       }
 
       if (player.exitReason === "failedEnglishScreen") {
-        msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game.";
+        // msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game."
+        msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game. Here is your completion code: C150JEXN";
       }
 
       if (player.exitReason === "minPlayerCountNotMaintained") {
@@ -8439,7 +8455,15 @@ var Thanks = /*#__PURE__*/function (_React$Component) {
       console.log(player.get("nodeId"));
       return /*#__PURE__*/React.createElement("div", {
         className: "finished"
-      }, /*#__PURE__*/React.createElement("div", null, player.get("nodeId") ? /*#__PURE__*/React.createElement("p", null, " If you are receiving this message, it means you have participated in one of our symbol task games before. As mentioned in out HIT expectations, if you've participated in one of our HIT sessions before, you cannot participate in another. We are trying to gather new players for each game. If you think this is a mistake, please do no hesistate to reach out.") : /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Finished!"), player.exitReason === "preQualSuccess" ? /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $" + basePay + " : " : " ", /*#__PURE__*/React.createElement("strong", null, player._id)) : /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $" + (basePay + parseInt(player.get("score") * conversionRate)) + " : " : " ", /*#__PURE__*/React.createElement("strong", null, player._id)))));
+      }, /*#__PURE__*/React.createElement("div", null, player.get("nodeId") ? /*#__PURE__*/React.createElement("p", null, " If you are receiving this message, it means you have participated in one of our symbol task games before. As mentioned in out HIT expectations, if you've participated in one of our HIT sessions before, you cannot participate in another. We are trying to gather new players for each game. If you think this is a mistake, please do no hesistate to reach out.") : /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Finished!"), player.exitReason === "preQualSuccess" ?
+      /*#__PURE__*/
+      // TODO: mturk
+      // <p>Thank you for participating! Please submit the following code to receive your bonus 
+      // { basePay && conversionRate ? ` of $${basePay} : ` : " "} 
+      // <strong>{player._id}</strong>
+      // </p> 
+      // TODO: Prolific
+      React.createElement("p", null, "Thank you for participating! Please submit the following code: C2NSYBWZ") : /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $" + (basePay + parseInt(player.get("score") * conversionRate)) + " : " : " ", /*#__PURE__*/React.createElement("strong", null, player._id)))));
     }
 
     return render;

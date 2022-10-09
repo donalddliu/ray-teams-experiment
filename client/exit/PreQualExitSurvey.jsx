@@ -41,8 +41,11 @@ export default class PreQualExitSurvey extends React.Component {
         <div className="exit-survey">
           <h1> Exit Survey </h1>
           <p>
-            Please submit the following code to receive your bonus:{" "}
-            <strong>{player._id}</strong>.
+            {/* Please submit the following code to receive your bonus:{" "} */}
+            Please submit the following code:{" "}
+
+            <strong> C2NSYBWZ </strong>
+            {/* <strong>{player._id}</strong>. */}
           </p>
           <p>
           {player.exitReason === "minPlayerCountNotMaintained" ? 

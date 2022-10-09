@@ -38,6 +38,7 @@ export default class Footer extends React.Component {
   };
 
   handleChange = (e) => {
+    const {player} = this.props;
     const el = e.currentTarget;
     const textareaLineHeight = 24;
     const { minRows, maxRows } = this.state;
@@ -56,6 +57,7 @@ export default class Footer extends React.Component {
     }
 
     const usedRows = currentRows < maxRows ? currentRows : maxRows;
+    player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
 
     this.setState(
       {
