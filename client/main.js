@@ -13,20 +13,12 @@ import NetworkSurveyTwo from "./intro/network-survey/NetworkSurvey2";
 import NetworkSurveyThree from "./intro/network-survey/NetworkSurvey3";
 
 
-import TutorialPageOne from "./intro/TutorialPageOne";
-import TutorialPageTwo from "./intro/TutorialPageTwo";
-import TutorialPageThree from "./intro/TutorialPageThree";
-import TutorialPageFour from "./intro/TutorialPageFour";
+import TutorialPageOne from "./intro/tutorial/TutorialPageOne";
+import TutorialPageTwo from "./intro/tutorial/TutorialPageTwo";
+import TutorialPageThree from "./intro/tutorial/TutorialPageThree";
+import TutorialPageFour from "./intro/tutorial/TutorialPageFour";
 
 import AllQuiz from "./intro/quiz/AllQuiz";
-import QuizOne from "./intro/quiz/QuizOne";
-import QuizTwo from "./intro/quiz/QuizTwo";
-import QuizThree from "./intro/quiz/QuizThree";
-import QuizFour from "./intro/quiz/QuizFour";
-import QuizFive from "./intro/quiz/QuizFive";
-import QuizSix from "./intro/quiz/QuizSix";
-import QuizSeven from "./intro/quiz/QuizSeven";
-import QuizEight from "./intro/quiz/QuizEight";
 import QuizOverview from "./intro/quiz/QuizOverview";
 
 import EnglishScreen from "./intro/english-screening/EnglishScreen";
