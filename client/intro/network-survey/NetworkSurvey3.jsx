@@ -16,12 +16,19 @@ const DropdownSelect = ({id, name, handleChange}) => (
 );
 
 export default class NetworkSurveyThree extends React.Component {
-  state = {
+  constructor(props) {
+    super(props);
+    const {name1, name2, name3, name4, name5} = this.props.player.get("networkResponse1");
+
+    this.state = {
         tie12 : "", tie13 : "", tie14: "", tie15: "", 
         tie23 : "", tie24 : "", tie25 : "",
         tie34 : "", tie35 : "",
         tie45 : "",
-  };
+        name1: name1, name2: name2, name3: name3, name4: name4, name5: name5
+     };
+  }
+
   handleChange = event => {
     const el = event.currentTarget;
     this.setState({ [el.name]: el.value });
@@ -30,8 +37,16 @@ export default class NetworkSurveyThree extends React.Component {
   handleSubmit = event => {
     const { onNext, player } = this.props;
     event.preventDefault();
-    const networkSurveyResponse = this.state;
+    const {tie12, tie13, tie14, tie15, tie23, tie24, tie25, tie34, tie35, tie45} = this.state;
+
+    const networkSurveyResponse = {
+        tie12 : tie12, tie13 : tie13, tie14: tie14, tie15: tie15, 
+        tie23 : tie23, tie24 : tie24, tie25 : tie25,
+        tie34 : tie34, tie35 : tie35,
+        tie45 : tie45,
+    };
     player.set("networkResponse3", networkSurveyResponse);
+    console.log("set NR 3")
 
     // TODO: log player response to survey question
     onNext();
@@ -41,7 +56,8 @@ export default class NetworkSurveyThree extends React.Component {
     const { game, round, stage, player } = this.props;
     const {tie12, tie13, tie14, tie15, tie23, tie24, tie25, tie34, tie35, tie45} = this.state;
     const filledOut = tie12 && tie13 && tie14 && tie15 && tie23 && tie24 && tie25 && tie34 && tie35 && tie45;
-    const {name1, name2, name3, name4, name5} = player.get("networkResponse1");
+    const {name1, name2, name3, name4, name5} = this.state;
+
     
     return (
           <div className="network-survey-container">

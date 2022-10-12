@@ -6,8 +6,13 @@ import React from "react";
 import { TimeSync } from "meteor/mizzao:timesync";
 import moment from "moment";
 
+import _ from 'lodash';
+
+
 export default class Footer extends React.Component {
   state = { comment: "", rows: 1, minRows: 1, maxRows: 5, buttonHeight: 30 };
+
+  updateLastActive = _.debounce((player) => player.set("lastActive", moment(TimeSync.serverTime(null, 1000))), 500, {leading: true});
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -57,7 +62,8 @@ export default class Footer extends React.Component {
     }
 
     const usedRows = currentRows < maxRows ? currentRows : maxRows;
-    player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+
+    this.updateLastActive(player);
 
     this.setState(
       {

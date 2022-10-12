@@ -1,7 +1,6 @@
 import React from "react";
 import '../../public/css/intro.css';
 import { Centered } from "meteor/empirica:core";
-import { FLEX_EXPANDER } from "@blueprintjs/core/lib/esm/common/classes";
 
 
 export default class DescribeSymbolQuestion extends React.Component {
@@ -25,7 +24,6 @@ export default class DescribeSymbolQuestion extends React.Component {
     
 
     render() {
-        const { game, onPrev, player } = this.props;
         const { response } = this.state;
     
         return (

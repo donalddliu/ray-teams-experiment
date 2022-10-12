@@ -20,20 +20,19 @@ export default class NetworkSurveyOne extends React.Component {
   handleSubmit = event => {
     const { onNext, player } = this.props;
     event.preventDefault();
-    // TODO: log player response to survey question
+
     const networkSurveyResponse = this.state;
-    player.set("name", player.id);
     player.set("networkResponse1", networkSurveyResponse);
+    console.log("set NR 1");
     
     onNext();
   };
 
   render() {
-    const { game, round, stage, player } = this.props;
     const { name1, name2, name3, name4, name5 } = this.state;
     
     const filledOut = name1 && name2 && name3 && name4 && name5;
-
+    console.log("rendered");
     return (
           <div className="network-survey-container">
                 <div className="network-survey-header">

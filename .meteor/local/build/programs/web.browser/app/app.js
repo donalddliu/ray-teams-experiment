@@ -1051,11 +1051,21 @@ module.link("./Modal", {
 
 }, 5);
 
+let _;
+
+module.link("lodash", {
+  default(v) {
+    _ = v;
+  }
+
+}, 6);
+
 class inactiveTimer extends React.Component {
   constructor(props) {
     super(props);
 
     this.onOpenModal = () => {
+      console.log("modal opened up");
       this.setState({
         modalIsOpen: true
       });
@@ -1065,14 +1075,16 @@ class inactiveTimer extends React.Component {
       const {
         player
       } = this.props;
-      this.setState({
-        modalIsOpen: false
-      });
 
       if (!player.get("inactiveWarningUsed")) {
         player.set("lastActive", moment(TimeSync.serverTime(null, 1000)).subtract(30, 'seconds'));
         player.set("inactiveWarningUsed", true);
       }
+
+      console.log("modal closed");
+      this.setState({
+        modalIsOpen: false
+      });
     };
 
     this.onPlayerInactive = (player, game) => {
@@ -1083,6 +1095,35 @@ class inactiveTimer extends React.Component {
       }
     };
 
+    this.checkEveryoneLastActive = _.throttle((game, player) => {
+      const currentTime = moment(TimeSync.serverTime(null, 1000));
+      const inactiveDuration = game.treatment.userInactivityDuration;
+      const inactiveDurationPlus30 = inactiveDuration + game.treatment.idleWarningTime;
+      const activePlayers = game.players.filter(p => !p.get("inactive"));
+      activePlayers.forEach(p => {
+        console.log("checking");
+        const playerLastActive = p.get("lastActive");
+        const timeDiff = currentTime.diff(playerLastActive, 'seconds');
+
+        if (!p.get("inactiveWarningUsed")) {
+          if (timeDiff >= inactiveDurationPlus30) {
+            this.onPlayerInactive(p, game);
+            p.exit("inactive");
+          } else if (timeDiff >= inactiveDuration) {
+            if (!this.state.modalIsOpen && p._id === player._id) {
+              this.onOpenModal();
+            }
+          }
+        } else {
+          if (timeDiff >= inactiveDuration) {
+            this.onPlayerInactive(p, game);
+            p.exit("inactive");
+          }
+        }
+      });
+    }, 1000, {
+      leading: true
+    });
     this.state = {
       modalIsOpen: false
     };
@@ -1095,43 +1136,32 @@ class inactiveTimer extends React.Component {
       stage,
       player
     } = this.props;
-    const currentTime = moment(TimeSync.serverTime(null, 1000));
-    const inactiveDuration = game.treatment.userInactivityDuration;
-    const inactiveDurationPlus30 = inactiveDuration + game.treatment.idleWarningTime;
-    const activePlayers = game.players.filter(p => !p.get("inactive"));
-    activePlayers.forEach(p => {
-      const playerLastActive = p.get("lastActive");
-      const timeDiff = currentTime.diff(playerLastActive, 'seconds');
-
-      if (!p.get("inactiveWarningUsed")) {
-        if (timeDiff >= inactiveDurationPlus30) {
-          this.onPlayerInactive(p, game);
-          p.exit("inactive");
-        } else if (timeDiff >= inactiveDuration) {
-          if (!this.state.modalIsOpen && p._id === player._id) {
-            this.onOpenModal();
-          }
-        }
-      } else {
-        if (timeDiff >= inactiveDuration) {
-          this.onPlayerInactive(p, game);
-          p.exit("inactive");
-        }
-      } // if (timeDiff >= inactiveDuration) {
-      //     this.onPlayerInactive(p, game);
-      //     p.exit("inactive");
-      //     // this.onPlayerInactive();
-      // } else if (timeDiff > inactiveDuration - game.treatment.idleWarningTime) {
-      //     if (!this.state.modalIsOpen && p._id === player._id) {
-      //         if (!p.get("inactiveWarningUsed")) {
-      //             this.onOpenModal();
-      //         } else if (p.get("inactiveWarningUsed") && (timeDiff % 5 === 0)) {
-      //             this.onOpenModal();
-      //         }
-      //     }
-      // }
-
-    }); // const playerLastActive = player.get("lastActive");
+    this.checkEveryoneLastActive(game, player); // const currentTime = moment(TimeSync.serverTime(null, 1000));
+    // const inactiveDuration = game.treatment.userInactivityDuration;
+    // const inactiveDurationPlus30 = inactiveDuration + game.treatment.idleWarningTime;
+    // const activePlayers = game.players.filter(p => !p.get("inactive"));
+    // activePlayers.forEach((p) => {
+    //     console.log("checking");
+    //     const playerLastActive = p.get("lastActive");
+    //     const timeDiff = currentTime.diff(playerLastActive, 'seconds');
+    //     if (!p.get("inactiveWarningUsed")) {
+    //         if (timeDiff >= inactiveDurationPlus30) {
+    //             this.onPlayerInactive(p,game);
+    //             p.exit("inactive");
+    //         }
+    //         else if (timeDiff >= inactiveDuration) {
+    //             if (!this.state.modalIsOpen && p._id === player._id){
+    //                 this.onOpenModal();
+    //             }
+    //         }
+    //     } else {
+    //         if (timeDiff >= inactiveDuration) {
+    //             this.onPlayerInactive(p,game);
+    //             p.exit("inactive");
+    //         }
+    //     }
+    // })
+    // const playerLastActive = player.get("lastActive");
     // const inactiveDuration = game.treatment.userInactivityDuration;
     // const timeDiff = currentTime.diff(playerLastActive, 'seconds');
     // if (timeDiff >= inactiveDuration) {
@@ -1144,11 +1174,15 @@ class inactiveTimer extends React.Component {
     //     }
     // }
 
+    const currentTime = moment(TimeSync.serverTime(null, 1000));
+    const playerLastActive = player.get("lastActive");
+    const timeDiffForMe = currentTime.diff(playerLastActive, 'seconds');
+    console.log(this.state.modalIsOpen);
     return /*#__PURE__*/React.createElement("div", null, this.state.modalIsOpen && /*#__PURE__*/React.createElement(Modal, {
       game: game,
       player: player,
       onCloseModal: this.onCloseModal
-    }));
+    }), "Last Active: ", timeDiffForMe);
   }
 
 }
@@ -2883,6 +2917,7 @@ class EnglishScreen extends React.Component {
         }
       });
       player.set("englishScreenPercentage", numCorrect / totalNumQuestions);
+      console.log("set engScreen %");
       return numCorrect / totalNumQuestions >= 0.8;
     };
 
@@ -2896,12 +2931,15 @@ class EnglishScreen extends React.Component {
         player
       } = this.props;
       event.preventDefault();
+      player.set("name", player.id);
 
       if (this.passCorrectThreshold()) {
         player.set("englishScreenPassed", this.state);
+        console.log("set engScreen passed");
         onNext();
       } else {
         player.set("englishScreenFailed", this.state);
+        console.log("set engScreen failed");
         player.exit("failedEnglishScreen");
       }
     };
@@ -2912,15 +2950,12 @@ class EnglishScreen extends React.Component {
       player
     } = this.props;
     player.set("passedPreQual", false);
+    console.log("set passedPreQual to false");
   }
 
   render() {
-    const {
-      game,
-      onPrev,
-      player
-    } = this.props;
     const allSelected = Object.keys(this.state).every(key => this.state[key] !== "");
+    console.log("rendered");
     return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
       className: "intro-heading questionnaire-heading"
     }, " Questionnaire "), /*#__PURE__*/React.createElement("div", {
@@ -3009,22 +3044,15 @@ class NetworkSurveyOne extends React.Component {
         onNext,
         player
       } = this.props;
-      event.preventDefault(); // TODO: log player response to survey question
-
+      event.preventDefault();
       const networkSurveyResponse = this.state;
-      player.set("name", player.id);
       player.set("networkResponse1", networkSurveyResponse);
+      console.log("set NR 1");
       onNext();
     };
   }
 
   render() {
-    const {
-      game,
-      round,
-      stage,
-      player
-    } = this.props;
     const {
       name1,
       name2,
@@ -3033,6 +3061,7 @@ class NetworkSurveyOne extends React.Component {
       name5
     } = this.state;
     const filledOut = name1 && name2 && name3 && name4 && name5;
+    console.log("rendered");
     return /*#__PURE__*/React.createElement("div", {
       className: "network-survey-container"
     }, /*#__PURE__*/React.createElement("div", {
@@ -3210,15 +3239,8 @@ const DropdownSelect = (_ref) => {
 };
 
 class NetworkSurveyTwo extends React.Component {
-  constructor() {
-    super(...arguments);
-    this.state = {
-      tie1: "",
-      tie2: "",
-      tie3: "",
-      tie4: "",
-      tie5: ""
-    };
+  constructor(props) {
+    super(props);
 
     this.handleChange = event => {
       const el = event.currentTarget;
@@ -3232,36 +3254,53 @@ class NetworkSurveyTwo extends React.Component {
         onNext,
         player
       } = this.props;
-      const networkSurveyResponse = this.state;
+      const networkSurveyResponse = {
+        tie1: this.state.tie1,
+        tie2: this.state.tie2,
+        tie3: this.state.tie3,
+        tie4: this.state.tie4,
+        tie5: this.state.tie5
+      };
       event.preventDefault(); // TODO: log player response to survey question
 
       player.set("networkResponse2", networkSurveyResponse);
+      console.log("set NR 2");
       onNext();
     };
-  }
 
-  render() {
-    const {
-      game,
-      round,
-      stage,
-      player
-    } = this.props;
-    const {
-      tie1,
-      tie2,
-      tie3,
-      tie4,
-      tie5
-    } = this.state;
-    const filledOut = tie1 && tie2 && tie3 && tie4 && tie5;
     const {
       name1,
       name2,
       name3,
       name4,
       name5
-    } = player.get("networkResponse1");
+    } = this.props.player.get("networkResponse1");
+    this.state = {
+      tie1: "",
+      tie2: "",
+      tie3: "",
+      tie4: "",
+      tie5: "",
+      name1: name1,
+      name2: name2,
+      name3: name3,
+      name4: name4,
+      name5: name5
+    };
+  }
+
+  render() {
+    const {
+      player
+    } = this.props;
+    const filledOut = this.state.tie1 && this.state.tie2 && this.state.tie3 && this.state.tie4 && this.state.tie5;
+    const {
+      name1,
+      name2,
+      name3,
+      name4,
+      name5
+    } = this.state;
     return /*#__PURE__*/React.createElement("div", {
       className: "network-survey-container"
     }, /*#__PURE__*/React.createElement("div", {
@@ -3394,20 +3433,8 @@ const DropdownSelect = (_ref) => {
 };
 
 class NetworkSurveyThree extends React.Component {
-  constructor() {
-    super(...arguments);
-    this.state = {
-      tie12: "",
-      tie13: "",
-      tie14: "",
-      tie15: "",
-      tie23: "",
-      tie24: "",
-      tie25: "",
-      tie34: "",
-      tie35: "",
-      tie45: ""
-    };
+  constructor(props) {
+    super(props);
 
     this.handleChange = event => {
       const el = event.currentTarget;
@@ -3422,10 +3449,59 @@ class NetworkSurveyThree extends React.Component {
         player
       } = this.props;
       event.preventDefault();
-      const networkSurveyResponse = this.state;
-      player.set("networkResponse3", networkSurveyResponse); // TODO: log player response to survey question
+      const {
+        tie12,
+        tie13,
+        tie14,
+        tie15,
+        tie23,
+        tie24,
+        tie25,
+        tie34,
+        tie35,
+        tie45
+      } = this.state;
+      const networkSurveyResponse = {
+        tie12: tie12,
+        tie13: tie13,
+        tie14: tie14,
+        tie15: tie15,
+        tie23: tie23,
+        tie24: tie24,
+        tie25: tie25,
+        tie34: tie34,
+        tie35: tie35,
+        tie45: tie45
+      };
+      player.set("networkResponse3", networkSurveyResponse);
+      console.log("set NR 3"); // TODO: log player response to survey question
 
       onNext();
+    };
+
+    const {
+      name1,
+      name2,
+      name3,
+      name4,
+      name5
+    } = this.props.player.get("networkResponse1");
+    this.state = {
+      tie12: "",
+      tie13: "",
+      tie14: "",
+      tie15: "",
+      tie23: "",
+      tie24: "",
+      tie25: "",
+      tie34: "",
+      tie35: "",
+      tie45: "",
+      name1: name1,
+      name2: name2,
+      name3: name3,
+      name4: name4,
+      name5: name5
     };
   }
 
@@ -3455,7 +3531,7 @@ class NetworkSurveyThree extends React.Component {
       name3,
       name4,
       name5
-    } = player.get("networkResponse1");
+    } = this.state;
     return /*#__PURE__*/React.createElement("div", {
       className: "network-survey-container"
     }, /*#__PURE__*/React.createElement("div", {
@@ -5001,13 +5077,6 @@ module.link("meteor/empirica:core", {
   }
 
 }, 1);
-let FLEX_EXPANDER;
-module.link("@blueprintjs/core/lib/esm/common/classes", {
-  FLEX_EXPANDER(v) {
-    FLEX_EXPANDER = v;
-  }
-
-}, 2);
 
 class DescribeSymbolQuestion extends React.Component {
   constructor() {
@@ -5038,11 +5107,6 @@ class DescribeSymbolQuestion extends React.Component {
   }
 
   render() {
-    const {
-      game,
-      onPrev,
-      player
-    } = this.props;
     const {
       response
     } = this.state;
@@ -5829,6 +5893,15 @@ module.link("moment", {
 
 }, 3);
 
+let _;
+
+module.link("lodash", {
+  default(v) {
+    _ = v;
+  }
+
+}, 4);
+
 class Footer extends React.Component {
   constructor() {
     super(...arguments);
@@ -5839,6 +5912,9 @@ class Footer extends React.Component {
       maxRows: 5,
       buttonHeight: 30
     };
+    this.updateLastActive = _.debounce(player => player.set("lastActive", moment(TimeSync.serverTime(null, 1000))), 500, {
+      leading: true
+    });
 
     this.handleSubmit = e => {
       e.preventDefault();
@@ -5900,7 +5976,7 @@ class Footer extends React.Component {
       }
 
       const usedRows = currentRows < maxRows ? currentRows : maxRows;
-      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+      this.updateLastActive(player);
       this.setState({
         [el.name]: el.value,
         rows: usedRows

@@ -1269,6 +1269,14 @@ module.link("./Modal", {
   }
 }, 5);
 
+var _;
+
+module.link("lodash", {
+  "default": function (v) {
+    _ = v;
+  }
+}, 6);
+
 var inactiveTimer = /*#__PURE__*/function (_React$Component) {
   _inheritsLoose(inactiveTimer, _React$Component);
 
@@ -1280,6 +1288,8 @@ var inactiveTimer = /*#__PURE__*/function (_React$Component) {
     _this = _React$Component.call(this, props) || this;
 
     _this.onOpenModal = function () {
+      console.log("modal opened up");
+
       _this.setState({
         modalIsOpen: true
       });
@@ -1288,14 +1298,16 @@ var inactiveTimer = /*#__PURE__*/function (_React$Component) {
     _this.onCloseModal = function () {
       var player = _this.props.player;
 
-      _this.setState({
-        modalIsOpen: false
-      });
-
       if (!player.get("inactiveWarningUsed")) {
         player.set("lastActive", moment(TimeSync.serverTime(null, 1000)).subtract(30, 'seconds'));
         player.set("inactiveWarningUsed", true);
       }
+
+      console.log("modal closed");
+
+      _this.setState({
+        modalIsOpen: false
+      });
     };
 
     _this.onPlayerInactive = function (player, game) {
@@ -1306,6 +1318,39 @@ var inactiveTimer = /*#__PURE__*/function (_React$Component) {
       }
     };
 
+    _this.checkEveryoneLastActive = _.throttle(function (game, player) {
+      var currentTime = moment(TimeSync.serverTime(null, 1000));
+      var inactiveDuration = game.treatment.userInactivityDuration;
+      var inactiveDurationPlus30 = inactiveDuration + game.treatment.idleWarningTime;
+      var activePlayers = game.players.filter(function (p) {
+        return !p.get("inactive");
+      });
+      activePlayers.forEach(function (p) {
+        console.log("checking");
+        var playerLastActive = p.get("lastActive");
+        var timeDiff = currentTime.diff(playerLastActive, 'seconds');
+
+        if (!p.get("inactiveWarningUsed")) {
+          if (timeDiff >= inactiveDurationPlus30) {
+            _this.onPlayerInactive(p, game);
+
+            p.exit("inactive");
+          } else if (timeDiff >= inactiveDuration) {
+            if (!_this.state.modalIsOpen && p._id === player._id) {
+              _this.onOpenModal();
+            }
+          }
+        } else {
+          if (timeDiff >= inactiveDuration) {
+            _this.onPlayerInactive(p, game);
+
+            p.exit("inactive");
+          }
+        }
+      });
+    }, 1000, {
+      leading: true
+    });
     _this.state = {
       modalIsOpen: false
     };
@@ -1316,54 +1361,37 @@ var inactiveTimer = /*#__PURE__*/function (_React$Component) {
 
   _proto.render = function () {
     function render() {
-      var _this2 = this;
-
       var _this$props = this.props,
           game = _this$props.game,
           round = _this$props.round,
           stage = _this$props.stage,
           player = _this$props.player;
-      var currentTime = moment(TimeSync.serverTime(null, 1000));
-      var inactiveDuration = game.treatment.userInactivityDuration;
-      var inactiveDurationPlus30 = inactiveDuration + game.treatment.idleWarningTime;
-      var activePlayers = game.players.filter(function (p) {
-        return !p.get("inactive");
-      });
-      activePlayers.forEach(function (p) {
-        var playerLastActive = p.get("lastActive");
-        var timeDiff = currentTime.diff(playerLastActive, 'seconds');
-
-        if (!p.get("inactiveWarningUsed")) {
-          if (timeDiff >= inactiveDurationPlus30) {
-            _this2.onPlayerInactive(p, game);
-
-            p.exit("inactive");
-          } else if (timeDiff >= inactiveDuration) {
-            if (!_this2.state.modalIsOpen && p._id === player._id) {
-              _this2.onOpenModal();
-            }
-          }
-        } else {
-          if (timeDiff >= inactiveDuration) {
-            _this2.onPlayerInactive(p, game);
-
-            p.exit("inactive");
-          }
-        } // if (timeDiff >= inactiveDuration) {
-        //     this.onPlayerInactive(p, game);
-        //     p.exit("inactive");
-        //     // this.onPlayerInactive();
-        // } else if (timeDiff > inactiveDuration - game.treatment.idleWarningTime) {
-        //     if (!this.state.modalIsOpen && p._id === player._id) {
-        //         if (!p.get("inactiveWarningUsed")) {
-        //             this.onOpenModal();
-        //         } else if (p.get("inactiveWarningUsed") && (timeDiff % 5 === 0)) {
-        //             this.onOpenModal();
-        //         }
-        //     }
-        // }
-
-      }); // const playerLastActive = player.get("lastActive");
+      this.checkEveryoneLastActive(game, player); // const currentTime = moment(TimeSync.serverTime(null, 1000));
+      // const inactiveDuration = game.treatment.userInactivityDuration;
+      // const inactiveDurationPlus30 = inactiveDuration + game.treatment.idleWarningTime;
+      // const activePlayers = game.players.filter(p => !p.get("inactive"));
+      // activePlayers.forEach((p) => {
+      //     console.log("checking");
+      //     const playerLastActive = p.get("lastActive");
+      //     const timeDiff = currentTime.diff(playerLastActive, 'seconds');
+      //     if (!p.get("inactiveWarningUsed")) {
+      //         if (timeDiff >= inactiveDurationPlus30) {
+      //             this.onPlayerInactive(p,game);
+      //             p.exit("inactive");
+      //         }
+      //         else if (timeDiff >= inactiveDuration) {
+      //             if (!this.state.modalIsOpen && p._id === player._id){
+      //                 this.onOpenModal();
+      //             }
+      //         }
+      //     } else {
+      //         if (timeDiff >= inactiveDuration) {
+      //             this.onPlayerInactive(p,game);
+      //             p.exit("inactive");
+      //         }
+      //     }
+      // })
+      // const playerLastActive = player.get("lastActive");
       // const inactiveDuration = game.treatment.userInactivityDuration;
       // const timeDiff = currentTime.diff(playerLastActive, 'seconds');
       // if (timeDiff >= inactiveDuration) {
@@ -1376,11 +1404,15 @@ var inactiveTimer = /*#__PURE__*/function (_React$Component) {
       //     }
       // }
 
+      var currentTime = moment(TimeSync.serverTime(null, 1000));
+      var playerLastActive = player.get("lastActive");
+      var timeDiffForMe = currentTime.diff(playerLastActive, 'seconds');
+      console.log(this.state.modalIsOpen);
       return /*#__PURE__*/React.createElement("div", null, this.state.modalIsOpen && /*#__PURE__*/React.createElement(Modal, {
         game: game,
         player: player,
         onCloseModal: this.onCloseModal
-      }));
+      }), "Last Active: ", timeDiffForMe);
     }
 
     return render;
@@ -3565,6 +3597,7 @@ var EnglishScreen = /*#__PURE__*/function (_React$Component) {
         }
       });
       player.set("englishScreenPercentage", numCorrect / totalNumQuestions);
+      console.log("set engScreen %");
       return numCorrect / totalNumQuestions >= 0.8;
     };
 
@@ -3577,12 +3610,15 @@ var EnglishScreen = /*#__PURE__*/function (_React$Component) {
           game = _this$props.game,
           player = _this$props.player;
       event.preventDefault();
+      player.set("name", player.id);
 
       if (_this.passCorrectThreshold()) {
         player.set("englishScreenPassed", _this.state);
+        console.log("set engScreen passed");
         onNext();
       } else {
         player.set("englishScreenFailed", _this.state);
+        console.log("set engScreen failed");
         player.exit("failedEnglishScreen");
       }
     };
@@ -3596,6 +3632,7 @@ var EnglishScreen = /*#__PURE__*/function (_React$Component) {
     function componentDidMount() {
       var player = this.props.player;
       player.set("passedPreQual", false);
+      console.log("set passedPreQual to false");
     }
 
     return componentDidMount;
@@ -3605,13 +3642,10 @@ var EnglishScreen = /*#__PURE__*/function (_React$Component) {
     function render() {
       var _this2 = this;
 
-      var _this$props2 = this.props,
-          game = _this$props2.game,
-          onPrev = _this$props2.onPrev,
-          player = _this$props2.player;
       var allSelected = Object.keys(this.state).every(function (key) {
         return _this2.state[key] !== "";
       });
+      console.log("rendered");
       return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
         className: "intro-heading questionnaire-heading"
       }, " Questionnaire "), /*#__PURE__*/React.createElement("div", {
@@ -3727,11 +3761,10 @@ var NetworkSurveyOne = /*#__PURE__*/function (_React$Component) {
       var _this$props = _this.props,
           onNext = _this$props.onNext,
           player = _this$props.player;
-      event.preventDefault(); // TODO: log player response to survey question
-
+      event.preventDefault();
       var networkSurveyResponse = _this.state;
-      player.set("name", player.id);
       player.set("networkResponse1", networkSurveyResponse);
+      console.log("set NR 1");
       onNext();
     };
 
@@ -3742,11 +3775,6 @@ var NetworkSurveyOne = /*#__PURE__*/function (_React$Component) {
 
   _proto.render = function () {
     function render() {
-      var _this$props2 = this.props,
-          game = _this$props2.game,
-          round = _this$props2.round,
-          stage = _this$props2.stage,
-          player = _this$props2.player;
       var _this$state = this.state,
           name1 = _this$state.name1,
           name2 = _this$state.name2,
@@ -3754,6 +3782,7 @@ var NetworkSurveyOne = /*#__PURE__*/function (_React$Component) {
           name4 = _this$state.name4,
           name5 = _this$state.name5;
       var filledOut = name1 && name2 && name3 && name4 && name5;
+      console.log("rendered");
       return /*#__PURE__*/React.createElement("div", {
         className: "network-survey-container"
       }, /*#__PURE__*/React.createElement("div", {
@@ -3951,21 +3980,10 @@ var NetworkSurveyTwo = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(NetworkSurveyTwo);
 
-  function NetworkSurveyTwo() {
+  function NetworkSurveyTwo(props) {
     var _this;
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
-    _this.state = {
-      tie1: "",
-      tie2: "",
-      tie3: "",
-      tie4: "",
-      tie5: ""
-    };
+    _this = _React$Component.call(this, props) || this;
 
     _this.handleChange = function (event) {
       var _this$setState;
@@ -3979,13 +3997,39 @@ var NetworkSurveyTwo = /*#__PURE__*/function (_React$Component) {
       var _this$props = _this.props,
           onNext = _this$props.onNext,
           player = _this$props.player;
-      var networkSurveyResponse = _this.state;
+      var networkSurveyResponse = {
+        tie1: _this.state.tie1,
+        tie2: _this.state.tie2,
+        tie3: _this.state.tie3,
+        tie4: _this.state.tie4,
+        tie5: _this.state.tie5
+      };
       event.preventDefault(); // TODO: log player response to survey question
 
       player.set("networkResponse2", networkSurveyResponse);
+      console.log("set NR 2");
       onNext();
     };
 
+    var _this$props$player$ge = _this.props.player.get("networkResponse1"),
+        name1 = _this$props$player$ge.name1,
+        name2 = _this$props$player$ge.name2,
+        name3 = _this$props$player$ge.name3,
+        name4 = _this$props$player$ge.name4,
+        name5 = _this$props$player$ge.name5;
+
+    _this.state = {
+      tie1: "",
+      tie2: "",
+      tie3: "",
+      tie4: "",
+      tie5: "",
+      name1: name1,
+      name2: name2,
+      name3: name3,
+      name4: name4,
+      name5: name5
+    };
     return _this;
   }
 
@@ -3993,26 +4037,14 @@ var NetworkSurveyTwo = /*#__PURE__*/function (_React$Component) {
 
   _proto.render = function () {
     function render() {
-      var _this$props2 = this.props,
-          game = _this$props2.game,
-          round = _this$props2.round,
-          stage = _this$props2.stage,
-          player = _this$props2.player;
+      var player = this.props.player;
+      var filledOut = this.state.tie1 && this.state.tie2 && this.state.tie3 && this.state.tie4 && this.state.tie5;
       var _this$state = this.state,
-          tie1 = _this$state.tie1,
-          tie2 = _this$state.tie2,
-          tie3 = _this$state.tie3,
-          tie4 = _this$state.tie4,
-          tie5 = _this$state.tie5;
-      var filledOut = tie1 && tie2 && tie3 && tie4 && tie5;
-
-      var _player$get = player.get("networkResponse1"),
-          name1 = _player$get.name1,
-          name2 = _player$get.name2,
-          name3 = _player$get.name3,
-          name4 = _player$get.name4,
-          name5 = _player$get.name5;
-
+          name1 = _this$state.name1,
+          name2 = _this$state.name2,
+          name3 = _this$state.name3,
+          name4 = _this$state.name4,
+          name5 = _this$state.name5;
       return /*#__PURE__*/React.createElement("div", {
         className: "network-survey-container"
       }, /*#__PURE__*/React.createElement("div", {
@@ -4165,26 +4197,10 @@ var NetworkSurveyThree = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(NetworkSurveyThree);
 
-  function NetworkSurveyThree() {
+  function NetworkSurveyThree(props) {
     var _this;
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
-    _this.state = {
-      tie12: "",
-      tie13: "",
-      tie14: "",
-      tie15: "",
-      tie23: "",
-      tie24: "",
-      tie25: "",
-      tie34: "",
-      tie35: "",
-      tie45: ""
-    };
+    _this = _React$Component.call(this, props) || this;
 
     _this.handleChange = function (event) {
       var _this$setState;
@@ -4199,12 +4215,59 @@ var NetworkSurveyThree = /*#__PURE__*/function (_React$Component) {
           onNext = _this$props.onNext,
           player = _this$props.player;
       event.preventDefault();
-      var networkSurveyResponse = _this.state;
-      player.set("networkResponse3", networkSurveyResponse); // TODO: log player response to survey question
+      var _this$state = _this.state,
+          tie12 = _this$state.tie12,
+          tie13 = _this$state.tie13,
+          tie14 = _this$state.tie14,
+          tie15 = _this$state.tie15,
+          tie23 = _this$state.tie23,
+          tie24 = _this$state.tie24,
+          tie25 = _this$state.tie25,
+          tie34 = _this$state.tie34,
+          tie35 = _this$state.tie35,
+          tie45 = _this$state.tie45;
+      var networkSurveyResponse = {
+        tie12: tie12,
+        tie13: tie13,
+        tie14: tie14,
+        tie15: tie15,
+        tie23: tie23,
+        tie24: tie24,
+        tie25: tie25,
+        tie34: tie34,
+        tie35: tie35,
+        tie45: tie45
+      };
+      player.set("networkResponse3", networkSurveyResponse);
+      console.log("set NR 3"); // TODO: log player response to survey question
 
       onNext();
     };
 
+    var _this$props$player$ge = _this.props.player.get("networkResponse1"),
+        name1 = _this$props$player$ge.name1,
+        name2 = _this$props$player$ge.name2,
+        name3 = _this$props$player$ge.name3,
+        name4 = _this$props$player$ge.name4,
+        name5 = _this$props$player$ge.name5;
+
+    _this.state = {
+      tie12: "",
+      tie13: "",
+      tie14: "",
+      tie15: "",
+      tie23: "",
+      tie24: "",
+      tie25: "",
+      tie34: "",
+      tie35: "",
+      tie45: "",
+      name1: name1,
+      name2: name2,
+      name3: name3,
+      name4: name4,
+      name5: name5
+    };
     return _this;
   }
 
@@ -4219,26 +4282,24 @@ var NetworkSurveyThree = /*#__PURE__*/function (_React$Component) {
           round = _this$props2.round,
           stage = _this$props2.stage,
           player = _this$props2.player;
-      var _this$state = this.state,
-          tie12 = _this$state.tie12,
-          tie13 = _this$state.tie13,
-          tie14 = _this$state.tie14,
-          tie15 = _this$state.tie15,
-          tie23 = _this$state.tie23,
-          tie24 = _this$state.tie24,
-          tie25 = _this$state.tie25,
-          tie34 = _this$state.tie34,
-          tie35 = _this$state.tie35,
-          tie45 = _this$state.tie45;
+      var _this$state2 = this.state,
+          tie12 = _this$state2.tie12,
+          tie13 = _this$state2.tie13,
+          tie14 = _this$state2.tie14,
+          tie15 = _this$state2.tie15,
+          tie23 = _this$state2.tie23,
+          tie24 = _this$state2.tie24,
+          tie25 = _this$state2.tie25,
+          tie34 = _this$state2.tie34,
+          tie35 = _this$state2.tie35,
+          tie45 = _this$state2.tie45;
       var filledOut = tie12 && tie13 && tie14 && tie15 && tie23 && tie24 && tie25 && tie34 && tie35 && tie45;
-
-      var _player$get = player.get("networkResponse1"),
-          name1 = _player$get.name1,
-          name2 = _player$get.name2,
-          name3 = _player$get.name3,
-          name4 = _player$get.name4,
-          name5 = _player$get.name5;
-
+      var _this$state3 = this.state,
+          name1 = _this$state3.name1,
+          name2 = _this$state3.name2,
+          name3 = _this$state3.name3,
+          name4 = _this$state3.name4,
+          name5 = _this$state3.name5;
       return /*#__PURE__*/React.createElement("div", {
         className: "network-survey-container"
       }, /*#__PURE__*/React.createElement("div", {
@@ -6154,12 +6215,6 @@ module.link("meteor/empirica:core", {
     Centered = v;
   }
 }, 1);
-var FLEX_EXPANDER;
-module.link("@blueprintjs/core/lib/esm/common/classes", {
-  FLEX_EXPANDER: function (v) {
-    FLEX_EXPANDER = v;
-  }
-}, 2);
 
 var DescribeSymbolQuestion = /*#__PURE__*/function (_React$Component) {
   _inheritsLoose(DescribeSymbolQuestion, _React$Component);
@@ -6205,10 +6260,6 @@ var DescribeSymbolQuestion = /*#__PURE__*/function (_React$Component) {
 
   _proto.render = function () {
     function render() {
-      var _this$props2 = this.props,
-          game = _this$props2.game,
-          onPrev = _this$props2.onPrev,
-          player = _this$props2.player;
       var response = this.state.response;
       return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
         className: "intro-heading questionnaire-heading"
@@ -7244,6 +7295,14 @@ module.link("moment", {
   }
 }, 3);
 
+var _;
+
+module.link("lodash", {
+  "default": function (v) {
+    _ = v;
+  }
+}, 4);
+
 var Footer = /*#__PURE__*/function (_React$Component) {
   _inheritsLoose(Footer, _React$Component);
 
@@ -7264,6 +7323,11 @@ var Footer = /*#__PURE__*/function (_React$Component) {
       maxRows: 5,
       buttonHeight: 30
     };
+    _this.updateLastActive = _.debounce(function (player) {
+      return player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+    }, 500, {
+      leading: true
+    });
 
     _this.handleSubmit = function (e) {
       e.preventDefault();
@@ -7325,7 +7389,8 @@ var Footer = /*#__PURE__*/function (_React$Component) {
       }
 
       var usedRows = currentRows < maxRows ? currentRows : maxRows;
-      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+
+      _this.updateLastActive(player);
 
       _this.setState((_this$setState = {}, _this$setState[el.name] = el.value, _this$setState.rows = usedRows, _this$setState), function () {
         _this.setState({
