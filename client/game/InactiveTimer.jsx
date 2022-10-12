@@ -18,7 +18,6 @@ class inactiveTimer extends React.Component {
     }
 
     onOpenModal = () => {
-        console.log("modal opened up")
         this.setState({modalIsOpen: true});
     }
     
@@ -28,7 +27,6 @@ class inactiveTimer extends React.Component {
             player.set("lastActive", moment(TimeSync.serverTime(null, 1000)).subtract(30, 'seconds'));
             player.set("inactiveWarningUsed", true);
         }
-        console.log("modal closed")
         this.setState({modalIsOpen: false});
 
     }
@@ -48,7 +46,6 @@ class inactiveTimer extends React.Component {
         const activePlayers = game.players.filter(p => !p.get("inactive"));
 
         activePlayers.forEach((p) => {
-            console.log("checking");
             const playerLastActive = p.get("lastActive");
             const timeDiff = currentTime.diff(playerLastActive, 'seconds');
 
@@ -122,7 +119,6 @@ class inactiveTimer extends React.Component {
         const currentTime = moment(TimeSync.serverTime(null, 1000));
         const playerLastActive = player.get("lastActive");
         const timeDiffForMe = currentTime.diff(playerLastActive, 'seconds');
-        console.log(this.state.modalIsOpen);
         return(
             <div>
                 {this.state.modalIsOpen && <Modal game={game} player={player} onCloseModal={this.onCloseModal} />}

@@ -11,7 +11,6 @@ export default class Thanks extends React.Component {
     const basePay = game.treatment.basePay;
     const conversionRate = game.treatment.conversionRate;
 
-    console.log(player.get("nodeId"))
     return (
       <div className="finished">
         <div>

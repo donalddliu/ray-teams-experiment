@@ -46,7 +46,6 @@ export default class NetworkSurveyThree extends React.Component {
         tie45 : tie45,
     };
     player.set("networkResponse3", networkSurveyResponse);
-    console.log("set NR 3")
 
     // TODO: log player response to survey question
     onNext();

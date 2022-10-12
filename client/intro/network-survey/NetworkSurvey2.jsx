@@ -53,7 +53,6 @@ export default class NetworkSurveyTwo extends React.Component {
     event.preventDefault();
     // TODO: log player response to survey question
     player.set("networkResponse2", networkSurveyResponse);
-    console.log("set NR 2");
     onNext();
   };
 

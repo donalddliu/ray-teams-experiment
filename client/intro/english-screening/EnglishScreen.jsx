@@ -48,7 +48,6 @@ export default class EnglishScreen extends React.Component {
     componentDidMount() {
       const {player} = this.props;
       player.set("passedPreQual", false);
-      console.log("set passedPreQual to false");
     }
   
     handleChange = event => {
@@ -67,7 +66,6 @@ export default class EnglishScreen extends React.Component {
             }
         })
         player.set("englishScreenPercentage", numCorrect/totalNumQuestions);
-        console.log("set engScreen %");
 
         return numCorrect/totalNumQuestions >= 0.8;
     }
@@ -79,12 +77,10 @@ export default class EnglishScreen extends React.Component {
 
       if (this.passCorrectThreshold()) {
             player.set("englishScreenPassed", this.state);
-            console.log("set engScreen passed");
 
             onNext();
       } else {
             player.set("englishScreenFailed", this.state);
-            console.log("set engScreen failed");
             player.exit("failedEnglishScreen");
 
       }
@@ -92,7 +88,6 @@ export default class EnglishScreen extends React.Component {
   
     render() {  
       const allSelected = Object.keys(this.state).every(key => this.state[key] !== "");
-      console.log("rendered");
       return (
         <Centered>
           <div className="intro-heading questionnaire-heading"> Questionnaire </div>

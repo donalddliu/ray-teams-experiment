@@ -12,7 +12,7 @@ import _ from 'lodash';
 export default class Footer extends React.Component {
   state = { comment: "", rows: 1, minRows: 1, maxRows: 5, buttonHeight: 30 };
 
-  updateLastActive = _.debounce((player) => player.set("lastActive", moment(TimeSync.serverTime(null, 1000))), 500, {leading: true});
+  updateLastActive = _.throttle((player) => player.set("lastActive", moment(TimeSync.serverTime(null, 1000))), 5000, {leading: true});
 
   handleSubmit = (e) => {
     e.preventDefault();

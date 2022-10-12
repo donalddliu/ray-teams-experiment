@@ -23,7 +23,6 @@ export default class NetworkSurveyOne extends React.Component {
 
     const networkSurveyResponse = this.state;
     player.set("networkResponse1", networkSurveyResponse);
-    console.log("set NR 1");
     
     onNext();
   };
@@ -32,7 +31,6 @@ export default class NetworkSurveyOne extends React.Component {
     const { name1, name2, name3, name4, name5 } = this.state;
     
     const filledOut = name1 && name2 && name3 && name4 && name5;
-    console.log("rendered");
     return (
           <div className="network-survey-container">
                 <div className="network-survey-header">
