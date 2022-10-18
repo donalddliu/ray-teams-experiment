@@ -37,7 +37,7 @@ export default class Sorry extends Component {
         }
         if (player.exitReason === "failedEnglishScreen") {
             // msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game."
-            msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game. Here is your completion code: C150JEXN"
+            msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game. Here is your completion code: CCX0X59H"
 
         }
         if (player.exitReason === "minPlayerCountNotMaintained") {

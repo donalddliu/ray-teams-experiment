@@ -44,7 +44,7 @@ export default class PreQualExitSurvey extends React.Component {
             {/* Please submit the following code to receive your bonus:{" "} */}
             Please submit the following code:{" "}
 
-            <strong> C2NSYBWZ </strong>
+            <strong> CZ586HD9 </strong>
             {/* <strong>{player._id}</strong>. */}
           </p>
           <p>
