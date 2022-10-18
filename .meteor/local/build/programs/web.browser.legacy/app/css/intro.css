@@ -225,7 +225,7 @@ td, th, tr { vertical-align: inherit } /* add this rule */
 
 .english-screening-buttons {
     display: flex;
-    flex-direction: row;w
+    flex-direction: row;
 }
 
 .english-screening-horizontal-bar {

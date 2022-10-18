@@ -104,7 +104,7 @@ export default class EnglishScreen extends React.Component {
                                 <p>2. Answer the question immediately following</p>
                             </li>
                         </ol>
-                        <div>Because some Mechanical Turk users answer questions randomly, we will reject users with error rates of 25% or larger. Consequently, if you cannot answer 75% of the questions correctly, please do not fill out the survey.</div>
+                        <div>Because some users answer questions randomly, we will reject users with error rates of 25% or larger. Consequently, if you cannot answer 75% of the questions correctly, please do not fill out the survey.</div>
                         <br></br>
                         <div>Note: <span style={{fontWeight: "bold"}}>Please read the sentence </span> before answering the question!</div>
                             {

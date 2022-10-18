@@ -158,65 +158,65 @@ Empirica.onGameEnd(game => {});
 //   // }
 // });
 
-Empirica.onSet((
-  game,
-  round,
-  stage,
-  player, // Player who made the change
-  target, // Object on which the change was made (eg. player.set() => player)
-  targetType, // Type of object on which the change was made (eg. player.set() => "player")
-  key, // Key of changed value (e.g. player.set("score", 1) => "score")
-  value, // New value
-  prevValue // Previous value
-) => {
-  const players = game.players;
-  // const activePlayers = game.players.filter(p => p.online === true && !p.get("inactive"));
-  const activePlayers = game.players.filter(p => !p.get("inactive"));
+// Empirica.onSet((
+//   game,
+//   round,
+//   stage,
+//   player, // Player who made the change
+//   target, // Object on which the change was made (eg. player.set() => player)
+//   targetType, // Type of object on which the change was made (eg. player.set() => "player")
+//   key, // Key of changed value (e.g. player.set("score", 1) => "score")
+//   value, // New value
+//   prevValue // Previous value
+// ) => {
+//   console.log("key", key);
+//   const players = game.players;
+//   // const activePlayers = game.players.filter(p => p.online === true && !p.get("inactive"));
+//   const activePlayers = game.players.filter(p => !p.get("inactive"));
 
-  // Some player decides to reconsider their answer
-  console.log("key", key);
-  if (key === "submitted") { 
-    // Checks if everyone has submitted their answer and if so, submit the stage
-    let allSubmitted = true;
-    let numPlayersSubmitted = 0;
-    activePlayers.forEach((player) => {
-      if (player.get("submitted")) {
-        numPlayersSubmitted += 1;
-      }
-      allSubmitted = player.get("submitted") && allSubmitted;
-    })
-    round.set("numPlayersSubmitted", numPlayersSubmitted);
-    if (allSubmitted) {
-      if (stage.name === "Task") {
-        computeScore(activePlayers, game, stage, round);
-      }
-      // Need to submit for submit the stage for every player
-      game.players.forEach((player) => {
-        player.stage.submit();
-      })
-    }
-  //   if (stage.get("resultsShown")) {
-  //     players.forEach((player) => {
-  //       player.stage.submit();
-  //     })
-  //   }
-  // }
+//   // Some player decides to reconsider their answer
+//   if (key === "submitted") { 
+//     // Checks if everyone has submitted their answer and if so, submit the stage
+//     let allSubmitted = true;
+//     let numPlayersSubmitted = 0;
+//     activePlayers.forEach((player) => {
+//       if (player.get("submitted")) {
+//         numPlayersSubmitted += 1;
+//       }
+//       allSubmitted = player.get("submitted") && allSubmitted;
+//     })
+//     round.set("numPlayersSubmitted", numPlayersSubmitted);
+//     if (allSubmitted) {
+//       if (stage.name === "Task") {
+//         computeScore(activePlayers, game, stage, round);
+//       }
+//       // Need to submit for submit the stage for every player
+//       game.players.forEach((player) => {
+//         player.stage.submit();
+//       })
+//     }
+//   //   if (stage.get("resultsShown")) {
+//   //     players.forEach((player) => {
+//   //       player.stage.submit();
+//   //     })
+//   //   }
+//   // }
 
-  // if (targetType === "stage" && key === "resultsShown") {
-  //   if (stage.get("resultsShown")) {
-  //     players.forEach((player) => {
-  //       player.stage.submit();
-  //     })
-  //   }
-  }
+//   // if (targetType === "stage" && key === "resultsShown") {
+//   //   if (stage.get("resultsShown")) {
+//   //     players.forEach((player) => {
+//   //       player.stage.submit();
+//   //     })
+//   //   }
+//   }
 
-  // else if (key === "inactive") {
-    // getFullyConnectedLayer(game);
-  // }
+//   // else if (key === "inactive") {
+//     // getFullyConnectedLayer(game);
+//   // }
 
-  return;
+//   return;
 
-});
+// });
 
 function computeScore(activePlayers, game, stage, round) {
   let success = true;

@@ -1,5 +1,5 @@
 import React from "react";
-import '../../public/css/intro.css'
+import '../../../public/css/intro.css'
 
 import { Centered } from "meteor/empirica:core";
 
