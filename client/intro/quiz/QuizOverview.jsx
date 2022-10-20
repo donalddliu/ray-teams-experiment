@@ -21,13 +21,13 @@ export default class QuizOverview extends React.Component {
                             <div className="question-section">
                                 <p className="questionnaire-question"> PLEASE READ THE FOLLOWING CAREFULLY </p>
                                 <label className="questionnaire-question"> 
-                                    1. This game may last up to <span style={{fontWeight: 'bolder'}}>  60 minutes </span>. If you cannot make this commitment, please leave and wait for the next session.
+                                    1. This game may last up to <span style={{fontWeight: 'bolder'}}>  60 minutes</span>. If you cannot make this commitment, please leave and wait for the next session.
                                 </label>
                                 <label className="questionnaire-question">
-                                    2. If you are inactive for longer than <span style={{fontWeight: 'bolder'}}>  1 minute </span>, you will be kicked from the game. You will only get <span style={{fontWeight: 'bolder'}}> ONE warning </span> about your inactivity. Thus, actively speak with your teammates until everyone has submitted.
+                                    2. If you are inactive for longer than <span style={{fontWeight: 'bolder'}}>  2 minutes</span>, you will be kicked from the game. You will only get <span style={{fontWeight: 'bolder'}}> ONE warning </span> about your inactivity. Thus, actively speak with your teammates until everyone has submitted.
                                 </label>
                                 <label className="questionnaire-question">
-                                    3. If a player is kicked from the game, the <span style={{fontWeight: 'bolder'}}> entire game for everyone will end </span>. 
+                                    3. If a player is kicked from the game, the <span style={{fontWeight: 'bolder'}}> entire game for everyone will end</span>. 
                                 </label>
                                 <label className="questionnaire-question">
                                     4. For each trial, there will be <span style={{fontWeight: 'bolder'}}> only 1 common symbol </span> amongst everyone. Some symbols may be the same amongst a few of you, but only one that you all share.
@@ -40,13 +40,22 @@ export default class QuizOverview extends React.Component {
                                 </label>
                                 { game.treatment.conversionRate && game.treatment.basePay ? 
                                 <label className="questionnaire-question"> 
+                                    7. You will receive a ${game.treatment.conversionRate} bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn an additional ${ game.treatment.numTaskRounds * game.treatment.conversionRate}.
+                                </label>
+                                : 
+                                <label className="questionnaire-question">
+                                    7. You will receive $1 bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to ${ game.treatment.numTaskRounds * 1}.
+                                </label>
+                                }
+                                {/* { game.treatment.conversionRate && game.treatment.basePay ? 
+                                <label className="questionnaire-question"> 
                                     7. You will receive a flat fee of ${game.treatment.basePay} for participating. You will also receive ${game.treatment.conversionRate} bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to ${game.treatment.basePay + game.treatment.numTaskRounds * game.treatment.conversionRate}.
                                 </label>
                                 : 
                                 <label className="questionnaire-question">
                                     7. You will receive a flat fee of $2 for participating. You will also receive $1 bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to ${2 + game.treatment.numTaskRounds * 1}.
                                 </label>
-                                }
+                                } */}
                                 <br></br>
                             </div>
                             <form className="questionnaire-btn-container" onSubmit={this.handleSubmit}>

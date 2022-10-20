@@ -16,24 +16,28 @@ export default class Sorry extends Component {
                 msg = "All games you are eligible for have filled up too fast... Sorry, there will be no more games in the near future.";
                 break;
             case "gameLobbyTimedOut":
-                msg = "There were NOT enough players for the game to start... Thank you for participating in this game, you will still get paid the base amount for passing the attention check. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
+                msg = "There were NOT enough players for the game to start... Thank you for participating in this game. Please submit your Prolific Id to the study and we will make sure you get paid accordingly.";
+                // msg = "There were NOT enough players for the game to start... Thank you for participating in this game, you will still get paid the base amount for passing the attention check. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
                 break;
             case "playerEndedLobbyWait":
                 msg =
                     "You decided to stop waiting, we are sorry it was too long a wait.";
                 break;
             default:
-                msg = "Unfortunately, the Game was cancelled... Thank you for participating in this game, please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly.";
+                msg = "Unfortunately, the Game was cancelled... Thank you for participating in this game, please submit your Prolific ID to the HIT and we will make sure you get paid accordingly.";
+                // msg = "Unfortunately, the Game was cancelled... Thank you for participating in this game, please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly.";
                 break;
         }
         if (player.exitReason === "failedQuestion") {
             return <FailedAttentionCheck />
         }
         if (player.exitReason === "inactive") {
-            msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
+            msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid including any bonuses for the rounds you successfully passed. Please submit the following completion code: C1FLL9CG";
+            // msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
         }
         if (player.exitReason === "someoneInactive") {
-            msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly. ";
+            msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid including any bonuses for the rounds you successfully passed. Please submit the following completion code: C1FLL9CG";
+            // msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly. ";
         }
         if (player.exitReason === "failedEnglishScreen") {
             // msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game."
@@ -41,7 +45,9 @@ export default class Sorry extends Component {
 
         }
         if (player.exitReason === "minPlayerCountNotMaintained") {
-            msg = `Unfortunately, there were too few players active in this game and the game had to be cancelled. Thank you for participating in this game, please submit the follow code ${player._id} to the HIT and we will make sure you get paid accordingly. `
+            msg = `Unfortunately, there were too few players active in this game and the game had to be cancelled. Thank you for participating in this game, please submit the following completion code: C1FLL9CG`
+
+            // msg = `Unfortunately, there were too few players active in this game and the game had to be cancelled. Thank you for participating in this game, please submit the follow code ${player._id} to the HIT and we will make sure you get paid accordingly. `
         }
         // Only for dev
         if (!game && Meteor.isDevelopment) {

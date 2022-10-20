@@ -42,7 +42,9 @@ export default class ExitSurvey extends React.Component {
           <h1> Exit Survey </h1>
           <p>
             Please submit the following code to receive your bonus:{" "}
-            <strong>{player._id}</strong>.
+            <strong> C1FLL9CG </strong>.
+
+            {/* <strong>{player._id}</strong>. */}
           </p>
           <p>
           {player.exitReason === "minPlayerCountNotMaintained" ? 
@@ -51,11 +53,15 @@ export default class ExitSurvey extends React.Component {
           </p>
           <p>
             Your team got a total of <strong>{player.get("score")}</strong> correct.
-
             {basePay && conversionRate ? 
-              ` You will receive a base pay of $${basePay} and an additional performance bonus of ${player.get("score")} x $${conversionRate}, for a total of $${basePay + parseInt(player.get("score")*conversionRate)}.`
+              ` You will receive an additional performance bonus of ${player.get("score")} x $${conversionRate}.`
               : ` You will receive a base pay of $2 and an additional performance bonus of ${player.get("score")} x 1, for a total of ${2 + parseInt(player.get("score"))*1}.`
             }
+
+            {/* {basePay && conversionRate ? 
+              ` You will receive a base pay of $${basePay} and an additional performance bonus of ${player.get("score")} x $${conversionRate}, for a total of $${basePay + parseInt(player.get("score")*conversionRate)}.`
+              : ` You will receive a base pay of $2 and an additional performance bonus of ${player.get("score")} x 1, for a total of ${2 + parseInt(player.get("score"))*1}.`
+            } */}
           </p>
           <br />
           <p>

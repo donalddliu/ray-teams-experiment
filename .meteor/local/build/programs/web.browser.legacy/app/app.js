@@ -2287,7 +2287,8 @@ var RoundMetaData = /*#__PURE__*/function (_React$Component) {
       var taskWarningTime = game.treatment.taskWarningTime;
       var playerId = player.id;
       var taskName = stage.displayName;
-      var totalTaskRounds = game.treatment.numTaskRounds; // const allSymbols = [];
+      var totalTaskRounds = game.treatment.numTaskRounds;
+      var playerScore = player.get("score"); // const allSymbols = [];
       // game.players.forEach(player => {
       //     const taskSymbols = 
       // })
@@ -2296,7 +2297,7 @@ var RoundMetaData = /*#__PURE__*/function (_React$Component) {
         className: "metadata-container"
       }, /*#__PURE__*/React.createElement("div", {
         className: "round-number-container"
-      }, taskName, " of ", totalTaskRounds), /*#__PURE__*/React.createElement("div", {
+      }, /*#__PURE__*/React.createElement("div", null, " ", taskName, " of ", totalTaskRounds, " "), /*#__PURE__*/React.createElement("div", null, " Current Score : ", playerScore, " ")), /*#__PURE__*/React.createElement("div", {
         style: {
           display: "flex",
           flexDirection: "column",
@@ -4874,13 +4875,13 @@ var QuizOverview = /*#__PURE__*/function (_React$Component) {
         style: {
           fontWeight: 'bolder'
         }
-      }, "  60 minutes "), ". If you cannot make this commitment, please leave and wait for the next session."), /*#__PURE__*/React.createElement("label", {
+      }, "  60 minutes"), ". If you cannot make this commitment, please leave and wait for the next session."), /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
       }, "2. If you are inactive for longer than ", /*#__PURE__*/React.createElement("span", {
         style: {
           fontWeight: 'bolder'
         }
-      }, "  1 minute "), ", you will be kicked from the game. You will only get ", /*#__PURE__*/React.createElement("span", {
+      }, "  2 minutes"), ", you will be kicked from the game. You will only get ", /*#__PURE__*/React.createElement("span", {
         style: {
           fontWeight: 'bolder'
         }
@@ -4890,7 +4891,7 @@ var QuizOverview = /*#__PURE__*/function (_React$Component) {
         style: {
           fontWeight: 'bolder'
         }
-      }, " entire game for everyone will end "), "."), /*#__PURE__*/React.createElement("label", {
+      }, " entire game for everyone will end"), "."), /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
       }, "4. For each trial, there will be ", /*#__PURE__*/React.createElement("span", {
         style: {
@@ -4902,9 +4903,9 @@ var QuizOverview = /*#__PURE__*/function (_React$Component) {
         className: "questionnaire-question"
       }, "6. After selecting a symbol and submitting it, you are allowed to reconsider your answer if you find more information from your team."), game.treatment.conversionRate && game.treatment.basePay ? /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
-      }, "7. You will receive a flat fee of $", game.treatment.basePay, " for participating. You will also receive $", game.treatment.conversionRate, " bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to $", game.treatment.basePay + game.treatment.numTaskRounds * game.treatment.conversionRate, ".") : /*#__PURE__*/React.createElement("label", {
+      }, "7. You will receive a $", game.treatment.conversionRate, " bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn an additional $", game.treatment.numTaskRounds * game.treatment.conversionRate, ".") : /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
-      }, "7. You will receive a flat fee of $2 for participating. You will also receive $1 bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to $", 2 + game.treatment.numTaskRounds * 1, "."), /*#__PURE__*/React.createElement("br", null)), /*#__PURE__*/React.createElement("form", {
+      }, "7. You will receive $1 bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to $", game.treatment.numTaskRounds * 1, "."), /*#__PURE__*/React.createElement("br", null)), /*#__PURE__*/React.createElement("form", {
         className: "questionnaire-btn-container",
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/React.createElement("button", {
@@ -6777,7 +6778,7 @@ var ExitSurvey = /*#__PURE__*/function (_React$Component) {
       var conversionRate = game.treatment.conversionRate;
       return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
         className: "exit-survey"
-      }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, "Please submit the following code to receive your bonus:", " ", /*#__PURE__*/React.createElement("strong", null, player._id), "."), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""), /*#__PURE__*/React.createElement("p", null, "Your team got a total of ", /*#__PURE__*/React.createElement("strong", null, player.get("score")), " correct.", basePay && conversionRate ? " You will receive a base pay of $" + basePay + " and an additional performance bonus of " + player.get("score") + " x $" + conversionRate + ", for a total of $" + (basePay + parseInt(player.get("score") * conversionRate)) + "." : " You will receive a base pay of $2 and an additional performance bonus of " + player.get("score") + " x 1, for a total of " + (2 + parseInt(player.get("score")) * 1) + "."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
+      }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, "Please submit the following code to receive your bonus:", " ", /*#__PURE__*/React.createElement("strong", null, " C1FLL9CG "), "."), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""), /*#__PURE__*/React.createElement("p", null, "Your team got a total of ", /*#__PURE__*/React.createElement("strong", null, player.get("score")), " correct.", basePay && conversionRate ? " You will receive an additional performance bonus of " + player.get("score") + " x $" + conversionRate + "." : " You will receive a base pay of $2 and an additional performance bonus of " + player.get("score") + " x 1, for a total of " + (2 + parseInt(player.get("score")) * 1) + "."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/React.createElement("div", {
         className: "form-line"
@@ -6940,7 +6941,7 @@ var FailedAttentionCheck = /*#__PURE__*/function (_Component) {
         className: "failed-attention-container"
       }, /*#__PURE__*/React.createElement("h2", {
         className: "failed-attention-text"
-      }, "YOU FAILED THE ATTENTION CHECK, AND HAVE NOT BEEN SELECTED TO PLAY. PLEASE DO NOT TRY TO COMPLETE THE TASK AGAIN. THANK YOU FOR YOUR TIME. HERE IS YOUR COMPLETION CODE: C150JEXN")));
+      }, "YOU FAILED THE ATTENTION CHECK, AND HAVE NOT BEEN SELECTED TO PLAY. PLEASE DO NOT TRY TO COMPLETE THE TASK AGAIN. THANK YOU FOR YOUR TIME. HERE IS YOUR COMPLETION CODE: CCX0X59H")));
     }
 
     return render;
@@ -7061,7 +7062,7 @@ var PreQualExitSurvey = /*#__PURE__*/function (_React$Component) {
       var conversionRate = game.treatment.conversionRate;
       return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
         className: "exit-survey"
-      }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, "Please submit the following code:", " ", /*#__PURE__*/React.createElement("strong", null, " C2NSYBWZ ")), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""), /*#__PURE__*/React.createElement("p", null, "Thank you for taking time to take this pre-qualification survey ! We will finish screening all the players and send out a date and time to those that qualify for our future game.", basePay && conversionRate ? " You will receive a base pay of $" + basePay + " for taking this pre-qualification." : " You will receive a base pay of $2 for taking this pre-qualification."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
+      }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, "Please submit the following code:", " ", /*#__PURE__*/React.createElement("strong", null, " CZ586HD9 ")), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""), /*#__PURE__*/React.createElement("p", null, "Thank you for taking time to take this pre-qualification survey ! We will finish screening all the players and send out a date and time to those that qualify for our future game.", basePay && conversionRate ? " You will receive a base pay of $" + basePay + " for taking this pre-qualification." : " You will receive a base pay of $2 for taking this pre-qualification."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/React.createElement("div", {
         className: "form-line"
@@ -7219,7 +7220,8 @@ var Sorry = /*#__PURE__*/function (_Component) {
           break;
 
         case "gameLobbyTimedOut":
-          msg = "There were NOT enough players for the game to start... Thank you for participating in this game, you will still get paid the base amount for passing the attention check. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
+          msg = "There were NOT enough players for the game to start... Thank you for participating in this game. Please submit your Prolific Id to the study and we will make sure you get paid accordingly."; // msg = "There were NOT enough players for the game to start... Thank you for participating in this game, you will still get paid the base amount for passing the attention check. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
+
           break;
 
         case "playerEndedLobbyWait":
@@ -7227,7 +7229,8 @@ var Sorry = /*#__PURE__*/function (_Component) {
           break;
 
         default:
-          msg = "Unfortunately, the Game was cancelled... Thank you for participating in this game, please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly.";
+          msg = "Unfortunately, the Game was cancelled... Thank you for participating in this game, please submit your Prolific ID to the HIT and we will make sure you get paid accordingly."; // msg = "Unfortunately, the Game was cancelled... Thank you for participating in this game, please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly.";
+
           break;
       }
 
@@ -7236,20 +7239,20 @@ var Sorry = /*#__PURE__*/function (_Component) {
       }
 
       if (player.exitReason === "inactive") {
-        msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
+        msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid including any bonuses for the rounds you successfully passed. Please submit the following completion code: C1FLL9CG"; // msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
       }
 
       if (player.exitReason === "someoneInactive") {
-        msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly. ";
+        msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid including any bonuses for the rounds you successfully passed. Please submit the following completion code: C1FLL9CG"; // msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly. ";
       }
 
       if (player.exitReason === "failedEnglishScreen") {
         // msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game."
-        msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game. Here is your completion code: C150JEXN";
+        msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game. Here is your completion code: CCX0X59H";
       }
 
       if (player.exitReason === "minPlayerCountNotMaintained") {
-        msg = "Unfortunately, there were too few players active in this game and the game had to be cancelled. Thank you for participating in this game, please submit the follow code " + player._id + " to the HIT and we will make sure you get paid accordingly. ";
+        msg = "Unfortunately, there were too few players active in this game and the game had to be cancelled. Thank you for participating in this game, please submit the following completion code: C1FLL9CG"; // msg = `Unfortunately, there were too few players active in this game and the game had to be cancelled. Thank you for participating in this game, please submit the follow code ${player._id} to the HIT and we will make sure you get paid accordingly. `
       } // Only for dev
 
 
@@ -7344,7 +7347,7 @@ var Thanks = /*#__PURE__*/function (_React$Component) {
       // <strong>{player._id}</strong>
       // </p> 
       // TODO: Prolific
-      React.createElement("p", null, "Thank you for participating! Please submit the following code: C2NSYBWZ") : /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $" + (basePay + parseInt(player.get("score") * conversionRate)) + " : " : " ", /*#__PURE__*/React.createElement("strong", null, player._id)))));
+      React.createElement("p", null, "Thank you for participating! Please submit the following code: C1FLL9CG") : /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $" + (basePay + parseInt(player.get("score") * conversionRate)) + " : " : " ", /*#__PURE__*/React.createElement("strong", null, player._id)))));
     }
 
     return render;

@@ -780,12 +780,12 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/app/app.js?hash=540866941538f38bde98426cb5d84be560264b37",
+      "url": "/app/app.js?hash=7c84c1a2b8f7fcf176c081609bb9587b1d886171",
       "sourceMap": "app/app.js.map",
-      "sourceMapUrl": "/app/540866941538f38bde98426cb5d84be560264b37.map",
-      "size": 272171,
-      "hash": "540866941538f38bde98426cb5d84be560264b37",
-      "sri": "bKesCCpXa6C+UxeJ9ovWKQKwWrOQFXALzRDMAoMexS8AhtlWQrazXI4qmZo7RglxvZsUslB51JWtqbIapcCGQQ=="
+      "sourceMapUrl": "/app/7c84c1a2b8f7fcf176c081609bb9587b1d886171.map",
+      "size": 273176,
+      "hash": "7c84c1a2b8f7fcf176c081609bb9587b1d886171",
+      "sri": "WjWEyvyk377chwVh4wUKcE/uvaOGN34I1Pt0gvXxBnMBfpJrOPy+yWGpNs2PpY5aSd9J6wvvxpRdcPYOW6am+g=="
     },
     {
       "path": "packages/service-configuration.js",
@@ -802,12 +802,12 @@
       "where": "client",
       "type": "css",
       "cacheable": true,
-      "url": "/merged-stylesheets.css?hash=a9b7ab7a4f84f8d17e104bb0de86b0d47b327f7f",
+      "url": "/merged-stylesheets.css?hash=a60d93d521593b7bdff22b18130ba81bb526753d",
       "sourceMap": "merged-stylesheets.css.map",
-      "sourceMapUrl": "/a9b7ab7a4f84f8d17e104bb0de86b0d47b327f7f.map",
-      "size": 21064,
-      "hash": "a9b7ab7a4f84f8d17e104bb0de86b0d47b327f7f",
-      "sri": "tg+EA/TyVRjByASWtDyXmNt3xyGSH8MibjFp+uZ+5fmrH2Q+NPgbqzPeljWqzMdR6Hqv+0+JJziQvsRjx76Nxg=="
+      "sourceMapUrl": "/a60d93d521593b7bdff22b18130ba81bb526753d.map",
+      "size": 21107,
+      "hash": "a60d93d521593b7bdff22b18130ba81bb526753d",
+      "sri": "62BtxLFP06gvmWpVP53UPCKbnfF9sSz9FdnYofRL9lvvMUeUpJodrcNSz38V7IgOt6YPHykULgM6ja39cILRng=="
     },
     {
       "path": "packages/empirica_core/ui/components/NoBatch.less.map.json",

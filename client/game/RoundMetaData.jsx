@@ -13,6 +13,7 @@ export default class RoundMetaData extends React.Component {
         const playerId = player.id;
         const taskName = stage.displayName;
         const totalTaskRounds = game.treatment.numTaskRounds;
+        const playerScore = player.get("score");
 
         // const allSymbols = [];
         // game.players.forEach(player => {
@@ -32,7 +33,8 @@ export default class RoundMetaData extends React.Component {
                     {playerId}
                 </div> */}
                 <div className="round-number-container">
-                    {taskName} of {totalTaskRounds}
+                    <div> {taskName} of {totalTaskRounds} </div>
+                    <div> Current Score : {playerScore} </div>
                 </div>
                 <div style={{display: "flex", flexDirection:"column", alignItems: "center"}}>
                     {game.treatment.maxGameTime && <GameTimer game={game}/>}

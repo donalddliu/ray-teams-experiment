@@ -944,6 +944,8 @@ body.bp3-dark {
   color: var(--darkblue);
 }
 .round .round-number-container {
+  display: flex;
+  flex-direction: column;
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-size: 16px;
