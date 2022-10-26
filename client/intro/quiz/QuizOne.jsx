@@ -31,12 +31,12 @@ export default class QuizOne extends React.Component {
     if (this.state.response === 'yes') {
         onNext();
     } else {
-        player.exit("failedQuestion");
+        player.exit("returnSubmission");
     }
   };
 
   render() {
-    const { player } = this.props;
+    const { game, player } = this.props;
     const { response } = this.state;
 
     return (
@@ -44,7 +44,7 @@ export default class QuizOne extends React.Component {
         <div className="intro-heading questionnaire-heading"> Questionnaire </div>
             <div className="questionnaire-content-container">
                 <div className="questionnaire-body">
-                    <label className="questionnaire-question">Are you willing to participate in an online team exercise that could last for approximately 60 minutes?</label>
+                    <label className="questionnaire-question">Are you willing to participate in an online team exercise (in the future) that could last for approximately {game.treatment.maxGameTime} minutes?</label>
                     <Radio
                         selected={response}
                         name="response"

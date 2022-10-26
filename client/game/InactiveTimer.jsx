@@ -22,9 +22,12 @@ class inactiveTimer extends React.Component {
     }
     
     onCloseModal = () => {
-        const {player} = this.props;
+        const {player, game} = this.props;
+        const inactiveDuration = game.treatment.userInactivityDuration;
+        const extra30Seconds = inactiveDuration - game.treatment.idleWarningTime;
+
         if (!player.get("inactiveWarningUsed")) {
-            player.set("lastActive", moment(TimeSync.serverTime(null, 1000)).subtract(30, 'seconds'));
+            player.set("lastActive", moment(TimeSync.serverTime(null, 1000)).subtract(extra30Seconds, 'seconds'));
             player.set("inactiveWarningUsed", true);
         }
         this.setState({modalIsOpen: false});

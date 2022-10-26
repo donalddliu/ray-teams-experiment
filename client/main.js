@@ -2,6 +2,11 @@ import Empirica from "meteor/empirica:core";
 import { render } from "react-dom";
 import ExitSurvey from "./exit/ExitSurvey";
 import PreQualExitSurvey from "./exit/PreQualExitSurvey";
+import FinalMidSurveyOne from "./exit/final-mid-survey/FinalMidSurvey1";
+import FinalMidSurveyTwo from "./exit/final-mid-survey/FinalMidSurvey2";
+import FinalMidSurveyThree from "./exit/final-mid-survey/FinalMidSurvey3";
+import FinalMidSurveyFour from "./exit/final-mid-survey/FinalMidSurvey4";
+import FinalMidSurveyFive from "./exit/final-mid-survey/FinalMidSurvey5";
 import Thanks from "./exit/Thanks";
 import Sorry from "./exit/Sorry";
 import About from "./game/About";
@@ -19,11 +24,19 @@ import TutorialPageThree from "./intro/tutorial/TutorialPageThree";
 import TutorialPageFour from "./intro/tutorial/TutorialPageFour";
 
 import AllQuiz from "./intro/quiz/AllQuiz";
+import QuizFive from "./intro/quiz/QuizFive";
+import QuizSix from "./intro/quiz/QuizSix";
+import QuizSeven from "./intro/quiz/QuizSeven";
+import QuizTwo from "./intro/quiz/QuizTwo";
+import QuizOne from "./intro/quiz/QuizOne";
+
 import QuizOverview from "./intro/quiz/QuizOverview";
 
 import EnglishScreen from "./intro/english-screening/EnglishScreen";
 
 import DescribeSymbolQuestion from "./intro/DescribeSymbolQuestion";
+
+import Schedule from "./intro/Schedule";
 
 import NewPlayer from "./intro/NewPlayer";
 
@@ -45,16 +58,20 @@ Empirica.newPlayer(NewPlayer);
 // different instruction steps depending on the assigned treatment.
 Empirica.introSteps((game, treatment) => {
   // MidSurveyFive, MidSurveyFour, MidSurveyThree, MidSurveyTwo, MidSurveyOne,
+  const durationConsent = [QuizOne];
   const englishScreen = [EnglishScreen];
   const networkSurvey = [NetworkSurveyOne, NetworkSurveyTwo, NetworkSurveyThree];
   const tutorialSteps = [TutorialPageOne, TutorialPageThree, TutorialPageFour,];
   const symbolDescription = [DescribeSymbolQuestion];
   // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
-  const quizSteps = [AllQuiz];
+  // const quizSteps = [AllQuiz];
+  const quizSteps = [QuizFive, QuizSix, QuizSeven, QuizTwo];
   const quizOverview = [QuizOverview];
+  const schedule = [Schedule]
   let steps;
   if (game.treatment.isPreQualification) {
-    steps = englishScreen.concat(networkSurvey,tutorialSteps,quizSteps, symbolDescription);
+    steps = durationConsent.concat(englishScreen, tutorialSteps, quizSteps, symbolDescription, networkSurvey, schedule);
+    // steps = englishScreen.concat(networkSurvey,tutorialSteps,quizSteps, symbolDescription, schedule);
     // steps = quizSteps.concat(symbolDescription);
 
   } else {
@@ -64,7 +81,7 @@ Empirica.introSteps((game, treatment) => {
   if (treatment.skipIntro) {
     return [];
   }
-
+  // return [QuizFive, QuizSix, QuizSeven, QuizTwo];
   return steps;
 });
 
@@ -84,7 +101,7 @@ Empirica.round(Round);
 Empirica.exitSteps((game, player) => {
   if (player.exitStatus && player.exitStatus === "custom" && 
       (player.exitReason === "maxGameTimeReached" || player.exitReason === "minPlayerCountNotMaintained")) {
-    return [ExitSurvey, Thanks];
+    return [FinalMidSurveyOne, FinalMidSurveyTwo, FinalMidSurveyThree, FinalMidSurveyFour, FinalMidSurveyFive, ExitSurvey, Thanks];
   }
   if (player.exitStatus && player.exitStatus === "custom" &&
       (player.exitReason === "preQualSuccess")) {

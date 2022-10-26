@@ -168,8 +168,8 @@ export default class AllQuiz extends React.Component {
                     <label className="questionnaire-question">
                         Is the following statement true or false?  
                         {game.treatment.endGameIfPlayerIdle ? 
-                        <span> If any member of my team doesn't register a guess or communicate with a colleague for long time, the task will end and the entire team (including myself) will be sent to the exit page of the survey.</span> :
-                        <span> If a member of my team doesn't register a guess or communicate with a colleague for long time, the inactive player will be kicked and the task will continue for the rest of the team.</span>
+                        <span> If any member of my team doesn't register a guess or communicate with a colleague for a long time, the task will end and the entire team (including myself) will be sent to the exit page of the survey.</span> :
+                        <span> If a member of my team doesn't register a guess or communicate with a colleague for a long time, the inactive player will be kicked and the task will continue for the rest of the team.</span>
                         }
                     </label>
                     <Radio

@@ -2,6 +2,8 @@ import Empirica from "meteor/empirica:core";
 import "./bots.js";
 import "./callbacks.js";
 
+import _ from 'lodash';
+
 import { testSymbols, testTangrams } from "./constants"; 
 import { getNeighbors, getFullyConnectedLayer } from "./util";
 
@@ -36,7 +38,7 @@ Empirica.gameInit(game => {
 
   let colors = ["Green", "Red", "Yellow", "Blue", "Purple", "White", "Black"]
   let surveyNum = 1
-  colors = shuffle(colors);
+  colors = _.shuffle(colors);
 
   game.players.forEach((player, i) => {
     player.set("avatar", `/avatars/jdenticon/${player._id}`);
@@ -101,7 +103,7 @@ Empirica.gameInit(game => {
 
   function getSymbolsForPlayers(symbolSet, answer, setSize, taskName, game, maxNumOverlap) {
       let symbolsWithoutAnswer = symbolSet.filter(symbol => symbol !== answer);
-      symbolsWithoutAnswer = shuffle(symbolsWithoutAnswer);
+      symbolsWithoutAnswer = _.shuffle(symbolsWithoutAnswer);
       let numPlayers = game.players.length;
       let numOverlap = 0;
 
@@ -140,7 +142,7 @@ Empirica.gameInit(game => {
           }
         }
 
-        symbolsPicked = shuffle(symbolsPicked);
+        symbolsPicked = _.shuffle(symbolsPicked);
 
         player.set(taskName, symbolsPicked);
       })

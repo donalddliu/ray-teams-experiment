@@ -5,7 +5,8 @@ import { TimeSync } from "meteor/mizzao:timesync";
 import moment from "moment";
 import { Centered } from "meteor/empirica:core";
 
-export default class MidSurveyFive extends React.Component {
+export default class FinalMidSurveyFive extends React.Component {
+  static stepName = "FinalMidSurveyFive";
   state = { response: "" };
 
   handleChange = event => {
@@ -17,8 +18,6 @@ export default class MidSurveyFive extends React.Component {
     const { stage, player } = this.props;
     // Rounding the number to 2 decimals max
     this.setState({sliderValue : num}) 
-    player.stage.set("sliderValue", num);
-
   };
 
   renderLabels = (val) => {
@@ -34,20 +33,13 @@ export default class MidSurveyFive extends React.Component {
 
   handleSubmit = event => {
     const { onNext, player, stage } = this.props;
-    const surveyNumber = player.get("surveyNumber");
 
     event.preventDefault();
     // TODO: log player response to survey question
-    player.round.set(`survey_${surveyNumber}`, this.state);
-    stage.append("log", {
-        verb: `survey_${surveyNumber}`,
-        subjectId: player.id,
-        object: this.state,
-        at: moment(TimeSync.serverTime(null, 1000)),
-    })
+    player.set(`final_survey_5`, this.state);
     player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
 
-    player.set("submitted", true);
+    this.props.onSubmit(this.state);
   };
   
 
@@ -55,9 +47,7 @@ export default class MidSurveyFive extends React.Component {
     const { game, round, stage, player } = this.props;
     const { response } = this.state;
 
-    const submitted = player.get("submitted");
-
-    const surveyNumber = player.get("surveyNumber");
+    const surveyNumber = 5;
     const completedWidth = 590/5 * surveyNumber
     const uncompletedWidth = 590 - completedWidth;
     const offset = 590/5 * 0.5;

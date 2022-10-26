@@ -1,4 +1,1714 @@
-var require = meteorInstall({"client":{"game":{"mid-survey":{"MidSurvey1.jsx":function module(require,exports,module){
+var require = meteorInstall({"client":{"exit":{"final-mid-survey":{"FinalMidSurvey1.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/final-mid-survey/FinalMidSurvey1.jsx                                                                    //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+var _createSuper;
+
+module.link("@babel/runtime/helpers/createSuper", {
+  default: function (v) {
+    _createSuper = v;
+  }
+}, 0);
+
+var _inheritsLoose;
+
+module.link("@babel/runtime/helpers/inheritsLoose", {
+  default: function (v) {
+    _inheritsLoose = v;
+  }
+}, 1);
+module.export({
+  "default": function () {
+    return FinalMidSurveyOne;
+  }
+});
+var React;
+module.link("react", {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var TimeSync;
+module.link("meteor/mizzao:timesync", {
+  TimeSync: function (v) {
+    TimeSync = v;
+  }
+}, 1);
+var moment;
+module.link("moment", {
+  "default": function (v) {
+    moment = v;
+  }
+}, 2);
+var Centered;
+module.link("meteor/empirica:core", {
+  Centered: function (v) {
+    Centered = v;
+  }
+}, 3);
+
+var Radio = function (_ref) {
+  var selected = _ref.selected,
+      name = _ref.name,
+      value = _ref.value,
+      label = _ref.label,
+      playerIsOnline = _ref.playerIsOnline,
+      onChange = _ref.onChange;
+  return /*#__PURE__*/React.createElement("label", {
+    className: "questionnaire-radio"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "quiz-button",
+    type: "radio",
+    name: name,
+    value: value,
+    checked: selected === value,
+    onChange: onChange
+  }), label, " ", playerIsOnline ? "" : " (offline)");
+};
+
+var FinalMidSurveyOne = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(FinalMidSurveyOne, _React$Component);
+
+  var _super = _createSuper(FinalMidSurveyOne);
+
+  function FinalMidSurveyOne() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+    _this.state = {};
+
+    _this.handleChange = function (event) {
+      var _this$setState;
+
+      var player = _this.props.player;
+      var el = event.currentTarget;
+
+      _this.setState((_this$setState = {}, _this$setState[el.name] = el.value, _this$setState));
+
+      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+    };
+
+    _this.handleSubmit = function (event) {
+      var _this$props = _this.props,
+          onNext = _this$props.onNext,
+          player = _this$props.player,
+          stage = _this$props.stage;
+      event.preventDefault(); // TODO: log player response to survey question
+
+      player.set("final_survey_1", _this.state);
+      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+
+      _this.props.onSubmit(_this.state);
+    };
+
+    return _this;
+  }
+
+  var _proto = FinalMidSurveyOne.prototype;
+
+  _proto.render = function () {
+    function render() {
+      var _this2 = this;
+
+      console.log(this.props);
+      var _this$props2 = this.props,
+          game = _this$props2.game,
+          round = _this$props2.round,
+          stage = _this$props2.stage,
+          player = _this$props2.player;
+      var response = this.state.response;
+      var network = player.get("neighbors");
+      var surveyNumber = 1;
+      var completedWidth = 590 / 5 * surveyNumber;
+      var uncompletedWidth = 590 - completedWidth;
+      var offset = 590 / 5 * 0.5;
+      var stageNumPosition = completedWidth - offset;
+      return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+        className: "intro-heading questionnaire-heading"
+      }, " To complete the challenge, please fill in the following questionnaire "), /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-content-container"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "progress-bar"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "completed-bar"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "completed-heading",
+        style: {
+          marginLeft: stageNumPosition
+        }
+      }, " ", surveyNumber, " "), /*#__PURE__*/React.createElement("img", {
+        src: "images/hr-color.png",
+        width: completedWidth + " px",
+        height: "7px"
+      })), /*#__PURE__*/React.createElement("img", {
+        src: "images/hr-color-dark.png",
+        width: uncompletedWidth + " px",
+        height: "7px"
+      })), /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-body"
+      }, /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, " Did your group have a leader? If so, who?"), network.map(function (otherNodeId) {
+        var otherPlayer = game.players.find(function (p) {
+          return p.get("nodeId") === parseInt(otherNodeId);
+        });
+        var otherPlayerId = otherPlayer.get("anonymousName"); // const playerIsOnline = otherPlayer.online === true && !otherPlayer.get("inactive");
+
+        var playerIsOnline = !otherPlayer.get("inactive");
+        return /*#__PURE__*/React.createElement(Radio, {
+          selected: response,
+          key: otherPlayerId,
+          name: "response",
+          value: otherPlayerId,
+          label: otherPlayerId,
+          playerIsOnline: playerIsOnline,
+          onChange: _this2.handleChange
+        });
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        name: "response",
+        value: "myself",
+        label: "Myself",
+        playerIsOnline: true,
+        onChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        name: "response",
+        value: "team",
+        label: "We worked as a team",
+        playerIsOnline: true,
+        onChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        name: "response",
+        value: "none",
+        label: "Our team did not have a leader",
+        playerIsOnline: true,
+        onChange: this.handleChange
+      })), /*#__PURE__*/React.createElement("form", {
+        className: "questionnaire-btn-container",
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/React.createElement("button", {
+        className: !response ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+        disabled: !response,
+        type: "submit"
+      }, " Submit "))));
+    }
+
+    return render;
+  }();
+
+  return FinalMidSurveyOne;
+}(React.Component);
+
+FinalMidSurveyOne.stepName = "FinalMidSurveyOne";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"FinalMidSurvey2.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/final-mid-survey/FinalMidSurvey2.jsx                                                                    //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+var _createSuper;
+
+module.link("@babel/runtime/helpers/createSuper", {
+  default: function (v) {
+    _createSuper = v;
+  }
+}, 0);
+
+var _inheritsLoose;
+
+module.link("@babel/runtime/helpers/inheritsLoose", {
+  default: function (v) {
+    _inheritsLoose = v;
+  }
+}, 1);
+module.export({
+  "default": function () {
+    return FinalMidSurveyTwo;
+  }
+});
+var React;
+module.link("react", {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var Slider;
+module.link("meteor/empirica:slider", {
+  "default": function (v) {
+    Slider = v;
+  }
+}, 1);
+var TimeSync;
+module.link("meteor/mizzao:timesync", {
+  TimeSync: function (v) {
+    TimeSync = v;
+  }
+}, 2);
+var moment;
+module.link("moment", {
+  "default": function (v) {
+    moment = v;
+  }
+}, 3);
+var Centered;
+module.link("meteor/empirica:core", {
+  Centered: function (v) {
+    Centered = v;
+  }
+}, 4);
+
+var FinalMidSurveyTwo = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(FinalMidSurveyTwo, _React$Component);
+
+  var _super = _createSuper(FinalMidSurveyTwo);
+
+  function FinalMidSurveyTwo() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+    _this.state = {};
+
+    _this.renderLabels = function (val) {
+      if (val === 0) {
+        // Min value
+        return val + " Unhappy";
+      } else if (val === 3) {
+        return val + " Neutral";
+      } else if (val === 6) {
+        // Max value
+        return val + " Happy";
+      }
+
+      return "";
+    };
+
+    _this.handleSubmit = function (event) {
+      var _this$props = _this.props,
+          onNext = _this$props.onNext,
+          player = _this$props.player,
+          stage = _this$props.stage;
+      event.preventDefault(); // TODO: log player response to survey question
+
+      player.set("final_survey_2", _this.state);
+      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+
+      _this.props.onSubmit(_this.state);
+    };
+
+    return _this;
+  }
+
+  var _proto = FinalMidSurveyTwo.prototype;
+
+  _proto.componentDidMount = function () {
+    function componentDidMount() {
+      var _this2 = this;
+
+      var _this$props2 = this.props,
+          game = _this$props2.game,
+          round = _this$props2.round,
+          stage = _this$props2.stage,
+          player = _this$props2.player;
+      player.get("neighbors").forEach(function (otherNodeId) {
+        var _this2$setState;
+
+        var otherPlayerId = game.players.find(function (p) {
+          return p.get("nodeId") === parseInt(otherNodeId);
+        }).get("anonymousName");
+
+        _this2.setState((_this2$setState = {}, _this2$setState[otherPlayerId] = 0, _this2$setState));
+      });
+    }
+
+    return componentDidMount;
+  }();
+
+  _proto.render = function () {
+    function render() {
+      var _this3 = this;
+
+      var _this$props3 = this.props,
+          game = _this$props3.game,
+          round = _this$props3.round,
+          stage = _this$props3.stage,
+          player = _this$props3.player;
+      var network = player.get("neighbors");
+      var surveyNumber = 2;
+      var completedWidth = 590 / 5 * surveyNumber;
+      var uncompletedWidth = 590 - completedWidth;
+      var offset = 590 / 5 * 0.5;
+      var stageNumPosition = completedWidth - offset;
+      return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+        className: "intro-heading questionnaire-heading"
+      }, " To complete the challenge, please fill in the following questionnaire "), /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-content-container"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "progress-bar"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "completed-bar"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "completed-heading",
+        style: {
+          marginLeft: stageNumPosition
+        }
+      }, " ", surveyNumber, " "), /*#__PURE__*/React.createElement("img", {
+        src: "images/hr-color.png",
+        width: completedWidth + " px",
+        height: "7px"
+      })), /*#__PURE__*/React.createElement("img", {
+        src: "images/hr-color-dark.png",
+        width: uncompletedWidth + " px",
+        height: "7px"
+      })), /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-body"
+      }, /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, " Please rate how well you have been working with each teammate in the recent trials?"), network.map(function (otherNodeId) {
+        var otherPlayer = game.players.find(function (p) {
+          return p.get("nodeId") === parseInt(otherNodeId);
+        });
+        var otherPlayerId = otherPlayer.get("anonymousName"); // const playerIsOnline = otherPlayer.online === true && !otherPlayer.get("inactive");
+
+        var playerIsOnline = !otherPlayer.get("inactive");
+
+        var handleSliderChange = function (num) {
+          var _this3$setState;
+
+          // Rounding the number to 2 decimals max
+          _this3.setState((_this3$setState = {}, _this3$setState[otherPlayerId] = num, _this3$setState));
+
+          player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+        };
+
+        return /*#__PURE__*/React.createElement("div", {
+          className: "player-slider-container"
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "player-label"
+        }, " ", otherPlayerId, " ", playerIsOnline ? "" : " (offline)", " "), /*#__PURE__*/React.createElement(Slider, {
+          key: otherNodeId,
+          min: 0,
+          max: 6,
+          stepSize: 1,
+          disabled: false,
+          showTrackFill: false,
+          name: otherPlayerId,
+          value: _this3.state[otherPlayerId],
+          labelRenderer: _this3.renderLabels,
+          onChange: handleSliderChange
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "slider-value-container",
+          style: {
+            width: "15%"
+          }
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "slider-value"
+        }, _this3.state[otherPlayerId], " ")));
+      })), /*#__PURE__*/React.createElement("form", {
+        className: "questionnaire-btn-container",
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/React.createElement("button", {
+        className: "arrow-button button-submit",
+        type: "submit"
+      }, " Submit "))));
+    }
+
+    return render;
+  }();
+
+  return FinalMidSurveyTwo;
+}(React.Component);
+
+FinalMidSurveyTwo.stepName = "FinalMidSurveyTwo";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"FinalMidSurvey3.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/final-mid-survey/FinalMidSurvey3.jsx                                                                    //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+var _createSuper;
+
+module.link("@babel/runtime/helpers/createSuper", {
+  default: function (v) {
+    _createSuper = v;
+  }
+}, 0);
+
+var _inheritsLoose;
+
+module.link("@babel/runtime/helpers/inheritsLoose", {
+  default: function (v) {
+    _inheritsLoose = v;
+  }
+}, 1);
+module.export({
+  "default": function () {
+    return FinalMidSurveyThree;
+  }
+});
+var React;
+module.link("react", {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var Slider;
+module.link("meteor/empirica:slider", {
+  "default": function (v) {
+    Slider = v;
+  }
+}, 1);
+var TimeSync;
+module.link("meteor/mizzao:timesync", {
+  TimeSync: function (v) {
+    TimeSync = v;
+  }
+}, 2);
+var moment;
+module.link("moment", {
+  "default": function (v) {
+    moment = v;
+  }
+}, 3);
+var Centered;
+module.link("meteor/empirica:core", {
+  Centered: function (v) {
+    Centered = v;
+  }
+}, 4);
+
+var FinalMidSurveyThree = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(FinalMidSurveyThree, _React$Component);
+
+  var _super = _createSuper(FinalMidSurveyThree);
+
+  function FinalMidSurveyThree() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+    _this.state = {
+      sliderValue: 0
+    };
+
+    _this.handleSliderChange = function (num) {
+      var _this$props = _this.props,
+          stage = _this$props.stage,
+          player = _this$props.player; // Rounding the number to 2 decimals max
+
+      _this.setState({
+        sliderValue: num
+      });
+
+      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+    };
+
+    _this.renderLabels = function (val) {
+      if (val === 0) {
+        // Min value
+        return val + " Unhappy";
+      } else if (val === 3) {
+        return val + " Neutral";
+      } else if (val === 6) {
+        // Max value
+        return val + " Happy";
+      }
+
+      return "";
+    };
+
+    _this.handleSubmit = function (event) {
+      var _this$props2 = _this.props,
+          onNext = _this$props2.onNext,
+          player = _this$props2.player,
+          stage = _this$props2.stage;
+      event.preventDefault(); // TODO: log player response to survey question
+
+      player.set("final_survey_3", _this.state);
+      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+
+      _this.props.onSubmit(_this.state);
+    };
+
+    return _this;
+  }
+
+  var _proto = FinalMidSurveyThree.prototype;
+
+  _proto.render = function () {
+    function render() {
+      var _this$props3 = this.props,
+          game = _this$props3.game,
+          round = _this$props3.round,
+          stage = _this$props3.stage,
+          player = _this$props3.player;
+      var response = this.state.response;
+      var surveyNumber = 3;
+      var completedWidth = 590 / 5 * surveyNumber;
+      var uncompletedWidth = 590 - completedWidth;
+      var offset = 590 / 5 * 0.5;
+      var stageNumPosition = completedWidth - offset;
+      var sliderValue = this.state.sliderValue;
+      return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+        className: "intro-heading questionnaire-heading"
+      }, " To complete the challenge, please fill in the following questionnaire "), /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-content-container"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "progress-bar"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "completed-bar"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "completed-heading",
+        style: {
+          marginLeft: stageNumPosition
+        }
+      }, " ", surveyNumber, " "), /*#__PURE__*/React.createElement("img", {
+        src: "images/hr-color.png",
+        width: completedWidth + " px",
+        height: "7px"
+      })), /*#__PURE__*/React.createElement("img", {
+        src: "images/hr-color-dark.png",
+        width: uncompletedWidth + " px",
+        height: "7px"
+      })), /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-body"
+      }, /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, " How did you like your job in the team during the recent trials? "), /*#__PURE__*/React.createElement(Slider, {
+        min: 0,
+        max: 6,
+        stepSize: 1,
+        disabled: false,
+        showTrackFill: false,
+        value: sliderValue,
+        labelRenderer: this.renderLabels,
+        onChange: this.handleSliderChange
+      }), /*#__PURE__*/React.createElement("div", {
+        className: "slider-value-container"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "slider-value"
+      }, sliderValue, " "))), /*#__PURE__*/React.createElement("form", {
+        className: "questionnaire-btn-container",
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/React.createElement("button", {
+        className: "arrow-button button-submit",
+        type: "submit"
+      }, " Submit "))));
+    }
+
+    return render;
+  }();
+
+  return FinalMidSurveyThree;
+}(React.Component);
+
+FinalMidSurveyThree.stepName = "FinalMidSurveyThree";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"FinalMidSurvey4.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/final-mid-survey/FinalMidSurvey4.jsx                                                                    //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+var _createSuper;
+
+module.link("@babel/runtime/helpers/createSuper", {
+  default: function (v) {
+    _createSuper = v;
+  }
+}, 0);
+
+var _inheritsLoose;
+
+module.link("@babel/runtime/helpers/inheritsLoose", {
+  default: function (v) {
+    _inheritsLoose = v;
+  }
+}, 1);
+module.export({
+  "default": function () {
+    return FinalMidSurveyFour;
+  }
+});
+var React;
+module.link("react", {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var Slider;
+module.link("meteor/empirica:slider", {
+  "default": function (v) {
+    Slider = v;
+  }
+}, 1);
+var TimeSync;
+module.link("meteor/mizzao:timesync", {
+  TimeSync: function (v) {
+    TimeSync = v;
+  }
+}, 2);
+var moment;
+module.link("moment", {
+  "default": function (v) {
+    moment = v;
+  }
+}, 3);
+var Centered;
+module.link("meteor/empirica:core", {
+  Centered: function (v) {
+    Centered = v;
+  }
+}, 4);
+
+var FinalMidSurveyFour = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(FinalMidSurveyFour, _React$Component);
+
+  var _super = _createSuper(FinalMidSurveyFour);
+
+  function FinalMidSurveyFour() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+    _this.state = {
+      sliderValue: 0
+    };
+
+    _this.handleSliderChange = function (num) {
+      var _this$props = _this.props,
+          stage = _this$props.stage,
+          player = _this$props.player; // Rounding the number to 2 decimals max
+
+      _this.setState({
+        sliderValue: num
+      });
+
+      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+    };
+
+    _this.renderLabels = function (val) {
+      if (val === 0) {
+        // Min value
+        return val + " Poor";
+      } else if (val === 3) {
+        return val + " Neutral";
+      } else if (val === 6) {
+        // Max value
+        return val + " Great";
+      }
+
+      return "";
+    };
+
+    _this.handleSubmit = function (event) {
+      var _this$props2 = _this.props,
+          onNext = _this$props2.onNext,
+          player = _this$props2.player,
+          stage = _this$props2.stage;
+      event.preventDefault(); // TODO: log player response to survey question
+
+      player.set("final_survey_4", _this.state);
+      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+
+      _this.props.onSubmit(_this.state);
+    };
+
+    return _this;
+  }
+
+  var _proto = FinalMidSurveyFour.prototype;
+
+  _proto.render = function () {
+    function render() {
+      var _this$props3 = this.props,
+          game = _this$props3.game,
+          round = _this$props3.round,
+          stage = _this$props3.stage,
+          player = _this$props3.player;
+      var response = this.state.response;
+      var surveyNumber = 4;
+      var completedWidth = 590 / 5 * surveyNumber;
+      var uncompletedWidth = 590 - completedWidth;
+      var offset = 590 / 5 * 0.5;
+      var stageNumPosition = completedWidth - offset;
+      var sliderValue = this.state.sliderValue;
+      return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+        className: "intro-heading questionnaire-heading"
+      }, " To complete the challenge, please fill in the following questionnaire "), /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-content-container"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "progress-bar"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "completed-bar"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "completed-heading",
+        style: {
+          marginLeft: stageNumPosition
+        }
+      }, " ", surveyNumber, " "), /*#__PURE__*/React.createElement("img", {
+        src: "images/hr-color.png",
+        width: completedWidth + " px",
+        height: "7px"
+      })), /*#__PURE__*/React.createElement("img", {
+        src: "images/hr-color-dark.png",
+        width: uncompletedWidth + " px",
+        height: "7px"
+      })), /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-body"
+      }, /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, " On the scale below, rate how your team has been working in the recent trials "), /*#__PURE__*/React.createElement(Slider, {
+        min: 0,
+        max: 6,
+        stepSize: 1,
+        disabled: false,
+        showTrackFill: false,
+        value: sliderValue,
+        labelRenderer: this.renderLabels,
+        onChange: this.handleSliderChange
+      }), /*#__PURE__*/React.createElement("div", {
+        className: "slider-value-container"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "slider-value"
+      }, sliderValue, " "))), /*#__PURE__*/React.createElement("form", {
+        className: "questionnaire-btn-container",
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/React.createElement("button", {
+        className: "arrow-button button-submit",
+        type: "submit"
+      }, " Submit "))));
+    }
+
+    return render;
+  }();
+
+  return FinalMidSurveyFour;
+}(React.Component);
+
+FinalMidSurveyFour.stepName = "FinalMidSurveyFour";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"FinalMidSurvey5.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/final-mid-survey/FinalMidSurvey5.jsx                                                                    //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+var _createSuper;
+
+module.link("@babel/runtime/helpers/createSuper", {
+  default: function (v) {
+    _createSuper = v;
+  }
+}, 0);
+
+var _inheritsLoose;
+
+module.link("@babel/runtime/helpers/inheritsLoose", {
+  default: function (v) {
+    _inheritsLoose = v;
+  }
+}, 1);
+module.export({
+  "default": function () {
+    return FinalMidSurveyFive;
+  }
+});
+var React;
+module.link("react", {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var Slider;
+module.link("meteor/empirica:slider", {
+  "default": function (v) {
+    Slider = v;
+  }
+}, 1);
+var TimeSync;
+module.link("meteor/mizzao:timesync", {
+  TimeSync: function (v) {
+    TimeSync = v;
+  }
+}, 2);
+var moment;
+module.link("moment", {
+  "default": function (v) {
+    moment = v;
+  }
+}, 3);
+var Centered;
+module.link("meteor/empirica:core", {
+  Centered: function (v) {
+    Centered = v;
+  }
+}, 4);
+
+var FinalMidSurveyFive = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(FinalMidSurveyFive, _React$Component);
+
+  var _super = _createSuper(FinalMidSurveyFive);
+
+  function FinalMidSurveyFive() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+    _this.state = {
+      response: ""
+    };
+
+    _this.handleChange = function (event) {
+      var _this$setState;
+
+      var el = event.currentTarget;
+
+      _this.setState((_this$setState = {}, _this$setState[el.name] = el.value, _this$setState));
+    };
+
+    _this.handleSliderChange = function (num) {
+      var _this$props = _this.props,
+          stage = _this$props.stage,
+          player = _this$props.player; // Rounding the number to 2 decimals max
+
+      _this.setState({
+        sliderValue: num
+      });
+    };
+
+    _this.renderLabels = function (val) {
+      if (val === 0) {
+        // Min value
+        return val + " Unhappy";
+      } else if (val === 3) {
+        return val + " Neutral";
+      } else if (val === 6) {
+        // Max value
+        return val + " Happy";
+      }
+
+      return "";
+    };
+
+    _this.handleSubmit = function (event) {
+      var _this$props2 = _this.props,
+          onNext = _this$props2.onNext,
+          player = _this$props2.player,
+          stage = _this$props2.stage;
+      event.preventDefault(); // TODO: log player response to survey question
+
+      player.set("final_survey_5", _this.state);
+      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+
+      _this.props.onSubmit(_this.state);
+    };
+
+    return _this;
+  }
+
+  var _proto = FinalMidSurveyFive.prototype;
+
+  _proto.render = function () {
+    function render() {
+      var _this$props3 = this.props,
+          game = _this$props3.game,
+          round = _this$props3.round,
+          stage = _this$props3.stage,
+          player = _this$props3.player;
+      var response = this.state.response;
+      var surveyNumber = 5;
+      var completedWidth = 590 / 5 * surveyNumber;
+      var uncompletedWidth = 590 - completedWidth;
+      var offset = 590 / 5 * 0.5;
+      var stageNumPosition = completedWidth - offset;
+      return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+        className: "intro-heading questionnaire-heading"
+      }, " To complete the challenge, please fill in the following questionnaire "), /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-content-container"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "progress-bar"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "completed-bar"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "completed-heading",
+        style: {
+          marginLeft: stageNumPosition
+        }
+      }, " ", surveyNumber, " "), /*#__PURE__*/React.createElement("img", {
+        src: "images/hr-color.png",
+        width: completedWidth + " px",
+        height: "7px"
+      })), /*#__PURE__*/React.createElement("img", {
+        src: "images/hr-color-dark.png",
+        width: uncompletedWidth + " px",
+        height: "7px"
+      })), /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-body"
+      }, /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, " Do you think your group could improve its efficiency? If so, how? "), /*#__PURE__*/React.createElement("textarea", {
+        className: "survey-textarea",
+        dir: "auto",
+        id: "response",
+        name: "response",
+        value: response,
+        onChange: this.handleChange
+      })), /*#__PURE__*/React.createElement("form", {
+        className: "questionnaire-btn-container",
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/React.createElement("button", {
+        className: !response ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+        disabled: !response,
+        type: "submit"
+      }, " Submit "))));
+    }
+
+    return render;
+  }();
+
+  return FinalMidSurveyFive;
+}(React.Component);
+
+FinalMidSurveyFive.stepName = "FinalMidSurveyFive";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}},"ExitSurvey.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/ExitSurvey.jsx                                                                                          //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+var _createSuper;
+
+module.link("@babel/runtime/helpers/createSuper", {
+  default: function (v) {
+    _createSuper = v;
+  }
+}, 0);
+
+var _inheritsLoose;
+
+module.link("@babel/runtime/helpers/inheritsLoose", {
+  default: function (v) {
+    _inheritsLoose = v;
+  }
+}, 1);
+module.export({
+  "default": function () {
+    return ExitSurvey;
+  }
+});
+var React;
+module.link("react", {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var Centered;
+module.link("meteor/empirica:core", {
+  Centered: function (v) {
+    Centered = v;
+  }
+}, 1);
+
+var Radio = function (_ref) {
+  var selected = _ref.selected,
+      name = _ref.name,
+      value = _ref.value,
+      label = _ref.label,
+      onChange = _ref.onChange,
+      required = _ref.required;
+  return /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
+    type: "radio",
+    name: name,
+    value: value,
+    checked: selected === value,
+    onChange: onChange,
+    required: required ? "required" : ""
+  }), label);
+};
+
+var ExitSurvey = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(ExitSurvey, _React$Component);
+
+  var _super = _createSuper(ExitSurvey);
+
+  function ExitSurvey() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+    _this.state = {
+      age: "",
+      gender: "",
+      strength: "",
+      fair: "",
+      feedback: ""
+    };
+
+    _this.handleChange = function (event) {
+      var _this$setState;
+
+      var el = event.currentTarget;
+
+      _this.setState((_this$setState = {}, _this$setState[el.name] = el.value, _this$setState));
+    };
+
+    _this.handleSubmit = function (event) {
+      event.preventDefault();
+
+      _this.props.onSubmit(_this.state);
+    };
+
+    return _this;
+  }
+
+  var _proto = ExitSurvey.prototype;
+
+  _proto.render = function () {
+    function render() {
+      var _this$props = this.props,
+          player = _this$props.player,
+          game = _this$props.game;
+      var _this$state = this.state,
+          age = _this$state.age,
+          gender = _this$state.gender,
+          strength = _this$state.strength,
+          fair = _this$state.fair,
+          feedback = _this$state.feedback,
+          education = _this$state.education;
+      var basePay = game.treatment.basePay;
+      var conversionRate = game.treatment.conversionRate;
+      return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+        className: "exit-survey"
+      }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, "Please submit the following code to receive your bonus:", " ", /*#__PURE__*/React.createElement("strong", null, " C1FLL9CG "), "."), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""), /*#__PURE__*/React.createElement("p", null, "Your team got a total of ", /*#__PURE__*/React.createElement("strong", null, player.get("score")), " correct.", basePay && conversionRate ? " You will receive an additional performance bonus of " + player.get("score") + " x $" + conversionRate + "." : " You will receive a base pay of $2 and an additional performance bonus of " + player.get("score") + " x 1, for a total of " + (2 + parseInt(player.get("score")) * 1) + "."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "form-line"
+      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+        htmlFor: "age"
+      }, "Age"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
+        id: "age",
+        type: "number",
+        min: "0",
+        max: "150",
+        step: "1",
+        dir: "auto",
+        name: "age",
+        value: age,
+        onChange: this.handleChange,
+        required: true
+      }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+        htmlFor: "gender"
+      }, "Gender"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
+        id: "gender",
+        type: "text",
+        dir: "auto",
+        name: "gender",
+        value: gender,
+        onChange: this.handleChange,
+        required: true,
+        autoComplete: "off"
+      })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "Highest Education Qualification"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Radio, {
+        selected: education,
+        name: "education",
+        value: "high-school",
+        label: "High School",
+        onChange: this.handleChange,
+        required: true
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: education,
+        name: "education",
+        value: "bachelor",
+        label: "US Bachelor's Degree",
+        onChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: education,
+        name: "education",
+        value: "master",
+        label: "Master's or higher",
+        onChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: education,
+        name: "education",
+        value: "other",
+        label: "Other",
+        onChange: this.handleChange
+      }))), /*#__PURE__*/React.createElement("div", {
+        className: "form-line thirds"
+      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+        htmlFor: "strength"
+      }, "How would you describe your strength in the game?"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
+        dir: "auto",
+        id: "strength",
+        name: "strength",
+        value: strength,
+        onChange: this.handleChange,
+        required: true
+      }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+        htmlFor: "fair"
+      }, "Do you feel the pay was fair?"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
+        dir: "auto",
+        id: "fair",
+        name: "fair",
+        value: fair,
+        onChange: this.handleChange,
+        required: true
+      }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+        htmlFor: "feedback"
+      }, "Feedback, including problems you encountered."), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
+        dir: "auto",
+        id: "feedback",
+        name: "feedback",
+        value: feedback,
+        onChange: this.handleChange,
+        required: true
+      })))), /*#__PURE__*/React.createElement("button", {
+        type: "submit"
+      }, "Submit"))));
+    }
+
+    return render;
+  }();
+
+  return ExitSurvey;
+}(React.Component);
+
+ExitSurvey.stepName = "ExitSurvey";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"FailedAttentionCheck.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/FailedAttentionCheck.jsx                                                                                //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+var _createSuper;
+
+module.link("@babel/runtime/helpers/createSuper", {
+  default: function (v) {
+    _createSuper = v;
+  }
+}, 0);
+
+var _inheritsLoose;
+
+module.link("@babel/runtime/helpers/inheritsLoose", {
+  default: function (v) {
+    _inheritsLoose = v;
+  }
+}, 1);
+module.export({
+  "default": function () {
+    return FailedAttentionCheck;
+  }
+});
+var React, Component;
+module.link("react", {
+  "default": function (v) {
+    React = v;
+  },
+  Component: function (v) {
+    Component = v;
+  }
+}, 0);
+var Meteor;
+module.link("meteor/meteor", {
+  Meteor: function (v) {
+    Meteor = v;
+  }
+}, 1);
+var Centered;
+module.link("meteor/empirica:core", {
+  Centered: function (v) {
+    Centered = v;
+  }
+}, 2);
+
+var FailedAttentionCheck = /*#__PURE__*/function (_Component) {
+  _inheritsLoose(FailedAttentionCheck, _Component);
+
+  var _super = _createSuper(FailedAttentionCheck);
+
+  function FailedAttentionCheck() {
+    return _Component.apply(this, arguments) || this;
+  }
+
+  var _proto = FailedAttentionCheck.prototype;
+
+  _proto.render = function () {
+    function render() {
+      return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+        className: "failed-attention-container"
+      }, /*#__PURE__*/React.createElement("h2", {
+        className: "failed-attention-text"
+      }, "YOU FAILED THE ATTENTION CHECK, AND HAVE NOT BEEN SELECTED TO PLAY. PLEASE DO NOT TRY TO COMPLETE THE TASK AGAIN. THANK YOU FOR YOUR TIME. PLEASE RETURN YOUR SUBMISSION BY CLOSING THE SURVEY AND CLICKING 'STOP WITHOUT COMLPETING' ON PROLIFIC.\"")));
+    }
+
+    return render;
+  }();
+
+  return FailedAttentionCheck;
+}(Component);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"PreQualExitSurvey.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/PreQualExitSurvey.jsx                                                                                   //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+var _createSuper;
+
+module.link("@babel/runtime/helpers/createSuper", {
+  default: function (v) {
+    _createSuper = v;
+  }
+}, 0);
+
+var _inheritsLoose;
+
+module.link("@babel/runtime/helpers/inheritsLoose", {
+  default: function (v) {
+    _inheritsLoose = v;
+  }
+}, 1);
+module.export({
+  "default": function () {
+    return PreQualExitSurvey;
+  }
+});
+var React;
+module.link("react", {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var Centered;
+module.link("meteor/empirica:core", {
+  Centered: function (v) {
+    Centered = v;
+  }
+}, 1);
+
+var Radio = function (_ref) {
+  var selected = _ref.selected,
+      name = _ref.name,
+      value = _ref.value,
+      label = _ref.label,
+      onChange = _ref.onChange,
+      required = _ref.required;
+  return /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
+    type: "radio",
+    name: name,
+    value: value,
+    checked: selected === value,
+    onChange: onChange,
+    required: required ? "required" : ""
+  }), label);
+};
+
+var PreQualExitSurvey = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(PreQualExitSurvey, _React$Component);
+
+  var _super = _createSuper(PreQualExitSurvey);
+
+  function PreQualExitSurvey() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+    _this.state = {
+      age: "",
+      gender: "",
+      email: "",
+      feedback: ""
+    };
+
+    _this.handleChange = function (event) {
+      var _this$setState;
+
+      var el = event.currentTarget;
+
+      _this.setState((_this$setState = {}, _this$setState[el.name] = el.value, _this$setState));
+    };
+
+    _this.handleSubmit = function (event) {
+      event.preventDefault();
+
+      _this.props.onSubmit(_this.state);
+    };
+
+    return _this;
+  }
+
+  var _proto = PreQualExitSurvey.prototype;
+
+  _proto.render = function () {
+    function render() {
+      var _this$props = this.props,
+          player = _this$props.player,
+          game = _this$props.game;
+      var _this$state = this.state,
+          age = _this$state.age,
+          gender = _this$state.gender,
+          feedback = _this$state.feedback,
+          education = _this$state.education;
+      var basePay = game.treatment.basePay;
+      var conversionRate = game.treatment.conversionRate;
+      return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+        className: "exit-survey"
+      }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, "Please submit the following code:", " ", /*#__PURE__*/React.createElement("strong", null, " CZ586HD9 ")), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""), /*#__PURE__*/React.createElement("p", null, "Thank you for taking time to take this pre-qualification survey ! We will finish screening all the players and send out a date and time to those that qualify for our future game.", basePay && conversionRate ? " You will receive a base pay of $" + basePay + " for taking this pre-qualification." : " You will receive a base pay of $2 for taking this pre-qualification."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "form-line"
+      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+        htmlFor: "age"
+      }, "Age"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
+        id: "age",
+        type: "number",
+        min: "0",
+        max: "150",
+        step: "1",
+        dir: "auto",
+        name: "age",
+        value: age,
+        onChange: this.handleChange,
+        required: true
+      }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+        htmlFor: "gender"
+      }, "Gender"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
+        id: "gender",
+        type: "text",
+        dir: "auto",
+        name: "gender",
+        value: gender,
+        onChange: this.handleChange,
+        required: true,
+        autoComplete: "off"
+      })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "Highest Education Qualification"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Radio, {
+        selected: education,
+        name: "education",
+        value: "high-school",
+        label: "High School",
+        onChange: this.handleChange,
+        required: true
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: education,
+        name: "education",
+        value: "bachelor",
+        label: "US Bachelor's Degree",
+        onChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: education,
+        name: "education",
+        value: "master",
+        label: "Master's or higher",
+        onChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: education,
+        name: "education",
+        value: "other",
+        label: "Other",
+        onChange: this.handleChange
+      }))), /*#__PURE__*/React.createElement("div", {
+        className: "form-line thirds"
+      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+        htmlFor: "feedback"
+      }, "Feedback, including problems you encountered."), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
+        dir: "auto",
+        id: "feedback",
+        name: "feedback",
+        value: feedback,
+        onChange: this.handleChange,
+        required: true
+      })))), /*#__PURE__*/React.createElement("button", {
+        type: "submit"
+      }, "Submit"))));
+    }
+
+    return render;
+  }();
+
+  return PreQualExitSurvey;
+}(React.Component);
+
+PreQualExitSurvey.stepName = "ExitSurvey";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"Sorry.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/Sorry.jsx                                                                                               //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+var _createSuper;
+
+module.link("@babel/runtime/helpers/createSuper", {
+  default: function (v) {
+    _createSuper = v;
+  }
+}, 0);
+
+var _inheritsLoose;
+
+module.link("@babel/runtime/helpers/inheritsLoose", {
+  default: function (v) {
+    _inheritsLoose = v;
+  }
+}, 1);
+module.export({
+  "default": function () {
+    return Sorry;
+  }
+});
+var React, Component;
+module.link("react", {
+  "default": function (v) {
+    React = v;
+  },
+  Component: function (v) {
+    Component = v;
+  }
+}, 0);
+var Meteor;
+module.link("meteor/meteor", {
+  Meteor: function (v) {
+    Meteor = v;
+  }
+}, 1);
+var Centered;
+module.link("meteor/empirica:core", {
+  Centered: function (v) {
+    Centered = v;
+  }
+}, 2);
+var FailedAttentionCheck;
+module.link("./FailedAttentionCheck", {
+  "default": function (v) {
+    FailedAttentionCheck = v;
+  }
+}, 3);
+
+var Sorry = /*#__PURE__*/function (_Component) {
+  _inheritsLoose(Sorry, _Component);
+
+  var _super = _createSuper(Sorry);
+
+  function Sorry() {
+    return _Component.apply(this, arguments) || this;
+  }
+
+  var _proto = Sorry.prototype;
+
+  _proto.render = function () {
+    function render() {
+      var _this$props = this.props,
+          player = _this$props.player,
+          game = _this$props.game;
+      var msg;
+
+      switch (player.exitStatus) {
+        case "gameFull":
+          msg = "All games you are eligible for have filled up too fast... Sorry, there will be no more games in the near future.";
+          break;
+
+        case "gameLobbyTimedOut":
+          msg = "There were NOT enough players for the game to start... Thank you for participating in this game."; // msg = "There were NOT enough players for the game to start... Thank you for participating in this game, you will still get paid the base amount for passing the attention check. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
+
+          break;
+
+        case "playerEndedLobbyWait":
+          msg = "You decided to stop waiting, we are sorry it was too long a wait.";
+          break;
+
+        default:
+          msg = "Unfortunately, the Game was cancelled... Either there were not enough players or there was a technical issue with the game. If it was the latter, please contact us and we can restart the game."; // msg = "Unfortunately, the Game was cancelled... Thank you for participating in this game, please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly.";
+
+          break;
+      }
+
+      if (player.exitReason === "failedQuestion") {
+        return /*#__PURE__*/React.createElement(FailedAttentionCheck, null);
+      }
+
+      if (player.exitReason === "returnSubmission") {
+        msg = "You did not consent to participating for the whole duration of our future games. Please return your submission by closing the survey and clicking 'Stop Without Completing' on Prolific.";
+      }
+
+      if (player.exitReason === "inactive") {
+        msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid including any bonuses for the rounds you successfully passed. Please submit the following completion code: C1FLL9CG"; // msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
+      }
+
+      if (player.exitReason === "someoneInactive") {
+        msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid including any bonuses for the rounds you successfully passed. Please submit the following completion code: C1FLL9CG"; // msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly. ";
+      }
+
+      if (player.exitReason === "failedEnglishScreen") {
+        // msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game."
+        msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this survey. Please return your submission by closing the survey and clicking 'Stop Without Completing' on Prolific.";
+      }
+
+      if (player.exitReason === "minPlayerCountNotMaintained") {
+        msg = "Unfortunately, there were too few players active in this game and the game had to be cancelled. Thank you for participating in this game, please submit the following completion code: C1FLL9CG"; // msg = `Unfortunately, there were too few players active in this game and the game had to be cancelled. Thank you for participating in this game, please submit the follow code ${player._id} to the HIT and we will make sure you get paid accordingly. `
+      } // Only for dev
+
+
+      if (!game && Meteor.isDevelopment) {
+        msg = "Unfortunately the Game was cancelled because of failed to init Game (only visible in development, check the logs).";
+      }
+
+      return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Sorry!"), /*#__PURE__*/React.createElement("p", null, "Sorry, you were not able to play today! ", msg), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Please contact the researcher to see if there are more games available."))));
+    }
+
+    return render;
+  }();
+
+  return Sorry;
+}(Component);
+
+Sorry.stepName = "Sorry";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"Thanks.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/Thanks.jsx                                                                                              //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+var _createSuper;
+
+module.link("@babel/runtime/helpers/createSuper", {
+  default: function (v) {
+    _createSuper = v;
+  }
+}, 0);
+
+var _inheritsLoose;
+
+module.link("@babel/runtime/helpers/inheritsLoose", {
+  default: function (v) {
+    _inheritsLoose = v;
+  }
+}, 1);
+module.export({
+  "default": function () {
+    return Thanks;
+  }
+});
+var React;
+module.link("react", {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var moment;
+module.link("moment", {
+  "default": function (v) {
+    moment = v;
+  }
+}, 1);
+var Centered;
+module.link("meteor/empirica:core", {
+  Centered: function (v) {
+    Centered = v;
+  }
+}, 2);
+
+var Thanks = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(Thanks, _React$Component);
+
+  var _super = _createSuper(Thanks);
+
+  function Thanks() {
+    return _React$Component.apply(this, arguments) || this;
+  }
+
+  var _proto = Thanks.prototype;
+
+  _proto.render = function () {
+    function render() {
+      var _this$props = this.props,
+          player = _this$props.player,
+          game = _this$props.game;
+      var basePay = game.treatment.basePay;
+      var conversionRate = game.treatment.conversionRate;
+      return /*#__PURE__*/React.createElement("div", {
+        className: "finished"
+      }, /*#__PURE__*/React.createElement("div", null, player.get("nodeId") ? /*#__PURE__*/React.createElement("p", null, " If you are receiving this message, it means you have participated in one of our symbol task games before. As mentioned in out HIT expectations, if you've participated in one of our HIT sessions before, you cannot participate in another. We are trying to gather new players for each game. If you think this is a mistake, please do no hesistate to reach out.") : /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Finished!"), player.exitReason === "preQualSuccess" ?
+      /*#__PURE__*/
+      // TODO: mturk
+      // <p>Thank you for participating! Please submit the following code to receive your bonus 
+      // { basePay && conversionRate ? ` of $${basePay} : ` : " "} 
+      // <strong>{player._id}</strong>
+      // </p> 
+      // TODO: Prolific
+      React.createElement("p", null, "Thank you for participating! Please submit the following code: C1FLL9CG") : /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $" + (basePay + parseInt(player.get("score") * conversionRate)) + " : " : " ", /*#__PURE__*/React.createElement("strong", null, player._id)))));
+    }
+
+    return render;
+  }();
+
+  return Thanks;
+}(React.Component);
+
+Thanks.stepName = "Thanks";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}},"game":{"mid-survey":{"MidSurvey1.jsx":function module(require,exports,module){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                     //
@@ -895,12 +2605,6 @@ module.link("meteor/empirica:core", {
     Centered = v;
   }
 }, 4);
-var PlayerTab;
-module.link("../PlayerTab", {
-  "default": function (v) {
-    PlayerTab = v;
-  }
-}, 5);
 
 var MidSurveyFive = /*#__PURE__*/function (_React$Component) {
   _inheritsLoose(MidSurveyFive, _React$Component);
@@ -1294,10 +2998,14 @@ var inactiveTimer = /*#__PURE__*/function (_React$Component) {
     };
 
     _this.onCloseModal = function () {
-      var player = _this.props.player;
+      var _this$props = _this.props,
+          player = _this$props.player,
+          game = _this$props.game;
+      var inactiveDuration = game.treatment.userInactivityDuration;
+      var extra30Seconds = inactiveDuration - game.treatment.idleWarningTime;
 
       if (!player.get("inactiveWarningUsed")) {
-        player.set("lastActive", moment(TimeSync.serverTime(null, 1000)).subtract(30, 'seconds'));
+        player.set("lastActive", moment(TimeSync.serverTime(null, 1000)).subtract(extra30Seconds, 'seconds'));
         player.set("inactiveWarningUsed", true);
       }
 
@@ -1356,11 +3064,11 @@ var inactiveTimer = /*#__PURE__*/function (_React$Component) {
 
   _proto.render = function () {
     function render() {
-      var _this$props = this.props,
-          game = _this$props.game,
-          round = _this$props.round,
-          stage = _this$props.stage,
-          player = _this$props.player;
+      var _this$props2 = this.props,
+          game = _this$props2.game,
+          round = _this$props2.round,
+          stage = _this$props2.stage,
+          player = _this$props2.player;
       this.checkEveryoneLastActive(game, player); // const currentTime = moment(TimeSync.serverTime(null, 1000));
       // const inactiveDuration = game.treatment.userInactivityDuration;
       // const inactiveDurationPlus30 = inactiveDuration + game.treatment.idleWarningTime;
@@ -3395,57 +5103,67 @@ var englishScreeningQuestions = [{
   question: "Was the trainer puzzled by the tigers' behavior?",
   answer: "Yes",
   question_number: "10"
-}, {
-  passage: "The house owner came downstairs to find out what made such a racket but she didn't see anything suspicious.",
-  question: "Did the house owner make a racket?",
-  answer: "No",
-  question_number: "11"
-}, {
-  passage: "The students could not wait to find out what surprise the teacher was talking about in class.",
-  question: "Were the students preparing a surprise for the teacher?",
-  answer: "No",
-  question_number: "12"
-}, {
-  passage: "The secretary for the clinic tried to figure out who prescribed what.",
-  question: "Did the secretary try to prescribe something?",
-  answer: "No",
-  question_number: "13"
-}, {
-  passage: "The film director could not remember who played the lead role in the film his colleague just finished shooting.",
-  question: "Was the film director trying to remember something about his colleague's film?",
-  answer: "Yes",
-  question_number: "14"
-}, {
-  passage: "The general was trying to decide when would be the best time to attack.",
-  question: "Was the general planning an attack?",
-  answer: "Yes",
-  question_number: "15"
-}, {
-  passage: "The writer could not decide who the main character would marry in the end of the novel.",
-  question: "Was the writer trying to figure out the ending of the novel?",
-  answer: "Yes",
-  question_number: "16"
-}, {
-  passage: "The student tried to find out why he got a bad grade on the test.",
-  question: "Did the student want to know the reason for a bad grade?",
-  answer: "Yes",
-  question_number: "17"
-}, {
-  passage: "The telemarketer asked who the head of the household was, and the man just hung up the phone.",
-  question: "Did the telemarketer hang up the phone?",
-  answer: "No",
-  question_number: "18"
-}, {
-  passage: "The administrator tried to remember what who donated to whom.",
-  question: "Did the administrator try to donate something?",
-  answer: "No",
-  question_number: "19"
-}, {
-  passage: "The farmer was trying to decide what achievement to submit to the fair this year.",
-  question: "Did the farmer decide not to go to the fair this year?",
-  answer: "No",
-  question_number: "20"
-}];
+} // {
+//   passage: "The house owner came downstairs to find out what made such a racket but she didn't see anything suspicious.",
+//   question: "Did the house owner make a racket?",
+//   answer: "No",
+//   question_number: "11",
+// },
+// {
+//   passage: "The students could not wait to find out what surprise the teacher was talking about in class.",
+//   question: "Were the students preparing a surprise for the teacher?",
+//   answer: "No",
+//   question_number: "12",
+// },
+// {
+//   passage: "The secretary for the clinic tried to figure out who prescribed what.",
+//   question: "Did the secretary try to prescribe something?",
+//   answer: "No",
+//   question_number: "13",
+// },
+// {
+//   passage: "The film director could not remember who played the lead role in the film his colleague just finished shooting.",
+//   question: "Was the film director trying to remember something about his colleague's film?",
+//   answer: "Yes",
+//   question_number: "14",
+// },
+// {
+//   passage: "The general was trying to decide when would be the best time to attack.",
+//   question: "Was the general planning an attack?",
+//   answer: "Yes",
+//   question_number: "15",
+// },
+// {
+//   passage: "The writer could not decide who the main character would marry in the end of the novel.",
+//   question: "Was the writer trying to figure out the ending of the novel?",
+//   answer: "Yes",
+//   question_number: "16",
+// },
+// {
+//   passage: "The student tried to find out why he got a bad grade on the test.",
+//   question: "Did the student want to know the reason for a bad grade?",
+//   answer: "Yes",
+//   question_number: "17",
+// },
+// {
+//   passage: "The telemarketer asked who the head of the household was, and the man just hung up the phone.",
+//   question: "Did the telemarketer hang up the phone?",
+//   answer: "No",
+//   question_number: "18",
+// },
+// {
+//   passage: "The administrator tried to remember what who donated to whom.",
+//   question: "Did the administrator try to donate something?",
+//   answer: "No",
+//   question_number: "19",
+// },
+// {
+//   passage: "The farmer was trying to decide what achievement to submit to the fair this year.",
+//   question: "Did the farmer decide not to go to the fair this year?",
+//   answer: "No",
+//   question_number: "20",
+// },
+];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 },"EnglishScreen.jsx":function module(require,exports,module){
@@ -3580,7 +5298,7 @@ var EnglishScreen = /*#__PURE__*/function (_React$Component) {
     _this.passCorrectThreshold = function () {
       var player = _this.props.player;
       var numCorrect = 0;
-      var totalNumQuestions = 20;
+      var totalNumQuestions = englishScreeningQuestions.length;
       englishScreeningQuestions.forEach(function (questionSet) {
         var passage = questionSet.passage,
             question = questionSet.question,
@@ -4596,7 +6314,7 @@ var AllQuiz = /*#__PURE__*/function (_React$Component) {
         className: "question-section"
       }, /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
-      }, "Is the following statement true or false?", game.treatment.endGameIfPlayerIdle ? /*#__PURE__*/React.createElement("span", null, " If any member of my team doesn't register a guess or communicate with a colleague for long time, the task will end and the entire team (including myself) will be sent to the exit page of the survey.") : /*#__PURE__*/React.createElement("span", null, " If a member of my team doesn't register a guess or communicate with a colleague for long time, the inactive player will be kicked and the task will continue for the rest of the team.")), /*#__PURE__*/React.createElement(Radio, {
+      }, "Is the following statement true or false?", game.treatment.endGameIfPlayerIdle ? /*#__PURE__*/React.createElement("span", null, " If any member of my team doesn't register a guess or communicate with a colleague for a long time, the task will end and the entire team (including myself) will be sent to the exit page of the survey.") : /*#__PURE__*/React.createElement("span", null, " If a member of my team doesn't register a guess or communicate with a colleague for a long time, the inactive player will be kicked and the task will continue for the rest of the team.")), /*#__PURE__*/React.createElement(Radio, {
         selected: q4,
         name: "q4",
         value: "yes",
@@ -4753,9 +6471,8 @@ var AttentionCheckModal = /*#__PURE__*/function (_React$Component) {
     function render() {
       var _this$props = this.props,
           player = _this$props.player,
-          onPrev = _this$props.onPrev,
+          triesLeft = _this$props.triesLeft,
           onCloseModal = _this$props.onCloseModal;
-      var triesLeft = player.get("attentionCheckTries");
       return /*#__PURE__*/React.createElement("div", {
         className: "dark-bg",
         onClick: onCloseModal
@@ -4765,18 +6482,371 @@ var AttentionCheckModal = /*#__PURE__*/function (_React$Component) {
         className: "modal"
       }, /*#__PURE__*/React.createElement("div", {
         className: "modal-content"
-      }, "You have failed the attention check. You have ", triesLeft, " tries left. Please go back and reread the instructions."), /*#__PURE__*/React.createElement("div", {
+      }, "You got this comprehension check question wrong. You have ", triesLeft, " try left. Please carefully reread the instructions."), /*#__PURE__*/React.createElement("div", {
         className: "attention-check-button-container"
       }, /*#__PURE__*/React.createElement("button", {
         className: "modal-button",
-        onClick: onPrev
-      }, "Review")))));
+        onClick: onCloseModal
+      }, "Try Again")))));
     }
 
     return render;
   }();
 
   return AttentionCheckModal;
+}(React.Component);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"QuizFive.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/quiz/QuizFive.jsx                                                                                      //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+var _createSuper;
+
+module.link("@babel/runtime/helpers/createSuper", {
+  default: function (v) {
+    _createSuper = v;
+  }
+}, 0);
+
+var _inheritsLoose;
+
+module.link("@babel/runtime/helpers/inheritsLoose", {
+  default: function (v) {
+    _inheritsLoose = v;
+  }
+}, 1);
+module.export({
+  "default": function () {
+    return QuizFive;
+  }
+});
+var React;
+module.link("react", {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+module.link("../../../public/css/intro.css");
+var Centered;
+module.link("meteor/empirica:core", {
+  Centered: function (v) {
+    Centered = v;
+  }
+}, 1);
+var AttentionCheckModal;
+module.link("./AttentionCheckModal", {
+  "default": function (v) {
+    AttentionCheckModal = v;
+  }
+}, 2);
+
+var Radio = function (_ref) {
+  var selected = _ref.selected,
+      name = _ref.name,
+      value = _ref.value,
+      label = _ref.label,
+      onChange = _ref.onChange;
+  return /*#__PURE__*/React.createElement("label", {
+    className: "questionnaire-radio"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "quiz-button",
+    type: "radio",
+    name: name,
+    value: value,
+    checked: selected === value,
+    onChange: onChange
+  }), label);
+};
+
+var QuizFive = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(QuizFive, _React$Component);
+
+  var _super = _createSuper(QuizFive);
+
+  function QuizFive() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+    _this.state = {
+      modalIsOpen: false
+    };
+
+    _this.handleChange = function (event) {
+      var _this$setState;
+
+      var el = event.currentTarget;
+
+      _this.setState((_this$setState = {}, _this$setState[el.name] = el.value, _this$setState));
+    };
+
+    _this.handleSubmit = function (event) {
+      var _this$props = _this.props,
+          hasPrev = _this$props.hasPrev,
+          hasNext = _this$props.hasNext,
+          onNext = _this$props.onNext,
+          onPrev = _this$props.onPrev,
+          game = _this$props.game,
+          player = _this$props.player;
+      event.preventDefault();
+
+      if (_this.state.response === 'one') {
+        onNext();
+      } else {
+        var currentTriesLeft = player.get("attentionCheck1Tries");
+        var attentionCheck1Answer = _this.state.response;
+        player.set("attentionCheck1-" + currentTriesLeft, attentionCheck1Answer);
+        player.set("attentionCheck1Tries", currentTriesLeft - 1);
+
+        if (currentTriesLeft - 1 <= 0) {
+          player.exit("failedQuestion");
+        } else {
+          _this.onOpenModal();
+        }
+      }
+    };
+
+    _this.onOpenModal = function () {
+      _this.setState({
+        modalIsOpen: true
+      });
+    };
+
+    _this.onCloseModal = function () {
+      _this.setState({
+        modalIsOpen: false
+      });
+    };
+
+    return _this;
+  }
+
+  var _proto = QuizFive.prototype;
+
+  _proto.componentDidMount = function () {
+    function componentDidMount() {
+      var player = this.props.player;
+
+      if (!player.get("attentionCheck1Tries")) {
+        player.set("attentionCheck1Tries", 2);
+      }
+    }
+
+    return componentDidMount;
+  }();
+
+  _proto.render = function () {
+    function render() {
+      var player = this.props.player;
+      var response = this.state.response;
+      return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+        className: "intro-heading questionnaire-heading"
+      }, " Questionnaire "), /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-content-container"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-body"
+      }, /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, " The task requires that members of a small network work together to identify abstract symbols for multiple trials. At the beginning of each trial, each member of your network will be assigned a set of symbols. One and only one of those symbols will be shared among you. Your job is to discover the shared symbol by communicating with the members of your network within the time allotted. Your symbols are illustrated in the \"my card\" box. When you believe you have identified the shared symbol, select it and then hit the submit answer button. If your team runs out of time, your team will be marked incorrect and you will move onto the next round.  "), /*#__PURE__*/React.createElement("p", null, "----------------------------------------------------------------------------------------------------"), /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, "On any trial, how many abstract symbols will you and any member of your team have in common?"), /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        name: "response",
+        value: "zero",
+        label: "0",
+        onChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        name: "response",
+        value: "one",
+        label: "1",
+        onChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        name: "response",
+        value: "two",
+        label: "2",
+        onChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        name: "response",
+        value: "many",
+        label: "More than 2",
+        onChange: this.handleChange
+      })), /*#__PURE__*/React.createElement("form", {
+        className: "questionnaire-btn-container",
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/React.createElement("button", {
+        className: !response ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+        disabled: !response,
+        type: "submit"
+      }, " Submit ")), this.state.modalIsOpen && /*#__PURE__*/React.createElement(AttentionCheckModal, {
+        player: player,
+        triesLeft: player.get("attentionCheck1Tries"),
+        onCloseModal: this.onCloseModal
+      })));
+    }
+
+    return render;
+  }();
+
+  return QuizFive;
+}(React.Component);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"QuizOne.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/quiz/QuizOne.jsx                                                                                       //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+var _createSuper;
+
+module.link("@babel/runtime/helpers/createSuper", {
+  default: function (v) {
+    _createSuper = v;
+  }
+}, 0);
+
+var _inheritsLoose;
+
+module.link("@babel/runtime/helpers/inheritsLoose", {
+  default: function (v) {
+    _inheritsLoose = v;
+  }
+}, 1);
+module.export({
+  "default": function () {
+    return QuizOne;
+  }
+});
+var React;
+module.link("react", {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+module.link("../../../public/css/intro.css");
+var Centered;
+module.link("meteor/empirica:core", {
+  Centered: function (v) {
+    Centered = v;
+  }
+}, 1);
+
+var Radio = function (_ref) {
+  var selected = _ref.selected,
+      name = _ref.name,
+      value = _ref.value,
+      label = _ref.label,
+      onChange = _ref.onChange;
+  return /*#__PURE__*/React.createElement("label", {
+    className: "questionnaire-radio"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "quiz-button",
+    type: "radio",
+    name: name,
+    value: value,
+    checked: selected === value,
+    onChange: onChange
+  }), label);
+};
+
+var QuizOne = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(QuizOne, _React$Component);
+
+  var _super = _createSuper(QuizOne);
+
+  function QuizOne() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+    _this.state = {};
+
+    _this.handleChange = function (event) {
+      var _this$setState;
+
+      var el = event.currentTarget;
+
+      _this.setState((_this$setState = {}, _this$setState[el.name] = el.value, _this$setState));
+    };
+
+    _this.handleSubmit = function (event) {
+      var _this$props = _this.props,
+          hasPrev = _this$props.hasPrev,
+          hasNext = _this$props.hasNext,
+          onNext = _this$props.onNext,
+          onPrev = _this$props.onPrev,
+          game = _this$props.game,
+          player = _this$props.player;
+      event.preventDefault();
+
+      if (_this.state.response === 'yes') {
+        onNext();
+      } else {
+        player.exit("returnSubmission");
+      }
+    };
+
+    return _this;
+  }
+
+  var _proto = QuizOne.prototype;
+
+  _proto.render = function () {
+    function render() {
+      var _this$props2 = this.props,
+          game = _this$props2.game,
+          player = _this$props2.player;
+      var response = this.state.response;
+      return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+        className: "intro-heading questionnaire-heading"
+      }, " Questionnaire "), /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-content-container"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-body"
+      }, /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, "Are you willing to participate in an online team exercise (in the future) that could last for approximately ", game.treatment.maxGameTime, " minutes?"), /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        name: "response",
+        value: "yes",
+        label: "Yes",
+        onChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        name: "response",
+        value: "no",
+        label: "No",
+        onChange: this.handleChange
+      })), /*#__PURE__*/React.createElement("form", {
+        className: "questionnaire-btn-container",
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/React.createElement("button", {
+        className: !response ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+        disabled: !response,
+        type: "submit"
+      }, " Submit "))));
+    }
+
+    return render;
+  }();
+
+  return QuizOne;
 }(React.Component);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -4921,6 +6991,609 @@ var QuizOverview = /*#__PURE__*/function (_React$Component) {
 }(React.Component);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+},"QuizSeven.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/quiz/QuizSeven.jsx                                                                                     //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+var _createSuper;
+
+module.link("@babel/runtime/helpers/createSuper", {
+  default: function (v) {
+    _createSuper = v;
+  }
+}, 0);
+
+var _inheritsLoose;
+
+module.link("@babel/runtime/helpers/inheritsLoose", {
+  default: function (v) {
+    _inheritsLoose = v;
+  }
+}, 1);
+module.export({
+  "default": function () {
+    return QuizSeven;
+  }
+});
+var React;
+module.link("react", {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+module.link("../../../public/css/intro.css");
+var Centered;
+module.link("meteor/empirica:core", {
+  Centered: function (v) {
+    Centered = v;
+  }
+}, 1);
+var AttentionCheckModal;
+module.link("./AttentionCheckModal", {
+  "default": function (v) {
+    AttentionCheckModal = v;
+  }
+}, 2);
+
+var Radio = function (_ref) {
+  var selected = _ref.selected,
+      name = _ref.name,
+      value = _ref.value,
+      label = _ref.label,
+      onChange = _ref.onChange;
+  return /*#__PURE__*/React.createElement("label", {
+    className: "questionnaire-radio"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "quiz-button",
+    type: "radio",
+    name: name,
+    value: value,
+    checked: selected === value,
+    onChange: onChange
+  }), label);
+};
+
+var QuizSeven = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(QuizSeven, _React$Component);
+
+  var _super = _createSuper(QuizSeven);
+
+  function QuizSeven() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+    _this.state = {
+      modalIsOpen: false
+    };
+
+    _this.handleChange = function (event) {
+      var _this$setState;
+
+      var el = event.currentTarget;
+
+      _this.setState((_this$setState = {}, _this$setState[el.name] = el.value, _this$setState));
+    };
+
+    _this.handleSubmit = function (event) {
+      var _this$props = _this.props,
+          hasPrev = _this$props.hasPrev,
+          hasNext = _this$props.hasNext,
+          onNext = _this$props.onNext,
+          onPrev = _this$props.onPrev,
+          game = _this$props.game,
+          player = _this$props.player;
+      event.preventDefault();
+
+      if (_this.state.response === 'self') {
+        onNext();
+      } else {
+        var currentTriesLeft = player.get("attentionCheck3Tries");
+        var attentionCheck3Answer = _this.state.response;
+        player.set("attentionCheck3-" + currentTriesLeft, attentionCheck3Answer);
+        player.set("attentionCheck3Tries", currentTriesLeft - 1);
+
+        if (currentTriesLeft - 1 <= 0) {
+          player.exit("failedQuestion");
+        } else {
+          _this.onOpenModal();
+        }
+      }
+    };
+
+    _this.onOpenModal = function () {
+      _this.setState({
+        modalIsOpen: true
+      });
+    };
+
+    _this.onCloseModal = function () {
+      _this.setState({
+        modalIsOpen: false
+      });
+    };
+
+    return _this;
+  }
+
+  var _proto = QuizSeven.prototype;
+
+  _proto.componentDidMount = function () {
+    function componentDidMount() {
+      var player = this.props.player;
+
+      if (!player.get("attentionCheck3Tries")) {
+        player.set("attentionCheck3Tries", 2);
+      }
+    }
+
+    return componentDidMount;
+  }();
+
+  _proto.render = function () {
+    function render() {
+      var player = this.props.player;
+      var response = this.state.response;
+      return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+        className: "intro-heading questionnaire-heading"
+      }, " Questionnaire "), /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-content-container"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-body"
+      }, /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, "You guess the symbol by selecting it and then selecting the submit answer button. While you are waiting for your team members to submit an answer, you will have an opportunity to reconsider your choice. The reconsider button does not indicate you have made an incorrect choice. "), /*#__PURE__*/React.createElement("p", null, "----------------------------------------------------------------------------------------------------"), /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, "When will the reconsider button appear?"), /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        name: "response",
+        value: "incorrect",
+        label: "After I submit an incorrect answer",
+        onChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        name: "response",
+        value: "self",
+        label: "After I submit my symbol",
+        onChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        name: "response",
+        value: "team",
+        label: "After all my teammates submit a symbol",
+        onChange: this.handleChange
+      })), /*#__PURE__*/React.createElement("form", {
+        className: "questionnaire-btn-container",
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/React.createElement("button", {
+        className: !response ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+        disabled: !response,
+        type: "submit"
+      }, " Submit ")), this.state.modalIsOpen && /*#__PURE__*/React.createElement(AttentionCheckModal, {
+        player: player,
+        triesLeft: player.get("attentionCheck3Tries"),
+        onCloseModal: this.onCloseModal
+      })));
+    }
+
+    return render;
+  }();
+
+  return QuizSeven;
+}(React.Component);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"QuizSix.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/quiz/QuizSix.jsx                                                                                       //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+var _createSuper;
+
+module.link("@babel/runtime/helpers/createSuper", {
+  default: function (v) {
+    _createSuper = v;
+  }
+}, 0);
+
+var _inheritsLoose;
+
+module.link("@babel/runtime/helpers/inheritsLoose", {
+  default: function (v) {
+    _inheritsLoose = v;
+  }
+}, 1);
+module.export({
+  "default": function () {
+    return QuizSix;
+  }
+});
+var React;
+module.link("react", {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+module.link("../../../public/css/intro.css");
+var Centered;
+module.link("meteor/empirica:core", {
+  Centered: function (v) {
+    Centered = v;
+  }
+}, 1);
+var AttentionCheckModal;
+module.link("./AttentionCheckModal", {
+  "default": function (v) {
+    AttentionCheckModal = v;
+  }
+}, 2);
+
+var Radio = function (_ref) {
+  var selected = _ref.selected,
+      name = _ref.name,
+      value = _ref.value,
+      label = _ref.label,
+      onChange = _ref.onChange;
+  return /*#__PURE__*/React.createElement("label", {
+    className: "questionnaire-radio"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "quiz-button",
+    type: "radio",
+    name: name,
+    value: value,
+    checked: selected === value,
+    onChange: onChange
+  }), label);
+};
+
+var QuizSix = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(QuizSix, _React$Component);
+
+  var _super = _createSuper(QuizSix);
+
+  function QuizSix() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+    _this.state = {
+      modalIsOpen: false
+    };
+
+    _this.handleChange = function (event) {
+      var _this$setState;
+
+      var el = event.currentTarget;
+
+      _this.setState((_this$setState = {}, _this$setState[el.name] = el.value, _this$setState));
+    };
+
+    _this.handleSubmit = function (event) {
+      var _this$props = _this.props,
+          hasPrev = _this$props.hasPrev,
+          hasNext = _this$props.hasNext,
+          onNext = _this$props.onNext,
+          onPrev = _this$props.onPrev,
+          game = _this$props.game,
+          player = _this$props.player;
+      event.preventDefault();
+
+      if (_this.state.response === 'individual') {
+        onNext();
+      } else {
+        var currentTriesLeft = player.get("attentionCheck2Tries");
+        var attentionCheck2Answer = _this.state.response;
+        player.set("attentionCheck2-" + currentTriesLeft, attentionCheck2Answer);
+        player.set("attentionCheck2Tries", currentTriesLeft - 1);
+
+        if (currentTriesLeft - 1 <= 0) {
+          player.exit("failedQuestion");
+        } else {
+          _this.onOpenModal();
+        }
+      }
+    };
+
+    _this.onOpenModal = function () {
+      _this.setState({
+        modalIsOpen: true
+      });
+    };
+
+    _this.onCloseModal = function () {
+      _this.setState({
+        modalIsOpen: false
+      });
+    };
+
+    return _this;
+  }
+
+  var _proto = QuizSix.prototype;
+
+  _proto.componentDidMount = function () {
+    function componentDidMount() {
+      var player = this.props.player;
+
+      if (!player.get("attentionCheck2Tries")) {
+        player.set("attentionCheck2Tries", 2);
+      }
+    }
+
+    return componentDidMount;
+  }();
+
+  _proto.render = function () {
+    function render() {
+      var player = this.props.player;
+      var response = this.state.response;
+      return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+        className: "intro-heading questionnaire-heading"
+      }, " Questionnaire "), /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-content-container"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-body"
+      }, /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, "Each player will have a network of people they can talk to through individual chats. Each member of your network has an unique dialogue box and you can have multiple dialogue boxes open on your screen as you communicate during a trial. You can open or close a box. You can also scroll up and down within a box to view the messages you have exchanged with a specific contact. There will be no overall team chat where you can talk to everyone at once. "), /*#__PURE__*/React.createElement("p", null, "----------------------------------------------------------------------------------------------------"), /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, "How will I communicate with my team members?"), /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        name: "response",
+        value: "individual",
+        label: "1-on-1 chats",
+        onChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        name: "response",
+        value: "group",
+        label: "Overall team group chat",
+        onChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        name: "response",
+        value: "none",
+        label: "There is no communication",
+        onChange: this.handleChange
+      })), /*#__PURE__*/React.createElement("form", {
+        className: "questionnaire-btn-container",
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/React.createElement("button", {
+        className: !response ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+        disabled: !response,
+        type: "submit"
+      }, " Submit ")), this.state.modalIsOpen && /*#__PURE__*/React.createElement(AttentionCheckModal, {
+        player: player,
+        triesLeft: player.get("attentionCheck2Tries"),
+        onCloseModal: this.onCloseModal
+      })));
+    }
+
+    return render;
+  }();
+
+  return QuizSix;
+}(React.Component);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"QuizTwo.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/quiz/QuizTwo.jsx                                                                                       //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+var _createSuper;
+
+module.link("@babel/runtime/helpers/createSuper", {
+  default: function (v) {
+    _createSuper = v;
+  }
+}, 0);
+
+var _inheritsLoose;
+
+module.link("@babel/runtime/helpers/inheritsLoose", {
+  default: function (v) {
+    _inheritsLoose = v;
+  }
+}, 1);
+module.export({
+  "default": function () {
+    return QuizTwo;
+  }
+});
+var React;
+module.link("react", {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+module.link("../../../public/css/intro.css");
+var Centered;
+module.link("meteor/empirica:core", {
+  Centered: function (v) {
+    Centered = v;
+  }
+}, 1);
+var AttentionCheckModal;
+module.link("./AttentionCheckModal", {
+  "default": function (v) {
+    AttentionCheckModal = v;
+  }
+}, 2);
+
+var Radio = function (_ref) {
+  var selected = _ref.selected,
+      name = _ref.name,
+      value = _ref.value,
+      label = _ref.label,
+      onChange = _ref.onChange;
+  return /*#__PURE__*/React.createElement("label", {
+    className: "questionnaire-radio"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "quiz-button",
+    type: "radio",
+    name: name,
+    value: value,
+    checked: selected === value,
+    onChange: onChange
+  }), label);
+};
+
+var QuizTwo = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(QuizTwo, _React$Component);
+
+  var _super = _createSuper(QuizTwo);
+
+  function QuizTwo() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+    _this.state = {
+      modalIsOpen: false
+    };
+
+    _this.handleChange = function (event) {
+      var _this$setState;
+
+      var el = event.currentTarget;
+
+      _this.setState((_this$setState = {}, _this$setState[el.name] = el.value, _this$setState));
+    };
+
+    _this.handleSubmit = function (event) {
+      var _this$props = _this.props,
+          hasPrev = _this$props.hasPrev,
+          hasNext = _this$props.hasNext,
+          onNext = _this$props.onNext,
+          onPrev = _this$props.onPrev,
+          game = _this$props.game,
+          player = _this$props.player;
+      event.preventDefault();
+
+      if (_this.state.response === 'end') {
+        onNext();
+      } else {
+        var currentTriesLeft = player.get("attentionCheck4Tries");
+        var attentionCheck4Answer = _this.state.response;
+        player.set("attentionCheck4-" + currentTriesLeft, attentionCheck4Answer);
+        player.set("attentionCheck4Tries", currentTriesLeft - 1);
+
+        if (currentTriesLeft - 1 <= 0) {
+          player.exit("failedQuestion");
+        } else {
+          _this.onOpenModal();
+        }
+      }
+    };
+
+    _this.onOpenModal = function () {
+      _this.setState({
+        modalIsOpen: true
+      });
+    };
+
+    _this.onCloseModal = function () {
+      _this.setState({
+        modalIsOpen: false
+      });
+    };
+
+    return _this;
+  }
+
+  var _proto = QuizTwo.prototype;
+
+  _proto.componentDidMount = function () {
+    function componentDidMount() {
+      var player = this.props.player;
+
+      if (!player.get("attentionCheck4Tries")) {
+        player.set("attentionCheck4Tries", 2);
+      }
+    }
+
+    return componentDidMount;
+  }();
+
+  _proto.render = function () {
+    function render() {
+      var _this$props2 = this.props,
+          player = _this$props2.player,
+          game = _this$props2.game;
+      var response = this.state.response;
+      return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+        className: "intro-heading questionnaire-heading"
+      }, " Questionnaire "), /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-content-container"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "questionnaire-body"
+      }, /*#__PURE__*/React.createElement("label", {
+        className: "questionnaire-question"
+      }, "If you do not interact within the game for a while, you will be kicked and the game will end for EVERYONE in your team. You will be given ONE warning the first time you reach the inactivity limit. If you still are not active within ", game.treatment.idleWarningTime, " seconds, you will be kicked. If you are active, your inactivity timer will reset."), /*#__PURE__*/React.createElement("p", null, "----------------------------------------------------------------------------------------------------"), /*#__PURE__*/React.createElement("label", null, "After receiving an inactivity warning, if I still do not interact within the game for a while, what will happen?"), /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        name: "response",
+        value: "warning",
+        label: "I will get another inactivity warning",
+        onChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        name: "response",
+        value: "continue",
+        label: "I will be kicked but the game will continue without me",
+        onChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        name: "response",
+        value: "end",
+        label: "I will be kicked and the game will end for everyone in my team",
+        onChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        name: "response",
+        value: "nothing",
+        label: "Nothing will happen",
+        onChange: this.handleChange
+      })), /*#__PURE__*/React.createElement("form", {
+        className: "questionnaire-btn-container",
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/React.createElement("button", {
+        className: !response ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+        disabled: !response,
+        type: "submit"
+      }, " Submit ")), this.state.modalIsOpen && /*#__PURE__*/React.createElement(AttentionCheckModal, {
+        player: player,
+        triesLeft: player.get("attentionCheck4Tries"),
+        onCloseModal: this.onCloseModal
+      })));
+    }
+
+    return render;
+  }();
+
+  return QuizTwo;
+}(React.Component);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 }},"tutorial":{"TutorialPageFour.jsx":function module(require,exports,module){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -5015,7 +7688,7 @@ var TutorialPageFour = /*#__PURE__*/function (_React$Component) {
         type: "button",
         onClick: onNext,
         disabled: !hasNext
-      }, "Next"));
+      }, "Attention Check"));
     }
 
     return render;
@@ -5478,8 +8151,7 @@ var DescribeSymbolQuestion = /*#__PURE__*/function (_React$Component) {
       event.preventDefault(); // TODO: log player response to survey question
 
       player.set("symbolDescription", _this.state.response);
-      player.set("passedPreQual", true);
-      player.exit("preQualSuccess");
+      onNext();
     };
 
     return _this;
@@ -5496,7 +8168,7 @@ var DescribeSymbolQuestion = /*#__PURE__*/function (_React$Component) {
         className: "questionnaire-content-container"
       }, /*#__PURE__*/React.createElement("div", {
         className: "questionnaire-body"
-      }, /*#__PURE__*/React.createElement("h2", null, " Please describe the following symbol below as if you were trying to explain it to another player. Try to be more descriptive than not.", /*#__PURE__*/React.createElement("br", null), "Note: If there are too many participants filling out the survey at once, there may be some server delays. If you click submit and you do not immediately proceed to the exit stage, please be patient as it will eventually submit."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
+      }, /*#__PURE__*/React.createElement("h2", null, " Please describe the following symbol below as if you were trying to explain it to another player. Try to be more descriptive than not.", /*#__PURE__*/React.createElement("br", null), "Note: If there are too many participants filling out the survey at once, there may be some server delays. If you click submit and you do not immediately proceed to the next page, please be patient as it will eventually submit."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
         className: "symbol-container",
         style: {
           width: "100%",
@@ -5646,6 +8318,155 @@ var NewPlayer = /*#__PURE__*/function (_Component) {
 
   return NewPlayer;
 }(Component);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"Schedule.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/Schedule.jsx                                                                                           //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+var _objectSpread;
+
+module.link("@babel/runtime/helpers/objectSpread2", {
+  default: function (v) {
+    _objectSpread = v;
+  }
+}, 0);
+
+var _createSuper;
+
+module.link("@babel/runtime/helpers/createSuper", {
+  default: function (v) {
+    _createSuper = v;
+  }
+}, 1);
+
+var _inheritsLoose;
+
+module.link("@babel/runtime/helpers/inheritsLoose", {
+  default: function (v) {
+    _inheritsLoose = v;
+  }
+}, 2);
+module.export({
+  "default": function () {
+    return Schedule;
+  }
+});
+var React;
+module.link("react", {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var Checkbox;
+module.link("@blueprintjs/core", {
+  Checkbox: function (v) {
+    Checkbox = v;
+  }
+}, 1);
+
+var Schedule = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(Schedule, _React$Component);
+
+  var _super = _createSuper(Schedule);
+
+  function Schedule(props) {
+    var _this;
+
+    _this = _React$Component.call(this, props) || this;
+
+    _this.handleChange = function (event) {
+      var _objectSpread2;
+
+      var el = event.currentTarget;
+
+      _this.setState({
+        availability: _objectSpread({}, _this.state.availability, (_objectSpread2 = {}, _objectSpread2[el.name] = !_this.state.availability[el.name], _objectSpread2))
+      });
+    };
+
+    _this.handleSubmit = function (event) {
+      var _this$props = _this.props,
+          onNext = _this$props.onNext,
+          player = _this$props.player;
+      event.preventDefault();
+      player.set("timeAvailabilities", _this.state.availability);
+      player.set("passedPreQual", true);
+      player.exit("preQualSuccess");
+    };
+
+    _this.state = {
+      availability: {},
+      dates: ['10/27/22', '10/28/22', '10/29/22', '10/30/22'],
+      times: ['9-10 AM', '10-11 AM', '11-12 PM', '12-1 PM', '1-2 PM', '2-3 PM', '3-4 PM', '4-5 PM', '5-6 PM', '6-7 PM', ' 7-8 PM', '8-9 PM', '9-10 PM']
+    };
+
+    _this.state.dates.forEach(function (date) {
+      _this.state.times.forEach(function (time) {
+        _this.state.availability[date + " " + time] = false;
+      });
+    });
+
+    return _this;
+  }
+
+  var _proto = Schedule.prototype;
+
+  _proto.render = function () {
+    function render() {
+      var _this2 = this;
+
+      return /*#__PURE__*/React.createElement("div", {
+        className: "network-survey-container"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "network-survey-header"
+      }, /*#__PURE__*/React.createElement("p", null, "Please fill out all the times you will be available to play this game.", /*#__PURE__*/React.createElement("br", null), "The time with the most overlapping players will be chosen.", /*#__PURE__*/React.createElement("br", null), "Note: If there are too many participants filling out the survey at once, there may be some server delays. If you click submit and you do not immediately proceed to the exit page, please be patient as it will eventually submit.")), /*#__PURE__*/React.createElement("form", {
+        className: "network-form",
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/React.createElement("table", {
+        className: "name-matrix-table"
+      }, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", {
+        style: {
+          textAlign: "right"
+        }
+      }, " Time (EST) "), /*#__PURE__*/React.createElement("th", null, " 10/27/22 (Thurs) "), /*#__PURE__*/React.createElement("th", null, " 10/28/22 (Fri) "), /*#__PURE__*/React.createElement("th", null, " 10/29/22 (Sat) "), /*#__PURE__*/React.createElement("th", null, " 10/30/22 (Sun) ")), this.state.times.map(function (time) {
+        return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", {
+          style: {
+            textAlign: "right"
+          }
+        }, " ", time, " "), _this2.state.dates.map(function (date) {
+          return /*#__PURE__*/React.createElement("td", {
+            style: {
+              textAlign: "center"
+            }
+          }, /*#__PURE__*/React.createElement(Checkbox // checked={this.state[`${date} ${time}`]}
+          , {
+            key: date + " " + time,
+            checked: _this2.state.availability[date + " " + time],
+            name: date + " " + time,
+            onChange: _this2.handleChange
+          }));
+        }));
+      }))), /*#__PURE__*/React.createElement("div", {
+        className: "network-button-container",
+        style: {
+          justifyContent: "flex-end"
+        }
+      }, /*#__PURE__*/React.createElement("button", {
+        className: "arrow-button button-submit",
+        type: "submit"
+      }, " Submit"))));
+    }
+
+    return render;
+  }();
+
+  return Schedule;
+}(React.Component);
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }},"chat":{"ChatContainer.js":function module(require,exports,module){
@@ -6664,701 +9485,6 @@ module.exportDefault(filteredMessages(Messages));
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}},"exit":{"ExitSurvey.jsx":function module(require,exports,module){
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                     //
-// client/exit/ExitSurvey.jsx                                                                                          //
-//                                                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                       //
-var _createSuper;
-
-module.link("@babel/runtime/helpers/createSuper", {
-  default: function (v) {
-    _createSuper = v;
-  }
-}, 0);
-
-var _inheritsLoose;
-
-module.link("@babel/runtime/helpers/inheritsLoose", {
-  default: function (v) {
-    _inheritsLoose = v;
-  }
-}, 1);
-module.export({
-  "default": function () {
-    return ExitSurvey;
-  }
-});
-var React;
-module.link("react", {
-  "default": function (v) {
-    React = v;
-  }
-}, 0);
-var Centered;
-module.link("meteor/empirica:core", {
-  Centered: function (v) {
-    Centered = v;
-  }
-}, 1);
-
-var Radio = function (_ref) {
-  var selected = _ref.selected,
-      name = _ref.name,
-      value = _ref.value,
-      label = _ref.label,
-      onChange = _ref.onChange,
-      required = _ref.required;
-  return /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
-    type: "radio",
-    name: name,
-    value: value,
-    checked: selected === value,
-    onChange: onChange,
-    required: required ? "required" : ""
-  }), label);
-};
-
-var ExitSurvey = /*#__PURE__*/function (_React$Component) {
-  _inheritsLoose(ExitSurvey, _React$Component);
-
-  var _super = _createSuper(ExitSurvey);
-
-  function ExitSurvey() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
-    _this.state = {
-      age: "",
-      gender: "",
-      strength: "",
-      fair: "",
-      feedback: ""
-    };
-
-    _this.handleChange = function (event) {
-      var _this$setState;
-
-      var el = event.currentTarget;
-
-      _this.setState((_this$setState = {}, _this$setState[el.name] = el.value, _this$setState));
-    };
-
-    _this.handleSubmit = function (event) {
-      event.preventDefault();
-
-      _this.props.onSubmit(_this.state);
-    };
-
-    return _this;
-  }
-
-  var _proto = ExitSurvey.prototype;
-
-  _proto.render = function () {
-    function render() {
-      var _this$props = this.props,
-          player = _this$props.player,
-          game = _this$props.game;
-      var _this$state = this.state,
-          age = _this$state.age,
-          gender = _this$state.gender,
-          strength = _this$state.strength,
-          fair = _this$state.fair,
-          feedback = _this$state.feedback,
-          education = _this$state.education;
-      var basePay = game.treatment.basePay;
-      var conversionRate = game.treatment.conversionRate;
-      return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
-        className: "exit-survey"
-      }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, "Please submit the following code to receive your bonus:", " ", /*#__PURE__*/React.createElement("strong", null, " C1FLL9CG "), "."), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""), /*#__PURE__*/React.createElement("p", null, "Your team got a total of ", /*#__PURE__*/React.createElement("strong", null, player.get("score")), " correct.", basePay && conversionRate ? " You will receive an additional performance bonus of " + player.get("score") + " x $" + conversionRate + "." : " You will receive a base pay of $2 and an additional performance bonus of " + player.get("score") + " x 1, for a total of " + (2 + parseInt(player.get("score")) * 1) + "."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
-        onSubmit: this.handleSubmit
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "form-line"
-      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
-        htmlFor: "age"
-      }, "Age"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
-        id: "age",
-        type: "number",
-        min: "0",
-        max: "150",
-        step: "1",
-        dir: "auto",
-        name: "age",
-        value: age,
-        onChange: this.handleChange,
-        required: true
-      }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
-        htmlFor: "gender"
-      }, "Gender"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
-        id: "gender",
-        type: "text",
-        dir: "auto",
-        name: "gender",
-        value: gender,
-        onChange: this.handleChange,
-        required: true,
-        autoComplete: "off"
-      })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "Highest Education Qualification"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Radio, {
-        selected: education,
-        name: "education",
-        value: "high-school",
-        label: "High School",
-        onChange: this.handleChange,
-        required: true
-      }), /*#__PURE__*/React.createElement(Radio, {
-        selected: education,
-        name: "education",
-        value: "bachelor",
-        label: "US Bachelor's Degree",
-        onChange: this.handleChange
-      }), /*#__PURE__*/React.createElement(Radio, {
-        selected: education,
-        name: "education",
-        value: "master",
-        label: "Master's or higher",
-        onChange: this.handleChange
-      }), /*#__PURE__*/React.createElement(Radio, {
-        selected: education,
-        name: "education",
-        value: "other",
-        label: "Other",
-        onChange: this.handleChange
-      }))), /*#__PURE__*/React.createElement("div", {
-        className: "form-line thirds"
-      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
-        htmlFor: "strength"
-      }, "How would you describe your strength in the game?"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
-        dir: "auto",
-        id: "strength",
-        name: "strength",
-        value: strength,
-        onChange: this.handleChange,
-        required: true
-      }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
-        htmlFor: "fair"
-      }, "Do you feel the pay was fair?"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
-        dir: "auto",
-        id: "fair",
-        name: "fair",
-        value: fair,
-        onChange: this.handleChange,
-        required: true
-      }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
-        htmlFor: "feedback"
-      }, "Feedback, including problems you encountered."), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
-        dir: "auto",
-        id: "feedback",
-        name: "feedback",
-        value: feedback,
-        onChange: this.handleChange,
-        required: true
-      })))), /*#__PURE__*/React.createElement("button", {
-        type: "submit"
-      }, "Submit"))));
-    }
-
-    return render;
-  }();
-
-  return ExitSurvey;
-}(React.Component);
-
-ExitSurvey.stepName = "ExitSurvey";
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-},"FailedAttentionCheck.jsx":function module(require,exports,module){
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                     //
-// client/exit/FailedAttentionCheck.jsx                                                                                //
-//                                                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                       //
-var _createSuper;
-
-module.link("@babel/runtime/helpers/createSuper", {
-  default: function (v) {
-    _createSuper = v;
-  }
-}, 0);
-
-var _inheritsLoose;
-
-module.link("@babel/runtime/helpers/inheritsLoose", {
-  default: function (v) {
-    _inheritsLoose = v;
-  }
-}, 1);
-module.export({
-  "default": function () {
-    return FailedAttentionCheck;
-  }
-});
-var React, Component;
-module.link("react", {
-  "default": function (v) {
-    React = v;
-  },
-  Component: function (v) {
-    Component = v;
-  }
-}, 0);
-var Meteor;
-module.link("meteor/meteor", {
-  Meteor: function (v) {
-    Meteor = v;
-  }
-}, 1);
-var Centered;
-module.link("meteor/empirica:core", {
-  Centered: function (v) {
-    Centered = v;
-  }
-}, 2);
-
-var FailedAttentionCheck = /*#__PURE__*/function (_Component) {
-  _inheritsLoose(FailedAttentionCheck, _Component);
-
-  var _super = _createSuper(FailedAttentionCheck);
-
-  function FailedAttentionCheck() {
-    return _Component.apply(this, arguments) || this;
-  }
-
-  var _proto = FailedAttentionCheck.prototype;
-
-  _proto.render = function () {
-    function render() {
-      return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
-        className: "failed-attention-container"
-      }, /*#__PURE__*/React.createElement("h2", {
-        className: "failed-attention-text"
-      }, "YOU FAILED THE ATTENTION CHECK, AND HAVE NOT BEEN SELECTED TO PLAY. PLEASE DO NOT TRY TO COMPLETE THE TASK AGAIN. THANK YOU FOR YOUR TIME. HERE IS YOUR COMPLETION CODE: CCX0X59H")));
-    }
-
-    return render;
-  }();
-
-  return FailedAttentionCheck;
-}(Component);
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-},"PreQualExitSurvey.jsx":function module(require,exports,module){
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                     //
-// client/exit/PreQualExitSurvey.jsx                                                                                   //
-//                                                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                       //
-var _createSuper;
-
-module.link("@babel/runtime/helpers/createSuper", {
-  default: function (v) {
-    _createSuper = v;
-  }
-}, 0);
-
-var _inheritsLoose;
-
-module.link("@babel/runtime/helpers/inheritsLoose", {
-  default: function (v) {
-    _inheritsLoose = v;
-  }
-}, 1);
-module.export({
-  "default": function () {
-    return PreQualExitSurvey;
-  }
-});
-var React;
-module.link("react", {
-  "default": function (v) {
-    React = v;
-  }
-}, 0);
-var Centered;
-module.link("meteor/empirica:core", {
-  Centered: function (v) {
-    Centered = v;
-  }
-}, 1);
-
-var Radio = function (_ref) {
-  var selected = _ref.selected,
-      name = _ref.name,
-      value = _ref.value,
-      label = _ref.label,
-      onChange = _ref.onChange,
-      required = _ref.required;
-  return /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
-    type: "radio",
-    name: name,
-    value: value,
-    checked: selected === value,
-    onChange: onChange,
-    required: required ? "required" : ""
-  }), label);
-};
-
-var PreQualExitSurvey = /*#__PURE__*/function (_React$Component) {
-  _inheritsLoose(PreQualExitSurvey, _React$Component);
-
-  var _super = _createSuper(PreQualExitSurvey);
-
-  function PreQualExitSurvey() {
-    var _this;
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
-    _this.state = {
-      age: "",
-      gender: "",
-      email: "",
-      feedback: ""
-    };
-
-    _this.handleChange = function (event) {
-      var _this$setState;
-
-      var el = event.currentTarget;
-
-      _this.setState((_this$setState = {}, _this$setState[el.name] = el.value, _this$setState));
-    };
-
-    _this.handleSubmit = function (event) {
-      event.preventDefault();
-
-      _this.props.onSubmit(_this.state);
-    };
-
-    return _this;
-  }
-
-  var _proto = PreQualExitSurvey.prototype;
-
-  _proto.render = function () {
-    function render() {
-      var _this$props = this.props,
-          player = _this$props.player,
-          game = _this$props.game;
-      var _this$state = this.state,
-          age = _this$state.age,
-          gender = _this$state.gender,
-          feedback = _this$state.feedback,
-          education = _this$state.education;
-      var basePay = game.treatment.basePay;
-      var conversionRate = game.treatment.conversionRate;
-      return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
-        className: "exit-survey"
-      }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, "Please submit the following code:", " ", /*#__PURE__*/React.createElement("strong", null, " CZ586HD9 ")), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""), /*#__PURE__*/React.createElement("p", null, "Thank you for taking time to take this pre-qualification survey ! We will finish screening all the players and send out a date and time to those that qualify for our future game.", basePay && conversionRate ? " You will receive a base pay of $" + basePay + " for taking this pre-qualification." : " You will receive a base pay of $2 for taking this pre-qualification."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
-        onSubmit: this.handleSubmit
-      }, /*#__PURE__*/React.createElement("div", {
-        className: "form-line"
-      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
-        htmlFor: "age"
-      }, "Age"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
-        id: "age",
-        type: "number",
-        min: "0",
-        max: "150",
-        step: "1",
-        dir: "auto",
-        name: "age",
-        value: age,
-        onChange: this.handleChange,
-        required: true
-      }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
-        htmlFor: "gender"
-      }, "Gender"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
-        id: "gender",
-        type: "text",
-        dir: "auto",
-        name: "gender",
-        value: gender,
-        onChange: this.handleChange,
-        required: true,
-        autoComplete: "off"
-      })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "Highest Education Qualification"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Radio, {
-        selected: education,
-        name: "education",
-        value: "high-school",
-        label: "High School",
-        onChange: this.handleChange,
-        required: true
-      }), /*#__PURE__*/React.createElement(Radio, {
-        selected: education,
-        name: "education",
-        value: "bachelor",
-        label: "US Bachelor's Degree",
-        onChange: this.handleChange
-      }), /*#__PURE__*/React.createElement(Radio, {
-        selected: education,
-        name: "education",
-        value: "master",
-        label: "Master's or higher",
-        onChange: this.handleChange
-      }), /*#__PURE__*/React.createElement(Radio, {
-        selected: education,
-        name: "education",
-        value: "other",
-        label: "Other",
-        onChange: this.handleChange
-      }))), /*#__PURE__*/React.createElement("div", {
-        className: "form-line thirds"
-      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
-        htmlFor: "feedback"
-      }, "Feedback, including problems you encountered."), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
-        dir: "auto",
-        id: "feedback",
-        name: "feedback",
-        value: feedback,
-        onChange: this.handleChange,
-        required: true
-      })))), /*#__PURE__*/React.createElement("button", {
-        type: "submit"
-      }, "Submit"))));
-    }
-
-    return render;
-  }();
-
-  return PreQualExitSurvey;
-}(React.Component);
-
-PreQualExitSurvey.stepName = "ExitSurvey";
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-},"Sorry.jsx":function module(require,exports,module){
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                     //
-// client/exit/Sorry.jsx                                                                                               //
-//                                                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                       //
-var _createSuper;
-
-module.link("@babel/runtime/helpers/createSuper", {
-  default: function (v) {
-    _createSuper = v;
-  }
-}, 0);
-
-var _inheritsLoose;
-
-module.link("@babel/runtime/helpers/inheritsLoose", {
-  default: function (v) {
-    _inheritsLoose = v;
-  }
-}, 1);
-module.export({
-  "default": function () {
-    return Sorry;
-  }
-});
-var React, Component;
-module.link("react", {
-  "default": function (v) {
-    React = v;
-  },
-  Component: function (v) {
-    Component = v;
-  }
-}, 0);
-var Meteor;
-module.link("meteor/meteor", {
-  Meteor: function (v) {
-    Meteor = v;
-  }
-}, 1);
-var Centered;
-module.link("meteor/empirica:core", {
-  Centered: function (v) {
-    Centered = v;
-  }
-}, 2);
-var FailedAttentionCheck;
-module.link("./FailedAttentionCheck", {
-  "default": function (v) {
-    FailedAttentionCheck = v;
-  }
-}, 3);
-
-var Sorry = /*#__PURE__*/function (_Component) {
-  _inheritsLoose(Sorry, _Component);
-
-  var _super = _createSuper(Sorry);
-
-  function Sorry() {
-    return _Component.apply(this, arguments) || this;
-  }
-
-  var _proto = Sorry.prototype;
-
-  _proto.render = function () {
-    function render() {
-      var _this$props = this.props,
-          player = _this$props.player,
-          game = _this$props.game;
-      var msg;
-
-      switch (player.exitStatus) {
-        case "gameFull":
-          msg = "All games you are eligible for have filled up too fast... Sorry, there will be no more games in the near future.";
-          break;
-
-        case "gameLobbyTimedOut":
-          msg = "There were NOT enough players for the game to start... Thank you for participating in this game. Please submit your Prolific Id to the study and we will make sure you get paid accordingly."; // msg = "There were NOT enough players for the game to start... Thank you for participating in this game, you will still get paid the base amount for passing the attention check. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
-
-          break;
-
-        case "playerEndedLobbyWait":
-          msg = "You decided to stop waiting, we are sorry it was too long a wait.";
-          break;
-
-        default:
-          msg = "Unfortunately, the Game was cancelled... Thank you for participating in this game, please submit your Prolific ID to the HIT and we will make sure you get paid accordingly."; // msg = "Unfortunately, the Game was cancelled... Thank you for participating in this game, please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly.";
-
-          break;
-      }
-
-      if (player.exitReason === "failedQuestion") {
-        return /*#__PURE__*/React.createElement(FailedAttentionCheck, null);
-      }
-
-      if (player.exitReason === "inactive") {
-        msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid including any bonuses for the rounds you successfully passed. Please submit the following completion code: C1FLL9CG"; // msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
-      }
-
-      if (player.exitReason === "someoneInactive") {
-        msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid including any bonuses for the rounds you successfully passed. Please submit the following completion code: C1FLL9CG"; // msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly. ";
-      }
-
-      if (player.exitReason === "failedEnglishScreen") {
-        // msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game."
-        msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game. Here is your completion code: CCX0X59H";
-      }
-
-      if (player.exitReason === "minPlayerCountNotMaintained") {
-        msg = "Unfortunately, there were too few players active in this game and the game had to be cancelled. Thank you for participating in this game, please submit the following completion code: C1FLL9CG"; // msg = `Unfortunately, there were too few players active in this game and the game had to be cancelled. Thank you for participating in this game, please submit the follow code ${player._id} to the HIT and we will make sure you get paid accordingly. `
-      } // Only for dev
-
-
-      if (!game && Meteor.isDevelopment) {
-        msg = "Unfortunately the Game was cancelled because of failed to init Game (only visible in development, check the logs).";
-      }
-
-      return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Sorry!"), /*#__PURE__*/React.createElement("p", null, "Sorry, you were not able to play today! ", msg), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Please contact the researcher to see if there are more games available."))));
-    }
-
-    return render;
-  }();
-
-  return Sorry;
-}(Component);
-
-Sorry.stepName = "Sorry";
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-},"Thanks.jsx":function module(require,exports,module){
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                     //
-// client/exit/Thanks.jsx                                                                                              //
-//                                                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                       //
-var _createSuper;
-
-module.link("@babel/runtime/helpers/createSuper", {
-  default: function (v) {
-    _createSuper = v;
-  }
-}, 0);
-
-var _inheritsLoose;
-
-module.link("@babel/runtime/helpers/inheritsLoose", {
-  default: function (v) {
-    _inheritsLoose = v;
-  }
-}, 1);
-module.export({
-  "default": function () {
-    return Thanks;
-  }
-});
-var React;
-module.link("react", {
-  "default": function (v) {
-    React = v;
-  }
-}, 0);
-var moment;
-module.link("moment", {
-  "default": function (v) {
-    moment = v;
-  }
-}, 1);
-var Centered;
-module.link("meteor/empirica:core", {
-  Centered: function (v) {
-    Centered = v;
-  }
-}, 2);
-
-var Thanks = /*#__PURE__*/function (_React$Component) {
-  _inheritsLoose(Thanks, _React$Component);
-
-  var _super = _createSuper(Thanks);
-
-  function Thanks() {
-    return _React$Component.apply(this, arguments) || this;
-  }
-
-  var _proto = Thanks.prototype;
-
-  _proto.render = function () {
-    function render() {
-      var _this$props = this.props,
-          player = _this$props.player,
-          game = _this$props.game;
-      var basePay = game.treatment.basePay;
-      var conversionRate = game.treatment.conversionRate;
-      return /*#__PURE__*/React.createElement("div", {
-        className: "finished"
-      }, /*#__PURE__*/React.createElement("div", null, player.get("nodeId") ? /*#__PURE__*/React.createElement("p", null, " If you are receiving this message, it means you have participated in one of our symbol task games before. As mentioned in out HIT expectations, if you've participated in one of our HIT sessions before, you cannot participate in another. We are trying to gather new players for each game. If you think this is a mistake, please do no hesistate to reach out.") : /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Finished!"), player.exitReason === "preQualSuccess" ?
-      /*#__PURE__*/
-      // TODO: mturk
-      // <p>Thank you for participating! Please submit the following code to receive your bonus 
-      // { basePay && conversionRate ? ` of $${basePay} : ` : " "} 
-      // <strong>{player._id}</strong>
-      // </p> 
-      // TODO: Prolific
-      React.createElement("p", null, "Thank you for participating! Please submit the following code: C1FLL9CG") : /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $" + (basePay + parseInt(player.get("score") * conversionRate)) + " : " : " ", /*#__PURE__*/React.createElement("strong", null, player._id)))));
-    }
-
-    return render;
-  }();
-
-  return Thanks;
-}(React.Component);
-
-Thanks.stepName = "Thanks";
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 }},"main.js":function module(require,exports,module){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -7391,108 +9517,174 @@ module.link("./exit/PreQualExitSurvey", {
     PreQualExitSurvey = v;
   }
 }, 3);
+var FinalMidSurveyOne;
+module.link("./exit/final-mid-survey/FinalMidSurvey1", {
+  "default": function (v) {
+    FinalMidSurveyOne = v;
+  }
+}, 4);
+var FinalMidSurveyTwo;
+module.link("./exit/final-mid-survey/FinalMidSurvey2", {
+  "default": function (v) {
+    FinalMidSurveyTwo = v;
+  }
+}, 5);
+var FinalMidSurveyThree;
+module.link("./exit/final-mid-survey/FinalMidSurvey3", {
+  "default": function (v) {
+    FinalMidSurveyThree = v;
+  }
+}, 6);
+var FinalMidSurveyFour;
+module.link("./exit/final-mid-survey/FinalMidSurvey4", {
+  "default": function (v) {
+    FinalMidSurveyFour = v;
+  }
+}, 7);
+var FinalMidSurveyFive;
+module.link("./exit/final-mid-survey/FinalMidSurvey5", {
+  "default": function (v) {
+    FinalMidSurveyFive = v;
+  }
+}, 8);
 var Thanks;
 module.link("./exit/Thanks", {
   "default": function (v) {
     Thanks = v;
   }
-}, 4);
+}, 9);
 var Sorry;
 module.link("./exit/Sorry", {
   "default": function (v) {
     Sorry = v;
   }
-}, 5);
+}, 10);
 var About;
 module.link("./game/About", {
   "default": function (v) {
     About = v;
   }
-}, 6);
+}, 11);
 var Round;
 module.link("./game/Round", {
   "default": function (v) {
     Round = v;
   }
-}, 7);
+}, 12);
 var Consent;
 module.link("./intro/Consent", {
   "default": function (v) {
     Consent = v;
   }
-}, 8);
+}, 13);
 var NetworkSurveyOne;
 module.link("./intro/network-survey/NetworkSurvey1", {
   "default": function (v) {
     NetworkSurveyOne = v;
   }
-}, 9);
+}, 14);
 var NetworkSurveyTwo;
 module.link("./intro/network-survey/NetworkSurvey2", {
   "default": function (v) {
     NetworkSurveyTwo = v;
   }
-}, 10);
+}, 15);
 var NetworkSurveyThree;
 module.link("./intro/network-survey/NetworkSurvey3", {
   "default": function (v) {
     NetworkSurveyThree = v;
   }
-}, 11);
+}, 16);
 var TutorialPageOne;
 module.link("./intro/tutorial/TutorialPageOne", {
   "default": function (v) {
     TutorialPageOne = v;
   }
-}, 12);
+}, 17);
 var TutorialPageTwo;
 module.link("./intro/tutorial/TutorialPageTwo", {
   "default": function (v) {
     TutorialPageTwo = v;
   }
-}, 13);
+}, 18);
 var TutorialPageThree;
 module.link("./intro/tutorial/TutorialPageThree", {
   "default": function (v) {
     TutorialPageThree = v;
   }
-}, 14);
+}, 19);
 var TutorialPageFour;
 module.link("./intro/tutorial/TutorialPageFour", {
   "default": function (v) {
     TutorialPageFour = v;
   }
-}, 15);
+}, 20);
 var AllQuiz;
 module.link("./intro/quiz/AllQuiz", {
   "default": function (v) {
     AllQuiz = v;
   }
-}, 16);
+}, 21);
+var QuizFive;
+module.link("./intro/quiz/QuizFive", {
+  "default": function (v) {
+    QuizFive = v;
+  }
+}, 22);
+var QuizSix;
+module.link("./intro/quiz/QuizSix", {
+  "default": function (v) {
+    QuizSix = v;
+  }
+}, 23);
+var QuizSeven;
+module.link("./intro/quiz/QuizSeven", {
+  "default": function (v) {
+    QuizSeven = v;
+  }
+}, 24);
+var QuizTwo;
+module.link("./intro/quiz/QuizTwo", {
+  "default": function (v) {
+    QuizTwo = v;
+  }
+}, 25);
+var QuizOne;
+module.link("./intro/quiz/QuizOne", {
+  "default": function (v) {
+    QuizOne = v;
+  }
+}, 26);
 var QuizOverview;
 module.link("./intro/quiz/QuizOverview", {
   "default": function (v) {
     QuizOverview = v;
   }
-}, 17);
+}, 27);
 var EnglishScreen;
 module.link("./intro/english-screening/EnglishScreen", {
   "default": function (v) {
     EnglishScreen = v;
   }
-}, 18);
+}, 28);
 var DescribeSymbolQuestion;
 module.link("./intro/DescribeSymbolQuestion", {
   "default": function (v) {
     DescribeSymbolQuestion = v;
   }
-}, 19);
+}, 29);
+var Schedule;
+module.link("./intro/Schedule", {
+  "default": function (v) {
+    Schedule = v;
+  }
+}, 30);
 var NewPlayer;
 module.link("./intro/NewPlayer", {
   "default": function (v) {
     NewPlayer = v;
   }
-}, 20);
+}, 31);
 // Get rid of Breadcrumb component
 Empirica.breadcrumb(function () {
   return null;
@@ -7508,24 +9700,29 @@ Empirica.newPlayer(NewPlayer); // Introduction pages to show before they play th
 
 Empirica.introSteps(function (game, treatment) {
   // MidSurveyFive, MidSurveyFour, MidSurveyThree, MidSurveyTwo, MidSurveyOne,
+  var durationConsent = [QuizOne];
   var englishScreen = [EnglishScreen];
   var networkSurvey = [NetworkSurveyOne, NetworkSurveyTwo, NetworkSurveyThree];
   var tutorialSteps = [TutorialPageOne, TutorialPageThree, TutorialPageFour];
   var symbolDescription = [DescribeSymbolQuestion]; // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
+  // const quizSteps = [AllQuiz];
 
-  var quizSteps = [AllQuiz];
+  var quizSteps = [QuizFive, QuizSix, QuizSeven, QuizTwo];
   var quizOverview = [QuizOverview];
+  var schedule = [Schedule];
   var steps;
 
   if (game.treatment.isPreQualification) {
-    steps = englishScreen.concat(networkSurvey, tutorialSteps, quizSteps, symbolDescription); // steps = quizSteps.concat(symbolDescription);
+    steps = durationConsent.concat(englishScreen, tutorialSteps, quizSteps, symbolDescription, networkSurvey, schedule); // steps = englishScreen.concat(networkSurvey,tutorialSteps,quizSteps, symbolDescription, schedule);
+    // steps = quizSteps.concat(symbolDescription);
   } else {
     steps = tutorialSteps.concat(quizOverview);
   }
 
   if (treatment.skipIntro) {
     return [];
-  }
+  } // return [QuizFive, QuizSix, QuizSeven, QuizTwo];
+
 
   return steps;
 }); // The Round component containing the game UI logic.
@@ -7543,7 +9740,7 @@ Empirica.round(Round); // End of Game pages. These may vary depending on player 
 
 Empirica.exitSteps(function (game, player) {
   if (player.exitStatus && player.exitStatus === "custom" && (player.exitReason === "maxGameTimeReached" || player.exitReason === "minPlayerCountNotMaintained")) {
-    return [ExitSurvey, Thanks];
+    return [FinalMidSurveyOne, FinalMidSurveyTwo, FinalMidSurveyThree, FinalMidSurveyFour, FinalMidSurveyFive, ExitSurvey, Thanks];
   }
 
   if (player.exitStatus && player.exitStatus === "custom" && player.exitReason === "preQualSuccess") {

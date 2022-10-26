@@ -32,7 +32,7 @@ export default class TutorialPageFour extends React.Component {
         
         {hasNext &&
         <button className="arrow-button tutorial-next-btn" type="button" onClick={onNext} disabled={!hasNext}>
-          Next
+          Attention Check
         </button>
         }
       </div>

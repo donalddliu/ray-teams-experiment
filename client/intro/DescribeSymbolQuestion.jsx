@@ -18,8 +18,8 @@ export default class DescribeSymbolQuestion extends React.Component {
         event.preventDefault();
         // TODO: log player response to survey question
         player.set(`symbolDescription`, this.state.response);
-        player.set("passedPreQual", true);
-        player.exit("preQualSuccess");
+
+        onNext();
     };
     
 
@@ -33,7 +33,7 @@ export default class DescribeSymbolQuestion extends React.Component {
                       <div className="questionnaire-body">
                             <h2> Please describe the following symbol below as if you were trying to explain it to another player. Try to be more descriptive than not.
                                 <br></br>
-                                Note: If there are too many participants filling out the survey at once, there may be some server delays. If you click submit and you do not immediately proceed to the exit stage, please be patient as it will eventually submit.
+                                Note: If there are too many participants filling out the survey at once, there may be some server delays. If you click submit and you do not immediately proceed to the next page, please be patient as it will eventually submit.
                             </h2>
                             <br></br>
                             <div className="symbol-container" style = {{width: "100%", backgroundColor:"#051A46", borderRadius: "0%", display: "flex", justifyContent: "center"}}>

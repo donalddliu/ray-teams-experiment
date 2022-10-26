@@ -4,6 +4,7 @@ import '../../../public/css/intro.css'
 import { Centered } from "meteor/empirica:core";
 
 export default class TutorialPageOne extends React.Component {
+
   render() {
     const { hasPrev, hasNext, onNext, onPrev, game } = this.props;
 

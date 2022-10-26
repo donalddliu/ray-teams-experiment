@@ -1,4 +1,1410 @@
-var require = meteorInstall({"client":{"game":{"mid-survey":{"MidSurvey1.jsx":function module(require,exports,module){
+var require = meteorInstall({"client":{"exit":{"final-mid-survey":{"FinalMidSurvey1.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/final-mid-survey/FinalMidSurvey1.jsx                                                                    //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => FinalMidSurveyOne
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+let TimeSync;
+module.link("meteor/mizzao:timesync", {
+  TimeSync(v) {
+    TimeSync = v;
+  }
+
+}, 1);
+let moment;
+module.link("moment", {
+  default(v) {
+    moment = v;
+  }
+
+}, 2);
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 3);
+
+const Radio = (_ref) => {
+  let {
+    selected,
+    name,
+    value,
+    label,
+    playerIsOnline,
+    onChange
+  } = _ref;
+  return /*#__PURE__*/React.createElement("label", {
+    className: "questionnaire-radio"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "quiz-button",
+    type: "radio",
+    name: name,
+    value: value,
+    checked: selected === value,
+    onChange: onChange
+  }), label, " ", playerIsOnline ? "" : " (offline)");
+};
+
+class FinalMidSurveyOne extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = {};
+
+    this.handleChange = event => {
+      const {
+        player
+      } = this.props;
+      const el = event.currentTarget;
+      this.setState({
+        [el.name]: el.value
+      });
+      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+    };
+
+    this.handleSubmit = event => {
+      const {
+        onNext,
+        player,
+        stage
+      } = this.props;
+      event.preventDefault(); // TODO: log player response to survey question
+
+      player.set("final_survey_1", this.state);
+      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+      this.props.onSubmit(this.state);
+    };
+  }
+
+  render() {
+    console.log(this.props);
+    const {
+      game,
+      round,
+      stage,
+      player
+    } = this.props;
+    const {
+      response
+    } = this.state;
+    const network = player.get("neighbors");
+    const surveyNumber = 1;
+    const completedWidth = 590 / 5 * surveyNumber;
+    const uncompletedWidth = 590 - completedWidth;
+    const offset = 590 / 5 * 0.5;
+    const stageNumPosition = completedWidth - offset;
+    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+      className: "intro-heading questionnaire-heading"
+    }, " To complete the challenge, please fill in the following questionnaire "), /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-content-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "progress-bar"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "completed-bar"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "completed-heading",
+      style: {
+        marginLeft: stageNumPosition
+      }
+    }, " ", surveyNumber, " "), /*#__PURE__*/React.createElement("img", {
+      src: "images/hr-color.png",
+      width: "".concat(completedWidth, " px"),
+      height: "7px"
+    })), /*#__PURE__*/React.createElement("img", {
+      src: "images/hr-color-dark.png",
+      width: "".concat(uncompletedWidth, " px"),
+      height: "7px"
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-body"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "questionnaire-question"
+    }, " Did your group have a leader? If so, who?"), network.map(otherNodeId => {
+      const otherPlayer = game.players.find(p => p.get("nodeId") === parseInt(otherNodeId));
+      const otherPlayerId = otherPlayer.get("anonymousName"); // const playerIsOnline = otherPlayer.online === true && !otherPlayer.get("inactive");
+
+      const playerIsOnline = !otherPlayer.get("inactive");
+      return /*#__PURE__*/React.createElement(Radio, {
+        selected: response,
+        key: otherPlayerId,
+        name: "response",
+        value: otherPlayerId,
+        label: otherPlayerId,
+        playerIsOnline: playerIsOnline,
+        onChange: this.handleChange
+      });
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: response,
+      name: "response",
+      value: "myself",
+      label: "Myself",
+      playerIsOnline: true,
+      onChange: this.handleChange
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: response,
+      name: "response",
+      value: "team",
+      label: "We worked as a team",
+      playerIsOnline: true,
+      onChange: this.handleChange
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: response,
+      name: "response",
+      value: "none",
+      label: "Our team did not have a leader",
+      playerIsOnline: true,
+      onChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("form", {
+      className: "questionnaire-btn-container",
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("button", {
+      className: !response ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+      disabled: !response,
+      type: "submit"
+    }, " Submit "))));
+  }
+
+}
+
+FinalMidSurveyOne.stepName = "FinalMidSurveyOne";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"FinalMidSurvey2.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/final-mid-survey/FinalMidSurvey2.jsx                                                                    //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => FinalMidSurveyTwo
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+let Slider;
+module.link("meteor/empirica:slider", {
+  default(v) {
+    Slider = v;
+  }
+
+}, 1);
+let TimeSync;
+module.link("meteor/mizzao:timesync", {
+  TimeSync(v) {
+    TimeSync = v;
+  }
+
+}, 2);
+let moment;
+module.link("moment", {
+  default(v) {
+    moment = v;
+  }
+
+}, 3);
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 4);
+
+class FinalMidSurveyTwo extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = {};
+
+    this.renderLabels = val => {
+      if (val === 0) {
+        // Min value
+        return "".concat(val, " Unhappy");
+      } else if (val === 3) {
+        return "".concat(val, " Neutral");
+      } else if (val === 6) {
+        // Max value
+        return "".concat(val, " Happy");
+      }
+
+      return "";
+    };
+
+    this.handleSubmit = event => {
+      const {
+        onNext,
+        player,
+        stage
+      } = this.props;
+      event.preventDefault(); // TODO: log player response to survey question
+
+      player.set("final_survey_2", this.state);
+      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+      this.props.onSubmit(this.state);
+    };
+  }
+
+  componentDidMount() {
+    const {
+      game,
+      round,
+      stage,
+      player
+    } = this.props;
+    player.get("neighbors").forEach(otherNodeId => {
+      const otherPlayerId = game.players.find(p => p.get("nodeId") === parseInt(otherNodeId)).get("anonymousName");
+      this.setState({
+        [otherPlayerId]: 0
+      });
+    });
+  }
+
+  render() {
+    const {
+      game,
+      round,
+      stage,
+      player
+    } = this.props;
+    const network = player.get("neighbors");
+    const surveyNumber = 2;
+    const completedWidth = 590 / 5 * surveyNumber;
+    const uncompletedWidth = 590 - completedWidth;
+    const offset = 590 / 5 * 0.5;
+    const stageNumPosition = completedWidth - offset;
+    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+      className: "intro-heading questionnaire-heading"
+    }, " To complete the challenge, please fill in the following questionnaire "), /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-content-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "progress-bar"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "completed-bar"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "completed-heading",
+      style: {
+        marginLeft: stageNumPosition
+      }
+    }, " ", surveyNumber, " "), /*#__PURE__*/React.createElement("img", {
+      src: "images/hr-color.png",
+      width: "".concat(completedWidth, " px"),
+      height: "7px"
+    })), /*#__PURE__*/React.createElement("img", {
+      src: "images/hr-color-dark.png",
+      width: "".concat(uncompletedWidth, " px"),
+      height: "7px"
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-body"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "questionnaire-question"
+    }, " Please rate how well you have been working with each teammate in the recent trials?"), network.map(otherNodeId => {
+      const otherPlayer = game.players.find(p => p.get("nodeId") === parseInt(otherNodeId));
+      const otherPlayerId = otherPlayer.get("anonymousName"); // const playerIsOnline = otherPlayer.online === true && !otherPlayer.get("inactive");
+
+      const playerIsOnline = !otherPlayer.get("inactive");
+
+      const handleSliderChange = num => {
+        // Rounding the number to 2 decimals max
+        this.setState({
+          [otherPlayerId]: num
+        });
+        player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+      };
+
+      return /*#__PURE__*/React.createElement("div", {
+        className: "player-slider-container"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "player-label"
+      }, " ", otherPlayerId, " ", playerIsOnline ? "" : " (offline)", " "), /*#__PURE__*/React.createElement(Slider, {
+        key: otherNodeId,
+        min: 0,
+        max: 6,
+        stepSize: 1,
+        disabled: false,
+        showTrackFill: false,
+        name: otherPlayerId,
+        value: this.state[otherPlayerId],
+        labelRenderer: this.renderLabels,
+        onChange: handleSliderChange
+      }), /*#__PURE__*/React.createElement("div", {
+        className: "slider-value-container",
+        style: {
+          width: "15%"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "slider-value"
+      }, this.state[otherPlayerId], " ")));
+    })), /*#__PURE__*/React.createElement("form", {
+      className: "questionnaire-btn-container",
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "arrow-button button-submit",
+      type: "submit"
+    }, " Submit "))));
+  }
+
+}
+
+FinalMidSurveyTwo.stepName = "FinalMidSurveyTwo";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"FinalMidSurvey3.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/final-mid-survey/FinalMidSurvey3.jsx                                                                    //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => FinalMidSurveyThree
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+let Slider;
+module.link("meteor/empirica:slider", {
+  default(v) {
+    Slider = v;
+  }
+
+}, 1);
+let TimeSync;
+module.link("meteor/mizzao:timesync", {
+  TimeSync(v) {
+    TimeSync = v;
+  }
+
+}, 2);
+let moment;
+module.link("moment", {
+  default(v) {
+    moment = v;
+  }
+
+}, 3);
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 4);
+
+class FinalMidSurveyThree extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = {
+      sliderValue: 0
+    };
+
+    this.handleSliderChange = num => {
+      const {
+        stage,
+        player
+      } = this.props; // Rounding the number to 2 decimals max
+
+      this.setState({
+        sliderValue: num
+      });
+      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+    };
+
+    this.renderLabels = val => {
+      if (val === 0) {
+        // Min value
+        return "".concat(val, " Unhappy");
+      } else if (val === 3) {
+        return "".concat(val, " Neutral");
+      } else if (val === 6) {
+        // Max value
+        return "".concat(val, " Happy");
+      }
+
+      return "";
+    };
+
+    this.handleSubmit = event => {
+      const {
+        onNext,
+        player,
+        stage
+      } = this.props;
+      event.preventDefault(); // TODO: log player response to survey question
+
+      player.set("final_survey_3", this.state);
+      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+      this.props.onSubmit(this.state);
+    };
+  }
+
+  render() {
+    const {
+      game,
+      round,
+      stage,
+      player
+    } = this.props;
+    const {
+      response
+    } = this.state;
+    const surveyNumber = 3;
+    const completedWidth = 590 / 5 * surveyNumber;
+    const uncompletedWidth = 590 - completedWidth;
+    const offset = 590 / 5 * 0.5;
+    const stageNumPosition = completedWidth - offset;
+    const sliderValue = this.state.sliderValue;
+    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+      className: "intro-heading questionnaire-heading"
+    }, " To complete the challenge, please fill in the following questionnaire "), /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-content-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "progress-bar"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "completed-bar"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "completed-heading",
+      style: {
+        marginLeft: stageNumPosition
+      }
+    }, " ", surveyNumber, " "), /*#__PURE__*/React.createElement("img", {
+      src: "images/hr-color.png",
+      width: "".concat(completedWidth, " px"),
+      height: "7px"
+    })), /*#__PURE__*/React.createElement("img", {
+      src: "images/hr-color-dark.png",
+      width: "".concat(uncompletedWidth, " px"),
+      height: "7px"
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-body"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "questionnaire-question"
+    }, " How did you like your job in the team during the recent trials? "), /*#__PURE__*/React.createElement(Slider, {
+      min: 0,
+      max: 6,
+      stepSize: 1,
+      disabled: false,
+      showTrackFill: false,
+      value: sliderValue,
+      labelRenderer: this.renderLabels,
+      onChange: this.handleSliderChange
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "slider-value-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "slider-value"
+    }, sliderValue, " "))), /*#__PURE__*/React.createElement("form", {
+      className: "questionnaire-btn-container",
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "arrow-button button-submit",
+      type: "submit"
+    }, " Submit "))));
+  }
+
+}
+
+FinalMidSurveyThree.stepName = "FinalMidSurveyThree";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"FinalMidSurvey4.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/final-mid-survey/FinalMidSurvey4.jsx                                                                    //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => FinalMidSurveyFour
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+let Slider;
+module.link("meteor/empirica:slider", {
+  default(v) {
+    Slider = v;
+  }
+
+}, 1);
+let TimeSync;
+module.link("meteor/mizzao:timesync", {
+  TimeSync(v) {
+    TimeSync = v;
+  }
+
+}, 2);
+let moment;
+module.link("moment", {
+  default(v) {
+    moment = v;
+  }
+
+}, 3);
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 4);
+
+class FinalMidSurveyFour extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = {
+      sliderValue: 0
+    };
+
+    this.handleSliderChange = num => {
+      const {
+        stage,
+        player
+      } = this.props; // Rounding the number to 2 decimals max
+
+      this.setState({
+        sliderValue: num
+      });
+      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+    };
+
+    this.renderLabels = val => {
+      if (val === 0) {
+        // Min value
+        return "".concat(val, " Poor");
+      } else if (val === 3) {
+        return "".concat(val, " Neutral");
+      } else if (val === 6) {
+        // Max value
+        return "".concat(val, " Great");
+      }
+
+      return "";
+    };
+
+    this.handleSubmit = event => {
+      const {
+        onNext,
+        player,
+        stage
+      } = this.props;
+      event.preventDefault(); // TODO: log player response to survey question
+
+      player.set("final_survey_4", this.state);
+      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+      this.props.onSubmit(this.state);
+    };
+  }
+
+  render() {
+    const {
+      game,
+      round,
+      stage,
+      player
+    } = this.props;
+    const {
+      response
+    } = this.state;
+    const surveyNumber = 4;
+    const completedWidth = 590 / 5 * surveyNumber;
+    const uncompletedWidth = 590 - completedWidth;
+    const offset = 590 / 5 * 0.5;
+    const stageNumPosition = completedWidth - offset;
+    const sliderValue = this.state.sliderValue;
+    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+      className: "intro-heading questionnaire-heading"
+    }, " To complete the challenge, please fill in the following questionnaire "), /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-content-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "progress-bar"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "completed-bar"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "completed-heading",
+      style: {
+        marginLeft: stageNumPosition
+      }
+    }, " ", surveyNumber, " "), /*#__PURE__*/React.createElement("img", {
+      src: "images/hr-color.png",
+      width: "".concat(completedWidth, " px"),
+      height: "7px"
+    })), /*#__PURE__*/React.createElement("img", {
+      src: "images/hr-color-dark.png",
+      width: "".concat(uncompletedWidth, " px"),
+      height: "7px"
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-body"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "questionnaire-question"
+    }, " On the scale below, rate how your team has been working in the recent trials "), /*#__PURE__*/React.createElement(Slider, {
+      min: 0,
+      max: 6,
+      stepSize: 1,
+      disabled: false,
+      showTrackFill: false,
+      value: sliderValue,
+      labelRenderer: this.renderLabels,
+      onChange: this.handleSliderChange
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "slider-value-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "slider-value"
+    }, sliderValue, " "))), /*#__PURE__*/React.createElement("form", {
+      className: "questionnaire-btn-container",
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "arrow-button button-submit",
+      type: "submit"
+    }, " Submit "))));
+  }
+
+}
+
+FinalMidSurveyFour.stepName = "FinalMidSurveyFour";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"FinalMidSurvey5.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/final-mid-survey/FinalMidSurvey5.jsx                                                                    //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => FinalMidSurveyFive
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+let Slider;
+module.link("meteor/empirica:slider", {
+  default(v) {
+    Slider = v;
+  }
+
+}, 1);
+let TimeSync;
+module.link("meteor/mizzao:timesync", {
+  TimeSync(v) {
+    TimeSync = v;
+  }
+
+}, 2);
+let moment;
+module.link("moment", {
+  default(v) {
+    moment = v;
+  }
+
+}, 3);
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 4);
+
+class FinalMidSurveyFive extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = {
+      response: ""
+    };
+
+    this.handleChange = event => {
+      const el = event.currentTarget;
+      this.setState({
+        [el.name]: el.value
+      });
+    };
+
+    this.handleSliderChange = num => {
+      const {
+        stage,
+        player
+      } = this.props; // Rounding the number to 2 decimals max
+
+      this.setState({
+        sliderValue: num
+      });
+    };
+
+    this.renderLabels = val => {
+      if (val === 0) {
+        // Min value
+        return "".concat(val, " Unhappy");
+      } else if (val === 3) {
+        return "".concat(val, " Neutral");
+      } else if (val === 6) {
+        // Max value
+        return "".concat(val, " Happy");
+      }
+
+      return "";
+    };
+
+    this.handleSubmit = event => {
+      const {
+        onNext,
+        player,
+        stage
+      } = this.props;
+      event.preventDefault(); // TODO: log player response to survey question
+
+      player.set("final_survey_5", this.state);
+      player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+      this.props.onSubmit(this.state);
+    };
+  }
+
+  render() {
+    const {
+      game,
+      round,
+      stage,
+      player
+    } = this.props;
+    const {
+      response
+    } = this.state;
+    const surveyNumber = 5;
+    const completedWidth = 590 / 5 * surveyNumber;
+    const uncompletedWidth = 590 - completedWidth;
+    const offset = 590 / 5 * 0.5;
+    const stageNumPosition = completedWidth - offset;
+    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+      className: "intro-heading questionnaire-heading"
+    }, " To complete the challenge, please fill in the following questionnaire "), /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-content-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "progress-bar"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "completed-bar"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "completed-heading",
+      style: {
+        marginLeft: stageNumPosition
+      }
+    }, " ", surveyNumber, " "), /*#__PURE__*/React.createElement("img", {
+      src: "images/hr-color.png",
+      width: "".concat(completedWidth, " px"),
+      height: "7px"
+    })), /*#__PURE__*/React.createElement("img", {
+      src: "images/hr-color-dark.png",
+      width: "".concat(uncompletedWidth, " px"),
+      height: "7px"
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-body"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "questionnaire-question"
+    }, " Do you think your group could improve its efficiency? If so, how? "), /*#__PURE__*/React.createElement("textarea", {
+      className: "survey-textarea",
+      dir: "auto",
+      id: "response",
+      name: "response",
+      value: response,
+      onChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("form", {
+      className: "questionnaire-btn-container",
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("button", {
+      className: !response ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+      disabled: !response,
+      type: "submit"
+    }, " Submit "))));
+  }
+
+}
+
+FinalMidSurveyFive.stepName = "FinalMidSurveyFive";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}},"ExitSurvey.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/ExitSurvey.jsx                                                                                          //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => ExitSurvey
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 1);
+
+const Radio = (_ref) => {
+  let {
+    selected,
+    name,
+    value,
+    label,
+    onChange,
+    required
+  } = _ref;
+  return /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
+    type: "radio",
+    name: name,
+    value: value,
+    checked: selected === value,
+    onChange: onChange,
+    required: required ? "required" : ""
+  }), label);
+};
+
+class ExitSurvey extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = {
+      age: "",
+      gender: "",
+      strength: "",
+      fair: "",
+      feedback: ""
+    };
+
+    this.handleChange = event => {
+      const el = event.currentTarget;
+      this.setState({
+        [el.name]: el.value
+      });
+    };
+
+    this.handleSubmit = event => {
+      event.preventDefault();
+      this.props.onSubmit(this.state);
+    };
+  }
+
+  render() {
+    const {
+      player,
+      game
+    } = this.props;
+    const {
+      age,
+      gender,
+      strength,
+      fair,
+      feedback,
+      education
+    } = this.state;
+    const basePay = game.treatment.basePay;
+    const conversionRate = game.treatment.conversionRate;
+    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+      className: "exit-survey"
+    }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, "Please submit the following code to receive your bonus:", " ", /*#__PURE__*/React.createElement("strong", null, " C1FLL9CG "), "."), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""), /*#__PURE__*/React.createElement("p", null, "Your team got a total of ", /*#__PURE__*/React.createElement("strong", null, player.get("score")), " correct.", basePay && conversionRate ? " You will receive an additional performance bonus of ".concat(player.get("score"), " x $").concat(conversionRate, ".") : " You will receive a base pay of $2 and an additional performance bonus of ".concat(player.get("score"), " x 1, for a total of ").concat(2 + parseInt(player.get("score")) * 1, ".")), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "form-line"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "age"
+    }, "Age"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
+      id: "age",
+      type: "number",
+      min: "0",
+      max: "150",
+      step: "1",
+      dir: "auto",
+      name: "age",
+      value: age,
+      onChange: this.handleChange,
+      required: true
+    }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "gender"
+    }, "Gender"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
+      id: "gender",
+      type: "text",
+      dir: "auto",
+      name: "gender",
+      value: gender,
+      onChange: this.handleChange,
+      required: true,
+      autoComplete: "off"
+    })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "Highest Education Qualification"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Radio, {
+      selected: education,
+      name: "education",
+      value: "high-school",
+      label: "High School",
+      onChange: this.handleChange,
+      required: true
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: education,
+      name: "education",
+      value: "bachelor",
+      label: "US Bachelor's Degree",
+      onChange: this.handleChange
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: education,
+      name: "education",
+      value: "master",
+      label: "Master's or higher",
+      onChange: this.handleChange
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: education,
+      name: "education",
+      value: "other",
+      label: "Other",
+      onChange: this.handleChange
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "form-line thirds"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "strength"
+    }, "How would you describe your strength in the game?"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
+      dir: "auto",
+      id: "strength",
+      name: "strength",
+      value: strength,
+      onChange: this.handleChange,
+      required: true
+    }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "fair"
+    }, "Do you feel the pay was fair?"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
+      dir: "auto",
+      id: "fair",
+      name: "fair",
+      value: fair,
+      onChange: this.handleChange,
+      required: true
+    }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "feedback"
+    }, "Feedback, including problems you encountered."), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
+      dir: "auto",
+      id: "feedback",
+      name: "feedback",
+      value: feedback,
+      onChange: this.handleChange,
+      required: true
+    })))), /*#__PURE__*/React.createElement("button", {
+      type: "submit"
+    }, "Submit"))));
+  }
+
+}
+
+ExitSurvey.stepName = "ExitSurvey";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"FailedAttentionCheck.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/FailedAttentionCheck.jsx                                                                                //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => FailedAttentionCheck
+});
+let React, Component;
+module.link("react", {
+  default(v) {
+    React = v;
+  },
+
+  Component(v) {
+    Component = v;
+  }
+
+}, 0);
+let Meteor;
+module.link("meteor/meteor", {
+  Meteor(v) {
+    Meteor = v;
+  }
+
+}, 1);
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 2);
+
+class FailedAttentionCheck extends Component {
+  render() {
+    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+      className: "failed-attention-container"
+    }, /*#__PURE__*/React.createElement("h2", {
+      className: "failed-attention-text"
+    }, "YOU FAILED THE ATTENTION CHECK, AND HAVE NOT BEEN SELECTED TO PLAY. PLEASE DO NOT TRY TO COMPLETE THE TASK AGAIN. THANK YOU FOR YOUR TIME. PLEASE RETURN YOUR SUBMISSION BY CLOSING THE SURVEY AND CLICKING 'STOP WITHOUT COMLPETING' ON PROLIFIC.\"")));
+  }
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"PreQualExitSurvey.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/PreQualExitSurvey.jsx                                                                                   //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => PreQualExitSurvey
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 1);
+
+const Radio = (_ref) => {
+  let {
+    selected,
+    name,
+    value,
+    label,
+    onChange,
+    required
+  } = _ref;
+  return /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
+    type: "radio",
+    name: name,
+    value: value,
+    checked: selected === value,
+    onChange: onChange,
+    required: required ? "required" : ""
+  }), label);
+};
+
+class PreQualExitSurvey extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = {
+      age: "",
+      gender: "",
+      email: "",
+      feedback: ""
+    };
+
+    this.handleChange = event => {
+      const el = event.currentTarget;
+      this.setState({
+        [el.name]: el.value
+      });
+    };
+
+    this.handleSubmit = event => {
+      event.preventDefault();
+      this.props.onSubmit(this.state);
+    };
+  }
+
+  render() {
+    const {
+      player,
+      game
+    } = this.props;
+    const {
+      age,
+      gender,
+      feedback,
+      education
+    } = this.state;
+    const basePay = game.treatment.basePay;
+    const conversionRate = game.treatment.conversionRate;
+    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+      className: "exit-survey"
+    }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, "Please submit the following code:", " ", /*#__PURE__*/React.createElement("strong", null, " CZ586HD9 ")), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""), /*#__PURE__*/React.createElement("p", null, "Thank you for taking time to take this pre-qualification survey ! We will finish screening all the players and send out a date and time to those that qualify for our future game.", basePay && conversionRate ? " You will receive a base pay of $".concat(basePay, " for taking this pre-qualification.") : " You will receive a base pay of $2 for taking this pre-qualification."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "form-line"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "age"
+    }, "Age"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
+      id: "age",
+      type: "number",
+      min: "0",
+      max: "150",
+      step: "1",
+      dir: "auto",
+      name: "age",
+      value: age,
+      onChange: this.handleChange,
+      required: true
+    }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "gender"
+    }, "Gender"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
+      id: "gender",
+      type: "text",
+      dir: "auto",
+      name: "gender",
+      value: gender,
+      onChange: this.handleChange,
+      required: true,
+      autoComplete: "off"
+    })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "Highest Education Qualification"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Radio, {
+      selected: education,
+      name: "education",
+      value: "high-school",
+      label: "High School",
+      onChange: this.handleChange,
+      required: true
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: education,
+      name: "education",
+      value: "bachelor",
+      label: "US Bachelor's Degree",
+      onChange: this.handleChange
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: education,
+      name: "education",
+      value: "master",
+      label: "Master's or higher",
+      onChange: this.handleChange
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: education,
+      name: "education",
+      value: "other",
+      label: "Other",
+      onChange: this.handleChange
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "form-line thirds"
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
+      htmlFor: "feedback"
+    }, "Feedback, including problems you encountered."), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
+      dir: "auto",
+      id: "feedback",
+      name: "feedback",
+      value: feedback,
+      onChange: this.handleChange,
+      required: true
+    })))), /*#__PURE__*/React.createElement("button", {
+      type: "submit"
+    }, "Submit"))));
+  }
+
+}
+
+PreQualExitSurvey.stepName = "ExitSurvey";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"Sorry.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/Sorry.jsx                                                                                               //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => Sorry
+});
+let React, Component;
+module.link("react", {
+  default(v) {
+    React = v;
+  },
+
+  Component(v) {
+    Component = v;
+  }
+
+}, 0);
+let Meteor;
+module.link("meteor/meteor", {
+  Meteor(v) {
+    Meteor = v;
+  }
+
+}, 1);
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 2);
+let FailedAttentionCheck;
+module.link("./FailedAttentionCheck", {
+  default(v) {
+    FailedAttentionCheck = v;
+  }
+
+}, 3);
+
+class Sorry extends Component {
+  render() {
+    const {
+      player,
+      game
+    } = this.props;
+    let msg;
+
+    switch (player.exitStatus) {
+      case "gameFull":
+        msg = "All games you are eligible for have filled up too fast... Sorry, there will be no more games in the near future.";
+        break;
+
+      case "gameLobbyTimedOut":
+        msg = "There were NOT enough players for the game to start... Thank you for participating in this game."; // msg = "There were NOT enough players for the game to start... Thank you for participating in this game, you will still get paid the base amount for passing the attention check. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
+
+        break;
+
+      case "playerEndedLobbyWait":
+        msg = "You decided to stop waiting, we are sorry it was too long a wait.";
+        break;
+
+      default:
+        msg = "Unfortunately, the Game was cancelled... Either there were not enough players or there was a technical issue with the game. If it was the latter, please contact us and we can restart the game."; // msg = "Unfortunately, the Game was cancelled... Thank you for participating in this game, please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly.";
+
+        break;
+    }
+
+    if (player.exitReason === "failedQuestion") {
+      return /*#__PURE__*/React.createElement(FailedAttentionCheck, null);
+    }
+
+    if (player.exitReason === "returnSubmission") {
+      msg = "You did not consent to participating for the whole duration of our future games. Please return your submission by closing the survey and clicking 'Stop Without Completing' on Prolific.";
+    }
+
+    if (player.exitReason === "inactive") {
+      msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid including any bonuses for the rounds you successfully passed. Please submit the following completion code: C1FLL9CG"; // msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
+    }
+
+    if (player.exitReason === "someoneInactive") {
+      msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid including any bonuses for the rounds you successfully passed. Please submit the following completion code: C1FLL9CG"; // msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly. ";
+    }
+
+    if (player.exitReason === "failedEnglishScreen") {
+      // msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game."
+      msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this survey. Please return your submission by closing the survey and clicking 'Stop Without Completing' on Prolific.";
+    }
+
+    if (player.exitReason === "minPlayerCountNotMaintained") {
+      msg = "Unfortunately, there were too few players active in this game and the game had to be cancelled. Thank you for participating in this game, please submit the following completion code: C1FLL9CG"; // msg = `Unfortunately, there were too few players active in this game and the game had to be cancelled. Thank you for participating in this game, please submit the follow code ${player._id} to the HIT and we will make sure you get paid accordingly. `
+    } // Only for dev
+
+
+    if (!game && Meteor.isDevelopment) {
+      msg = "Unfortunately the Game was cancelled because of failed to init Game (only visible in development, check the logs).";
+    }
+
+    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Sorry!"), /*#__PURE__*/React.createElement("p", null, "Sorry, you were not able to play today! ", msg), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Please contact the researcher to see if there are more games available."))));
+  }
+
+}
+
+Sorry.stepName = "Sorry";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"Thanks.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/exit/Thanks.jsx                                                                                              //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => Thanks
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+let moment;
+module.link("moment", {
+  default(v) {
+    moment = v;
+  }
+
+}, 1);
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 2);
+
+class Thanks extends React.Component {
+  render() {
+    const {
+      player,
+      game
+    } = this.props;
+    const basePay = game.treatment.basePay;
+    const conversionRate = game.treatment.conversionRate;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "finished"
+    }, /*#__PURE__*/React.createElement("div", null, player.get("nodeId") ? /*#__PURE__*/React.createElement("p", null, " If you are receiving this message, it means you have participated in one of our symbol task games before. As mentioned in out HIT expectations, if you've participated in one of our HIT sessions before, you cannot participate in another. We are trying to gather new players for each game. If you think this is a mistake, please do no hesistate to reach out.") : /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Finished!"), player.exitReason === "preQualSuccess" ?
+    /*#__PURE__*/
+    // TODO: mturk
+    // <p>Thank you for participating! Please submit the following code to receive your bonus 
+    // { basePay && conversionRate ? ` of $${basePay} : ` : " "} 
+    // <strong>{player._id}</strong>
+    // </p> 
+    // TODO: Prolific
+    React.createElement("p", null, "Thank you for participating! Please submit the following code: C1FLL9CG") : /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $".concat(basePay + parseInt(player.get("score") * conversionRate), " : ") : " ", /*#__PURE__*/React.createElement("strong", null, player._id)))));
+  }
+
+}
+
+Thanks.stepName = "Thanks";
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}},"game":{"mid-survey":{"MidSurvey1.jsx":function module(require,exports,module){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                     //
@@ -759,13 +2165,6 @@ module.link("meteor/empirica:core", {
   }
 
 }, 4);
-let PlayerTab;
-module.link("../PlayerTab", {
-  default(v) {
-    PlayerTab = v;
-  }
-
-}, 5);
 
 class MidSurveyFive extends React.Component {
   constructor() {
@@ -1072,11 +2471,14 @@ class inactiveTimer extends React.Component {
 
     this.onCloseModal = () => {
       const {
-        player
+        player,
+        game
       } = this.props;
+      const inactiveDuration = game.treatment.userInactivityDuration;
+      const extra30Seconds = inactiveDuration - game.treatment.idleWarningTime;
 
       if (!player.get("inactiveWarningUsed")) {
-        player.set("lastActive", moment(TimeSync.serverTime(null, 1000)).subtract(30, 'seconds'));
+        player.set("lastActive", moment(TimeSync.serverTime(null, 1000)).subtract(extra30Seconds, 'seconds'));
         player.set("inactiveWarningUsed", true);
       }
 
@@ -2736,57 +4138,67 @@ const englishScreeningQuestions = [{
   question: "Was the trainer puzzled by the tigers' behavior?",
   answer: "Yes",
   question_number: "10"
-}, {
-  passage: "The house owner came downstairs to find out what made such a racket but she didn't see anything suspicious.",
-  question: "Did the house owner make a racket?",
-  answer: "No",
-  question_number: "11"
-}, {
-  passage: "The students could not wait to find out what surprise the teacher was talking about in class.",
-  question: "Were the students preparing a surprise for the teacher?",
-  answer: "No",
-  question_number: "12"
-}, {
-  passage: "The secretary for the clinic tried to figure out who prescribed what.",
-  question: "Did the secretary try to prescribe something?",
-  answer: "No",
-  question_number: "13"
-}, {
-  passage: "The film director could not remember who played the lead role in the film his colleague just finished shooting.",
-  question: "Was the film director trying to remember something about his colleague's film?",
-  answer: "Yes",
-  question_number: "14"
-}, {
-  passage: "The general was trying to decide when would be the best time to attack.",
-  question: "Was the general planning an attack?",
-  answer: "Yes",
-  question_number: "15"
-}, {
-  passage: "The writer could not decide who the main character would marry in the end of the novel.",
-  question: "Was the writer trying to figure out the ending of the novel?",
-  answer: "Yes",
-  question_number: "16"
-}, {
-  passage: "The student tried to find out why he got a bad grade on the test.",
-  question: "Did the student want to know the reason for a bad grade?",
-  answer: "Yes",
-  question_number: "17"
-}, {
-  passage: "The telemarketer asked who the head of the household was, and the man just hung up the phone.",
-  question: "Did the telemarketer hang up the phone?",
-  answer: "No",
-  question_number: "18"
-}, {
-  passage: "The administrator tried to remember what who donated to whom.",
-  question: "Did the administrator try to donate something?",
-  answer: "No",
-  question_number: "19"
-}, {
-  passage: "The farmer was trying to decide what achievement to submit to the fair this year.",
-  question: "Did the farmer decide not to go to the fair this year?",
-  answer: "No",
-  question_number: "20"
-}];
+} // {
+//   passage: "The house owner came downstairs to find out what made such a racket but she didn't see anything suspicious.",
+//   question: "Did the house owner make a racket?",
+//   answer: "No",
+//   question_number: "11",
+// },
+// {
+//   passage: "The students could not wait to find out what surprise the teacher was talking about in class.",
+//   question: "Were the students preparing a surprise for the teacher?",
+//   answer: "No",
+//   question_number: "12",
+// },
+// {
+//   passage: "The secretary for the clinic tried to figure out who prescribed what.",
+//   question: "Did the secretary try to prescribe something?",
+//   answer: "No",
+//   question_number: "13",
+// },
+// {
+//   passage: "The film director could not remember who played the lead role in the film his colleague just finished shooting.",
+//   question: "Was the film director trying to remember something about his colleague's film?",
+//   answer: "Yes",
+//   question_number: "14",
+// },
+// {
+//   passage: "The general was trying to decide when would be the best time to attack.",
+//   question: "Was the general planning an attack?",
+//   answer: "Yes",
+//   question_number: "15",
+// },
+// {
+//   passage: "The writer could not decide who the main character would marry in the end of the novel.",
+//   question: "Was the writer trying to figure out the ending of the novel?",
+//   answer: "Yes",
+//   question_number: "16",
+// },
+// {
+//   passage: "The student tried to find out why he got a bad grade on the test.",
+//   question: "Did the student want to know the reason for a bad grade?",
+//   answer: "Yes",
+//   question_number: "17",
+// },
+// {
+//   passage: "The telemarketer asked who the head of the household was, and the man just hung up the phone.",
+//   question: "Did the telemarketer hang up the phone?",
+//   answer: "No",
+//   question_number: "18",
+// },
+// {
+//   passage: "The administrator tried to remember what who donated to whom.",
+//   question: "Did the administrator try to donate something?",
+//   answer: "No",
+//   question_number: "19",
+// },
+// {
+//   passage: "The farmer was trying to decide what achievement to submit to the fair this year.",
+//   question: "Did the farmer decide not to go to the fair this year?",
+//   answer: "No",
+//   question_number: "20",
+// },
+];
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 },"EnglishScreen.jsx":function module(require,exports,module){
@@ -2900,7 +4312,7 @@ class EnglishScreen extends React.Component {
         player
       } = this.props;
       let numCorrect = 0;
-      const totalNumQuestions = 20;
+      const totalNumQuestions = englishScreeningQuestions.length;
       englishScreeningQuestions.forEach(questionSet => {
         const {
           passage,
@@ -3794,7 +5206,7 @@ class AllQuiz extends React.Component {
       className: "question-section"
     }, /*#__PURE__*/React.createElement("label", {
       className: "questionnaire-question"
-    }, "Is the following statement true or false?", game.treatment.endGameIfPlayerIdle ? /*#__PURE__*/React.createElement("span", null, " If any member of my team doesn't register a guess or communicate with a colleague for long time, the task will end and the entire team (including myself) will be sent to the exit page of the survey.") : /*#__PURE__*/React.createElement("span", null, " If a member of my team doesn't register a guess or communicate with a colleague for long time, the inactive player will be kicked and the task will continue for the rest of the team.")), /*#__PURE__*/React.createElement(Radio, {
+    }, "Is the following statement true or false?", game.treatment.endGameIfPlayerIdle ? /*#__PURE__*/React.createElement("span", null, " If any member of my team doesn't register a guess or communicate with a colleague for a long time, the task will end and the entire team (including myself) will be sent to the exit page of the survey.") : /*#__PURE__*/React.createElement("span", null, " If a member of my team doesn't register a guess or communicate with a colleague for a long time, the inactive player will be kicked and the task will continue for the rest of the team.")), /*#__PURE__*/React.createElement(Radio, {
       selected: q4,
       name: "q4",
       value: "yes",
@@ -3920,10 +5332,9 @@ class AttentionCheckModal extends React.Component {
   render() {
     const {
       player,
-      onPrev,
+      triesLeft,
       onCloseModal
     } = this.props;
-    const triesLeft = player.get("attentionCheckTries");
     return /*#__PURE__*/React.createElement("div", {
       className: "dark-bg",
       onClick: onCloseModal
@@ -3933,12 +5344,307 @@ class AttentionCheckModal extends React.Component {
       className: "modal"
     }, /*#__PURE__*/React.createElement("div", {
       className: "modal-content"
-    }, "You have failed the attention check. You have ", triesLeft, " tries left. Please go back and reread the instructions."), /*#__PURE__*/React.createElement("div", {
+    }, "You got this comprehension check question wrong. You have ", triesLeft, " try left. Please carefully reread the instructions."), /*#__PURE__*/React.createElement("div", {
       className: "attention-check-button-container"
     }, /*#__PURE__*/React.createElement("button", {
       className: "modal-button",
-      onClick: onPrev
-    }, "Review")))));
+      onClick: onCloseModal
+    }, "Try Again")))));
+  }
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"QuizFive.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/quiz/QuizFive.jsx                                                                                      //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => QuizFive
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+module.link("../../../public/css/intro.css");
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 1);
+let AttentionCheckModal;
+module.link("./AttentionCheckModal", {
+  default(v) {
+    AttentionCheckModal = v;
+  }
+
+}, 2);
+
+const Radio = (_ref) => {
+  let {
+    selected,
+    name,
+    value,
+    label,
+    onChange
+  } = _ref;
+  return /*#__PURE__*/React.createElement("label", {
+    className: "questionnaire-radio"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "quiz-button",
+    type: "radio",
+    name: name,
+    value: value,
+    checked: selected === value,
+    onChange: onChange
+  }), label);
+};
+
+class QuizFive extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = {
+      modalIsOpen: false
+    };
+
+    this.handleChange = event => {
+      const el = event.currentTarget;
+      this.setState({
+        [el.name]: el.value
+      });
+    };
+
+    this.handleSubmit = event => {
+      const {
+        hasPrev,
+        hasNext,
+        onNext,
+        onPrev,
+        game,
+        player
+      } = this.props;
+      event.preventDefault();
+
+      if (this.state.response === 'one') {
+        onNext();
+      } else {
+        const currentTriesLeft = player.get("attentionCheck1Tries");
+        const attentionCheck1Answer = this.state.response;
+        player.set("attentionCheck1-".concat(currentTriesLeft), attentionCheck1Answer);
+        player.set("attentionCheck1Tries", currentTriesLeft - 1);
+
+        if (currentTriesLeft - 1 <= 0) {
+          player.exit("failedQuestion");
+        } else {
+          this.onOpenModal();
+        }
+      }
+    };
+
+    this.onOpenModal = () => {
+      this.setState({
+        modalIsOpen: true
+      });
+    };
+
+    this.onCloseModal = () => {
+      this.setState({
+        modalIsOpen: false
+      });
+    };
+  }
+
+  componentDidMount() {
+    const {
+      player
+    } = this.props;
+
+    if (!player.get("attentionCheck1Tries")) {
+      player.set("attentionCheck1Tries", 2);
+    }
+  }
+
+  render() {
+    const {
+      player
+    } = this.props;
+    const {
+      response
+    } = this.state;
+    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+      className: "intro-heading questionnaire-heading"
+    }, " Questionnaire "), /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-content-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-body"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "questionnaire-question"
+    }, " The task requires that members of a small network work together to identify abstract symbols for multiple trials. At the beginning of each trial, each member of your network will be assigned a set of symbols. One and only one of those symbols will be shared among you. Your job is to discover the shared symbol by communicating with the members of your network within the time allotted. Your symbols are illustrated in the \"my card\" box. When you believe you have identified the shared symbol, select it and then hit the submit answer button. If your team runs out of time, your team will be marked incorrect and you will move onto the next round.  "), /*#__PURE__*/React.createElement("p", null, "----------------------------------------------------------------------------------------------------"), /*#__PURE__*/React.createElement("label", {
+      className: "questionnaire-question"
+    }, "On any trial, how many abstract symbols will you and any member of your team have in common?"), /*#__PURE__*/React.createElement(Radio, {
+      selected: response,
+      name: "response",
+      value: "zero",
+      label: "0",
+      onChange: this.handleChange
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: response,
+      name: "response",
+      value: "one",
+      label: "1",
+      onChange: this.handleChange
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: response,
+      name: "response",
+      value: "two",
+      label: "2",
+      onChange: this.handleChange
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: response,
+      name: "response",
+      value: "many",
+      label: "More than 2",
+      onChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("form", {
+      className: "questionnaire-btn-container",
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("button", {
+      className: !response ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+      disabled: !response,
+      type: "submit"
+    }, " Submit ")), this.state.modalIsOpen && /*#__PURE__*/React.createElement(AttentionCheckModal, {
+      player: player,
+      triesLeft: player.get("attentionCheck1Tries"),
+      onCloseModal: this.onCloseModal
+    })));
+  }
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"QuizOne.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/quiz/QuizOne.jsx                                                                                       //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => QuizOne
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+module.link("../../../public/css/intro.css");
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 1);
+
+const Radio = (_ref) => {
+  let {
+    selected,
+    name,
+    value,
+    label,
+    onChange
+  } = _ref;
+  return /*#__PURE__*/React.createElement("label", {
+    className: "questionnaire-radio"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "quiz-button",
+    type: "radio",
+    name: name,
+    value: value,
+    checked: selected === value,
+    onChange: onChange
+  }), label);
+};
+
+class QuizOne extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = {};
+
+    this.handleChange = event => {
+      const el = event.currentTarget;
+      this.setState({
+        [el.name]: el.value
+      });
+    };
+
+    this.handleSubmit = event => {
+      const {
+        hasPrev,
+        hasNext,
+        onNext,
+        onPrev,
+        game,
+        player
+      } = this.props;
+      event.preventDefault();
+
+      if (this.state.response === 'yes') {
+        onNext();
+      } else {
+        player.exit("returnSubmission");
+      }
+    };
+  }
+
+  render() {
+    const {
+      game,
+      player
+    } = this.props;
+    const {
+      response
+    } = this.state;
+    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+      className: "intro-heading questionnaire-heading"
+    }, " Questionnaire "), /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-content-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-body"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "questionnaire-question"
+    }, "Are you willing to participate in an online team exercise (in the future) that could last for approximately ", game.treatment.maxGameTime, " minutes?"), /*#__PURE__*/React.createElement(Radio, {
+      selected: response,
+      name: "response",
+      value: "yes",
+      label: "Yes",
+      onChange: this.handleChange
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: response,
+      name: "response",
+      value: "no",
+      label: "No",
+      onChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("form", {
+      className: "questionnaire-btn-container",
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("button", {
+      className: !response ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+      disabled: !response,
+      type: "submit"
+    }, " Submit "))));
   }
 
 }
@@ -4053,6 +5759,521 @@ class QuizOverview extends React.Component {
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+},"QuizSeven.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/quiz/QuizSeven.jsx                                                                                     //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => QuizSeven
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+module.link("../../../public/css/intro.css");
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 1);
+let AttentionCheckModal;
+module.link("./AttentionCheckModal", {
+  default(v) {
+    AttentionCheckModal = v;
+  }
+
+}, 2);
+
+const Radio = (_ref) => {
+  let {
+    selected,
+    name,
+    value,
+    label,
+    onChange
+  } = _ref;
+  return /*#__PURE__*/React.createElement("label", {
+    className: "questionnaire-radio"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "quiz-button",
+    type: "radio",
+    name: name,
+    value: value,
+    checked: selected === value,
+    onChange: onChange
+  }), label);
+};
+
+class QuizSeven extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = {
+      modalIsOpen: false
+    };
+
+    this.handleChange = event => {
+      const el = event.currentTarget;
+      this.setState({
+        [el.name]: el.value
+      });
+    };
+
+    this.handleSubmit = event => {
+      const {
+        hasPrev,
+        hasNext,
+        onNext,
+        onPrev,
+        game,
+        player
+      } = this.props;
+      event.preventDefault();
+
+      if (this.state.response === 'self') {
+        onNext();
+      } else {
+        const currentTriesLeft = player.get("attentionCheck3Tries");
+        const attentionCheck3Answer = this.state.response;
+        player.set("attentionCheck3-".concat(currentTriesLeft), attentionCheck3Answer);
+        player.set("attentionCheck3Tries", currentTriesLeft - 1);
+
+        if (currentTriesLeft - 1 <= 0) {
+          player.exit("failedQuestion");
+        } else {
+          this.onOpenModal();
+        }
+      }
+    };
+
+    this.onOpenModal = () => {
+      this.setState({
+        modalIsOpen: true
+      });
+    };
+
+    this.onCloseModal = () => {
+      this.setState({
+        modalIsOpen: false
+      });
+    };
+  }
+
+  componentDidMount() {
+    const {
+      player
+    } = this.props;
+
+    if (!player.get("attentionCheck3Tries")) {
+      player.set("attentionCheck3Tries", 2);
+    }
+  }
+
+  render() {
+    const {
+      player
+    } = this.props;
+    const {
+      response
+    } = this.state;
+    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+      className: "intro-heading questionnaire-heading"
+    }, " Questionnaire "), /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-content-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-body"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "questionnaire-question"
+    }, "You guess the symbol by selecting it and then selecting the submit answer button. While you are waiting for your team members to submit an answer, you will have an opportunity to reconsider your choice. The reconsider button does not indicate you have made an incorrect choice. "), /*#__PURE__*/React.createElement("p", null, "----------------------------------------------------------------------------------------------------"), /*#__PURE__*/React.createElement("label", {
+      className: "questionnaire-question"
+    }, "When will the reconsider button appear?"), /*#__PURE__*/React.createElement(Radio, {
+      selected: response,
+      name: "response",
+      value: "incorrect",
+      label: "After I submit an incorrect answer",
+      onChange: this.handleChange
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: response,
+      name: "response",
+      value: "self",
+      label: "After I submit my symbol",
+      onChange: this.handleChange
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: response,
+      name: "response",
+      value: "team",
+      label: "After all my teammates submit a symbol",
+      onChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("form", {
+      className: "questionnaire-btn-container",
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("button", {
+      className: !response ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+      disabled: !response,
+      type: "submit"
+    }, " Submit ")), this.state.modalIsOpen && /*#__PURE__*/React.createElement(AttentionCheckModal, {
+      player: player,
+      triesLeft: player.get("attentionCheck3Tries"),
+      onCloseModal: this.onCloseModal
+    })));
+  }
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"QuizSix.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/quiz/QuizSix.jsx                                                                                       //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => QuizSix
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+module.link("../../../public/css/intro.css");
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 1);
+let AttentionCheckModal;
+module.link("./AttentionCheckModal", {
+  default(v) {
+    AttentionCheckModal = v;
+  }
+
+}, 2);
+
+const Radio = (_ref) => {
+  let {
+    selected,
+    name,
+    value,
+    label,
+    onChange
+  } = _ref;
+  return /*#__PURE__*/React.createElement("label", {
+    className: "questionnaire-radio"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "quiz-button",
+    type: "radio",
+    name: name,
+    value: value,
+    checked: selected === value,
+    onChange: onChange
+  }), label);
+};
+
+class QuizSix extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = {
+      modalIsOpen: false
+    };
+
+    this.handleChange = event => {
+      const el = event.currentTarget;
+      this.setState({
+        [el.name]: el.value
+      });
+    };
+
+    this.handleSubmit = event => {
+      const {
+        hasPrev,
+        hasNext,
+        onNext,
+        onPrev,
+        game,
+        player
+      } = this.props;
+      event.preventDefault();
+
+      if (this.state.response === 'individual') {
+        onNext();
+      } else {
+        const currentTriesLeft = player.get("attentionCheck2Tries");
+        const attentionCheck2Answer = this.state.response;
+        player.set("attentionCheck2-".concat(currentTriesLeft), attentionCheck2Answer);
+        player.set("attentionCheck2Tries", currentTriesLeft - 1);
+
+        if (currentTriesLeft - 1 <= 0) {
+          player.exit("failedQuestion");
+        } else {
+          this.onOpenModal();
+        }
+      }
+    };
+
+    this.onOpenModal = () => {
+      this.setState({
+        modalIsOpen: true
+      });
+    };
+
+    this.onCloseModal = () => {
+      this.setState({
+        modalIsOpen: false
+      });
+    };
+  }
+
+  componentDidMount() {
+    const {
+      player
+    } = this.props;
+
+    if (!player.get("attentionCheck2Tries")) {
+      player.set("attentionCheck2Tries", 2);
+    }
+  }
+
+  render() {
+    const {
+      player
+    } = this.props;
+    const {
+      response
+    } = this.state;
+    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+      className: "intro-heading questionnaire-heading"
+    }, " Questionnaire "), /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-content-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-body"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "questionnaire-question"
+    }, "Each player will have a network of people they can talk to through individual chats. Each member of your network has an unique dialogue box and you can have multiple dialogue boxes open on your screen as you communicate during a trial. You can open or close a box. You can also scroll up and down within a box to view the messages you have exchanged with a specific contact. There will be no overall team chat where you can talk to everyone at once. "), /*#__PURE__*/React.createElement("p", null, "----------------------------------------------------------------------------------------------------"), /*#__PURE__*/React.createElement("label", {
+      className: "questionnaire-question"
+    }, "How will I communicate with my team members?"), /*#__PURE__*/React.createElement(Radio, {
+      selected: response,
+      name: "response",
+      value: "individual",
+      label: "1-on-1 chats",
+      onChange: this.handleChange
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: response,
+      name: "response",
+      value: "group",
+      label: "Overall team group chat",
+      onChange: this.handleChange
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: response,
+      name: "response",
+      value: "none",
+      label: "There is no communication",
+      onChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("form", {
+      className: "questionnaire-btn-container",
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("button", {
+      className: !response ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+      disabled: !response,
+      type: "submit"
+    }, " Submit ")), this.state.modalIsOpen && /*#__PURE__*/React.createElement(AttentionCheckModal, {
+      player: player,
+      triesLeft: player.get("attentionCheck2Tries"),
+      onCloseModal: this.onCloseModal
+    })));
+  }
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"QuizTwo.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/quiz/QuizTwo.jsx                                                                                       //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => QuizTwo
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+module.link("../../../public/css/intro.css");
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 1);
+let AttentionCheckModal;
+module.link("./AttentionCheckModal", {
+  default(v) {
+    AttentionCheckModal = v;
+  }
+
+}, 2);
+
+const Radio = (_ref) => {
+  let {
+    selected,
+    name,
+    value,
+    label,
+    onChange
+  } = _ref;
+  return /*#__PURE__*/React.createElement("label", {
+    className: "questionnaire-radio"
+  }, /*#__PURE__*/React.createElement("input", {
+    className: "quiz-button",
+    type: "radio",
+    name: name,
+    value: value,
+    checked: selected === value,
+    onChange: onChange
+  }), label);
+};
+
+class QuizTwo extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = {
+      modalIsOpen: false
+    };
+
+    this.handleChange = event => {
+      const el = event.currentTarget;
+      this.setState({
+        [el.name]: el.value
+      });
+    };
+
+    this.handleSubmit = event => {
+      const {
+        hasPrev,
+        hasNext,
+        onNext,
+        onPrev,
+        game,
+        player
+      } = this.props;
+      event.preventDefault();
+
+      if (this.state.response === 'end') {
+        onNext();
+      } else {
+        const currentTriesLeft = player.get("attentionCheck4Tries");
+        const attentionCheck4Answer = this.state.response;
+        player.set("attentionCheck4-".concat(currentTriesLeft), attentionCheck4Answer);
+        player.set("attentionCheck4Tries", currentTriesLeft - 1);
+
+        if (currentTriesLeft - 1 <= 0) {
+          player.exit("failedQuestion");
+        } else {
+          this.onOpenModal();
+        }
+      }
+    };
+
+    this.onOpenModal = () => {
+      this.setState({
+        modalIsOpen: true
+      });
+    };
+
+    this.onCloseModal = () => {
+      this.setState({
+        modalIsOpen: false
+      });
+    };
+  }
+
+  componentDidMount() {
+    const {
+      player
+    } = this.props;
+
+    if (!player.get("attentionCheck4Tries")) {
+      player.set("attentionCheck4Tries", 2);
+    }
+  }
+
+  render() {
+    const {
+      player,
+      game
+    } = this.props;
+    const {
+      response
+    } = this.state;
+    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
+      className: "intro-heading questionnaire-heading"
+    }, " Questionnaire "), /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-content-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "questionnaire-body"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "questionnaire-question"
+    }, "If you do not interact within the game for a while, you will be kicked and the game will end for EVERYONE in your team. You will be given ONE warning the first time you reach the inactivity limit. If you still are not active within ", game.treatment.idleWarningTime, " seconds, you will be kicked. If you are active, your inactivity timer will reset."), /*#__PURE__*/React.createElement("p", null, "----------------------------------------------------------------------------------------------------"), /*#__PURE__*/React.createElement("label", null, "After receiving an inactivity warning, if I still do not interact within the game for a while, what will happen?"), /*#__PURE__*/React.createElement(Radio, {
+      selected: response,
+      name: "response",
+      value: "warning",
+      label: "I will get another inactivity warning",
+      onChange: this.handleChange
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: response,
+      name: "response",
+      value: "continue",
+      label: "I will be kicked but the game will continue without me",
+      onChange: this.handleChange
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: response,
+      name: "response",
+      value: "end",
+      label: "I will be kicked and the game will end for everyone in my team",
+      onChange: this.handleChange
+    }), /*#__PURE__*/React.createElement(Radio, {
+      selected: response,
+      name: "response",
+      value: "nothing",
+      label: "Nothing will happen",
+      onChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("form", {
+      className: "questionnaire-btn-container",
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("button", {
+      className: !response ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+      disabled: !response,
+      type: "submit"
+    }, " Submit ")), this.state.modalIsOpen && /*#__PURE__*/React.createElement(AttentionCheckModal, {
+      player: player,
+      triesLeft: player.get("attentionCheck4Tries"),
+      onCloseModal: this.onCloseModal
+    })));
+  }
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 }},"tutorial":{"TutorialPageFour.jsx":function module(require,exports,module){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4122,7 +6343,7 @@ class TutorialPageFour extends React.Component {
       type: "button",
       onClick: onNext,
       disabled: !hasNext
-    }, "Next"));
+    }, "Attention Check"));
   }
 
 }
@@ -4440,8 +6661,7 @@ class DescribeSymbolQuestion extends React.Component {
       event.preventDefault(); // TODO: log player response to survey question
 
       player.set("symbolDescription", this.state.response);
-      player.set("passedPreQual", true);
-      player.exit("preQualSuccess");
+      onNext();
     };
   }
 
@@ -4455,7 +6675,7 @@ class DescribeSymbolQuestion extends React.Component {
       className: "questionnaire-content-container"
     }, /*#__PURE__*/React.createElement("div", {
       className: "questionnaire-body"
-    }, /*#__PURE__*/React.createElement("h2", null, " Please describe the following symbol below as if you were trying to explain it to another player. Try to be more descriptive than not.", /*#__PURE__*/React.createElement("br", null), "Note: If there are too many participants filling out the survey at once, there may be some server delays. If you click submit and you do not immediately proceed to the exit stage, please be patient as it will eventually submit."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement("h2", null, " Please describe the following symbol below as if you were trying to explain it to another player. Try to be more descriptive than not.", /*#__PURE__*/React.createElement("br", null), "Note: If there are too many participants filling out the survey at once, there may be some server delays. If you click submit and you do not immediately proceed to the next page, please be patient as it will eventually submit."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
       className: "symbol-container",
       style: {
         width: "100%",
@@ -4571,6 +6791,122 @@ class NewPlayer extends Component {
     }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("button", {
       type: "submit"
     }, "Submit")))));
+  }
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"Schedule.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/Schedule.jsx                                                                                           //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+let _objectSpread;
+
+module.link("@babel/runtime/helpers/objectSpread2", {
+  default(v) {
+    _objectSpread = v;
+  }
+
+}, 0);
+module.export({
+  default: () => Schedule
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+let Checkbox;
+module.link("@blueprintjs/core", {
+  Checkbox(v) {
+    Checkbox = v;
+  }
+
+}, 1);
+
+class Schedule extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleChange = event => {
+      const el = event.currentTarget;
+      this.setState({
+        availability: _objectSpread({}, this.state.availability, {
+          [el.name]: !this.state.availability[el.name]
+        })
+      });
+    };
+
+    this.handleSubmit = event => {
+      const {
+        onNext,
+        player
+      } = this.props;
+      event.preventDefault();
+      player.set("timeAvailabilities", this.state.availability);
+      player.set("passedPreQual", true);
+      player.exit("preQualSuccess");
+    };
+
+    this.state = {
+      availability: {},
+      dates: ['10/27/22', '10/28/22', '10/29/22', '10/30/22'],
+      times: ['9-10 AM', '10-11 AM', '11-12 PM', '12-1 PM', '1-2 PM', '2-3 PM', '3-4 PM', '4-5 PM', '5-6 PM', '6-7 PM', ' 7-8 PM', '8-9 PM', '9-10 PM']
+    };
+    this.state.dates.forEach(date => {
+      this.state.times.forEach(time => {
+        this.state.availability["".concat(date, " ").concat(time)] = false;
+      });
+    });
+  }
+
+  render() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "network-survey-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "network-survey-header"
+    }, /*#__PURE__*/React.createElement("p", null, "Please fill out all the times you will be available to play this game.", /*#__PURE__*/React.createElement("br", null), "The time with the most overlapping players will be chosen.", /*#__PURE__*/React.createElement("br", null), "Note: If there are too many participants filling out the survey at once, there may be some server delays. If you click submit and you do not immediately proceed to the exit page, please be patient as it will eventually submit.")), /*#__PURE__*/React.createElement("form", {
+      className: "network-form",
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("table", {
+      className: "name-matrix-table"
+    }, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", {
+      style: {
+        textAlign: "right"
+      }
+    }, " Time (EST) "), /*#__PURE__*/React.createElement("th", null, " 10/27/22 (Thurs) "), /*#__PURE__*/React.createElement("th", null, " 10/28/22 (Fri) "), /*#__PURE__*/React.createElement("th", null, " 10/29/22 (Sat) "), /*#__PURE__*/React.createElement("th", null, " 10/30/22 (Sun) ")), this.state.times.map(time => {
+      return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", {
+        style: {
+          textAlign: "right"
+        }
+      }, " ", time, " "), this.state.dates.map(date => {
+        return /*#__PURE__*/React.createElement("td", {
+          style: {
+            textAlign: "center"
+          }
+        }, /*#__PURE__*/React.createElement(Checkbox // checked={this.state[`${date} ${time}`]}
+        , {
+          key: "".concat(date, " ").concat(time),
+          checked: this.state.availability["".concat(date, " ").concat(time)],
+          name: "".concat(date, " ").concat(time),
+          onChange: this.handleChange
+        }));
+      }));
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "network-button-container",
+      style: {
+        justifyContent: "flex-end"
+      }
+    }, /*#__PURE__*/React.createElement("button", {
+      className: "arrow-button button-submit",
+      type: "submit"
+    }, " Submit"))));
   }
 
 }
@@ -5385,555 +7721,6 @@ module.exportDefault(filteredMessages(Messages));
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}},"exit":{"ExitSurvey.jsx":function module(require,exports,module){
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                     //
-// client/exit/ExitSurvey.jsx                                                                                          //
-//                                                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                       //
-module.export({
-  default: () => ExitSurvey
-});
-let React;
-module.link("react", {
-  default(v) {
-    React = v;
-  }
-
-}, 0);
-let Centered;
-module.link("meteor/empirica:core", {
-  Centered(v) {
-    Centered = v;
-  }
-
-}, 1);
-
-const Radio = (_ref) => {
-  let {
-    selected,
-    name,
-    value,
-    label,
-    onChange,
-    required
-  } = _ref;
-  return /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
-    type: "radio",
-    name: name,
-    value: value,
-    checked: selected === value,
-    onChange: onChange,
-    required: required ? "required" : ""
-  }), label);
-};
-
-class ExitSurvey extends React.Component {
-  constructor() {
-    super(...arguments);
-    this.state = {
-      age: "",
-      gender: "",
-      strength: "",
-      fair: "",
-      feedback: ""
-    };
-
-    this.handleChange = event => {
-      const el = event.currentTarget;
-      this.setState({
-        [el.name]: el.value
-      });
-    };
-
-    this.handleSubmit = event => {
-      event.preventDefault();
-      this.props.onSubmit(this.state);
-    };
-  }
-
-  render() {
-    const {
-      player,
-      game
-    } = this.props;
-    const {
-      age,
-      gender,
-      strength,
-      fair,
-      feedback,
-      education
-    } = this.state;
-    const basePay = game.treatment.basePay;
-    const conversionRate = game.treatment.conversionRate;
-    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
-      className: "exit-survey"
-    }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, "Please submit the following code to receive your bonus:", " ", /*#__PURE__*/React.createElement("strong", null, " C1FLL9CG "), "."), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""), /*#__PURE__*/React.createElement("p", null, "Your team got a total of ", /*#__PURE__*/React.createElement("strong", null, player.get("score")), " correct.", basePay && conversionRate ? " You will receive an additional performance bonus of ".concat(player.get("score"), " x $").concat(conversionRate, ".") : " You will receive a base pay of $2 and an additional performance bonus of ".concat(player.get("score"), " x 1, for a total of ").concat(2 + parseInt(player.get("score")) * 1, ".")), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
-      onSubmit: this.handleSubmit
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "form-line"
-    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "age"
-    }, "Age"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
-      id: "age",
-      type: "number",
-      min: "0",
-      max: "150",
-      step: "1",
-      dir: "auto",
-      name: "age",
-      value: age,
-      onChange: this.handleChange,
-      required: true
-    }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "gender"
-    }, "Gender"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
-      id: "gender",
-      type: "text",
-      dir: "auto",
-      name: "gender",
-      value: gender,
-      onChange: this.handleChange,
-      required: true,
-      autoComplete: "off"
-    })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "Highest Education Qualification"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Radio, {
-      selected: education,
-      name: "education",
-      value: "high-school",
-      label: "High School",
-      onChange: this.handleChange,
-      required: true
-    }), /*#__PURE__*/React.createElement(Radio, {
-      selected: education,
-      name: "education",
-      value: "bachelor",
-      label: "US Bachelor's Degree",
-      onChange: this.handleChange
-    }), /*#__PURE__*/React.createElement(Radio, {
-      selected: education,
-      name: "education",
-      value: "master",
-      label: "Master's or higher",
-      onChange: this.handleChange
-    }), /*#__PURE__*/React.createElement(Radio, {
-      selected: education,
-      name: "education",
-      value: "other",
-      label: "Other",
-      onChange: this.handleChange
-    }))), /*#__PURE__*/React.createElement("div", {
-      className: "form-line thirds"
-    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "strength"
-    }, "How would you describe your strength in the game?"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
-      dir: "auto",
-      id: "strength",
-      name: "strength",
-      value: strength,
-      onChange: this.handleChange,
-      required: true
-    }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "fair"
-    }, "Do you feel the pay was fair?"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
-      dir: "auto",
-      id: "fair",
-      name: "fair",
-      value: fair,
-      onChange: this.handleChange,
-      required: true
-    }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "feedback"
-    }, "Feedback, including problems you encountered."), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
-      dir: "auto",
-      id: "feedback",
-      name: "feedback",
-      value: feedback,
-      onChange: this.handleChange,
-      required: true
-    })))), /*#__PURE__*/React.createElement("button", {
-      type: "submit"
-    }, "Submit"))));
-  }
-
-}
-
-ExitSurvey.stepName = "ExitSurvey";
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-},"FailedAttentionCheck.jsx":function module(require,exports,module){
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                     //
-// client/exit/FailedAttentionCheck.jsx                                                                                //
-//                                                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                       //
-module.export({
-  default: () => FailedAttentionCheck
-});
-let React, Component;
-module.link("react", {
-  default(v) {
-    React = v;
-  },
-
-  Component(v) {
-    Component = v;
-  }
-
-}, 0);
-let Meteor;
-module.link("meteor/meteor", {
-  Meteor(v) {
-    Meteor = v;
-  }
-
-}, 1);
-let Centered;
-module.link("meteor/empirica:core", {
-  Centered(v) {
-    Centered = v;
-  }
-
-}, 2);
-
-class FailedAttentionCheck extends Component {
-  render() {
-    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
-      className: "failed-attention-container"
-    }, /*#__PURE__*/React.createElement("h2", {
-      className: "failed-attention-text"
-    }, "YOU FAILED THE ATTENTION CHECK, AND HAVE NOT BEEN SELECTED TO PLAY. PLEASE DO NOT TRY TO COMPLETE THE TASK AGAIN. THANK YOU FOR YOUR TIME. HERE IS YOUR COMPLETION CODE: CCX0X59H")));
-  }
-
-}
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-},"PreQualExitSurvey.jsx":function module(require,exports,module){
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                     //
-// client/exit/PreQualExitSurvey.jsx                                                                                   //
-//                                                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                       //
-module.export({
-  default: () => PreQualExitSurvey
-});
-let React;
-module.link("react", {
-  default(v) {
-    React = v;
-  }
-
-}, 0);
-let Centered;
-module.link("meteor/empirica:core", {
-  Centered(v) {
-    Centered = v;
-  }
-
-}, 1);
-
-const Radio = (_ref) => {
-  let {
-    selected,
-    name,
-    value,
-    label,
-    onChange,
-    required
-  } = _ref;
-  return /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
-    type: "radio",
-    name: name,
-    value: value,
-    checked: selected === value,
-    onChange: onChange,
-    required: required ? "required" : ""
-  }), label);
-};
-
-class PreQualExitSurvey extends React.Component {
-  constructor() {
-    super(...arguments);
-    this.state = {
-      age: "",
-      gender: "",
-      email: "",
-      feedback: ""
-    };
-
-    this.handleChange = event => {
-      const el = event.currentTarget;
-      this.setState({
-        [el.name]: el.value
-      });
-    };
-
-    this.handleSubmit = event => {
-      event.preventDefault();
-      this.props.onSubmit(this.state);
-    };
-  }
-
-  render() {
-    const {
-      player,
-      game
-    } = this.props;
-    const {
-      age,
-      gender,
-      feedback,
-      education
-    } = this.state;
-    const basePay = game.treatment.basePay;
-    const conversionRate = game.treatment.conversionRate;
-    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
-      className: "exit-survey"
-    }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, "Please submit the following code:", " ", /*#__PURE__*/React.createElement("strong", null, " CZ586HD9 ")), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""), /*#__PURE__*/React.createElement("p", null, "Thank you for taking time to take this pre-qualification survey ! We will finish screening all the players and send out a date and time to those that qualify for our future game.", basePay && conversionRate ? " You will receive a base pay of $".concat(basePay, " for taking this pre-qualification.") : " You will receive a base pay of $2 for taking this pre-qualification."), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
-      onSubmit: this.handleSubmit
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "form-line"
-    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "age"
-    }, "Age"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
-      id: "age",
-      type: "number",
-      min: "0",
-      max: "150",
-      step: "1",
-      dir: "auto",
-      name: "age",
-      value: age,
-      onChange: this.handleChange,
-      required: true
-    }))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "gender"
-    }, "Gender"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
-      id: "gender",
-      type: "text",
-      dir: "auto",
-      name: "gender",
-      value: gender,
-      onChange: this.handleChange,
-      required: true,
-      autoComplete: "off"
-    })))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", null, "Highest Education Qualification"), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Radio, {
-      selected: education,
-      name: "education",
-      value: "high-school",
-      label: "High School",
-      onChange: this.handleChange,
-      required: true
-    }), /*#__PURE__*/React.createElement(Radio, {
-      selected: education,
-      name: "education",
-      value: "bachelor",
-      label: "US Bachelor's Degree",
-      onChange: this.handleChange
-    }), /*#__PURE__*/React.createElement(Radio, {
-      selected: education,
-      name: "education",
-      value: "master",
-      label: "Master's or higher",
-      onChange: this.handleChange
-    }), /*#__PURE__*/React.createElement(Radio, {
-      selected: education,
-      name: "education",
-      value: "other",
-      label: "Other",
-      onChange: this.handleChange
-    }))), /*#__PURE__*/React.createElement("div", {
-      className: "form-line thirds"
-    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("label", {
-      htmlFor: "feedback"
-    }, "Feedback, including problems you encountered."), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("textarea", {
-      dir: "auto",
-      id: "feedback",
-      name: "feedback",
-      value: feedback,
-      onChange: this.handleChange,
-      required: true
-    })))), /*#__PURE__*/React.createElement("button", {
-      type: "submit"
-    }, "Submit"))));
-  }
-
-}
-
-PreQualExitSurvey.stepName = "ExitSurvey";
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-},"Sorry.jsx":function module(require,exports,module){
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                     //
-// client/exit/Sorry.jsx                                                                                               //
-//                                                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                       //
-module.export({
-  default: () => Sorry
-});
-let React, Component;
-module.link("react", {
-  default(v) {
-    React = v;
-  },
-
-  Component(v) {
-    Component = v;
-  }
-
-}, 0);
-let Meteor;
-module.link("meteor/meteor", {
-  Meteor(v) {
-    Meteor = v;
-  }
-
-}, 1);
-let Centered;
-module.link("meteor/empirica:core", {
-  Centered(v) {
-    Centered = v;
-  }
-
-}, 2);
-let FailedAttentionCheck;
-module.link("./FailedAttentionCheck", {
-  default(v) {
-    FailedAttentionCheck = v;
-  }
-
-}, 3);
-
-class Sorry extends Component {
-  render() {
-    const {
-      player,
-      game
-    } = this.props;
-    let msg;
-
-    switch (player.exitStatus) {
-      case "gameFull":
-        msg = "All games you are eligible for have filled up too fast... Sorry, there will be no more games in the near future.";
-        break;
-
-      case "gameLobbyTimedOut":
-        msg = "There were NOT enough players for the game to start... Thank you for participating in this game. Please submit your Prolific Id to the study and we will make sure you get paid accordingly."; // msg = "There were NOT enough players for the game to start... Thank you for participating in this game, you will still get paid the base amount for passing the attention check. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
-
-        break;
-
-      case "playerEndedLobbyWait":
-        msg = "You decided to stop waiting, we are sorry it was too long a wait.";
-        break;
-
-      default:
-        msg = "Unfortunately, the Game was cancelled... Thank you for participating in this game, please submit your Prolific ID to the HIT and we will make sure you get paid accordingly."; // msg = "Unfortunately, the Game was cancelled... Thank you for participating in this game, please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly.";
-
-        break;
-    }
-
-    if (player.exitReason === "failedQuestion") {
-      return /*#__PURE__*/React.createElement(FailedAttentionCheck, null);
-    }
-
-    if (player.exitReason === "inactive") {
-      msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid including any bonuses for the rounds you successfully passed. Please submit the following completion code: C1FLL9CG"; // msg = "You were inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker Id to the HIT and we will make sure you get paid accordingly.";
-    }
-
-    if (player.exitReason === "someoneInactive") {
-      msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will still get paid including any bonuses for the rounds you successfully passed. Please submit the following completion code: C1FLL9CG"; // msg = "A player was inactive for too long, and we had to end the game. Thank you for participating in this game, you will get paid the base amount including any bonuses for the rounds you successfully passed. Please submit your MTurk Worker ID to the HIT and we will make sure you get paid accordingly. ";
-    }
-
-    if (player.exitReason === "failedEnglishScreen") {
-      // msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game."
-      msg = "You did not pass English Screening. For this game, we require strong communication skills and English fluency. Thank you for taking your time and participating in this game. Here is your completion code: CCX0X59H";
-    }
-
-    if (player.exitReason === "minPlayerCountNotMaintained") {
-      msg = "Unfortunately, there were too few players active in this game and the game had to be cancelled. Thank you for participating in this game, please submit the following completion code: C1FLL9CG"; // msg = `Unfortunately, there were too few players active in this game and the game had to be cancelled. Thank you for participating in this game, please submit the follow code ${player._id} to the HIT and we will make sure you get paid accordingly. `
-    } // Only for dev
-
-
-    if (!game && Meteor.isDevelopment) {
-      msg = "Unfortunately the Game was cancelled because of failed to init Game (only visible in development, check the logs).";
-    }
-
-    return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Sorry!"), /*#__PURE__*/React.createElement("p", null, "Sorry, you were not able to play today! ", msg), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "Please contact the researcher to see if there are more games available."))));
-  }
-
-}
-
-Sorry.stepName = "Sorry";
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-},"Thanks.jsx":function module(require,exports,module){
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                     //
-// client/exit/Thanks.jsx                                                                                              //
-//                                                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                       //
-module.export({
-  default: () => Thanks
-});
-let React;
-module.link("react", {
-  default(v) {
-    React = v;
-  }
-
-}, 0);
-let moment;
-module.link("moment", {
-  default(v) {
-    moment = v;
-  }
-
-}, 1);
-let Centered;
-module.link("meteor/empirica:core", {
-  Centered(v) {
-    Centered = v;
-  }
-
-}, 2);
-
-class Thanks extends React.Component {
-  render() {
-    const {
-      player,
-      game
-    } = this.props;
-    const basePay = game.treatment.basePay;
-    const conversionRate = game.treatment.conversionRate;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "finished"
-    }, /*#__PURE__*/React.createElement("div", null, player.get("nodeId") ? /*#__PURE__*/React.createElement("p", null, " If you are receiving this message, it means you have participated in one of our symbol task games before. As mentioned in out HIT expectations, if you've participated in one of our HIT sessions before, you cannot participate in another. We are trying to gather new players for each game. If you think this is a mistake, please do no hesistate to reach out.") : /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Finished!"), player.exitReason === "preQualSuccess" ?
-    /*#__PURE__*/
-    // TODO: mturk
-    // <p>Thank you for participating! Please submit the following code to receive your bonus 
-    // { basePay && conversionRate ? ` of $${basePay} : ` : " "} 
-    // <strong>{player._id}</strong>
-    // </p> 
-    // TODO: Prolific
-    React.createElement("p", null, "Thank you for participating! Please submit the following code: C1FLL9CG") : /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $".concat(basePay + parseInt(player.get("score") * conversionRate), " : ") : " ", /*#__PURE__*/React.createElement("strong", null, player._id)))));
-  }
-
-}
-
-Thanks.stepName = "Thanks";
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 }},"main.js":function module(require,exports,module){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -5970,125 +7757,202 @@ module.link("./exit/PreQualExitSurvey", {
   }
 
 }, 3);
+let FinalMidSurveyOne;
+module.link("./exit/final-mid-survey/FinalMidSurvey1", {
+  default(v) {
+    FinalMidSurveyOne = v;
+  }
+
+}, 4);
+let FinalMidSurveyTwo;
+module.link("./exit/final-mid-survey/FinalMidSurvey2", {
+  default(v) {
+    FinalMidSurveyTwo = v;
+  }
+
+}, 5);
+let FinalMidSurveyThree;
+module.link("./exit/final-mid-survey/FinalMidSurvey3", {
+  default(v) {
+    FinalMidSurveyThree = v;
+  }
+
+}, 6);
+let FinalMidSurveyFour;
+module.link("./exit/final-mid-survey/FinalMidSurvey4", {
+  default(v) {
+    FinalMidSurveyFour = v;
+  }
+
+}, 7);
+let FinalMidSurveyFive;
+module.link("./exit/final-mid-survey/FinalMidSurvey5", {
+  default(v) {
+    FinalMidSurveyFive = v;
+  }
+
+}, 8);
 let Thanks;
 module.link("./exit/Thanks", {
   default(v) {
     Thanks = v;
   }
 
-}, 4);
+}, 9);
 let Sorry;
 module.link("./exit/Sorry", {
   default(v) {
     Sorry = v;
   }
 
-}, 5);
+}, 10);
 let About;
 module.link("./game/About", {
   default(v) {
     About = v;
   }
 
-}, 6);
+}, 11);
 let Round;
 module.link("./game/Round", {
   default(v) {
     Round = v;
   }
 
-}, 7);
+}, 12);
 let Consent;
 module.link("./intro/Consent", {
   default(v) {
     Consent = v;
   }
 
-}, 8);
+}, 13);
 let NetworkSurveyOne;
 module.link("./intro/network-survey/NetworkSurvey1", {
   default(v) {
     NetworkSurveyOne = v;
   }
 
-}, 9);
+}, 14);
 let NetworkSurveyTwo;
 module.link("./intro/network-survey/NetworkSurvey2", {
   default(v) {
     NetworkSurveyTwo = v;
   }
 
-}, 10);
+}, 15);
 let NetworkSurveyThree;
 module.link("./intro/network-survey/NetworkSurvey3", {
   default(v) {
     NetworkSurveyThree = v;
   }
 
-}, 11);
+}, 16);
 let TutorialPageOne;
 module.link("./intro/tutorial/TutorialPageOne", {
   default(v) {
     TutorialPageOne = v;
   }
 
-}, 12);
+}, 17);
 let TutorialPageTwo;
 module.link("./intro/tutorial/TutorialPageTwo", {
   default(v) {
     TutorialPageTwo = v;
   }
 
-}, 13);
+}, 18);
 let TutorialPageThree;
 module.link("./intro/tutorial/TutorialPageThree", {
   default(v) {
     TutorialPageThree = v;
   }
 
-}, 14);
+}, 19);
 let TutorialPageFour;
 module.link("./intro/tutorial/TutorialPageFour", {
   default(v) {
     TutorialPageFour = v;
   }
 
-}, 15);
+}, 20);
 let AllQuiz;
 module.link("./intro/quiz/AllQuiz", {
   default(v) {
     AllQuiz = v;
   }
 
-}, 16);
+}, 21);
+let QuizFive;
+module.link("./intro/quiz/QuizFive", {
+  default(v) {
+    QuizFive = v;
+  }
+
+}, 22);
+let QuizSix;
+module.link("./intro/quiz/QuizSix", {
+  default(v) {
+    QuizSix = v;
+  }
+
+}, 23);
+let QuizSeven;
+module.link("./intro/quiz/QuizSeven", {
+  default(v) {
+    QuizSeven = v;
+  }
+
+}, 24);
+let QuizTwo;
+module.link("./intro/quiz/QuizTwo", {
+  default(v) {
+    QuizTwo = v;
+  }
+
+}, 25);
+let QuizOne;
+module.link("./intro/quiz/QuizOne", {
+  default(v) {
+    QuizOne = v;
+  }
+
+}, 26);
 let QuizOverview;
 module.link("./intro/quiz/QuizOverview", {
   default(v) {
     QuizOverview = v;
   }
 
-}, 17);
+}, 27);
 let EnglishScreen;
 module.link("./intro/english-screening/EnglishScreen", {
   default(v) {
     EnglishScreen = v;
   }
 
-}, 18);
+}, 28);
 let DescribeSymbolQuestion;
 module.link("./intro/DescribeSymbolQuestion", {
   default(v) {
     DescribeSymbolQuestion = v;
   }
 
-}, 19);
+}, 29);
+let Schedule;
+module.link("./intro/Schedule", {
+  default(v) {
+    Schedule = v;
+  }
+
+}, 30);
 let NewPlayer;
 module.link("./intro/NewPlayer", {
   default(v) {
     NewPlayer = v;
   }
 
-}, 20);
+}, 31);
 // Get rid of Breadcrumb component
 Empirica.breadcrumb(() => null); // Set the About Component you want to use for the About dialog (optional).
 
@@ -6102,24 +7966,29 @@ Empirica.newPlayer(NewPlayer); // Introduction pages to show before they play th
 
 Empirica.introSteps((game, treatment) => {
   // MidSurveyFive, MidSurveyFour, MidSurveyThree, MidSurveyTwo, MidSurveyOne,
+  const durationConsent = [QuizOne];
   const englishScreen = [EnglishScreen];
   const networkSurvey = [NetworkSurveyOne, NetworkSurveyTwo, NetworkSurveyThree];
   const tutorialSteps = [TutorialPageOne, TutorialPageThree, TutorialPageFour];
   const symbolDescription = [DescribeSymbolQuestion]; // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
+  // const quizSteps = [AllQuiz];
 
-  const quizSteps = [AllQuiz];
+  const quizSteps = [QuizFive, QuizSix, QuizSeven, QuizTwo];
   const quizOverview = [QuizOverview];
+  const schedule = [Schedule];
   let steps;
 
   if (game.treatment.isPreQualification) {
-    steps = englishScreen.concat(networkSurvey, tutorialSteps, quizSteps, symbolDescription); // steps = quizSteps.concat(symbolDescription);
+    steps = durationConsent.concat(englishScreen, tutorialSteps, quizSteps, symbolDescription, networkSurvey, schedule); // steps = englishScreen.concat(networkSurvey,tutorialSteps,quizSteps, symbolDescription, schedule);
+    // steps = quizSteps.concat(symbolDescription);
   } else {
     steps = tutorialSteps.concat(quizOverview);
   }
 
   if (treatment.skipIntro) {
     return [];
-  }
+  } // return [QuizFive, QuizSix, QuizSeven, QuizTwo];
+
 
   return steps;
 }); // The Round component containing the game UI logic.
@@ -6137,7 +8006,7 @@ Empirica.round(Round); // End of Game pages. These may vary depending on player 
 
 Empirica.exitSteps((game, player) => {
   if (player.exitStatus && player.exitStatus === "custom" && (player.exitReason === "maxGameTimeReached" || player.exitReason === "minPlayerCountNotMaintained")) {
-    return [ExitSurvey, Thanks];
+    return [FinalMidSurveyOne, FinalMidSurveyTwo, FinalMidSurveyThree, FinalMidSurveyFour, FinalMidSurveyFive, ExitSurvey, Thanks];
   }
 
   if (player.exitStatus && player.exitStatus === "custom" && player.exitReason === "preQualSuccess") {
