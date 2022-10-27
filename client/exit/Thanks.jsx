@@ -28,7 +28,7 @@ export default class Thanks extends React.Component {
                 // </p> 
 
                 // TODO: Prolific
-                <p>Thank you for participating! Please submit the following code: C1FLL9CG
+                <p>Thank you for participating! Please submit the following code: CZ586HD9
                 {/* { basePay && conversionRate ? ` of $${basePay} : ` : " "} 
                 <strong>{player._id}</strong> */}
                 </p> 

@@ -38,6 +38,9 @@ export default class QuizSix extends React.Component {
     const { hasPrev, hasNext, onNext, onPrev, game, player } = this.props;
     event.preventDefault();
     if (this.state.response === 'individual') {
+        const currentTriesLeft = player.get("attentionCheck2Tries");
+        const attentionCheck2Answer = this.state.response;
+        player.set(`attentionCheck2-${currentTriesLeft}`, attentionCheck2Answer);
         onNext();
     } else {
         const currentTriesLeft = player.get("attentionCheck2Tries");

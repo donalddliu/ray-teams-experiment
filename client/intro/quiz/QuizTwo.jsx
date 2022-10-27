@@ -38,6 +38,9 @@ export default class QuizTwo extends React.Component {
     const { hasPrev, hasNext, onNext, onPrev, game, player } = this.props;
     event.preventDefault();
     if (this.state.response === 'end') {
+        const currentTriesLeft = player.get("attentionCheck4Tries");
+        const attentionCheck4Answer = this.state.response;
+        player.set(`attentionCheck4-${currentTriesLeft}`, attentionCheck4Answer);
         onNext();
     } else {
       const currentTriesLeft = player.get("attentionCheck4Tries");

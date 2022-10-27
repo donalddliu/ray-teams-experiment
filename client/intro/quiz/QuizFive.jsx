@@ -37,6 +37,9 @@ export default class QuizFive extends React.Component {
     const { hasPrev, hasNext, onNext, onPrev, game, player } = this.props;
     event.preventDefault();
     if (this.state.response === 'one') {
+        const currentTriesLeft = player.get("attentionCheck1Tries");
+        const attentionCheck1Answer = this.state.response;
+        player.set(`attentionCheck1-${currentTriesLeft}`, attentionCheck1Answer);
         onNext();
     } else {
       const currentTriesLeft = player.get("attentionCheck1Tries");

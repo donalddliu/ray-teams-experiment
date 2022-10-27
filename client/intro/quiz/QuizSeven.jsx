@@ -38,6 +38,9 @@ export default class QuizSeven extends React.Component {
     const { hasPrev, hasNext, onNext, onPrev, game, player } = this.props;
     event.preventDefault();
     if (this.state.response === 'self') {
+        const currentTriesLeft = player.get("attentionCheck3Tries");
+        const attentionCheck3Answer = this.state.response;
+        player.set(`attentionCheck3-${currentTriesLeft}`, attentionCheck3Answer);
         onNext();
     } else {
       const currentTriesLeft = player.get("attentionCheck3Tries");
