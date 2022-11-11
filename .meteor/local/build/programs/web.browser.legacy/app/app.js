@@ -1696,7 +1696,7 @@ var Thanks = /*#__PURE__*/function (_React$Component) {
       // <strong>{player._id}</strong>
       // </p> 
       // TODO: Prolific
-      React.createElement("p", null, "Thank you for participating! Please submit the following code: C1FLL9CG") : /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $" + (basePay + parseInt(player.get("score") * conversionRate)) + " : " : " ", /*#__PURE__*/React.createElement("strong", null, player._id)))));
+      React.createElement("p", null, "Thank you for participating! Please submit the following code: CZ586HD9") : /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $" + (basePay + parseInt(player.get("score") * conversionRate)) + " : " : " ", /*#__PURE__*/React.createElement("strong", null, player._id)))));
     }
 
     return render;
@@ -6599,14 +6599,18 @@ var QuizFive = /*#__PURE__*/function (_React$Component) {
       event.preventDefault();
 
       if (_this.state.response === 'one') {
-        onNext();
-      } else {
         var currentTriesLeft = player.get("attentionCheck1Tries");
         var attentionCheck1Answer = _this.state.response;
         player.set("attentionCheck1-" + currentTriesLeft, attentionCheck1Answer);
-        player.set("attentionCheck1Tries", currentTriesLeft - 1);
+        onNext();
+      } else {
+        var _currentTriesLeft = player.get("attentionCheck1Tries");
 
-        if (currentTriesLeft - 1 <= 0) {
+        var _attentionCheck1Answer = _this.state.response;
+        player.set("attentionCheck1-" + _currentTriesLeft, _attentionCheck1Answer);
+        player.set("attentionCheck1Tries", _currentTriesLeft - 1);
+
+        if (_currentTriesLeft - 1 <= 0) {
           player.exit("failedQuestion");
         } else {
           _this.onOpenModal();
@@ -6945,13 +6949,13 @@ var QuizOverview = /*#__PURE__*/function (_React$Component) {
         style: {
           fontWeight: 'bolder'
         }
-      }, "  60 minutes"), ". If you cannot make this commitment, please leave and wait for the next session."), /*#__PURE__*/React.createElement("label", {
+      }, "  ", game.treatment.maxGameTime, " minutes"), ". If you cannot make this commitment, please leave and wait for the next session."), /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
       }, "2. If you are inactive for longer than ", /*#__PURE__*/React.createElement("span", {
         style: {
           fontWeight: 'bolder'
         }
-      }, "  2 minutes"), ", you will be kicked from the game. You will only get ", /*#__PURE__*/React.createElement("span", {
+      }, "  ", game.treatment.userInactivityDuration, " minutes"), ", you will be kicked from the game. You will only get ", /*#__PURE__*/React.createElement("span", {
         style: {
           fontWeight: 'bolder'
         }
@@ -6973,7 +6977,7 @@ var QuizOverview = /*#__PURE__*/function (_React$Component) {
         className: "questionnaire-question"
       }, "6. After selecting a symbol and submitting it, you are allowed to reconsider your answer if you find more information from your team."), game.treatment.conversionRate && game.treatment.basePay ? /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
-      }, "7. You will receive a $", game.treatment.conversionRate, " bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn an additional $", game.treatment.numTaskRounds * game.treatment.conversionRate, ".") : /*#__PURE__*/React.createElement("label", {
+      }, "7. You will receive a $", game.treatment.conversionRate, " bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to an additional $", game.treatment.numTaskRounds * game.treatment.conversionRate, ".") : /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
       }, "7. You will receive $1 bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to $", game.treatment.numTaskRounds * 1, "."), /*#__PURE__*/React.createElement("br", null)), /*#__PURE__*/React.createElement("form", {
         className: "questionnaire-btn-container",
@@ -7093,14 +7097,18 @@ var QuizSeven = /*#__PURE__*/function (_React$Component) {
       event.preventDefault();
 
       if (_this.state.response === 'self') {
-        onNext();
-      } else {
         var currentTriesLeft = player.get("attentionCheck3Tries");
         var attentionCheck3Answer = _this.state.response;
         player.set("attentionCheck3-" + currentTriesLeft, attentionCheck3Answer);
-        player.set("attentionCheck3Tries", currentTriesLeft - 1);
+        onNext();
+      } else {
+        var _currentTriesLeft = player.get("attentionCheck3Tries");
 
-        if (currentTriesLeft - 1 <= 0) {
+        var _attentionCheck3Answer = _this.state.response;
+        player.set("attentionCheck3-" + _currentTriesLeft, _attentionCheck3Answer);
+        player.set("attentionCheck3Tries", _currentTriesLeft - 1);
+
+        if (_currentTriesLeft - 1 <= 0) {
           player.exit("failedQuestion");
         } else {
           _this.onOpenModal();
@@ -7292,14 +7300,18 @@ var QuizSix = /*#__PURE__*/function (_React$Component) {
       event.preventDefault();
 
       if (_this.state.response === 'individual') {
-        onNext();
-      } else {
         var currentTriesLeft = player.get("attentionCheck2Tries");
         var attentionCheck2Answer = _this.state.response;
         player.set("attentionCheck2-" + currentTriesLeft, attentionCheck2Answer);
-        player.set("attentionCheck2Tries", currentTriesLeft - 1);
+        onNext();
+      } else {
+        var _currentTriesLeft = player.get("attentionCheck2Tries");
 
-        if (currentTriesLeft - 1 <= 0) {
+        var _attentionCheck2Answer = _this.state.response;
+        player.set("attentionCheck2-" + _currentTriesLeft, _attentionCheck2Answer);
+        player.set("attentionCheck2Tries", _currentTriesLeft - 1);
+
+        if (_currentTriesLeft - 1 <= 0) {
           player.exit("failedQuestion");
         } else {
           _this.onOpenModal();
@@ -7491,14 +7503,18 @@ var QuizTwo = /*#__PURE__*/function (_React$Component) {
       event.preventDefault();
 
       if (_this.state.response === 'end') {
-        onNext();
-      } else {
         var currentTriesLeft = player.get("attentionCheck4Tries");
         var attentionCheck4Answer = _this.state.response;
         player.set("attentionCheck4-" + currentTriesLeft, attentionCheck4Answer);
-        player.set("attentionCheck4Tries", currentTriesLeft - 1);
+        onNext();
+      } else {
+        var _currentTriesLeft = player.get("attentionCheck4Tries");
 
-        if (currentTriesLeft - 1 <= 0) {
+        var _attentionCheck4Answer = _this.state.response;
+        player.set("attentionCheck4-" + _currentTriesLeft, _attentionCheck4Answer);
+        player.set("attentionCheck4Tries", _currentTriesLeft - 1);
+
+        if (_currentTriesLeft - 1 <= 0) {
           player.exit("failedQuestion");
         } else {
           _this.onOpenModal();
@@ -8640,14 +8656,14 @@ var ChatContainer = /*#__PURE__*/function (_React$PureComponent) {
       var common = {
         player: player,
         scope: scope,
-        customKey: customKey
+        customKey: customKey,
+        otherPlayer: otherPlayer
       };
       return /*#__PURE__*/React.createElement(ErrorBoundary, null, /*#__PURE__*/React.createElement("div", {
         className: (customClassName ? customClassName : "empirica-chat-container") + " " + (docked ? "undocked" : "undocked") + " " + (isOpen ? "open" : "closed")
       }, /*#__PURE__*/React.createElement("div", {
         className: "chat " + (isOpen ? "open" : "closed")
       }, docked && /*#__PURE__*/React.createElement(HeaderComp, _extends({}, common, {
-        otherPlayer: otherPlayer,
         onTitleClick: this.onTitleClick,
         onXClick: this.onXClick,
         isOpen: isOpen,
@@ -8764,7 +8780,7 @@ var ChatHeader = /*#__PURE__*/function (_React$PureComponent) {
           onXClick = _this$props.onXClick,
           playerIsOnline = _this$props.playerIsOnline;
       return /*#__PURE__*/React.createElement("div", {
-        className: "header"
+        className: "header " + otherPlayer.toLowerCase()
       }, /*#__PURE__*/React.createElement("span", {
         className: "title",
         onClick: onTitleClick
@@ -9438,7 +9454,8 @@ var Messages = /*#__PURE__*/function (_React$Component2) {
           player = _this$props3.player,
           messages = _this$props3.messages,
           MessageComp = _this$props3.messageComp,
-          rest = _objectWithoutProperties(_this$props3, ["player", "messages", "messageComp"]);
+          otherPlayer = _this$props3.otherPlayer,
+          rest = _objectWithoutProperties(_this$props3, ["player", "messages", "messageComp", "otherPlayer"]);
 
       return /*#__PURE__*/React.createElement("div", {
         className: "messages",

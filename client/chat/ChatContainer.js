@@ -71,7 +71,7 @@ export default class ChatContainer extends React.PureComponent {
       ...rest
     } = this.props;
 
-    const common = { player, scope, customKey };
+    const common = { player, scope, customKey, otherPlayer };
 
     return (
       <ErrorBoundary>
@@ -82,7 +82,7 @@ export default class ChatContainer extends React.PureComponent {
         >
           <div className={`chat ${isOpen ? "open" : "closed"}`}>
             {docked && (
-              <HeaderComp {...common} otherPlayer={otherPlayer} onTitleClick={this.onTitleClick} onXClick={this.onXClick} isOpen={isOpen} playerIsOnline={playerIsOnline} />
+              <HeaderComp {...common} onTitleClick={this.onTitleClick} onXClick={this.onXClick} isOpen={isOpen} playerIsOnline={playerIsOnline} />
             )}
             {isOpen ? (
               <>

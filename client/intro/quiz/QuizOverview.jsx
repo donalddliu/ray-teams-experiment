@@ -21,10 +21,10 @@ export default class QuizOverview extends React.Component {
                             <div className="question-section">
                                 <p className="questionnaire-question"> PLEASE READ THE FOLLOWING CAREFULLY </p>
                                 <label className="questionnaire-question"> 
-                                    1. This game may last up to <span style={{fontWeight: 'bolder'}}>  60 minutes</span>. If you cannot make this commitment, please leave and wait for the next session.
+                                    1. This game may last up to <span style={{fontWeight: 'bolder'}}>  {game.treatment.maxGameTime} minutes</span>. If you cannot make this commitment, please leave and wait for the next session.
                                 </label>
                                 <label className="questionnaire-question">
-                                    2. If you are inactive for longer than <span style={{fontWeight: 'bolder'}}>  2 minutes</span>, you will be kicked from the game. You will only get <span style={{fontWeight: 'bolder'}}> ONE warning </span> about your inactivity. Thus, actively speak with your teammates until everyone has submitted.
+                                    2. If you are inactive for longer than <span style={{fontWeight: 'bolder'}}>  {game.treatment.userInactivityDuration} minutes</span>, you will be kicked from the game. You will only get <span style={{fontWeight: 'bolder'}}> ONE warning </span> about your inactivity. Thus, actively speak with your teammates until everyone has submitted.
                                 </label>
                                 <label className="questionnaire-question">
                                     3. If a player is kicked from the game, the <span style={{fontWeight: 'bolder'}}> entire game for everyone will end</span>. 
@@ -40,7 +40,7 @@ export default class QuizOverview extends React.Component {
                                 </label>
                                 { game.treatment.conversionRate && game.treatment.basePay ? 
                                 <label className="questionnaire-question"> 
-                                    7. You will receive a ${game.treatment.conversionRate} bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn an additional ${ game.treatment.numTaskRounds * game.treatment.conversionRate}.
+                                    7. You will receive a ${game.treatment.conversionRate} bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to an additional ${ game.treatment.numTaskRounds * game.treatment.conversionRate}.
                                 </label>
                                 : 
                                 <label className="questionnaire-question">

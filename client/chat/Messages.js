@@ -55,7 +55,7 @@ class Messages extends React.Component {
   }
 
   render() {
-    const { player, messages, messageComp: MessageComp, ...rest } = this.props;
+    const { player, messages, messageComp: MessageComp, otherPlayer, ...rest } = this.props;
 
     return (
       <div className="messages" ref={this.messagesEl}>

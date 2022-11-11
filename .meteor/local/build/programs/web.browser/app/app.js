@@ -1396,7 +1396,7 @@ class Thanks extends React.Component {
     // <strong>{player._id}</strong>
     // </p> 
     // TODO: Prolific
-    React.createElement("p", null, "Thank you for participating! Please submit the following code: C1FLL9CG") : /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $".concat(basePay + parseInt(player.get("score") * conversionRate), " : ") : " ", /*#__PURE__*/React.createElement("strong", null, player._id)))));
+    React.createElement("p", null, "Thank you for participating! Please submit the following code: CZ586HD9") : /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $".concat(basePay + parseInt(player.get("score") * conversionRate), " : ") : " ", /*#__PURE__*/React.createElement("strong", null, player._id)))));
   }
 
 }
@@ -5435,6 +5435,9 @@ class QuizFive extends React.Component {
       event.preventDefault();
 
       if (this.state.response === 'one') {
+        const currentTriesLeft = player.get("attentionCheck1Tries");
+        const attentionCheck1Answer = this.state.response;
+        player.set("attentionCheck1-".concat(currentTriesLeft), attentionCheck1Answer);
         onNext();
       } else {
         const currentTriesLeft = player.get("attentionCheck1Tries");
@@ -5717,13 +5720,13 @@ class QuizOverview extends React.Component {
       style: {
         fontWeight: 'bolder'
       }
-    }, "  60 minutes"), ". If you cannot make this commitment, please leave and wait for the next session."), /*#__PURE__*/React.createElement("label", {
+    }, "  ", game.treatment.maxGameTime, " minutes"), ". If you cannot make this commitment, please leave and wait for the next session."), /*#__PURE__*/React.createElement("label", {
       className: "questionnaire-question"
     }, "2. If you are inactive for longer than ", /*#__PURE__*/React.createElement("span", {
       style: {
         fontWeight: 'bolder'
       }
-    }, "  2 minutes"), ", you will be kicked from the game. You will only get ", /*#__PURE__*/React.createElement("span", {
+    }, "  ", game.treatment.userInactivityDuration, " minutes"), ", you will be kicked from the game. You will only get ", /*#__PURE__*/React.createElement("span", {
       style: {
         fontWeight: 'bolder'
       }
@@ -5745,7 +5748,7 @@ class QuizOverview extends React.Component {
       className: "questionnaire-question"
     }, "6. After selecting a symbol and submitting it, you are allowed to reconsider your answer if you find more information from your team."), game.treatment.conversionRate && game.treatment.basePay ? /*#__PURE__*/React.createElement("label", {
       className: "questionnaire-question"
-    }, "7. You will receive a $", game.treatment.conversionRate, " bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn an additional $", game.treatment.numTaskRounds * game.treatment.conversionRate, ".") : /*#__PURE__*/React.createElement("label", {
+    }, "7. You will receive a $", game.treatment.conversionRate, " bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to an additional $", game.treatment.numTaskRounds * game.treatment.conversionRate, ".") : /*#__PURE__*/React.createElement("label", {
       className: "questionnaire-question"
     }, "7. You will receive $1 bonus each time your team correctly identifies the shared symbol. If you complete all trials of the experiment, you could earn up to $", game.treatment.numTaskRounds * 1, "."), /*#__PURE__*/React.createElement("br", null)), /*#__PURE__*/React.createElement("form", {
       className: "questionnaire-btn-container",
@@ -5839,6 +5842,9 @@ class QuizSeven extends React.Component {
       event.preventDefault();
 
       if (this.state.response === 'self') {
+        const currentTriesLeft = player.get("attentionCheck3Tries");
+        const attentionCheck3Answer = this.state.response;
+        player.set("attentionCheck3-".concat(currentTriesLeft), attentionCheck3Answer);
         onNext();
       } else {
         const currentTriesLeft = player.get("attentionCheck3Tries");
@@ -6009,6 +6015,9 @@ class QuizSix extends React.Component {
       event.preventDefault();
 
       if (this.state.response === 'individual') {
+        const currentTriesLeft = player.get("attentionCheck2Tries");
+        const attentionCheck2Answer = this.state.response;
+        player.set("attentionCheck2-".concat(currentTriesLeft), attentionCheck2Answer);
         onNext();
       } else {
         const currentTriesLeft = player.get("attentionCheck2Tries");
@@ -6179,6 +6188,9 @@ class QuizTwo extends React.Component {
       event.preventDefault();
 
       if (this.state.response === 'end') {
+        const currentTriesLeft = player.get("attentionCheck4Tries");
+        const attentionCheck4Answer = this.state.response;
+        player.set("attentionCheck4-".concat(currentTriesLeft), attentionCheck4Answer);
         onNext();
       } else {
         const currentTriesLeft = player.get("attentionCheck4Tries");
@@ -7064,14 +7076,14 @@ class ChatContainer extends React.PureComponent {
     const common = {
       player,
       scope,
-      customKey
+      customKey,
+      otherPlayer
     };
     return /*#__PURE__*/React.createElement(ErrorBoundary, null, /*#__PURE__*/React.createElement("div", {
       className: "".concat(customClassName ? customClassName : "empirica-chat-container", " ").concat(docked ? "undocked" : "undocked", " ").concat(isOpen ? "open" : "closed")
     }, /*#__PURE__*/React.createElement("div", {
       className: "chat ".concat(isOpen ? "open" : "closed")
     }, docked && /*#__PURE__*/React.createElement(HeaderComp, _extends({}, common, {
-      otherPlayer: otherPlayer,
       onTitleClick: this.onTitleClick,
       onXClick: this.onXClick,
       isOpen: isOpen,
@@ -7158,7 +7170,7 @@ class ChatHeader extends React.PureComponent {
       playerIsOnline
     } = this.props;
     return /*#__PURE__*/React.createElement("div", {
-      className: "header"
+      className: "header ".concat(otherPlayer.toLowerCase())
     }, /*#__PURE__*/React.createElement("span", {
       className: "title",
       onClick: onTitleClick
@@ -7676,9 +7688,10 @@ class Messages extends React.Component {
           {
       player,
       messages,
-      messageComp: MessageComp
+      messageComp: MessageComp,
+      otherPlayer
     } = _this$props,
-          rest = _objectWithoutProperties(_this$props, ["player", "messages", "messageComp"]);
+          rest = _objectWithoutProperties(_this$props, ["player", "messages", "messageComp", "otherPlayer"]);
 
     return /*#__PURE__*/React.createElement("div", {
       className: "messages",

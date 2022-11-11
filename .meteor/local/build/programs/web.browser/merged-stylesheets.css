@@ -708,6 +708,27 @@ body.bp3-dark {
   cursor: pointer;
   padding: 8px 0px 8px 0px;
 }
+.ray-chat-container .chat .header.red {
+  background-color: var(--chat-red);
+}
+.ray-chat-container .chat .header.white {
+  background-color: var(--chat-white);
+}
+.ray-chat-container .chat .header.black {
+  background-color: var(--chat-black);
+}
+.ray-chat-container .chat .header.blue {
+  background-color: var(--chat-blue);
+}
+.ray-chat-container .chat .header.green {
+  background-color: var(--chat-green);
+}
+.ray-chat-container .chat .header.purple {
+  background-color: var(--chat-purple);
+}
+.ray-chat-container .chat .header.yellow {
+  background-color: var(--chat-yellow);
+}
 .ray-chat-container .chat .messages {
   width: 100%;
   margin: 0% 0% 100% 0%;

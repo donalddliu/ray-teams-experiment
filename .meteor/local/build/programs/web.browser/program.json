@@ -780,12 +780,12 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/app/app.js?hash=48df3882dd09ebb666628b18974ce9ae89e62f1c",
+      "url": "/app/app.js?hash=dfd2ad1aa87ab02ac50011c238431db5ad8bf295",
       "sourceMap": "app/app.js.map",
-      "sourceMapUrl": "/app/48df3882dd09ebb666628b18974ce9ae89e62f1c.map",
-      "size": 281465,
-      "hash": "48df3882dd09ebb666628b18974ce9ae89e62f1c",
-      "sri": "7r8ZvZIA/g+WyObKZOHlkjR6Lrj/2jU0q4GGDTFUcLpsKRomCZmH+68/4uUR4tZZlqIBJzRYX7WyPS5P7UeJYw=="
+      "sourceMapUrl": "/app/dfd2ad1aa87ab02ac50011c238431db5ad8bf295.map",
+      "size": 282463,
+      "hash": "dfd2ad1aa87ab02ac50011c238431db5ad8bf295",
+      "sri": "AkzjhR5Fl418tNTgqiyo+YjSKrubp2A3ED2RiokVTzehCv72yYAkMOY+y7asIWjL4CsGBuueXBVMDoghVwL02g=="
     },
     {
       "path": "packages/service-configuration.js",
@@ -802,12 +802,12 @@
       "where": "client",
       "type": "css",
       "cacheable": true,
-      "url": "/merged-stylesheets.css?hash=a60d93d521593b7bdff22b18130ba81bb526753d",
+      "url": "/merged-stylesheets.css?hash=63fb1c7b51910e0ad1f03800e598ee96c4e85d7e",
       "sourceMap": "merged-stylesheets.css.map",
-      "sourceMapUrl": "/a60d93d521593b7bdff22b18130ba81bb526753d.map",
-      "size": 21107,
-      "hash": "a60d93d521593b7bdff22b18130ba81bb526753d",
-      "sri": "62BtxLFP06gvmWpVP53UPCKbnfF9sSz9FdnYofRL9lvvMUeUpJodrcNSz38V7IgOt6YPHykULgM6ja39cILRng=="
+      "sourceMapUrl": "/63fb1c7b51910e0ad1f03800e598ee96c4e85d7e.map",
+      "size": 21686,
+      "hash": "63fb1c7b51910e0ad1f03800e598ee96c4e85d7e",
+      "sri": "QDP+5+wka9v3fxQ6Uyl4NHxLkUPm9nTm6D5t/SnqjN88GC1DOeU7b0L4Ebfr6qS1Z8bAO+UUbU2XNT1/uLkETw=="
     },
     {
       "path": "packages/empirica_core/ui/components/NoBatch.less.map.json",
@@ -865,8 +865,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/css/style.css",
-      "size": 34846,
-      "hash": "95eb9075ee51722dee108795b7b62189e333b2f4",
+      "size": 35044,
+      "hash": "96ec361eedb77e641a8d3ff8f9e09c51072f1491",
       "sri": null
     },
     {
