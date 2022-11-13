@@ -1688,7 +1688,7 @@ var Thanks = /*#__PURE__*/function (_React$Component) {
       var conversionRate = game.treatment.conversionRate;
       return /*#__PURE__*/React.createElement("div", {
         className: "finished"
-      }, /*#__PURE__*/React.createElement("div", null, player.get("nodeId") ? /*#__PURE__*/React.createElement("p", null, " If you are receiving this message, it means you have participated in one of our symbol task games before. As mentioned in out HIT expectations, if you've participated in one of our HIT sessions before, you cannot participate in another. We are trying to gather new players for each game. If you think this is a mistake, please do no hesistate to reach out.") : /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Finished!"), player.exitReason === "preQualSuccess" ?
+      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Finished!"), player.exitReason === "preQualSuccess" ?
       /*#__PURE__*/
       // TODO: mturk
       // <p>Thank you for participating! Please submit the following code to receive your bonus 
@@ -1696,7 +1696,7 @@ var Thanks = /*#__PURE__*/function (_React$Component) {
       // <strong>{player._id}</strong>
       // </p> 
       // TODO: Prolific
-      React.createElement("p", null, "Thank you for participating! Please submit the following code: CZ586HD9") : /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code to receive your bonus", basePay && conversionRate ? " of $" + (basePay + parseInt(player.get("score") * conversionRate)) + " : " : " ", /*#__PURE__*/React.createElement("strong", null, player._id)))));
+      React.createElement("p", null, "Thank you for participating! Please submit the following code: CZ586HD9") : /*#__PURE__*/React.createElement("p", null, "Thank you for participating! Please submit the following code: C1FLL9CG"))));
     }
 
     return render;
@@ -6955,17 +6955,21 @@ var QuizOverview = /*#__PURE__*/function (_React$Component) {
         style: {
           fontWeight: 'bolder'
         }
-      }, "  ", game.treatment.userInactivityDuration, " minutes"), ", you will be kicked from the game. You will only get ", /*#__PURE__*/React.createElement("span", {
+      }, "  ", game.treatment.userInactivityDuration / 60, " minutes"), ", you will be kicked from the game. You will only get ", /*#__PURE__*/React.createElement("span", {
         style: {
           fontWeight: 'bolder'
         }
-      }, " ONE warning "), " about your inactivity. Thus, actively speak with your teammates until everyone has submitted."), /*#__PURE__*/React.createElement("label", {
+      }, " ONE warning "), " about your inactivity. If you are still inactive in the next 30 seconds, you will be kicked. If you become active, your timer will reset. Thus, actively speak with your teammates until everyone has submitted. ", /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontWeight: 'bolder'
+        }
+      }, " Your inactive timer will still run after you submit. ")), /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
       }, "3. If a player is kicked from the game, the ", /*#__PURE__*/React.createElement("span", {
         style: {
           fontWeight: 'bolder'
         }
-      }, " entire game for everyone will end"), "."), /*#__PURE__*/React.createElement("label", {
+      }, " entire game for everyone will end "), "  after the round is finished."), /*#__PURE__*/React.createElement("label", {
         className: "questionnaire-question"
       }, "4. For each trial, there will be ", /*#__PURE__*/React.createElement("span", {
         style: {

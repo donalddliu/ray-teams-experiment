@@ -24,10 +24,10 @@ export default class QuizOverview extends React.Component {
                                     1. This game may last up to <span style={{fontWeight: 'bolder'}}>  {game.treatment.maxGameTime} minutes</span>. If you cannot make this commitment, please leave and wait for the next session.
                                 </label>
                                 <label className="questionnaire-question">
-                                    2. If you are inactive for longer than <span style={{fontWeight: 'bolder'}}>  {game.treatment.userInactivityDuration} minutes</span>, you will be kicked from the game. You will only get <span style={{fontWeight: 'bolder'}}> ONE warning </span> about your inactivity. Thus, actively speak with your teammates until everyone has submitted.
+                                    2. If you are inactive for longer than <span style={{fontWeight: 'bolder'}}>  {game.treatment.userInactivityDuration/60} minutes</span>, you will be kicked from the game. You will only get <span style={{fontWeight: 'bolder'}}> ONE warning </span> about your inactivity. If you are still inactive in the next 30 seconds, you will be kicked. If you become active, your timer will reset. Thus, actively speak with your teammates until everyone has submitted. <span style={{fontWeight: 'bolder'}}> Your inactive timer will still run after you submit. </span>
                                 </label>
                                 <label className="questionnaire-question">
-                                    3. If a player is kicked from the game, the <span style={{fontWeight: 'bolder'}}> entire game for everyone will end</span>. 
+                                    3. If a player is kicked from the game, the <span style={{fontWeight: 'bolder'}}> entire game for everyone will end </span>  after the round is finished. 
                                 </label>
                                 <label className="questionnaire-question">
                                     4. For each trial, there will be <span style={{fontWeight: 'bolder'}}> only 1 common symbol </span> amongst everyone. Some symbols may be the same amongst a few of you, but only one that you all share.

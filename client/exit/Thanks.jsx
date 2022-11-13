@@ -14,10 +14,10 @@ export default class Thanks extends React.Component {
     return (
       <div className="finished">
         <div>
-          {player.get("nodeId") ?
+          {/* {player.get("nodeId") ?
           <p> If you are receiving this message, it means you have participated in one of our symbol task games before. As mentioned in out HIT expectations, if you've participated in one of our HIT sessions before, you cannot participate in another. We are trying to gather new players for each game. 
             If you think this is a mistake, please do no hesistate to reach out.</p>
-          :
+          : */}
           <div>
             <h4>Finished!</h4>
               {player.exitReason === "preQualSuccess" ? 
@@ -34,14 +34,12 @@ export default class Thanks extends React.Component {
                 </p> 
                 
                 : 
-                <p>Thank you for participating! Please submit the following code to receive your bonus 
-                { basePay && conversionRate ? ` of $${basePay + parseInt(player.get("score")*conversionRate)} : ` : " "}
-                <strong>{player._id}</strong>
+                <p>Thank you for participating! Please submit the following code: C1FLL9CG 
                 </p> 
                 
               }
             </div>
-          }
+          {/* } */}
 
         </div>
       </div>
