@@ -44,7 +44,6 @@ export default class FinalMidSurveyOne extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     const { game, round, stage, player } = this.props;
     const { response } = this.state;
 
