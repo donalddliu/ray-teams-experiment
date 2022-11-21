@@ -118,7 +118,6 @@ var FinalMidSurveyOne = /*#__PURE__*/function (_React$Component) {
     function render() {
       var _this2 = this;
 
-      console.log(this.props);
       var _this$props2 = this.props,
           game = _this$props2.game,
           round = _this$props2.round,
@@ -2622,13 +2621,21 @@ var MidSurveyFive = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       response: ""
     };
+    _this.updateLastActive = _.throttle(function (player) {
+      return player.set("lastActive", moment(TimeSync.serverTime(null, 1000)));
+    }, 5000, {
+      leading: true
+    });
 
     _this.handleChange = function (event) {
       var _this$setState;
 
+      var player = _this.props.player;
       var el = event.currentTarget;
 
       _this.setState((_this$setState = {}, _this$setState[el.name] = el.value, _this$setState));
+
+      _this.updateLastActive(player);
     };
 
     _this.handleSliderChange = function (num) {
@@ -8421,7 +8428,7 @@ var Schedule = /*#__PURE__*/function (_React$Component) {
 
     _this.state = {
       availability: {},
-      dates: ['11/12/22', '11/13/22', '11/14/22'],
+      dates: ['11/20/22', '11/21/22', '11/22/22', '11/23/22'],
       times: ['9-10 AM', '10-11 AM', '11-12 PM', '12-1 PM', '1-2 PM', '2-3 PM', '3-4 PM', '4-5 PM', '5-6 PM', '6-7 PM', ' 7-8 PM', '8-9 PM', '9-10 PM']
     };
 
@@ -8453,7 +8460,7 @@ var Schedule = /*#__PURE__*/function (_React$Component) {
         style: {
           textAlign: "right"
         }
-      }, " Time (EST) "), /*#__PURE__*/React.createElement("th", null, " 11/12/22 (Sat) "), /*#__PURE__*/React.createElement("th", null, " 11/13/22 (Sun) "), /*#__PURE__*/React.createElement("th", null, " 11/14/22 (Mon) ")), this.state.times.map(function (time) {
+      }, " Time (EST) "), /*#__PURE__*/React.createElement("th", null, " 11/20/22 (Sun) "), /*#__PURE__*/React.createElement("th", null, " 11/21/22 (Mon) "), /*#__PURE__*/React.createElement("th", null, " 11/22/22 (Tue) "), /*#__PURE__*/React.createElement("th", null, " 11/23/22 (Wed) ")), this.state.times.map(function (time) {
         return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", {
           style: {
             textAlign: "right"

@@ -8,9 +8,16 @@ import { Centered } from "meteor/empirica:core";
 export default class MidSurveyFive extends React.Component {
   state = { response: "" };
 
+  updateLastActive = _.throttle((player) => player.set("lastActive", moment(TimeSync.serverTime(null, 1000))), 5000, {leading: true});
+
+
   handleChange = event => {
+    const { player } = this.props;
+
     const el = event.currentTarget;
     this.setState({ [el.name]: el.value });
+    this.updateLastActive(player);
+
   };
 
   handleSliderChange = num => {
