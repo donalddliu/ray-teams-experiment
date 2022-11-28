@@ -6878,7 +6878,7 @@ class Schedule extends React.Component {
 
     this.state = {
       availability: {},
-      dates: ['11/20/22', '11/21/22', '11/22/22', '11/23/22'],
+      dates: ['11/27/22', '11/28/22', '11/29/22', '11/30/22'],
       times: ['9-10 AM', '10-11 AM', '11-12 PM', '12-1 PM', '1-2 PM', '2-3 PM', '3-4 PM', '4-5 PM', '5-6 PM', '6-7 PM', ' 7-8 PM', '8-9 PM', '9-10 PM']
     };
     this.state.dates.forEach(date => {
@@ -6902,7 +6902,7 @@ class Schedule extends React.Component {
       style: {
         textAlign: "right"
       }
-    }, " Time (EST) "), /*#__PURE__*/React.createElement("th", null, " 11/20/22 (Sun) "), /*#__PURE__*/React.createElement("th", null, " 11/21/22 (Mon) "), /*#__PURE__*/React.createElement("th", null, " 11/22/22 (Tue) "), /*#__PURE__*/React.createElement("th", null, " 11/23/22 (Wed) ")), this.state.times.map(time => {
+    }, " Time (EST) "), /*#__PURE__*/React.createElement("th", null, " 11/27/22 (Sun) "), /*#__PURE__*/React.createElement("th", null, " 11/28/22 (Mon) "), /*#__PURE__*/React.createElement("th", null, " 11/29/22 (Tue) "), /*#__PURE__*/React.createElement("th", null, " 11/30/22 (Wed) ")), this.state.times.map(time => {
       return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", {
         style: {
           textAlign: "right"
