@@ -67,17 +67,18 @@ Empirica.gameInit(game => {
   _.times( numTaskRounds, i => {
     const round = game.addRound();
 
-    const {symbols, taskName, answer} = symbolSet[i];
+    const {symbols, taskName} = symbolSet[i];
 
     const taskStage = round.addStage({
       name: "Task",
       displayName: taskName,
-      answer: answer,
       durationInSeconds: taskDuration
     });
+    console.log(taskName);
     taskStage.set("task", symbolSet[i]);
-    getSymbolsForPlayers(symbols, answer, setSize, taskName, game, maxNumOverlap)
-    taskStage.set("answer", symbolSet[i].answer)
+    // getSymbolsForPlayers(symbols, answer, setSize, taskName, game, maxNumOverlap);
+    let answer = distributeSymbolsForPlayers(symbols, playerCount, taskName, game);
+    taskStage.set("answer", answer);
 
     const resultStage = round.addStage({
       name: "Result",
@@ -148,6 +149,53 @@ Empirica.gameInit(game => {
       })
 
 
+  }
+
+  function distributeSymbolsForPlayers(symbolSet, playerCount, taskName, game) {
+    let fullSymbolDistribution = createSymbolSetDistribution(symbolSet);
+
+    let cardSets = [];
+    for (let i = 1; i <= playerCount+1; i++) {
+      cardSets.push(`t${i}`);
+    }
+
+    let cardDistributions = {}
+    game.players.forEach((player) => {
+      let cardSetNum = _.sample(cardSets);
+      let removedCardSetNum = _.remove(cardSets, (num) => num === cardSetNum);
+      cardDistributions[player.get("nodeId")] = cardSetNum;
+    })
+
+    let answer = _.sample(cardSets);
+    // console.log(cardSets);
+    // console.log(cardSets[0]);
+    // console.log(`Full Symbol Distribution : ${fullSymbolDistribution}`);
+
+    game.players.forEach((player) => {
+      let symbolsPicked = fullSymbolDistribution[answer][cardDistributions[player.get("nodeId")]]
+      player.set(taskName, symbolsPicked);
+    })
+
+    return answer;
+
+  }
+
+  function createSymbolSetDistribution(symbolSet) {
+    let fullDistribution = {};
+    symbolSet.forEach((answer) => {
+      symbolsWithoutAnswer = symbolSet.filter(s => s !== answer);
+      let distribution = {};
+      let i = 0;
+      symbolsWithoutAnswer.forEach((s) => {
+        let symbolsWithoutSymbolToRemove = symbolsWithoutAnswer.filter(remove => remove !== s);
+        symbolsWithoutSymbolToRemove.push(answer);
+        distribution[s] = _.sortBy(symbolsWithoutSymbolToRemove);
+        i++;
+      })
+      fullDistribution[answer] = distribution;
+    })
+
+    return fullDistribution;
   }
 
   // Shuffling arrays:

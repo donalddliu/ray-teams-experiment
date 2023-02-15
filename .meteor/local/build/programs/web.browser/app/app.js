@@ -4130,7 +4130,7 @@ const englishScreeningQuestions = [{
   answer: "No",
   question_number: "7"
 }, {
-  passage: "The seamstress tried to remember by when she promised the client to finish the dress.",
+  passage: "The seamstress tried to remember when she promised the client to finish the dress.",
   question: "Did the seamstress try to remember when the deadline for an order was?",
   answer: "Yes",
   question_number: "8"
@@ -6878,7 +6878,7 @@ class Schedule extends React.Component {
 
     this.state = {
       availability: {},
-      dates: ['11/27/22', '11/28/22', '11/29/22', '11/30/22'],
+      dates: ['12/29/22', '12/30/22', '12/31/22', '1/1/23', '1/2/23'],
       times: ['9-10 AM', '10-11 AM', '11-12 PM', '12-1 PM', '1-2 PM', '2-3 PM', '3-4 PM', '4-5 PM', '5-6 PM', '6-7 PM', ' 7-8 PM', '8-9 PM', '9-10 PM']
     };
     this.state.dates.forEach(date => {
@@ -6902,7 +6902,7 @@ class Schedule extends React.Component {
       style: {
         textAlign: "right"
       }
-    }, " Time (EST) "), /*#__PURE__*/React.createElement("th", null, " 11/27/22 (Sun) "), /*#__PURE__*/React.createElement("th", null, " 11/28/22 (Mon) "), /*#__PURE__*/React.createElement("th", null, " 11/29/22 (Tue) "), /*#__PURE__*/React.createElement("th", null, " 11/30/22 (Wed) ")), this.state.times.map(time => {
+    }, " Time (PST) "), /*#__PURE__*/React.createElement("th", null, " 12/29/22 (Thu) "), /*#__PURE__*/React.createElement("th", null, " 12/30/22 (Fri) "), /*#__PURE__*/React.createElement("th", null, " 12/31/22 (Sat) "), /*#__PURE__*/React.createElement("th", null, " 1/1/23 (Sun) "), /*#__PURE__*/React.createElement("th", null, " 1/2/23 (Mon) ")), this.state.times.map(time => {
       return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", {
         style: {
           textAlign: "right"

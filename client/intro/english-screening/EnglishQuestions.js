@@ -42,7 +42,7 @@ export const englishScreeningQuestions = [
       question_number: "7",
     },  
     {
-      passage: "The seamstress tried to remember by when she promised the client to finish the dress.",
+      passage: "The seamstress tried to remember when she promised the client to finish the dress.",
       question: "Did the seamstress try to remember when the deadline for an order was?",
       answer: "Yes",
       question_number: "8",
