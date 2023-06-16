@@ -37,7 +37,7 @@ export default class DescribeSymbolQuestion extends React.Component {
                             </h2>
                             <br></br>
                             <div className="symbol-container" style = {{width: "100%", backgroundColor:"#051A46", borderRadius: "0%", display: "flex", justifyContent: "center"}}>
-                                <img src={`images/symbols/tangrams/t6.png`} />
+                                <img src={`images/symbols/tangrams/t7.png`} />
                             </div>
                             <br></br>
                             <form className="questionnaire-btn-container" style={{flexDirection: "column", width: "100%"}} onSubmit={this.handleSubmit}>

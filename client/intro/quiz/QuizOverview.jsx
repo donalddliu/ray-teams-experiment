@@ -33,7 +33,7 @@ export default class QuizOverview extends React.Component {
                                     4. For each trial, there will be <span style={{fontWeight: 'bolder'}}> only 1 common symbol </span> amongst everyone. Some symbols may be the same amongst a few of you, but only one that you all share.
                                 </label>
                                 <label className="questionnaire-question">
-                                    5. Each player will have different 1-on-1 chats with people to communicate with. You may not have the same chats as others.
+                                    5. Each player will have different 1-on-1 chats with people to communicate with. You may not have the same chats as others. Some may only have one chat, while others may have more.
                                 </label>
                                 <label className="questionnaire-question">
                                     6. After selecting a symbol and submitting it, you are allowed to reconsider your answer if you find more information from your team.

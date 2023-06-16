@@ -74,7 +74,6 @@ Empirica.gameInit(game => {
       displayName: taskName,
       durationInSeconds: taskDuration
     });
-    console.log(taskName);
     taskStage.set("task", symbolSet[i]);
     // getSymbolsForPlayers(symbols, answer, setSize, taskName, game, maxNumOverlap);
     let answer = distributeSymbolsForPlayers(symbols, playerCount, taskName, game);
@@ -167,9 +166,6 @@ Empirica.gameInit(game => {
     })
 
     let answer = _.sample(cardSets);
-    // console.log(cardSets);
-    // console.log(cardSets[0]);
-    // console.log(`Full Symbol Distribution : ${fullSymbolDistribution}`);
 
     game.players.forEach((player) => {
       let symbolsPicked = fullSymbolDistribution[answer][cardDistributions[player.get("nodeId")]]

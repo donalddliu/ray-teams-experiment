@@ -48,7 +48,7 @@ export default class ExitSurvey extends React.Component {
           </p>
           <p>
           {player.exitReason === "minPlayerCountNotMaintained" ? 
-            "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""
+            "Unfortunately, there were too few players active in this game and the game had to be cancelled. To be fair to other players that complete the entire session, please return your submission and we will compensate you for the time you played today." : ""
           }
           </p>
           <p>

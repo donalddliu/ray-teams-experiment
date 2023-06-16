@@ -936,7 +936,7 @@ class ExitSurvey extends React.Component {
     const conversionRate = game.treatment.conversionRate;
     return /*#__PURE__*/React.createElement(Centered, null, /*#__PURE__*/React.createElement("div", {
       className: "exit-survey"
-    }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, "Please submit the following code to receive your bonus:", " ", /*#__PURE__*/React.createElement("strong", null, " C1FLL9CG "), "."), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled." : ""), /*#__PURE__*/React.createElement("p", null, "Your team got a total of ", /*#__PURE__*/React.createElement("strong", null, player.get("score")), " correct.", basePay && conversionRate ? " You will receive an additional performance bonus of ".concat(player.get("score"), " x $").concat(conversionRate, ".") : " You will receive a base pay of $2 and an additional performance bonus of ".concat(player.get("score"), " x 1, for a total of ").concat(2 + parseInt(player.get("score")) * 1, ".")), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
+    }, /*#__PURE__*/React.createElement("h1", null, " Exit Survey "), /*#__PURE__*/React.createElement("p", null, "Please submit the following code to receive your bonus:", " ", /*#__PURE__*/React.createElement("strong", null, " C1FLL9CG "), "."), /*#__PURE__*/React.createElement("p", null, player.exitReason === "minPlayerCountNotMaintained" ? "Unfortunately, there were too few players active in this game and the game had to be cancelled. To be fair to other players that complete the entire session, please return your submission and we will compensate you for the time you played today." : ""), /*#__PURE__*/React.createElement("p", null, "Your team got a total of ", /*#__PURE__*/React.createElement("strong", null, player.get("score")), " correct.", basePay && conversionRate ? " You will receive an additional performance bonus of ".concat(player.get("score"), " x $").concat(conversionRate, ".") : " You will receive a base pay of $2 and an additional performance bonus of ".concat(player.get("score"), " x 1, for a total of ").concat(2 + parseInt(player.get("score")) * 1, ".")), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", null, "Please answer the following short survey."), /*#__PURE__*/React.createElement("form", {
       onSubmit: this.handleSubmit
     }, /*#__PURE__*/React.createElement("div", {
       className: "form-line"
@@ -5754,7 +5754,7 @@ class QuizOverview extends React.Component {
       }
     }, " only 1 common symbol "), " amongst everyone. Some symbols may be the same amongst a few of you, but only one that you all share."), /*#__PURE__*/React.createElement("label", {
       className: "questionnaire-question"
-    }, "5. Each player will have different 1-on-1 chats with people to communicate with. You may not have the same chats as others."), /*#__PURE__*/React.createElement("label", {
+    }, "5. Each player will have different 1-on-1 chats with people to communicate with. You may not have the same chats as others. Some may only have one chat, while others may have more."), /*#__PURE__*/React.createElement("label", {
       className: "questionnaire-question"
     }, "6. After selecting a symbol and submitting it, you are allowed to reconsider your answer if you find more information from your team."), game.treatment.conversionRate && game.treatment.basePay ? /*#__PURE__*/React.createElement("label", {
       className: "questionnaire-question"
@@ -6707,7 +6707,7 @@ class DescribeSymbolQuestion extends React.Component {
         justifyContent: "center"
       }
     }, /*#__PURE__*/React.createElement("img", {
-      src: "images/symbols/tangrams/t6.png"
+      src: "images/symbols/tangrams/t7.png"
     })), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("form", {
       className: "questionnaire-btn-container",
       style: {
@@ -6878,7 +6878,7 @@ class Schedule extends React.Component {
 
     this.state = {
       availability: {},
-      dates: ['12/29/22', '12/30/22', '12/31/22', '1/1/23', '1/2/23'],
+      dates: ['3/10/23', '3/11/23', '3/12/23'],
       times: ['9-10 AM', '10-11 AM', '11-12 PM', '12-1 PM', '1-2 PM', '2-3 PM', '3-4 PM', '4-5 PM', '5-6 PM', '6-7 PM', ' 7-8 PM', '8-9 PM', '9-10 PM']
     };
     this.state.dates.forEach(date => {
@@ -6902,7 +6902,7 @@ class Schedule extends React.Component {
       style: {
         textAlign: "right"
       }
-    }, " Time (PST) "), /*#__PURE__*/React.createElement("th", null, " 12/29/22 (Thu) "), /*#__PURE__*/React.createElement("th", null, " 12/30/22 (Fri) "), /*#__PURE__*/React.createElement("th", null, " 12/31/22 (Sat) "), /*#__PURE__*/React.createElement("th", null, " 1/1/23 (Sun) "), /*#__PURE__*/React.createElement("th", null, " 1/2/23 (Mon) ")), this.state.times.map(time => {
+    }, " Time (EST) "), /*#__PURE__*/React.createElement("th", null, " 3/10/23 (Fri) "), /*#__PURE__*/React.createElement("th", null, " 3/11/23 (Sat) "), /*#__PURE__*/React.createElement("th", null, " 3/12/23 (Sun) ")), this.state.times.map(time => {
       return /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", {
         style: {
           textAlign: "right"
