@@ -3,7 +3,7 @@ import React from "react";
 
 import { Centered } from "meteor/empirica:core";
 
-export default class NetworkSurveyOne extends React.Component {
+export default class NetworkSurveySelfContacts extends React.Component {
   state = {
     name1 : "", 
     name2 : "",
@@ -22,6 +22,7 @@ export default class NetworkSurveyOne extends React.Component {
     event.preventDefault();
 
     const networkSurveyResponse = this.state;
+    player.set("networkResponseSelfContacts", networkSurveyResponse);
     player.set("networkResponse1", networkSurveyResponse);
     
     onNext();
@@ -76,55 +77,6 @@ export default class NetworkSurveyOne extends React.Component {
                     </form>
                 </div>
           </div>
-
-
-    //   <Centered>
-    //     <div>
-    //         <div className="network-survey-container">
-    //             <p className="network-survey-intro">
-    //                 THIS EXPERIMENT IS ABOUT COMMUNICATION NETWORKS. WE BEGIN WITH A QUICK SENSE OF YOUR CURRENT NETWORK.
-    //                 <br/>
-    //                 HERE IS A GENERIC QUESTION OFTEN USED IN SURVEY RESEARCH:
-    //             </p>
-    //             <div className="network-survey-body">
-    //                 <p>From time to time, most people discuss important matters with other people, people they trust. The range of important matters varies from person to person across work, leisure, family, politics, whatever. The range of relations varies across work, family, friends, and advisors. </p>
-    //                 <p> If you look back over the last six months, who are the five people with whom you most discussed matters important to you? Use any symbol that identifies the person for you -- first name, initials, or any name that will let you identify the person. </p>
-    //                 <p/>To ensure confidentiality the names typed here will only be recorded in your local browser, and will NOT be sent to the server. It will be erased from your browser when you close or reload the tab. </p>
-    //             </div>
-    //     </div>
-    //     </div>
-            // <div className="questionnaire-content-container">
-            //     <div className="progress-bar">
-            //         <div className="completed-bar">
-            //             <div className="completed-heading" style={{marginLeft: stageNumPosition }}> {surveyNumber} </div>
-            //             <img src={`images/hr-color.png`} width={`${completedWidth} px`} height="7px" />
-            //         </div>
-            //         <img src={`images/hr-color-dark.png`} width={`${uncompletedWidth} px`} height="7px" />
-            //     </div>
-            //     <div className="questionnaire-body">
-            //         <label className="questionnaire-question"> Did your group have a leader? If so, who?</label>
-            //         {network.map(otherNodeId => {
-            //             const otherPlayerId = game.players.find(p => p.get("nodeId") === parseInt(otherNodeId)).id
-            //             return (
-            //                 <input
-            //                     selected={response}
-            //                     key={otherPlayerId}
-            //                     name="response"
-            //                     value={otherPlayerId}
-            //                     label={otherPlayerId}
-            //                     onChange={this.handleChange}
-            //                 />
-            //             )
-            //             })
-            //         }
-            //     </div>
-            //     <form className="questionnaire-btn-container" onSubmit={this.handleSubmit}>
-            //         <button 
-            //             className={!response ? "arrow-button button-submit-disabled" : "arrow-button button-submit"}
-            //             disabled={!response} type="submit"> Submit </button> 
-            //     </form>
-            // </div>
-    //   </Centered>
     );
   }
 }

@@ -780,12 +780,12 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/app/app.js?hash=a56fa4d31572d0ab65e50cd8000581ed6c29dc76",
+      "url": "/app/app.js?hash=4a25f4282fe8d5a5674e308de03794e16e42a61a",
       "sourceMap": "app/app.js.map",
-      "sourceMapUrl": "/app/a56fa4d31572d0ab65e50cd8000581ed6c29dc76.map",
-      "size": 282485,
-      "hash": "a56fa4d31572d0ab65e50cd8000581ed6c29dc76",
-      "sri": "HyMj4qUE85EyCqTs/FGVhpN6K9iPohcPwEEYM3Eucv3WKGGeCIuArprp2L0O3fisOuJhFnlEDtRJBGmYISuFsQ=="
+      "sourceMapUrl": "/app/4a25f4282fe8d5a5674e308de03794e16e42a61a.map",
+      "size": 305736,
+      "hash": "4a25f4282fe8d5a5674e308de03794e16e42a61a",
+      "sri": "eNfxen+Ty3pxknL1S8T26nK6Vq8MWul4/hkhtQdmsITvukjsMHrqk3tZjjEn5gjQcM7l4z/Hl2fHwj/bGssfMQ=="
     },
     {
       "path": "packages/service-configuration.js",
@@ -835,8 +835,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/css/intro.css",
-      "size": 6893,
-      "hash": "b4caee437acbdb904503440d67c44bef86c3463a",
+      "size": 7491,
+      "hash": "e14129ed40551ab961f667a4340d4edd2921a797",
       "sri": null
     },
     {

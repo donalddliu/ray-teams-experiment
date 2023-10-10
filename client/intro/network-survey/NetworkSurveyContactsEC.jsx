@@ -8,14 +8,14 @@ const DropdownSelect = ({id, name, handleChange}) => (
     <div className="bp4-html-select">
         <select className="dropdown-select-input" defaultValue="" id={id} name={name} onChange={handleChange} required>
             <option value="" disbaled="true" hidden></option>
-            <option value="daily">Daily</option>
-            <option value="weekly">Weekly</option>
-            <option value="lessoften">Less often</option>
+            <option value="EC">Especially Close</option>
+            <option value="S">Strangers</option>
+            <option value="M">Neither</option>
         </select>
     </div>
 );
 
-export default class NetworkSurveyThree extends React.Component {
+export default class NetworkSurveyContactsEC extends React.Component {
   constructor(props) {
     super(props);
     const {name1, name2, name3, name4, name5} = this.props.player.get("networkResponse1");
@@ -45,7 +45,7 @@ export default class NetworkSurveyThree extends React.Component {
         tie34 : tie34, tie35 : tie35,
         tie45 : tie45,
     };
-    player.set("networkResponse3", networkSurveyResponse);
+    player.set("networkResponseContactsEC", networkSurveyResponse);
 
     // TODO: log player response to survey question
     onNext();
@@ -68,17 +68,17 @@ export default class NetworkSurveyThree extends React.Component {
                 <img src={`images/hr-color.png`} />
                 <div className="network-survey-body">
                     <p>
-                        The people you cited on the previous page are listed in the table below. The task is to indicate how often the people you know communicate with each other.
+                        The people you cited on the previous page are listed in the table below. Next, please think about connections between the people you mentioned. Some of them can be total strangers in the sense that they wouldn't recognize the other person if they bumped into one other on the street. Some of them can be especially close, as close or closer to each other as they are to you. Please select the appropriate box to describe how close the people you know are with each other.
                     </p>
                     <ul className="network-list">
                         <li>
-                            “Daily” means that to the best of your knowledge, the two people communicate daily.
+                            “Especially Close” indicates this is one of your closest personal contacts.
                         </li>
                         <li>
-                            “Weekly” indicates the two people usually interact and communicate on a weekly basis.
+                            "Strangers" indicates that they rarely work together, are total strangers as far as you know, or do not enjoy one another's company.
                         </li>
                         <li>
-                            “Less often” indicates, again, as best you know, that the two people communicate infrequently or not at all.
+                            “Neither" indicates this is someone you don't mind working with, but have no wish to develop a friendship.
                         </li>
                     </ul>
                     <form className="network-form" onSubmit={this.handleSubmit}>

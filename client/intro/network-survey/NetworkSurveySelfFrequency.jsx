@@ -15,7 +15,7 @@ const DropdownSelect = ({id, name, handleChange}) => (
     </div>
 );
 
-export default class NetworkSurveyTwo extends React.Component {
+export default class NetworkSurveySelfFrequency extends React.Component {
   constructor(props) {
     super(props);
     const {name1, name2, name3, name4, name5} = this.props.player.get("networkResponse1");
@@ -52,6 +52,7 @@ export default class NetworkSurveyTwo extends React.Component {
 
     event.preventDefault();
     // TODO: log player response to survey question
+    player.set("networkResponseSelfFrequency");
     player.set("networkResponse2", networkSurveyResponse);
     onNext();
   };

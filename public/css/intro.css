@@ -71,6 +71,39 @@
     margin-right: 10px;
 }
 
+.relationship-input-row {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.relationship-input-label {
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.relationship-buttons-container {
+    display: flex;
+    width: 50%;
+    justify-content: space-evenly;
+}
+
+.network-relationship-button {
+    display: flex;
+    background-color: transparent;
+}
+
+.network-relationship-button:hover {
+    background-color: var(--turquoise);
+}
+
+.network-relationship-button.selected {
+    background-color: var(--mediumblue);
+}
+
 .network-button-container {
     display: flex;
     width: 100%;

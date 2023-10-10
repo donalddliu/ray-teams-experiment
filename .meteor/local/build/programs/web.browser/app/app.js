@@ -4405,196 +4405,16 @@ class EnglishScreen extends React.Component {
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-}},"network-survey":{"NetworkSurvey1.jsx":function module(require,exports,module){
+}},"network-survey":{"NetworkSurveyContactsEC.jsx":function module(require,exports,module){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                     //
-// client/intro/network-survey/NetworkSurvey1.jsx                                                                      //
-//                                                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                       //
-module.export({
-  default: () => NetworkSurveyOne
-});
-let React;
-module.link("react", {
-  default(v) {
-    React = v;
-  }
-
-}, 0);
-let Centered;
-module.link("meteor/empirica:core", {
-  Centered(v) {
-    Centered = v;
-  }
-
-}, 1);
-
-class NetworkSurveyOne extends React.Component {
-  constructor() {
-    super(...arguments);
-    this.state = {
-      name1: "",
-      name2: "",
-      name3: "",
-      name4: "",
-      name5: ""
-    };
-
-    this.handleChange = event => {
-      const el = event.currentTarget;
-      this.setState({
-        [el.name]: el.value
-      });
-    };
-
-    this.handleSubmit = event => {
-      const {
-        onNext,
-        player
-      } = this.props;
-      event.preventDefault();
-      const networkSurveyResponse = this.state;
-      player.set("networkResponse1", networkSurveyResponse);
-      onNext();
-    };
-  }
-
-  render() {
-    const {
-      name1,
-      name2,
-      name3,
-      name4,
-      name5
-    } = this.state;
-    const filledOut = name1 && name2 && name3 && name4 && name5;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "network-survey-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "network-survey-header"
-    }, /*#__PURE__*/React.createElement("p", null, "THIS EXPERIMENT IS ABOUT COMMUNICATION NETWORKS. WE BEGIN WITH A QUICK SENSE OF YOUR CURRENT NETWORK. ", /*#__PURE__*/React.createElement("br", null), "HERE IS A GENERIC QUESTION OFTEN USED IN SURVEY RESEARCH:")), /*#__PURE__*/React.createElement("img", {
-      src: "images/hr-color.png"
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "network-survey-body"
-    }, /*#__PURE__*/React.createElement("p", null, "From time to time, most people discuss important matters with other people, people they trust. The range of important matters varies from person to person across work, leisure, family, politics, whatever. The range of relations varies across work, family, friends, and advisors. "), /*#__PURE__*/React.createElement("p", null, "If you look back over the last six months, who are the five people with whom you most discussed matters important to you? Use any symbol that identifies the person for you -- first name, initials, or any name that will let you identify the person. "), /*#__PURE__*/React.createElement("p", null, "To ensure confidentiality the names typed here will only be recorded in your local browser, and will NOT be sent to the server. It will be erased from your browser when you close or reload the tab. "), /*#__PURE__*/React.createElement("form", {
-      className: "network-form",
-      onSubmit: this.handleSubmit
-    }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
-      className: "input-label",
-      htmlFor: "name1"
-    }, " Name: "), /*#__PURE__*/React.createElement("input", {
-      type: "text",
-      id: "name1",
-      name: "name1",
-      onChange: this.handleChange,
-      required: true
-    })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
-      className: "input-label",
-      htmlFor: "name2"
-    }, " Name: "), /*#__PURE__*/React.createElement("input", {
-      type: "text",
-      id: "name2",
-      name: "name2",
-      onChange: this.handleChange,
-      required: true
-    })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
-      className: "input-label",
-      htmlFor: "name3"
-    }, " Name: "), /*#__PURE__*/React.createElement("input", {
-      type: "text",
-      id: "name3",
-      name: "name3",
-      onChange: this.handleChange,
-      required: true
-    })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
-      className: "input-label",
-      htmlFor: "name4"
-    }, " Name: "), /*#__PURE__*/React.createElement("input", {
-      type: "text",
-      id: "name4",
-      name: "name4",
-      onChange: this.handleChange,
-      required: true
-    })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
-      className: "input-label",
-      htmlFor: "name5"
-    }, " Name: "), /*#__PURE__*/React.createElement("input", {
-      type: "text",
-      id: "name5",
-      name: "name5",
-      onChange: this.handleChange,
-      required: true
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "network-button-container"
-    }, /*#__PURE__*/React.createElement("button", {
-      className: !filledOut ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
-      disabled: !filledOut,
-      type: "submit"
-    }, " Next Page"))))) //   <Centered>
-    //     <div>
-    //         <div className="network-survey-container">
-    //             <p className="network-survey-intro">
-    //                 THIS EXPERIMENT IS ABOUT COMMUNICATION NETWORKS. WE BEGIN WITH A QUICK SENSE OF YOUR CURRENT NETWORK.
-    //                 <br/>
-    //                 HERE IS A GENERIC QUESTION OFTEN USED IN SURVEY RESEARCH:
-    //             </p>
-    //             <div className="network-survey-body">
-    //                 <p>From time to time, most people discuss important matters with other people, people they trust. The range of important matters varies from person to person across work, leisure, family, politics, whatever. The range of relations varies across work, family, friends, and advisors. </p>
-    //                 <p> If you look back over the last six months, who are the five people with whom you most discussed matters important to you? Use any symbol that identifies the person for you -- first name, initials, or any name that will let you identify the person. </p>
-    //                 <p/>To ensure confidentiality the names typed here will only be recorded in your local browser, and will NOT be sent to the server. It will be erased from your browser when you close or reload the tab. </p>
-    //             </div>
-    //     </div>
-    //     </div>
-    // <div className="questionnaire-content-container">
-    //     <div className="progress-bar">
-    //         <div className="completed-bar">
-    //             <div className="completed-heading" style={{marginLeft: stageNumPosition }}> {surveyNumber} </div>
-    //             <img src={`images/hr-color.png`} width={`${completedWidth} px`} height="7px" />
-    //         </div>
-    //         <img src={`images/hr-color-dark.png`} width={`${uncompletedWidth} px`} height="7px" />
-    //     </div>
-    //     <div className="questionnaire-body">
-    //         <label className="questionnaire-question"> Did your group have a leader? If so, who?</label>
-    //         {network.map(otherNodeId => {
-    //             const otherPlayerId = game.players.find(p => p.get("nodeId") === parseInt(otherNodeId)).id
-    //             return (
-    //                 <input
-    //                     selected={response}
-    //                     key={otherPlayerId}
-    //                     name="response"
-    //                     value={otherPlayerId}
-    //                     label={otherPlayerId}
-    //                     onChange={this.handleChange}
-    //                 />
-    //             )
-    //             })
-    //         }
-    //     </div>
-    //     <form className="questionnaire-btn-container" onSubmit={this.handleSubmit}>
-    //         <button 
-    //             className={!response ? "arrow-button button-submit-disabled" : "arrow-button button-submit"}
-    //             disabled={!response} type="submit"> Submit </button> 
-    //     </form>
-    // </div>
-    //   </Centered>
-    ;
-  }
-
-}
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-},"NetworkSurvey2.jsx":function module(require,exports,module){
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                     //
-// client/intro/network-survey/NetworkSurvey2.jsx                                                                      //
+// client/intro/network-survey/NetworkSurveyContactsEC.jsx                                                             //
 //                                                                                                                     //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                                        //
 module.export({
-  default: () => NetworkSurveyTwo
+  default: () => NetworkSurveyContactsEC
 });
 let React;
 module.link("react", {
@@ -4638,208 +4458,15 @@ const DropdownSelect = (_ref) => {
     disbaled: "true",
     hidden: true
   }), /*#__PURE__*/React.createElement("option", {
-    value: "daily"
-  }, "Daily"), /*#__PURE__*/React.createElement("option", {
-    value: "weekly"
-  }, "Weekly"), /*#__PURE__*/React.createElement("option", {
-    value: "lessoften"
-  }, "Less often")));
+    value: "EC"
+  }, "Especially Close"), /*#__PURE__*/React.createElement("option", {
+    value: "S"
+  }, "Strangers"), /*#__PURE__*/React.createElement("option", {
+    value: "M"
+  }, "Neither")));
 };
 
-class NetworkSurveyTwo extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.handleChange = event => {
-      const el = event.currentTarget;
-      this.setState({
-        [el.name]: el.value
-      });
-    };
-
-    this.handleSubmit = event => {
-      const {
-        onNext,
-        player
-      } = this.props;
-      const networkSurveyResponse = {
-        tie1: this.state.tie1,
-        tie2: this.state.tie2,
-        tie3: this.state.tie3,
-        tie4: this.state.tie4,
-        tie5: this.state.tie5
-      };
-      event.preventDefault(); // TODO: log player response to survey question
-
-      player.set("networkResponse2", networkSurveyResponse);
-      onNext();
-    };
-
-    const {
-      name1,
-      name2,
-      name3,
-      name4,
-      name5
-    } = this.props.player.get("networkResponse1");
-    this.state = {
-      tie1: "",
-      tie2: "",
-      tie3: "",
-      tie4: "",
-      tie5: "",
-      name1: name1,
-      name2: name2,
-      name3: name3,
-      name4: name4,
-      name5: name5
-    };
-  }
-
-  render() {
-    const {
-      player
-    } = this.props;
-    const filledOut = this.state.tie1 && this.state.tie2 && this.state.tie3 && this.state.tie4 && this.state.tie5;
-    const {
-      name1,
-      name2,
-      name3,
-      name4,
-      name5
-    } = this.state;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "network-survey-container"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "network-survey-header"
-    }, /*#__PURE__*/React.createElement("p", null, "HOW CLOSE ARE YOU TO THE PEOPLE IN YOUR NETWORK?")), /*#__PURE__*/React.createElement("img", {
-      src: "images/hr-color.png"
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "network-survey-body"
-    }, /*#__PURE__*/React.createElement("p", null, "The people you cited on the previous page are listed in the table below. The task is indicate how often you communicate and interact with each of them. "), /*#__PURE__*/React.createElement("ul", {
-      className: "network-list"
-    }, /*#__PURE__*/React.createElement("li", null, "\u201CDaily\u201D means this is someone you communicate with daily."), /*#__PURE__*/React.createElement("li", null, "\u201CWeekly\u201D indicates this is someone you usually interact with and communicate on a weekly basis."), /*#__PURE__*/React.createElement("li", null, "\u201CLess often\u201D indicates this is someone you speak to infrequently.")), /*#__PURE__*/React.createElement("form", {
-      className: "network-form",
-      onSubmit: this.handleSubmit
-    }, /*#__PURE__*/React.createElement("p", null, " How often do you communicate with _ ? "), /*#__PURE__*/React.createElement("div", {
-      className: "input-row"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "dropdown-input-label",
-      htmlFor: "tie1"
-    }, " ", /*#__PURE__*/React.createElement("p", null, name1), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
-      id: "tie1",
-      name: "tie1",
-      handleChange: this.handleChange
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "input-row"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "dropdown-input-label",
-      htmlFor: "tie2"
-    }, " ", /*#__PURE__*/React.createElement("p", null, name2), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
-      id: "tie2",
-      name: "tie2",
-      handleChange: this.handleChange
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "input-row"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "dropdown-input-label",
-      htmlFor: "tie3"
-    }, " ", /*#__PURE__*/React.createElement("p", null, name3), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
-      id: "tie3",
-      name: "tie3",
-      handleChange: this.handleChange
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "input-row"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "dropdown-input-label",
-      htmlFor: "tie4"
-    }, " ", /*#__PURE__*/React.createElement("p", null, name4), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
-      id: "tie4",
-      name: "tie4",
-      handleChange: this.handleChange
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "input-row"
-    }, /*#__PURE__*/React.createElement("label", {
-      className: "dropdown-input-label",
-      htmlFor: "tie5"
-    }, " ", /*#__PURE__*/React.createElement("p", null, name5), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
-      id: "tie5",
-      name: "tie5",
-      handleChange: this.handleChange
-    })), /*#__PURE__*/React.createElement("div", {
-      className: "network-button-container"
-    }, /*#__PURE__*/React.createElement("button", {
-      className: !filledOut ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
-      disabled: !filledOut,
-      type: "submit"
-    }, " Next Page")))));
-  }
-
-}
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-},"NetworkSurvey3.jsx":function module(require,exports,module){
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                     //
-// client/intro/network-survey/NetworkSurvey3.jsx                                                                      //
-//                                                                                                                     //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                       //
-module.export({
-  default: () => NetworkSurveyThree
-});
-let React;
-module.link("react", {
-  default(v) {
-    React = v;
-  }
-
-}, 0);
-let Centered;
-module.link("meteor/empirica:core", {
-  Centered(v) {
-    Centered = v;
-  }
-
-}, 1);
-let HTMLSelect;
-module.link("@blueprintjs/core", {
-  HTMLSelect(v) {
-    HTMLSelect = v;
-  }
-
-}, 2);
-
-const DropdownSelect = (_ref) => {
-  let {
-    id,
-    name,
-    handleChange
-  } = _ref;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "bp4-html-select"
-  }, /*#__PURE__*/React.createElement("select", {
-    className: "dropdown-select-input",
-    defaultValue: "",
-    id: id,
-    name: name,
-    onChange: handleChange,
-    required: true
-  }, /*#__PURE__*/React.createElement("option", {
-    value: "",
-    disbaled: "true",
-    hidden: true
-  }), /*#__PURE__*/React.createElement("option", {
-    value: "daily"
-  }, "Daily"), /*#__PURE__*/React.createElement("option", {
-    value: "weekly"
-  }, "Weekly"), /*#__PURE__*/React.createElement("option", {
-    value: "lessoften"
-  }, "Less often")));
-};
-
-class NetworkSurveyThree extends React.Component {
+class NetworkSurveyContactsEC extends React.Component {
   constructor(props) {
     super(props);
 
@@ -4880,6 +4507,233 @@ class NetworkSurveyThree extends React.Component {
         tie35: tie35,
         tie45: tie45
       };
+      player.set("networkResponseContactsEC", networkSurveyResponse); // TODO: log player response to survey question
+
+      onNext();
+    };
+
+    const {
+      name1,
+      name2,
+      name3,
+      name4,
+      name5
+    } = this.props.player.get("networkResponse1");
+    this.state = {
+      tie12: "",
+      tie13: "",
+      tie14: "",
+      tie15: "",
+      tie23: "",
+      tie24: "",
+      tie25: "",
+      tie34: "",
+      tie35: "",
+      tie45: "",
+      name1: name1,
+      name2: name2,
+      name3: name3,
+      name4: name4,
+      name5: name5
+    };
+  }
+
+  render() {
+    const {
+      game,
+      round,
+      stage,
+      player
+    } = this.props;
+    const {
+      tie12,
+      tie13,
+      tie14,
+      tie15,
+      tie23,
+      tie24,
+      tie25,
+      tie34,
+      tie35,
+      tie45
+    } = this.state;
+    const filledOut = tie12 && tie13 && tie14 && tie15 && tie23 && tie24 && tie25 && tie34 && tie35 && tie45;
+    const {
+      name1,
+      name2,
+      name3,
+      name4,
+      name5
+    } = this.state;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "network-survey-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "network-survey-header"
+    }, /*#__PURE__*/React.createElement("p", null, "THIS QUESTION ASKS FOR YOUR VIEW OF CONNECTIONS AMONG THE PEOPLE YOU NAMED. YOU ARE ALMOST FINISHED.")), /*#__PURE__*/React.createElement("img", {
+      src: "images/hr-color.png"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "network-survey-body"
+    }, /*#__PURE__*/React.createElement("p", null, "The people you cited on the previous page are listed in the table below. Next, please think about connections between the people you mentioned. Some of them can be total strangers in the sense that they wouldn't recognize the other person if they bumped into one other on the street. Some of them can be especially close, as close or closer to each other as they are to you. Please select the appropriate box to describe how close the people you know are with each other."), /*#__PURE__*/React.createElement("ul", {
+      className: "network-list"
+    }, /*#__PURE__*/React.createElement("li", null, "\u201CEspecially Close\u201D indicates this is one of your closest personal contacts."), /*#__PURE__*/React.createElement("li", null, "\"Strangers\" indicates that they rarely work together, are total strangers as far as you know, or do not enjoy one another's company."), /*#__PURE__*/React.createElement("li", null, "\u201CNeither\" indicates this is someone you don't mind working with, but have no wish to develop a friendship.")), /*#__PURE__*/React.createElement("form", {
+      className: "network-form",
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("table", {
+      className: "name-matrix-table"
+    }, /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "How often does __ communicate with __ ?"), /*#__PURE__*/React.createElement("th", null, name2), /*#__PURE__*/React.createElement("th", null, name3), /*#__PURE__*/React.createElement("th", null, name4), /*#__PURE__*/React.createElement("th", null, name5)), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, " ", name1), _.times(4, i => {
+      return (
+        /*#__PURE__*/
+        // tie12, tie13, tie14, tie15
+        React.createElement("td", {
+          key: "tie1".concat(i + 2)
+        }, /*#__PURE__*/React.createElement(DropdownSelect, {
+          id: "tie1".concat(i + 2),
+          name: "tie1".concat(i + 2),
+          handleChange: this.handleChange
+        }), " ")
+      );
+    })), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, " ", name2), _.times(4, i => {
+      // tie23, tie24, tie25
+      return i > 0 ? /*#__PURE__*/React.createElement("td", {
+        key: "tie2".concat(i + 2)
+      }, /*#__PURE__*/React.createElement(DropdownSelect, {
+        id: "tie2".concat(i + 2),
+        name: "tie2".concat(i + 2),
+        handleChange: this.handleChange
+      }), " ") : /*#__PURE__*/React.createElement("td", null);
+    })), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, " ", name3), _.times(4, i => {
+      // tie34, tie35
+      return i > 1 ? /*#__PURE__*/React.createElement("td", {
+        key: "tie3".concat(i + 2)
+      }, /*#__PURE__*/React.createElement(DropdownSelect, {
+        id: "tie3".concat(i + 2),
+        name: "tie3".concat(i + 2),
+        handleChange: this.handleChange
+      }), " ") : /*#__PURE__*/React.createElement("td", null);
+    })), /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, " ", name4), _.times(4, i => {
+      // tie45
+      return i > 2 ? /*#__PURE__*/React.createElement("td", {
+        key: "tie4".concat(i + 2)
+      }, /*#__PURE__*/React.createElement(DropdownSelect, {
+        id: "tie4".concat(i + 2),
+        name: "tie4".concat(i + 2),
+        handleChange: this.handleChange
+      }), " ") : /*#__PURE__*/React.createElement("td", null);
+    })))), /*#__PURE__*/React.createElement("div", {
+      className: "network-button-container"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: !filledOut ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+      disabled: !filledOut,
+      type: "submit"
+    }, " Submit")))));
+  }
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"NetworkSurveyContactsFrequency.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/network-survey/NetworkSurveyContactsFrequency.jsx                                                      //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => NetworkSurveyContactsFrequency
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 1);
+let HTMLSelect;
+module.link("@blueprintjs/core", {
+  HTMLSelect(v) {
+    HTMLSelect = v;
+  }
+
+}, 2);
+
+const DropdownSelect = (_ref) => {
+  let {
+    id,
+    name,
+    handleChange
+  } = _ref;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "bp4-html-select"
+  }, /*#__PURE__*/React.createElement("select", {
+    className: "dropdown-select-input",
+    defaultValue: "",
+    id: id,
+    name: name,
+    onChange: handleChange,
+    required: true
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "",
+    disbaled: "true",
+    hidden: true
+  }), /*#__PURE__*/React.createElement("option", {
+    value: "daily"
+  }, "Daily"), /*#__PURE__*/React.createElement("option", {
+    value: "weekly"
+  }, "Weekly"), /*#__PURE__*/React.createElement("option", {
+    value: "lessoften"
+  }, "Less often")));
+};
+
+class NetworkSurveyContactsFrequency extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleChange = event => {
+      const el = event.currentTarget;
+      this.setState({
+        [el.name]: el.value
+      });
+    };
+
+    this.handleSubmit = event => {
+      const {
+        onNext,
+        player
+      } = this.props;
+      event.preventDefault();
+      const {
+        tie12,
+        tie13,
+        tie14,
+        tie15,
+        tie23,
+        tie24,
+        tie25,
+        tie34,
+        tie35,
+        tie45
+      } = this.state;
+      const networkSurveyResponse = {
+        tie12: tie12,
+        tie13: tie13,
+        tie14: tie14,
+        tie15: tie15,
+        tie23: tie23,
+        tie24: tie24,
+        tie25: tie25,
+        tie34: tie34,
+        tie35: tie35,
+        tie45: tie45
+      };
+      player.set("networkResponseContactsFrequency", networkSurveyResponse);
       player.set("networkResponse3", networkSurveyResponse); // TODO: log player response to survey question
 
       onNext();
@@ -4999,6 +4853,768 @@ class NetworkSurveyThree extends React.Component {
       disabled: !filledOut,
       type: "submit"
     }, " Submit")))));
+  }
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"NetworkSurveyRelationshipInterpreter.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/network-survey/NetworkSurveyRelationshipInterpreter.jsx                                                //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => NetworkSurveyRelationshipInterpreter
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 1);
+let HTMLSelect;
+module.link("@blueprintjs/core", {
+  HTMLSelect(v) {
+    HTMLSelect = v;
+  }
+
+}, 2);
+
+const DropdownSelect = (_ref) => {
+  let {
+    id,
+    name,
+    handleChange
+  } = _ref;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "bp4-html-select"
+  }, /*#__PURE__*/React.createElement("select", {
+    className: "dropdown-select-input",
+    defaultValue: "",
+    id: id,
+    name: name,
+    onChange: handleChange,
+    required: true
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "",
+    disbaled: "true",
+    hidden: true
+  }), /*#__PURE__*/React.createElement("option", {
+    value: "EC"
+  }, "Especially Close"), /*#__PURE__*/React.createElement("option", {
+    value: "C"
+  }, "Close"), /*#__PURE__*/React.createElement("option", {
+    value: "LTC"
+  }, "Less Than Close")));
+};
+
+const RelationshipButtonSet = (_ref2) => {
+  let {
+    contactName,
+    tie,
+    categories,
+    categoriesSelected,
+    handleCategorySelect
+  } = _ref2;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "relationship-input-row",
+    style: {
+      width: "100%"
+    }
+  }, /*#__PURE__*/React.createElement("label", {
+    className: "relationship-input-label",
+    htmlFor: tie
+  }, " ", /*#__PURE__*/React.createElement("p", null, contactName), " "), /*#__PURE__*/React.createElement("div", {
+    className: "relationship-buttons-container"
+  }, categories.map((category, index) => {
+    return /*#__PURE__*/React.createElement("div", {
+      key: "".concat(contactName, "-").concat(category),
+      className: categoriesSelected[index] ? "network-relationship-button selected" : "network-relationship-button",
+      onClick: () => handleCategorySelect(tie, index)
+    }, " ", /*#__PURE__*/React.createElement("p", null, " ", category, " "), " ");
+  })));
+}; // This section asks the user what their personal emotional closeness is to the listed 5 people.
+
+
+class NetworkSurveyRelationshipInterpreter extends React.Component {
+  constructor(props) {
+    super(props); // const {name1, name2, name3, name4, name5} = this.props.player.get("networkResponse1");
+
+    this.handleChange = event => {
+      const el = event.currentTarget;
+      this.setState({
+        [el.name]: el.value
+      });
+    };
+
+    this.handleCategorySelect = (tie, category_i) => {
+      console.log("called");
+      this.state[tie][category_i] = !this.state[tie][category_i];
+    };
+
+    this.handleSubmit = event => {
+      const {
+        onNext,
+        player
+      } = this.props;
+      const networkSurveyResponse = {
+        tie1: this.state.tie1,
+        tie2: this.state.tie2,
+        tie3: this.state.tie3,
+        tie4: this.state.tie4,
+        tie5: this.state.tie5
+      };
+      event.preventDefault(); // TODO: log player response to survey question
+
+      player.set("networkResponseRelationshipInterpreter", networkSurveyResponse);
+      onNext();
+    };
+
+    const {
+      name1,
+      name2,
+      name3,
+      name4,
+      name5
+    } = {
+      name1: "Person 1",
+      name2: "Person 2",
+      name3: "Person 3",
+      name4: "Person 4",
+      name5: "Person 5"
+    };
+    this.state = {
+      tie1: [false, false, false, false],
+      tie2: [false, false, false, false],
+      tie3: [false, false, false, false],
+      tie4: [false, false, false, false],
+      tie5: [false, false, false, false],
+      name1: name1,
+      name2: name2,
+      name3: name3,
+      name4: name4,
+      name5: name5
+    };
+  }
+
+  render() {
+    const {
+      player
+    } = this.props;
+    const filledOut = this.state.tie1 && this.state.tie2 && this.state.tie3 && this.state.tie4 && this.state.tie5;
+    const {
+      name1,
+      name2,
+      name3,
+      name4,
+      name5
+    } = this.state;
+    const categories = ["colleague", "friend", "spouse", "other kin"];
+    console.log(this.state);
+    return /*#__PURE__*/React.createElement("div", {
+      className: "network-survey-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "network-survey-header"
+    }, /*#__PURE__*/React.createElement("p", null, "WHAT ARE YOUR RELATIONSHIPS TO THE PEOPLE IN YOUR NETWORK?")), /*#__PURE__*/React.createElement("img", {
+      src: "images/hr-color.png"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "network-survey-body"
+    }, /*#__PURE__*/React.createElement("p", null, "The people you cited on the previous page are listed in the table below. Please select the option next to each name that best describes how close you feel with each listed person. For each person, are you \u201Cespecially close\u201D (EC), \u201Cclose\u201D (C), or \u201Cless than close\u201D (LTC)? "), /*#__PURE__*/React.createElement("ul", {
+      className: "network-list"
+    }, /*#__PURE__*/React.createElement("li", null, "\u201CEspecially Close\u201D indicates this is one of your closest personal contacts."), /*#__PURE__*/React.createElement("li", null, "\u201CClose\u201D indicates this is someone you enjoy, but don't count him or her among your closest personal contacts."), /*#__PURE__*/React.createElement("li", null, "\u201CLess Than Close\" indicates this is someone you don't mind working with, but have no wish to develop a friendship.")), /*#__PURE__*/React.createElement("form", {
+      className: "network-form",
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("p", null, " How often do you communicate with _ ? "), /*#__PURE__*/React.createElement(RelationshipButtonSet, {
+      contactName: name1,
+      tie: "tie1",
+      categories: categories,
+      categoriesSelected: this.state["tie1"],
+      handleCategorySelect: this.handleCategorySelect
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "input-row"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "dropdown-input-label",
+      htmlFor: "tie1"
+    }, " ", /*#__PURE__*/React.createElement("p", null, name1), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+      id: "tie1",
+      name: "tie1",
+      handleChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "input-row"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "dropdown-input-label",
+      htmlFor: "tie2"
+    }, " ", /*#__PURE__*/React.createElement("p", null, name2), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+      id: "tie2",
+      name: "tie2",
+      handleChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "input-row"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "dropdown-input-label",
+      htmlFor: "tie3"
+    }, " ", /*#__PURE__*/React.createElement("p", null, name3), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+      id: "tie3",
+      name: "tie3",
+      handleChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "input-row"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "dropdown-input-label",
+      htmlFor: "tie4"
+    }, " ", /*#__PURE__*/React.createElement("p", null, name4), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+      id: "tie4",
+      name: "tie4",
+      handleChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "input-row"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "dropdown-input-label",
+      htmlFor: "tie5"
+    }, " ", /*#__PURE__*/React.createElement("p", null, name5), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+      id: "tie5",
+      name: "tie5",
+      handleChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "network-button-container"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: !filledOut ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+      disabled: !filledOut,
+      type: "submit"
+    }, " Next Page")))));
+  }
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"NetworkSurveySelfContacts.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/network-survey/NetworkSurveySelfContacts.jsx                                                           //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => NetworkSurveySelfContacts
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 1);
+
+class NetworkSurveySelfContacts extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = {
+      name1: "",
+      name2: "",
+      name3: "",
+      name4: "",
+      name5: ""
+    };
+
+    this.handleChange = event => {
+      const el = event.currentTarget;
+      this.setState({
+        [el.name]: el.value
+      });
+    };
+
+    this.handleSubmit = event => {
+      const {
+        onNext,
+        player
+      } = this.props;
+      event.preventDefault();
+      const networkSurveyResponse = this.state;
+      player.set("networkResponseSelfContacts", networkSurveyResponse);
+      player.set("networkResponse1", networkSurveyResponse);
+      onNext();
+    };
+  }
+
+  render() {
+    const {
+      name1,
+      name2,
+      name3,
+      name4,
+      name5
+    } = this.state;
+    const filledOut = name1 && name2 && name3 && name4 && name5;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "network-survey-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "network-survey-header"
+    }, /*#__PURE__*/React.createElement("p", null, "THIS EXPERIMENT IS ABOUT COMMUNICATION NETWORKS. WE BEGIN WITH A QUICK SENSE OF YOUR CURRENT NETWORK. ", /*#__PURE__*/React.createElement("br", null), "HERE IS A GENERIC QUESTION OFTEN USED IN SURVEY RESEARCH:")), /*#__PURE__*/React.createElement("img", {
+      src: "images/hr-color.png"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "network-survey-body"
+    }, /*#__PURE__*/React.createElement("p", null, "From time to time, most people discuss important matters with other people, people they trust. The range of important matters varies from person to person across work, leisure, family, politics, whatever. The range of relations varies across work, family, friends, and advisors. "), /*#__PURE__*/React.createElement("p", null, "If you look back over the last six months, who are the five people with whom you most discussed matters important to you? Use any symbol that identifies the person for you -- first name, initials, or any name that will let you identify the person. "), /*#__PURE__*/React.createElement("p", null, "To ensure confidentiality the names typed here will only be recorded in your local browser, and will NOT be sent to the server. It will be erased from your browser when you close or reload the tab. "), /*#__PURE__*/React.createElement("form", {
+      className: "network-form",
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
+      className: "input-label",
+      htmlFor: "name1"
+    }, " Name: "), /*#__PURE__*/React.createElement("input", {
+      type: "text",
+      id: "name1",
+      name: "name1",
+      onChange: this.handleChange,
+      required: true
+    })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
+      className: "input-label",
+      htmlFor: "name2"
+    }, " Name: "), /*#__PURE__*/React.createElement("input", {
+      type: "text",
+      id: "name2",
+      name: "name2",
+      onChange: this.handleChange,
+      required: true
+    })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
+      className: "input-label",
+      htmlFor: "name3"
+    }, " Name: "), /*#__PURE__*/React.createElement("input", {
+      type: "text",
+      id: "name3",
+      name: "name3",
+      onChange: this.handleChange,
+      required: true
+    })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
+      className: "input-label",
+      htmlFor: "name4"
+    }, " Name: "), /*#__PURE__*/React.createElement("input", {
+      type: "text",
+      id: "name4",
+      name: "name4",
+      onChange: this.handleChange,
+      required: true
+    })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
+      className: "input-label",
+      htmlFor: "name5"
+    }, " Name: "), /*#__PURE__*/React.createElement("input", {
+      type: "text",
+      id: "name5",
+      name: "name5",
+      onChange: this.handleChange,
+      required: true
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "network-button-container"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: !filledOut ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+      disabled: !filledOut,
+      type: "submit"
+    }, " Next Page")))));
+  }
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"NetworkSurveySelfEC.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/network-survey/NetworkSurveySelfEC.jsx                                                                 //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => NetworkSurveySelfEC
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 1);
+let HTMLSelect;
+module.link("@blueprintjs/core", {
+  HTMLSelect(v) {
+    HTMLSelect = v;
+  }
+
+}, 2);
+
+const DropdownSelect = (_ref) => {
+  let {
+    id,
+    name,
+    handleChange
+  } = _ref;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "bp4-html-select"
+  }, /*#__PURE__*/React.createElement("select", {
+    className: "dropdown-select-input",
+    defaultValue: "",
+    id: id,
+    name: name,
+    onChange: handleChange,
+    required: true
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "",
+    disbaled: "true",
+    hidden: true
+  }), /*#__PURE__*/React.createElement("option", {
+    value: "EC"
+  }, "Especially Close"), /*#__PURE__*/React.createElement("option", {
+    value: "C"
+  }, "Close"), /*#__PURE__*/React.createElement("option", {
+    value: "LTC"
+  }, "Less Than Close")));
+}; // This section asks the user what their personal emotional closeness is to the listed 5 people.
+
+
+class NetworkSurveySelfEC extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleChange = event => {
+      const el = event.currentTarget;
+      this.setState({
+        [el.name]: el.value
+      });
+    };
+
+    this.handleSubmit = event => {
+      const {
+        onNext,
+        player
+      } = this.props;
+      const networkSurveyResponse = {
+        tie1: this.state.tie1,
+        tie2: this.state.tie2,
+        tie3: this.state.tie3,
+        tie4: this.state.tie4,
+        tie5: this.state.tie5
+      };
+      event.preventDefault(); // TODO: log player response to survey question
+
+      player.set("networkResponseSelfEC", networkSurveyResponse);
+      onNext();
+    };
+
+    const {
+      name1,
+      name2,
+      name3,
+      name4,
+      name5
+    } = this.props.player.get("networkResponse1");
+    this.state = {
+      tie1: "",
+      tie2: "",
+      tie3: "",
+      tie4: "",
+      tie5: "",
+      name1: name1,
+      name2: name2,
+      name3: name3,
+      name4: name4,
+      name5: name5
+    };
+  }
+
+  render() {
+    const {
+      player
+    } = this.props;
+    const filledOut = this.state.tie1 && this.state.tie2 && this.state.tie3 && this.state.tie4 && this.state.tie5;
+    const {
+      name1,
+      name2,
+      name3,
+      name4,
+      name5
+    } = this.state;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "network-survey-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "network-survey-header"
+    }, /*#__PURE__*/React.createElement("p", null, "HOW CLOSE ARE YOU TO THE PEOPLE IN YOUR NETWORK?")), /*#__PURE__*/React.createElement("img", {
+      src: "images/hr-color.png"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "network-survey-body"
+    }, /*#__PURE__*/React.createElement("p", null, "The people you cited on the previous page are listed in the table below. Please select the option next to each name that best describes how close you feel with each listed person. For each person, are you \u201Cespecially close\u201D (EC), \u201Cclose\u201D (C), or \u201Cless than close\u201D (LTC)? "), /*#__PURE__*/React.createElement("ul", {
+      className: "network-list"
+    }, /*#__PURE__*/React.createElement("li", null, "\u201CEspecially Close\u201D indicates this is one of your closest personal contacts."), /*#__PURE__*/React.createElement("li", null, "\u201CClose\u201D indicates this is someone you enjoy, but don't count him or her among your closest personal contacts."), /*#__PURE__*/React.createElement("li", null, "\u201CLess Than Close\" indicates this is someone you don't mind working with, but have no wish to develop a friendship.")), /*#__PURE__*/React.createElement("form", {
+      className: "network-form",
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("p", null, " How often do you communicate with _ ? "), /*#__PURE__*/React.createElement("div", {
+      className: "input-row"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "dropdown-input-label",
+      htmlFor: "tie1"
+    }, " ", /*#__PURE__*/React.createElement("p", null, name1), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+      id: "tie1",
+      name: "tie1",
+      handleChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "input-row"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "dropdown-input-label",
+      htmlFor: "tie2"
+    }, " ", /*#__PURE__*/React.createElement("p", null, name2), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+      id: "tie2",
+      name: "tie2",
+      handleChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "input-row"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "dropdown-input-label",
+      htmlFor: "tie3"
+    }, " ", /*#__PURE__*/React.createElement("p", null, name3), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+      id: "tie3",
+      name: "tie3",
+      handleChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "input-row"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "dropdown-input-label",
+      htmlFor: "tie4"
+    }, " ", /*#__PURE__*/React.createElement("p", null, name4), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+      id: "tie4",
+      name: "tie4",
+      handleChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "input-row"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "dropdown-input-label",
+      htmlFor: "tie5"
+    }, " ", /*#__PURE__*/React.createElement("p", null, name5), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+      id: "tie5",
+      name: "tie5",
+      handleChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "network-button-container"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: !filledOut ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+      disabled: !filledOut,
+      type: "submit"
+    }, " Next Page")))));
+  }
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+},"NetworkSurveySelfFrequency.jsx":function module(require,exports,module){
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                     //
+// client/intro/network-survey/NetworkSurveySelfFrequency.jsx                                                          //
+//                                                                                                                     //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                       //
+module.export({
+  default: () => NetworkSurveySelfFrequency
+});
+let React;
+module.link("react", {
+  default(v) {
+    React = v;
+  }
+
+}, 0);
+let Centered;
+module.link("meteor/empirica:core", {
+  Centered(v) {
+    Centered = v;
+  }
+
+}, 1);
+let HTMLSelect;
+module.link("@blueprintjs/core", {
+  HTMLSelect(v) {
+    HTMLSelect = v;
+  }
+
+}, 2);
+
+const DropdownSelect = (_ref) => {
+  let {
+    id,
+    name,
+    handleChange
+  } = _ref;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "bp4-html-select"
+  }, /*#__PURE__*/React.createElement("select", {
+    className: "dropdown-select-input",
+    defaultValue: "",
+    id: id,
+    name: name,
+    onChange: handleChange,
+    required: true
+  }, /*#__PURE__*/React.createElement("option", {
+    value: "",
+    disbaled: "true",
+    hidden: true
+  }), /*#__PURE__*/React.createElement("option", {
+    value: "daily"
+  }, "Daily"), /*#__PURE__*/React.createElement("option", {
+    value: "weekly"
+  }, "Weekly"), /*#__PURE__*/React.createElement("option", {
+    value: "lessoften"
+  }, "Less often")));
+};
+
+class NetworkSurveySelfFrequency extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleChange = event => {
+      const el = event.currentTarget;
+      this.setState({
+        [el.name]: el.value
+      });
+    };
+
+    this.handleSubmit = event => {
+      const {
+        onNext,
+        player
+      } = this.props;
+      const networkSurveyResponse = {
+        tie1: this.state.tie1,
+        tie2: this.state.tie2,
+        tie3: this.state.tie3,
+        tie4: this.state.tie4,
+        tie5: this.state.tie5
+      };
+      event.preventDefault(); // TODO: log player response to survey question
+
+      player.set("networkResponseSelfFrequency");
+      player.set("networkResponse2", networkSurveyResponse);
+      onNext();
+    };
+
+    const {
+      name1,
+      name2,
+      name3,
+      name4,
+      name5
+    } = this.props.player.get("networkResponse1");
+    this.state = {
+      tie1: "",
+      tie2: "",
+      tie3: "",
+      tie4: "",
+      tie5: "",
+      name1: name1,
+      name2: name2,
+      name3: name3,
+      name4: name4,
+      name5: name5
+    };
+  }
+
+  render() {
+    const {
+      player
+    } = this.props;
+    const filledOut = this.state.tie1 && this.state.tie2 && this.state.tie3 && this.state.tie4 && this.state.tie5;
+    const {
+      name1,
+      name2,
+      name3,
+      name4,
+      name5
+    } = this.state;
+    return /*#__PURE__*/React.createElement("div", {
+      className: "network-survey-container"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "network-survey-header"
+    }, /*#__PURE__*/React.createElement("p", null, "HOW CLOSE ARE YOU TO THE PEOPLE IN YOUR NETWORK?")), /*#__PURE__*/React.createElement("img", {
+      src: "images/hr-color.png"
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "network-survey-body"
+    }, /*#__PURE__*/React.createElement("p", null, "The people you cited on the previous page are listed in the table below. The task is indicate how often you communicate and interact with each of them. "), /*#__PURE__*/React.createElement("ul", {
+      className: "network-list"
+    }, /*#__PURE__*/React.createElement("li", null, "\u201CDaily\u201D means this is someone you communicate with daily."), /*#__PURE__*/React.createElement("li", null, "\u201CWeekly\u201D indicates this is someone you usually interact with and communicate on a weekly basis."), /*#__PURE__*/React.createElement("li", null, "\u201CLess often\u201D indicates this is someone you speak to infrequently.")), /*#__PURE__*/React.createElement("form", {
+      className: "network-form",
+      onSubmit: this.handleSubmit
+    }, /*#__PURE__*/React.createElement("p", null, " How often do you communicate with _ ? "), /*#__PURE__*/React.createElement("div", {
+      className: "input-row"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "dropdown-input-label",
+      htmlFor: "tie1"
+    }, " ", /*#__PURE__*/React.createElement("p", null, name1), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+      id: "tie1",
+      name: "tie1",
+      handleChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "input-row"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "dropdown-input-label",
+      htmlFor: "tie2"
+    }, " ", /*#__PURE__*/React.createElement("p", null, name2), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+      id: "tie2",
+      name: "tie2",
+      handleChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "input-row"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "dropdown-input-label",
+      htmlFor: "tie3"
+    }, " ", /*#__PURE__*/React.createElement("p", null, name3), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+      id: "tie3",
+      name: "tie3",
+      handleChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "input-row"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "dropdown-input-label",
+      htmlFor: "tie4"
+    }, " ", /*#__PURE__*/React.createElement("p", null, name4), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+      id: "tie4",
+      name: "tie4",
+      handleChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "input-row"
+    }, /*#__PURE__*/React.createElement("label", {
+      className: "dropdown-input-label",
+      htmlFor: "tie5"
+    }, " ", /*#__PURE__*/React.createElement("p", null, name5), " "), /*#__PURE__*/React.createElement(DropdownSelect, {
+      id: "tie5",
+      name: "tie5",
+      handleChange: this.handleChange
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "network-button-container"
+    }, /*#__PURE__*/React.createElement("button", {
+      className: !filledOut ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+      disabled: !filledOut,
+      type: "submit"
+    }, " Next Page")))));
   }
 
 }
@@ -7850,132 +8466,153 @@ module.link("./intro/Consent", {
   }
 
 }, 13);
-let NetworkSurveyOne;
-module.link("./intro/network-survey/NetworkSurvey1", {
+let NetworkSurveySelfContacts;
+module.link("./intro/network-survey/NetworkSurveySelfContacts", {
   default(v) {
-    NetworkSurveyOne = v;
+    NetworkSurveySelfContacts = v;
   }
 
 }, 14);
-let NetworkSurveyTwo;
-module.link("./intro/network-survey/NetworkSurvey2", {
+let NetworkSurveySelfEC;
+module.link("./intro/network-survey/NetworkSurveySelfEC", {
   default(v) {
-    NetworkSurveyTwo = v;
+    NetworkSurveySelfEC = v;
   }
 
 }, 15);
-let NetworkSurveyThree;
-module.link("./intro/network-survey/NetworkSurvey3", {
+let NetworkSurveyContactsEC;
+module.link("./intro/network-survey/NetworkSurveyContactsEC", {
   default(v) {
-    NetworkSurveyThree = v;
+    NetworkSurveyContactsEC = v;
   }
 
 }, 16);
+let NetworkSurveySelfFrequency;
+module.link("./intro/network-survey/NetworkSurveySelfFrequency", {
+  default(v) {
+    NetworkSurveySelfFrequency = v;
+  }
+
+}, 17);
+let NetworkSurveyContactsFrequency;
+module.link("./intro/network-survey/NetworkSurveyContactsFrequency", {
+  default(v) {
+    NetworkSurveyContactsFrequency = v;
+  }
+
+}, 18);
+let NetworkSurveyRelationshipInterpreter;
+module.link("./intro/network-survey/NetworkSurveyRelationshipInterpreter", {
+  default(v) {
+    NetworkSurveyRelationshipInterpreter = v;
+  }
+
+}, 19);
 let TutorialPageOne;
 module.link("./intro/tutorial/TutorialPageOne", {
   default(v) {
     TutorialPageOne = v;
   }
 
-}, 17);
+}, 20);
 let TutorialPageTwo;
 module.link("./intro/tutorial/TutorialPageTwo", {
   default(v) {
     TutorialPageTwo = v;
   }
 
-}, 18);
+}, 21);
 let TutorialPageThree;
 module.link("./intro/tutorial/TutorialPageThree", {
   default(v) {
     TutorialPageThree = v;
   }
 
-}, 19);
+}, 22);
 let TutorialPageFour;
 module.link("./intro/tutorial/TutorialPageFour", {
   default(v) {
     TutorialPageFour = v;
   }
 
-}, 20);
+}, 23);
 let AllQuiz;
 module.link("./intro/quiz/AllQuiz", {
   default(v) {
     AllQuiz = v;
   }
 
-}, 21);
+}, 24);
 let QuizFive;
 module.link("./intro/quiz/QuizFive", {
   default(v) {
     QuizFive = v;
   }
 
-}, 22);
+}, 25);
 let QuizSix;
 module.link("./intro/quiz/QuizSix", {
   default(v) {
     QuizSix = v;
   }
 
-}, 23);
+}, 26);
 let QuizSeven;
 module.link("./intro/quiz/QuizSeven", {
   default(v) {
     QuizSeven = v;
   }
 
-}, 24);
+}, 27);
 let QuizTwo;
 module.link("./intro/quiz/QuizTwo", {
   default(v) {
     QuizTwo = v;
   }
 
-}, 25);
+}, 28);
 let QuizOne;
 module.link("./intro/quiz/QuizOne", {
   default(v) {
     QuizOne = v;
   }
 
-}, 26);
+}, 29);
 let QuizOverview;
 module.link("./intro/quiz/QuizOverview", {
   default(v) {
     QuizOverview = v;
   }
 
-}, 27);
+}, 30);
 let EnglishScreen;
 module.link("./intro/english-screening/EnglishScreen", {
   default(v) {
     EnglishScreen = v;
   }
 
-}, 28);
+}, 31);
 let DescribeSymbolQuestion;
 module.link("./intro/DescribeSymbolQuestion", {
   default(v) {
     DescribeSymbolQuestion = v;
   }
 
-}, 29);
+}, 32);
 let Schedule;
 module.link("./intro/Schedule", {
   default(v) {
     Schedule = v;
   }
 
-}, 30);
+}, 33);
 let NewPlayer;
 module.link("./intro/NewPlayer", {
   default(v) {
     NewPlayer = v;
   }
 
-}, 31);
+}, 34);
 // Get rid of Breadcrumb component
 Empirica.breadcrumb(() => null); // Set the About Component you want to use for the About dialog (optional).
 
@@ -7991,7 +8628,7 @@ Empirica.introSteps((game, treatment) => {
   // MidSurveyFive, MidSurveyFour, MidSurveyThree, MidSurveyTwo, MidSurveyOne,
   const durationConsent = [QuizOne];
   const englishScreen = [EnglishScreen];
-  const networkSurvey = [NetworkSurveyOne, NetworkSurveyTwo, NetworkSurveyThree];
+  const networkSurvey = [NetworkSurveySelfContacts, NetworkSurveySelfEC, NetworkSurveySelfFrequency, NetworkSurveyContactsEC];
   const tutorialSteps = [TutorialPageOne, TutorialPageThree, TutorialPageFour];
   const symbolDescription = [DescribeSymbolQuestion]; // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
   // const quizSteps = [AllQuiz];
@@ -8010,9 +8647,10 @@ Empirica.introSteps((game, treatment) => {
 
   if (treatment.skipIntro) {
     return [];
-  } // return [QuizFive, QuizSix, QuizSeven, QuizTwo];
+  }
 
-
+  return [NetworkSurveyRelationshipInterpreter];
+  return networkSurvey;
   return steps;
 }); // The Round component containing the game UI logic.
 // This is where you will be doing the most development.
@@ -8060,7 +8698,7 @@ Meteor.startup(() => {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                                        //
 module.exports = require("meteor/modules").addStyles(
-  "/* Network Survey */\n.network-survey-container {\n    display: flex;\n    flex-direction: column;\n    width: 100%;\n    height: 100%;\n    justify-content: center;\n    align-items: center;\n    text-align: center;\n    font-family: \"Palatino Linotype\", \"Book Antiqua\", \"Palatino\", serif;\n}\n\n.network-survey-container p {\n    display: flex;\n    margin-block-start: 1em;\n    margin-block-end: 1em;\n    margin-inline-start: 0px;\n    margin-inline-end: 0px;\n}\n\n.network-survey-header p {\n    font-weight: bold;\n    text-transform: uppercase;\n    color: var(--darkblue);\n    font-size: 16px;\n    padding: 2em;\n}\n\n.network-survey-body {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    padding: 2em;\n    width: 60%;\n    margin: auto;\n}\n\n.network-survey-body p  {\n    text-transform: none;\n    font-weight: normal;\n    color: var(--darkblue);\n    font-size: 16px;\n}\n\n.network-form {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    padding: 2em;\n    width: 100%;\n}\n\n.input-row {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    width: 50%;\n}\n\n.dropdown-input-label {\n    display: flex;\n    width: 70%;\n    align-items: center;\n    justify-content: center;\n}\n\n.input-label {\n    display: flex;\n    margin-right: 10px;\n}\n\n.network-button-container {\n    display: flex;\n    width: 100%;\n    justify-content: flex-start;\n    margin-top: 23px;\n}\n\n.network-list {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    text-transform: none;\n    max-width: 75%;\n    margin: auto;\n}\n\n.network-list li {\n    display: list-item;\n    margin-left: 10px;\n    list-style-type: disc;\n    width: 100%;\n    padding: 1em 2em;\n    text-transform: none;\n    font-style: italic;\n    font-weight: normal;\n    color: var(--darkblue);\n    font-size: 16px;\n}\n\n.dropdown-select-input {\n    font-size: 14px;\n    color: var(--darkblue);\n    margin: 2px;\n    border-radius: 5px;\n}\n\n.name-matrix-table {\n    width: 60%;\n    margin: 0px auto 2em;\n    font-size: 16px;\n}\n\nthead, tbody, tfoot { vertical-align: middle } /* add this rule*/\ntd, th, tr { vertical-align: inherit } /* add this rule */\n\n/* Tutorial */\n\n.tutorial-container {\n    display: flex;\n    flex-direction: column;\n}\n\n.title-static-image {\n    display: flex;\n    justify-content: flex-start;\n    padding: 30px 15px;\n}\n\n.two-col {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    width: 60%;\n}\n\n.tutorial-content {\n    display: flex;\n    flex-direction: column;\n}\n\n.tutorial-static-image {\n    display:flex;\n    margin-right: 40px;\n    width: 45%;\n    justify-content: center;\n    align-items: center;\n}\n\n.tutorial-info {\n    width: 50%;\n}\n\n.intro-heading {\n    font-family:\"Palatino Linotype\", \"Book Antiqua\", Palatino, serif; \n    font-style:italic; \n    text-transform:uppercase; \n    font-weight:normal;\n    margin: 0px 0px;\n    font-size: 26px;\n    color: var(--darkblue);\n}\n\n.tutorial-body {\n    font-size: 16px;\n    word-spacing: 0.3em;\n    margin-top: 1rem;\n    color: var(--darkblue);\n}\n\n/* BUTTON STYLING AND POSITIONING */\n\n.tutorial-next-btn {\n    position: fixed;\n    top: 50%;\n    right: 0;\n    text-align:left;\n    background: var(--turquoise); \n\n}\n\n.tutorial-next-btn:hover {\n    margin-right: 20px;\n    background:var(--periwinkle)\n}\n\n.tutorial-next-btn:after {border-left:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}\n.tutorial-next-btn:hover:after {border-left:21px solid var(--periwinkle)}\n\n.tutorial-prev-btn {\n    position: fixed;\n    top: 50%;\n    left: 0;\n    text-align:right;\n    background: var(--turquoise); \n}\n\n.tutorial-prev-btn:hover {\n    margin-left: 20px;\n    background:var(--periwinkle)\n}\n\n.tutorial-prev-btn:before {border-right:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}\n.tutorial-prev-btn:hover:before {border-right:21px solid var(--periwinkle)}\n\n\n\n\n/* QUESTIONNAIRE STYLING */\n\n.questionnaire-radio {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    align-items: center;\n\n}\n\n.questionnaire-radio .quiz-button {\n    margin-right: 5px;\n    cursor: pointer;\n}\n\n.english-screening-buttons {\n    display: flex;\n    flex-direction: row;\n}\n\n.english-screening-horizontal-bar {\n    display: flex;\n}\n\n.questionnaire-heading {\n    margin: 10% auto 5% auto;\n    display: flex;\n    justify-content: center;\n    width: 590px;\n    text-align: center;\n}\n\n.question-section {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    margin-top: 15px;\n}\n\n.questionnaire-question {\n    padding-bottom: 20px;\n}\n\n.questionnaire-content-container {\n    display:flex;\n    flex-direction:column;\n    align-items: flex-start;\n    width: 590px;\n}\n\n.questionnaire-body {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    background-color: white;\n    font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\n    color: var(--darkblue);\n    width: 100%;\n    font-size: 15px;\n    padding: 25px;\n}\n\n.questionnaire-btn-container {\n    display: flex;\n}\n\n.progress-bar {\n    display: flex;\n    flex-direction:row;\n    align-items: flex-end;\n}\n\n.completed-heading {\n    font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\n    color: var(--turquoise);\n    font-size: 20px;\n    font-weight: bold;\n}\n\n.completed-bar {\n    display: flex;\n    flex-direction: column;\n}\n\n.slider-value-container {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 100%;\n}\n\n.slider-value {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    border: 1px solid lightgrey;\n    width: 40px;\n    height: 40px;\n    border-radius: 50%;\n    background-color: lightgrey;\n}\n\n/* Customizing SLIDER */\n\n.player-slider-container {\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n    padding: 15px 0px;\n}\n\n.player-label {\n    display: flex;\n    width: 25%;\n    padding: 5px 5px;\n    overflow-wrap: anywhere;\n}\n\n.empirica-slider {\n    width: 100%;\n}\n\n.bp3-slider-axis {\n    display: flex;\n    justify-content: space-between;\n}\n\n.bp3-slider-label {\n    transform: translate(0%, 20px);\n    display: flex;\n    position: static;\n    padding: 2px 5px;\n    vertical-align: top;\n    line-height: 1;\n    font-size: 12px;\n}\n\n.bp3-slider-track {\n    background-color: var(--darkblue);\n}\n\n.bp3-slider-handle {\n    background-color: var(--turquoise);\n    border: 1px solid var(--turquoise);\n    border-radius: 50%;\n    background-image: none;\n    box-shadow: none;\n    width: 20px;\n    height: 20px;\n}\n\n/* Turn off label that appears below slider handle */\n.bp3-slider-handle .bp3-slider-label {\n    display: none;\n}\n\n\n.survey-textarea {\n    width: 100%;\n    resize: vertical;\n    padding: 5px 5px 5px 5px;\n    margin-bottom: 30px;\n}\n\n\n\n"
+  "/* Network Survey */\n.network-survey-container {\n    display: flex;\n    flex-direction: column;\n    width: 100%;\n    height: 100%;\n    justify-content: center;\n    align-items: center;\n    text-align: center;\n    font-family: \"Palatino Linotype\", \"Book Antiqua\", \"Palatino\", serif;\n}\n\n.network-survey-container p {\n    display: flex;\n    margin-block-start: 1em;\n    margin-block-end: 1em;\n    margin-inline-start: 0px;\n    margin-inline-end: 0px;\n}\n\n.network-survey-header p {\n    font-weight: bold;\n    text-transform: uppercase;\n    color: var(--darkblue);\n    font-size: 16px;\n    padding: 2em;\n}\n\n.network-survey-body {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    padding: 2em;\n    width: 60%;\n    margin: auto;\n}\n\n.network-survey-body p  {\n    text-transform: none;\n    font-weight: normal;\n    color: var(--darkblue);\n    font-size: 16px;\n}\n\n.network-form {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    padding: 2em;\n    width: 100%;\n}\n\n.input-row {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    width: 50%;\n}\n\n.dropdown-input-label {\n    display: flex;\n    width: 70%;\n    align-items: center;\n    justify-content: center;\n}\n\n.input-label {\n    display: flex;\n    margin-right: 10px;\n}\n\n.relationship-input-row {\n    display: flex;\n    width: 100%;\n    align-items: center;\n    justify-content: center;\n}\n\n.relationship-input-label {\n    display: flex;\n    width: 50%;\n    align-items: center;\n    justify-content: center;\n}\n\n.relationship-buttons-container {\n    display: flex;\n    width: 50%;\n    justify-content: space-evenly;\n}\n\n.network-relationship-button {\n    display: flex;\n    background-color: transparent;\n}\n\n.network-relationship-button:hover {\n    background-color: var(--turquoise);\n}\n\n.network-relationship-button.selected {\n    background-color: var(--mediumblue);\n}\n\n.network-button-container {\n    display: flex;\n    width: 100%;\n    justify-content: flex-start;\n    margin-top: 23px;\n}\n\n.network-list {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    text-transform: none;\n    max-width: 75%;\n    margin: auto;\n}\n\n.network-list li {\n    display: list-item;\n    margin-left: 10px;\n    list-style-type: disc;\n    width: 100%;\n    padding: 1em 2em;\n    text-transform: none;\n    font-style: italic;\n    font-weight: normal;\n    color: var(--darkblue);\n    font-size: 16px;\n}\n\n.dropdown-select-input {\n    font-size: 14px;\n    color: var(--darkblue);\n    margin: 2px;\n    border-radius: 5px;\n}\n\n.name-matrix-table {\n    width: 60%;\n    margin: 0px auto 2em;\n    font-size: 16px;\n}\n\nthead, tbody, tfoot { vertical-align: middle } /* add this rule*/\ntd, th, tr { vertical-align: inherit } /* add this rule */\n\n/* Tutorial */\n\n.tutorial-container {\n    display: flex;\n    flex-direction: column;\n}\n\n.title-static-image {\n    display: flex;\n    justify-content: flex-start;\n    padding: 30px 15px;\n}\n\n.two-col {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    width: 60%;\n}\n\n.tutorial-content {\n    display: flex;\n    flex-direction: column;\n}\n\n.tutorial-static-image {\n    display:flex;\n    margin-right: 40px;\n    width: 45%;\n    justify-content: center;\n    align-items: center;\n}\n\n.tutorial-info {\n    width: 50%;\n}\n\n.intro-heading {\n    font-family:\"Palatino Linotype\", \"Book Antiqua\", Palatino, serif; \n    font-style:italic; \n    text-transform:uppercase; \n    font-weight:normal;\n    margin: 0px 0px;\n    font-size: 26px;\n    color: var(--darkblue);\n}\n\n.tutorial-body {\n    font-size: 16px;\n    word-spacing: 0.3em;\n    margin-top: 1rem;\n    color: var(--darkblue);\n}\n\n/* BUTTON STYLING AND POSITIONING */\n\n.tutorial-next-btn {\n    position: fixed;\n    top: 50%;\n    right: 0;\n    text-align:left;\n    background: var(--turquoise); \n\n}\n\n.tutorial-next-btn:hover {\n    margin-right: 20px;\n    background:var(--periwinkle)\n}\n\n.tutorial-next-btn:after {border-left:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}\n.tutorial-next-btn:hover:after {border-left:21px solid var(--periwinkle)}\n\n.tutorial-prev-btn {\n    position: fixed;\n    top: 50%;\n    left: 0;\n    text-align:right;\n    background: var(--turquoise); \n}\n\n.tutorial-prev-btn:hover {\n    margin-left: 20px;\n    background:var(--periwinkle)\n}\n\n.tutorial-prev-btn:before {border-right:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}\n.tutorial-prev-btn:hover:before {border-right:21px solid var(--periwinkle)}\n\n\n\n\n/* QUESTIONNAIRE STYLING */\n\n.questionnaire-radio {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    align-items: center;\n\n}\n\n.questionnaire-radio .quiz-button {\n    margin-right: 5px;\n    cursor: pointer;\n}\n\n.english-screening-buttons {\n    display: flex;\n    flex-direction: row;\n}\n\n.english-screening-horizontal-bar {\n    display: flex;\n}\n\n.questionnaire-heading {\n    margin: 10% auto 5% auto;\n    display: flex;\n    justify-content: center;\n    width: 590px;\n    text-align: center;\n}\n\n.question-section {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    margin-top: 15px;\n}\n\n.questionnaire-question {\n    padding-bottom: 20px;\n}\n\n.questionnaire-content-container {\n    display:flex;\n    flex-direction:column;\n    align-items: flex-start;\n    width: 590px;\n}\n\n.questionnaire-body {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    background-color: white;\n    font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\n    color: var(--darkblue);\n    width: 100%;\n    font-size: 15px;\n    padding: 25px;\n}\n\n.questionnaire-btn-container {\n    display: flex;\n}\n\n.progress-bar {\n    display: flex;\n    flex-direction:row;\n    align-items: flex-end;\n}\n\n.completed-heading {\n    font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\n    color: var(--turquoise);\n    font-size: 20px;\n    font-weight: bold;\n}\n\n.completed-bar {\n    display: flex;\n    flex-direction: column;\n}\n\n.slider-value-container {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 100%;\n}\n\n.slider-value {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    border: 1px solid lightgrey;\n    width: 40px;\n    height: 40px;\n    border-radius: 50%;\n    background-color: lightgrey;\n}\n\n/* Customizing SLIDER */\n\n.player-slider-container {\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n    padding: 15px 0px;\n}\n\n.player-label {\n    display: flex;\n    width: 25%;\n    padding: 5px 5px;\n    overflow-wrap: anywhere;\n}\n\n.empirica-slider {\n    width: 100%;\n}\n\n.bp3-slider-axis {\n    display: flex;\n    justify-content: space-between;\n}\n\n.bp3-slider-label {\n    transform: translate(0%, 20px);\n    display: flex;\n    position: static;\n    padding: 2px 5px;\n    vertical-align: top;\n    line-height: 1;\n    font-size: 12px;\n}\n\n.bp3-slider-track {\n    background-color: var(--darkblue);\n}\n\n.bp3-slider-handle {\n    background-color: var(--turquoise);\n    border: 1px solid var(--turquoise);\n    border-radius: 50%;\n    background-image: none;\n    box-shadow: none;\n    width: 20px;\n    height: 20px;\n}\n\n/* Turn off label that appears below slider handle */\n.bp3-slider-handle .bp3-slider-label {\n    display: none;\n}\n\n\n.survey-textarea {\n    width: 100%;\n    resize: vertical;\n    padding: 5px 5px 5px 5px;\n    margin-bottom: 30px;\n}\n\n\n\n"
 );
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
