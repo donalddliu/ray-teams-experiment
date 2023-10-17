@@ -19,6 +19,7 @@ import NetworkSurveyContactsEC from "./intro/network-survey/NetworkSurveyContact
 import NetworkSurveySelfFrequency from "./intro/network-survey/NetworkSurveySelfFrequency";
 import NetworkSurveyContactsFrequency from "./intro/network-survey/NetworkSurveyContactsFrequency";
 import NetworkSurveyRelationshipInterpreter from "./intro/network-survey/NetworkSurveyRelationshipInterpreter";
+import NetworkGenderInterpreter from "./intro/network-survey/NetworkSurveyGenderInterpreter";
 
 
 import TutorialPageOne from "./intro/tutorial/TutorialPageOne";

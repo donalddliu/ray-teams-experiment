@@ -93,15 +93,27 @@
 
 .network-relationship-button {
     display: flex;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 16px;
+    align-items: center;
+    padding: 0.25em 1em;
+    border: 1px solid black;
+    border-radius: 5px;
+
     background-color: transparent;
 }
 
 .network-relationship-button:hover {
-    background-color: var(--turquoise);
+    background-color: rgb(142, 209, 205);
 }
 
 .network-relationship-button.selected {
-    background-color: var(--mediumblue);
+    text-decoration-color: white;
+    background-color: var(--turquoise);
+}
+
+.network-relationship-button.selected:hover {
+    background: #03a5a7;
 }
 
 .network-button-container {
