@@ -32,7 +32,7 @@
     align-items: center;
     justify-content: center;
     padding: 2em;
-    width: 60%;
+    width: 70%;
     margin: auto;
 }
 
@@ -80,14 +80,14 @@
 
 .relationship-input-label {
     display: flex;
-    width: 50%;
+    width: 40%;
     align-items: center;
     justify-content: center;
 }
 
 .relationship-buttons-container {
     display: flex;
-    width: 50%;
+    width: 60%;
     justify-content: space-evenly;
 }
 
@@ -121,6 +121,51 @@
     width: 100%;
     justify-content: flex-start;
     margin-top: 23px;
+}
+
+.personal-input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.personal-input-container-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.personal-input-radio-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-left: 1em;
+}
+
+.personal-input-radio-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.personal-input-race-specific-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-left: 1em;
+}
+
+.personal-input-race-specific-input {
+    font-size: "10px";
+    margin-bottom: 1em;
+    overflow: auto;
 }
 
 .network-list {

@@ -21,33 +21,6 @@ const RelationshipButtonSet = ({contactName, tie, categories, categoriesSelected
 
 }
 
-const RelationshipButtonSet2 = ({contactName, tie, categories, categoriesSelected, handleCategorySelect}) => {
-    return(    
-        <div className="relationship-input-row" style={{width: "100%", flexDirection: "column"}}>
-            <label className="relationship-input-label" htmlFor={tie}> <p>{contactName}</p> </label>
-            <div className="relationship-buttons-container">
-            {categories.map((category, index) => {
-                return (
-                    <div style={{ display: "flex",fontFamily: ["Palatino Linotype", "Book Antiqua", "Palatino", "serif"],
-                        fontSize: "16px",
-                        alignItems: "center"}}>
-                    <Checkbox
-                    key={`${contactName}-${category}`}
-                    checked={categoriesSelected[index]}
-                    name={category}
-                    onChange={() => handleCategorySelect(tie, index)}>
-                    </Checkbox>
-                    <p> {category} </p>
-                    </div>
-                )
-            })
-            }
-            </div>
-        </div>
-    )
-
-}
-
 // This section asks the user what their personal emotional closeness is to the listed 5 people.
 export default class NetworkSurveyRelationshipInterpreter extends React.Component { 
   constructor(props) {
@@ -101,7 +74,7 @@ export default class NetworkSurveyRelationshipInterpreter extends React.Componen
     const filledOut = this.state.tie1 && this.state.tie2 && this.state.tie3 && this.state.tie4 && this.state.tie5;
     const {name1, name2, name3, name4, name5} = this.state;
     const names = [name1, name2, name3, name4, name5];
-    const categories = ["Colleague", "Friend", "Spouse", "Other kin"];
+    const categories = ["Current Colleague", "Previous Colleague", "Spouse", "Other kin", "Other"];
     
     return (
           <div className="network-survey-container">
@@ -115,16 +88,19 @@ export default class NetworkSurveyRelationshipInterpreter extends React.Componen
                     <p>The people you cited on the previous page are listed in the table below. Please select the options next to each name that best describes your relationship with each listed person. For each person, you are allowed to select multiple options. </p>
                     <ul className="network-list">
                         <li>
-                            “Colleague” indicates a person whom you have or had a business relationship.
+                            “Current Colleague” indicates someone who works at the same organization you do.
                         </li>
                         <li>
-                            “Friend” indicates a person you would call a friend.
+                            "Previous Colleague" indicates someone with whom you used to work with.
                         </li>
                         <li>
                             “Spouse" indicates that you and this person are, or were, married, or lived together as if married at some time.
                         </li>
                         <li>
                             "Other kin" indicates any family relative other than spouse.
+                        </li>
+                        <li>
+                            "Other" indicates someone that does not fall within one of the above categories
                         </li>
                     </ul>
                     <form className="network-form" onSubmit={this.handleSubmit}>
@@ -134,7 +110,6 @@ export default class NetworkSurveyRelationshipInterpreter extends React.Componen
                                 <RelationshipButtonSet key={i} contactName={name} tie={`tie${i+1}`} categories={categories} categoriesSelected={this.state[`tie${i+1}`]} handleCategorySelect={this.handleCategorySelect}/>    
                             )
                         })}
-                        <RelationshipButtonSet2 key={7} contactName={"Person 6"} tie={`tie1`} categories={categories} categoriesSelected={this.state[`tie1`]} handleCategorySelect={this.handleCategorySelect}/>    
                         <div className="network-button-container">
                             <button 
                                 className={!filledOut ? "arrow-button button-submit-disabled" : "arrow-button button-submit"}

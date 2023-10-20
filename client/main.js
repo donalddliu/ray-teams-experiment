@@ -20,7 +20,7 @@ import NetworkSurveySelfFrequency from "./intro/network-survey/NetworkSurveySelf
 import NetworkSurveyContactsFrequency from "./intro/network-survey/NetworkSurveyContactsFrequency";
 import NetworkSurveyRelationshipInterpreter from "./intro/network-survey/NetworkSurveyRelationshipInterpreter";
 import NetworkGenderInterpreter from "./intro/network-survey/NetworkSurveyGenderInterpreter";
-
+import NetworkSurveyPersonalQuestions from "./intro/network-survey/NetworkSurveyPersonalQuestions";
 
 import TutorialPageOne from "./intro/tutorial/TutorialPageOne";
 import TutorialPageTwo from "./intro/tutorial/TutorialPageTwo";
@@ -86,7 +86,7 @@ Empirica.introSteps((game, treatment) => {
     return [];
   }
 
-  return [NetworkSurveyRelationshipInterpreter];
+  return [NetworkSurveyPersonalQuestions];
   return networkSurvey;
   return steps;
 });

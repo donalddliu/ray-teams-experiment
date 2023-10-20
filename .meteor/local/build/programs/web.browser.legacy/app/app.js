@@ -6092,6 +6092,342 @@ var NetworkSurveyGenderInterpreter = /*#__PURE__*/function (_React$Component) {
 }(React.Component);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+},"NetworkSurveyPersonalQuestions.jsx":function module(require,exports,module){
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                    //
+// client/intro/network-survey/NetworkSurveyPersonalQuestions.jsx                                                     //
+//                                                                                                                    //
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                      //
+var _createSuper;
+
+module.link("@babel/runtime/helpers/createSuper", {
+  default: function (v) {
+    _createSuper = v;
+  }
+}, 0);
+
+var _inheritsLoose;
+
+module.link("@babel/runtime/helpers/inheritsLoose", {
+  default: function (v) {
+    _inheritsLoose = v;
+  }
+}, 1);
+module.export({
+  "default": function () {
+    return NetworkSurveyPersonalQuestions;
+  }
+});
+var React;
+module.link("react", {
+  "default": function (v) {
+    React = v;
+  }
+}, 0);
+var Centered;
+module.link("meteor/empirica:core", {
+  Centered: function (v) {
+    Centered = v;
+  }
+}, 1);
+
+var _;
+
+module.link("lodash", {
+  "default": function (v) {
+    _ = v;
+  }
+}, 2);
+var elevationClass;
+module.link("@blueprintjs/core/lib/esm/common/classes", {
+  elevationClass: function (v) {
+    elevationClass = v;
+  }
+}, 3);
+
+var Radio = function (_ref) {
+  var selected = _ref.selected,
+      name = _ref.name,
+      value = _ref.value,
+      label = _ref.label,
+      onChange = _ref.onChange;
+  return /*#__PURE__*/React.createElement("label", null, /*#__PURE__*/React.createElement("input", {
+    type: "radio",
+    name: name,
+    value: value,
+    checked: selected === value,
+    onChange: onChange,
+    required: true,
+    style: {
+      marginRight: "5px"
+    }
+  }), label);
+};
+
+var RaceSpecific = function (_ref2) {
+  var race = _ref2.race,
+      message = _ref2.message,
+      textValue = _ref2.textValue,
+      handleRaceChange = _ref2.handleRaceChange;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "personal-input-race-specific-container"
+  }, /*#__PURE__*/React.createElement("p", {
+    style: {
+      margin: "0px 0px",
+      fontSize: "100%"
+    }
+  }, " ", message), /*#__PURE__*/React.createElement("input", {
+    className: "personal-input-race-specific-input",
+    id: "raceSpecific",
+    type: "text",
+    dir: "auto",
+    name: "raceSpecific",
+    value: textValue,
+    onChange: handleRaceChange,
+    required: true
+  }));
+};
+
+var AgeQuestionSet = function (_ref3) {
+  var ageValue = _ref3.ageValue,
+      handleAgeChange = _ref3.handleAgeChange;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "personal-input-container-row"
+  }, /*#__PURE__*/React.createElement("p", null, " What is your age? "), /*#__PURE__*/React.createElement("input", {
+    id: "age",
+    type: "number",
+    min: "0",
+    max: "150",
+    step: "1",
+    dir: "auto",
+    name: "age",
+    value: ageValue,
+    onChange: handleAgeChange,
+    style: {
+      height: "fit-content",
+      margin: "0em 1em"
+    },
+    required: true
+  }));
+};
+
+var GenderButtonSet = function (_ref4) {
+  var genderSelected = _ref4.genderSelected,
+      handleGenderSelect = _ref4.handleGenderSelect;
+  var genders = ["Male", "Female", "N/A"];
+  return /*#__PURE__*/React.createElement("div", {
+    className: "personal-input-container-row"
+  }, /*#__PURE__*/React.createElement("p", null, " What is your gender? "), /*#__PURE__*/React.createElement("div", {
+    className: "relationship-buttons-container",
+    style: {
+      width: "30%"
+    }
+  }, genders.map(function (gender, index) {
+    return /*#__PURE__*/React.createElement("div", {
+      key: "" + index,
+      name: "gender",
+      value: gender,
+      className: gender === genderSelected ? "network-relationship-button selected" : "network-relationship-button",
+      onClick: function () {
+        return handleGenderSelect(gender);
+      }
+    }, " ", gender, " ");
+  })));
+};
+
+var HispanicQuestionSet = function (_ref5) {
+  var selected = _ref5.selected,
+      handleIsHispanicChange = _ref5.handleIsHispanicChange;
+  var options = ["No, not Spanish/Hispanic/Latino", "Yes, Mexican, Mexican-American, Chicano", "Yes, Puerto Rican", "Yes, Cuban", "Yes, other Spanish, Hispanic, or Latino"];
+  return /*#__PURE__*/React.createElement("div", {
+    className: "personal-input-container"
+  }, /*#__PURE__*/React.createElement("p", null, "Are you Spanish, Hispanic, or Latino?"), /*#__PURE__*/React.createElement("div", {
+    className: "personal-input-radio-list-container"
+  }, options.map(function (option) {
+    return /*#__PURE__*/React.createElement(Radio, {
+      key: option,
+      selected: selected,
+      name: "isHispanic",
+      value: option,
+      label: option,
+      onChange: handleIsHispanicChange
+    });
+  })));
+};
+
+var RaceQuestionSet = function (_ref6) {
+  var selected = _ref6.selected,
+      textValue = _ref6.textValue,
+      handleRaceChange = _ref6.handleRaceChange;
+  var options = ["White", "Black or African American", "Indian (American)", "Eskimo", "Aleut", "Chinese", "Filipino", "Hawaiian", "Korean", "Vietnamese", "Japanese", "Asian Indian", "Samoan", "Guamanian", "Other Asian or Pacific Islander", "Some other race", "Multiracial or biracial"];
+  var askRaceSpecific = {
+    "Indian (American)": "Please specify the name of the enrolled or principal tribe",
+    "Other Asian or Pacific Islander": "Print race",
+    "Some other race": "Print race",
+    "Multiracial or biracial": "Print races"
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "personal-input-container"
+  }, /*#__PURE__*/React.createElement("p", null, "What is your race/ethnicity?"), /*#__PURE__*/React.createElement("div", {
+    className: "personal-input-radio-list-container"
+  }, options.map(function (option) {
+    return /*#__PURE__*/React.createElement("div", {
+      className: "personal-input-radio-container"
+    }, /*#__PURE__*/React.createElement(Radio, {
+      key: option,
+      selected: selected,
+      name: "race",
+      value: option,
+      label: option,
+      onChange: handleRaceChange
+    }), selected in askRaceSpecific && option == selected ? /*#__PURE__*/React.createElement(RaceSpecific, {
+      race: selected,
+      message: askRaceSpecific[selected],
+      textValue: textValue,
+      handleRaceChange: handleRaceChange
+    }) : null);
+  })));
+};
+
+var EducationQuestionSet = function (_ref7) {
+  var selected = _ref7.selected,
+      handleEducationChange = _ref7.handleEducationChange;
+  var options = ["High school graduate", "Some college, no degree", "Associate's degree", "Bachelor's degree", "Master's degree", "Professional degree (e.g., MD, JD)", "Doctoral degree"];
+  return /*#__PURE__*/React.createElement("div", {
+    className: "personal-input-container"
+  }, /*#__PURE__*/React.createElement("p", null, "What is your highest education qualification?"), /*#__PURE__*/React.createElement("div", {
+    className: "personal-input-radio-list-container"
+  }, options.map(function (option) {
+    return /*#__PURE__*/React.createElement(Radio, {
+      key: option,
+      selected: selected,
+      name: "education",
+      value: option,
+      label: option,
+      onChange: handleEducationChange
+    });
+  })));
+}; // This section asks the user what their personal emotional closeness is to the listed 5 people.
+
+
+var NetworkSurveyPersonalQuestions = /*#__PURE__*/function (_React$Component) {
+  _inheritsLoose(NetworkSurveyPersonalQuestions, _React$Component);
+
+  var _super = _createSuper(NetworkSurveyPersonalQuestions);
+
+  function NetworkSurveyPersonalQuestions(props) {
+    var _this;
+
+    _this = _React$Component.call(this, props) || this; // Age, gender, race, level of education, employment, job title, how many people report to you
+
+    _this.handleChange = function (event) {
+      var _this$setState;
+
+      var el = event.currentTarget;
+
+      _this.setState((_this$setState = {}, _this$setState[el.name] = el.value, _this$setState));
+    };
+
+    _this.handleGenderSelect = function (gender) {
+      _this.setState({
+        gender: gender
+      });
+    };
+
+    _this.handleSubmit = function (event) {
+      var _this$props = _this.props,
+          onNext = _this$props.onNext,
+          player = _this$props.player;
+      var networkSurveyResponse = {
+        age: _this.state.age,
+        gender: _this.state.gender,
+        race: _this.state.race,
+        education: _this.state.education,
+        job_title: _this.state.employment,
+        report: _this.state.report
+      };
+      event.preventDefault(); // TODO: log player response to survey question
+
+      player.set("networkResponsePersonalQuestions", networkSurveyResponse);
+      onNext();
+    };
+
+    _this.state = {
+      age: "",
+      gender: "",
+      isHispanic: "",
+      race: "",
+      raceSpecific: "",
+      education: "",
+      employment: "",
+      job_title: "",
+      report: ""
+    };
+    return _this;
+  }
+
+  var _proto = NetworkSurveyPersonalQuestions.prototype;
+
+  _proto.render = function () {
+    function render() {
+      var player = this.props.player;
+      var filledOut = this.state.age && this.state.gender && this.state.race && this.state.education && this.state.job_title;
+      var _this$state = this.state,
+          name1 = _this$state.name1,
+          name2 = _this$state.name2,
+          name3 = _this$state.name3,
+          name4 = _this$state.name4,
+          name5 = _this$state.name5;
+      var names = [name1, name2, name3, name4, name5];
+      var races = ["White", "Hispanic", "Black or African American", "Asian", "American Indian or Alaska Native", "Native Hawaiian and Other Pacific Islander", "Other"];
+      var education = ["High School", "Bachelor", "Master or higher", "Other"];
+      return /*#__PURE__*/React.createElement("div", {
+        className: "network-survey-container"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "network-survey-header"
+      }, /*#__PURE__*/React.createElement("p", null, "WHAT ARE THE GENDERS OF THE PEOPLE IN YOUR NETWORK?")), /*#__PURE__*/React.createElement("img", {
+        src: "images/hr-color.png"
+      }), /*#__PURE__*/React.createElement("div", {
+        className: "network-survey-body"
+      }, /*#__PURE__*/React.createElement("p", null, "The people you cited on the previous page are listed in the table below. Please select the option next to each name that best describes each listed person's gender. "), /*#__PURE__*/React.createElement("ul", {
+        className: "network-list"
+      }), /*#__PURE__*/React.createElement("form", {
+        className: "network-form",
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/React.createElement(AgeQuestionSet, {
+        ageValue: this.state.age,
+        handleAgeChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(GenderButtonSet, {
+        genderSelected: this.state.gender,
+        handleGenderSelect: this.handleGenderSelect
+      }), /*#__PURE__*/React.createElement(HispanicQuestionSet, {
+        selected: this.state.isHispanic,
+        handleIsHispanicChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(RaceQuestionSet, {
+        selected: this.state.race,
+        textValue: this.state.raceSpecific,
+        handleRaceChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(EducationQuestionSet, {
+        selected: this.state.education,
+        handleEducationChange: this.handleChange
+      }), /*#__PURE__*/React.createElement("div", {
+        className: "network-button-container"
+      }, /*#__PURE__*/React.createElement("button", {
+        className: !filledOut ? "arrow-button button-submit-disabled" : "arrow-button button-submit",
+        disabled: !filledOut,
+        type: "submit"
+      }, " Next Page")))));
+    }
+
+    return render;
+  }();
+
+  return NetworkSurveyPersonalQuestions;
+}(React.Component);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 },"NetworkSurveyRelationshipInterpreter.jsx":function module(require,exports,module){
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -6172,42 +6508,6 @@ var RelationshipButtonSet = function (_ref) {
       }
     }, " ", category, " ");
   })));
-};
-
-var RelationshipButtonSet2 = function (_ref2) {
-  var contactName = _ref2.contactName,
-      tie = _ref2.tie,
-      categories = _ref2.categories,
-      categoriesSelected = _ref2.categoriesSelected,
-      handleCategorySelect = _ref2.handleCategorySelect;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "relationship-input-row",
-    style: {
-      width: "100%",
-      flexDirection: "column"
-    }
-  }, /*#__PURE__*/React.createElement("label", {
-    className: "relationship-input-label",
-    htmlFor: tie
-  }, " ", /*#__PURE__*/React.createElement("p", null, contactName), " "), /*#__PURE__*/React.createElement("div", {
-    className: "relationship-buttons-container"
-  }, categories.map(function (category, index) {
-    return /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: "flex",
-        fontFamily: ["Palatino Linotype", "Book Antiqua", "Palatino", "serif"],
-        fontSize: "16px",
-        alignItems: "center"
-      }
-    }, /*#__PURE__*/React.createElement(Checkbox, {
-      key: contactName + "-" + category,
-      checked: categoriesSelected[index],
-      name: category,
-      onChange: function () {
-        return handleCategorySelect(tie, index);
-      }
-    }), /*#__PURE__*/React.createElement("p", null, " ", category, " "));
-  })));
 }; // This section asks the user what their personal emotional closeness is to the listed 5 people.
 
 
@@ -6286,7 +6586,7 @@ var NetworkSurveyRelationshipInterpreter = /*#__PURE__*/function (_React$Compone
           name4 = _this$state.name4,
           name5 = _this$state.name5;
       var names = [name1, name2, name3, name4, name5];
-      var categories = ["Colleague", "Friend", "Spouse", "Other kin"];
+      var categories = ["Current Colleague", "Previous Colleague", "Spouse", "Other kin", "Other"];
       return /*#__PURE__*/React.createElement("div", {
         className: "network-survey-container"
       }, /*#__PURE__*/React.createElement("div", {
@@ -6297,7 +6597,7 @@ var NetworkSurveyRelationshipInterpreter = /*#__PURE__*/function (_React$Compone
         className: "network-survey-body"
       }, /*#__PURE__*/React.createElement("p", null, "The people you cited on the previous page are listed in the table below. Please select the options next to each name that best describes your relationship with each listed person. For each person, you are allowed to select multiple options. "), /*#__PURE__*/React.createElement("ul", {
         className: "network-list"
-      }, /*#__PURE__*/React.createElement("li", null, "\u201CColleague\u201D indicates a person whom you have or had a business relationship."), /*#__PURE__*/React.createElement("li", null, "\u201CFriend\u201D indicates a person you would call a friend."), /*#__PURE__*/React.createElement("li", null, "\u201CSpouse\" indicates that you and this person are, or were, married, or lived together as if married at some time."), /*#__PURE__*/React.createElement("li", null, "\"Other kin\" indicates any family relative other than spouse.")), /*#__PURE__*/React.createElement("form", {
+      }, /*#__PURE__*/React.createElement("li", null, "\u201CCurrent Colleague\u201D indicates someone who works at the same organization you do."), /*#__PURE__*/React.createElement("li", null, "\"Previous Colleague\" indicates someone with whom you used to work with."), /*#__PURE__*/React.createElement("li", null, "\u201CSpouse\" indicates that you and this person are, or were, married, or lived together as if married at some time."), /*#__PURE__*/React.createElement("li", null, "\"Other kin\" indicates any family relative other than spouse."), /*#__PURE__*/React.createElement("li", null, "\"Other\" indicates someone that does not fall within one of the above categories")), /*#__PURE__*/React.createElement("form", {
         className: "network-form",
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/React.createElement("p", null, " What is their relationship to you? (Select all that applies) "), names.map(function (name, i) {
@@ -6309,13 +6609,6 @@ var NetworkSurveyRelationshipInterpreter = /*#__PURE__*/function (_React$Compone
           categoriesSelected: _this2.state["tie" + (i + 1)],
           handleCategorySelect: _this2.handleCategorySelect
         });
-      }), /*#__PURE__*/React.createElement(RelationshipButtonSet2, {
-        key: 7,
-        contactName: "Person 6",
-        tie: "tie1",
-        categories: categories,
-        categoriesSelected: this.state["tie1"],
-        handleCategorySelect: this.handleCategorySelect
       }), /*#__PURE__*/React.createElement("div", {
         className: "network-button-container"
       }, /*#__PURE__*/React.createElement("button", {
@@ -10499,96 +10792,102 @@ module.link("./intro/network-survey/NetworkSurveyGenderInterpreter", {
     NetworkGenderInterpreter = v;
   }
 }, 20);
+var NetworkSurveyPersonalQuestions;
+module.link("./intro/network-survey/NetworkSurveyPersonalQuestions", {
+  "default": function (v) {
+    NetworkSurveyPersonalQuestions = v;
+  }
+}, 21);
 var TutorialPageOne;
 module.link("./intro/tutorial/TutorialPageOne", {
   "default": function (v) {
     TutorialPageOne = v;
   }
-}, 21);
+}, 22);
 var TutorialPageTwo;
 module.link("./intro/tutorial/TutorialPageTwo", {
   "default": function (v) {
     TutorialPageTwo = v;
   }
-}, 22);
+}, 23);
 var TutorialPageThree;
 module.link("./intro/tutorial/TutorialPageThree", {
   "default": function (v) {
     TutorialPageThree = v;
   }
-}, 23);
+}, 24);
 var TutorialPageFour;
 module.link("./intro/tutorial/TutorialPageFour", {
   "default": function (v) {
     TutorialPageFour = v;
   }
-}, 24);
+}, 25);
 var AllQuiz;
 module.link("./intro/quiz/AllQuiz", {
   "default": function (v) {
     AllQuiz = v;
   }
-}, 25);
+}, 26);
 var QuizFive;
 module.link("./intro/quiz/QuizFive", {
   "default": function (v) {
     QuizFive = v;
   }
-}, 26);
+}, 27);
 var QuizSix;
 module.link("./intro/quiz/QuizSix", {
   "default": function (v) {
     QuizSix = v;
   }
-}, 27);
+}, 28);
 var QuizSeven;
 module.link("./intro/quiz/QuizSeven", {
   "default": function (v) {
     QuizSeven = v;
   }
-}, 28);
+}, 29);
 var QuizTwo;
 module.link("./intro/quiz/QuizTwo", {
   "default": function (v) {
     QuizTwo = v;
   }
-}, 29);
+}, 30);
 var QuizOne;
 module.link("./intro/quiz/QuizOne", {
   "default": function (v) {
     QuizOne = v;
   }
-}, 30);
+}, 31);
 var QuizOverview;
 module.link("./intro/quiz/QuizOverview", {
   "default": function (v) {
     QuizOverview = v;
   }
-}, 31);
+}, 32);
 var EnglishScreen;
 module.link("./intro/english-screening/EnglishScreen", {
   "default": function (v) {
     EnglishScreen = v;
   }
-}, 32);
+}, 33);
 var DescribeSymbolQuestion;
 module.link("./intro/DescribeSymbolQuestion", {
   "default": function (v) {
     DescribeSymbolQuestion = v;
   }
-}, 33);
+}, 34);
 var Schedule;
 module.link("./intro/Schedule", {
   "default": function (v) {
     Schedule = v;
   }
-}, 34);
+}, 35);
 var NewPlayer;
 module.link("./intro/NewPlayer", {
   "default": function (v) {
     NewPlayer = v;
   }
-}, 35);
+}, 36);
 // Get rid of Breadcrumb component
 Empirica.breadcrumb(function () {
   return null;
@@ -10627,7 +10926,7 @@ Empirica.introSteps(function (game, treatment) {
     return [];
   }
 
-  return [NetworkSurveyRelationshipInterpreter];
+  return [NetworkSurveyPersonalQuestions];
   return networkSurvey;
   return steps;
 }); // The Round component containing the game UI logic.
@@ -10676,7 +10975,7 @@ Meteor.startup(function () {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                                       //
 module.exports = require("meteor/modules").addStyles(
-  "/* Network Survey */\n.network-survey-container {\n    display: flex;\n    flex-direction: column;\n    width: 100%;\n    height: 100%;\n    justify-content: center;\n    align-items: center;\n    text-align: center;\n    font-family: \"Palatino Linotype\", \"Book Antiqua\", \"Palatino\", serif;\n}\n\n.network-survey-container p {\n    display: flex;\n    margin-block-start: 1em;\n    margin-block-end: 1em;\n    margin-inline-start: 0px;\n    margin-inline-end: 0px;\n}\n\n.network-survey-header p {\n    font-weight: bold;\n    text-transform: uppercase;\n    color: var(--darkblue);\n    font-size: 16px;\n    padding: 2em;\n}\n\n.network-survey-body {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    padding: 2em;\n    width: 60%;\n    margin: auto;\n}\n\n.network-survey-body p  {\n    text-transform: none;\n    font-weight: normal;\n    color: var(--darkblue);\n    font-size: 16px;\n}\n\n.network-form {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    padding: 2em;\n    width: 100%;\n}\n\n.input-row {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    width: 50%;\n}\n\n.dropdown-input-label {\n    display: flex;\n    width: 70%;\n    align-items: center;\n    justify-content: center;\n}\n\n.input-label {\n    display: flex;\n    margin-right: 10px;\n}\n\n.relationship-input-row {\n    display: flex;\n    width: 100%;\n    align-items: center;\n    justify-content: center;\n}\n\n.relationship-input-label {\n    display: flex;\n    width: 50%;\n    align-items: center;\n    justify-content: center;\n}\n\n.relationship-buttons-container {\n    display: flex;\n    width: 50%;\n    justify-content: space-evenly;\n}\n\n.network-relationship-button {\n    display: flex;\n    font-family: \"Palatino Linotype\", \"Book Antiqua\", Palatino, serif;\n    font-size: 16px;\n    align-items: center;\n    padding: 0.25em 1em;\n    border: 1px solid black;\n    border-radius: 5px;\n\n    background-color: transparent;\n}\n\n.network-relationship-button:hover {\n    background-color: rgb(142, 209, 205);\n}\n\n.network-relationship-button.selected {\n    text-decoration-color: white;\n    background-color: var(--turquoise);\n}\n\n.network-relationship-button.selected:hover {\n    background: #03a5a7;\n}\n\n.network-button-container {\n    display: flex;\n    width: 100%;\n    justify-content: flex-start;\n    margin-top: 23px;\n}\n\n.network-list {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    text-transform: none;\n    max-width: 75%;\n    margin: auto;\n}\n\n.network-list li {\n    display: list-item;\n    margin-left: 10px;\n    list-style-type: disc;\n    width: 100%;\n    padding: 1em 2em;\n    text-transform: none;\n    font-style: italic;\n    font-weight: normal;\n    color: var(--darkblue);\n    font-size: 16px;\n}\n\n.dropdown-select-input {\n    font-size: 14px;\n    color: var(--darkblue);\n    margin: 2px;\n    border-radius: 5px;\n}\n\n.name-matrix-table {\n    width: 60%;\n    margin: 0px auto 2em;\n    font-size: 16px;\n}\n\nthead, tbody, tfoot { vertical-align: middle } /* add this rule*/\ntd, th, tr { vertical-align: inherit } /* add this rule */\n\n/* Tutorial */\n\n.tutorial-container {\n    display: flex;\n    flex-direction: column;\n}\n\n.title-static-image {\n    display: flex;\n    justify-content: flex-start;\n    padding: 30px 15px;\n}\n\n.two-col {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    width: 60%;\n}\n\n.tutorial-content {\n    display: flex;\n    flex-direction: column;\n}\n\n.tutorial-static-image {\n    display:flex;\n    margin-right: 40px;\n    width: 45%;\n    justify-content: center;\n    align-items: center;\n}\n\n.tutorial-info {\n    width: 50%;\n}\n\n.intro-heading {\n    font-family:\"Palatino Linotype\", \"Book Antiqua\", Palatino, serif; \n    font-style:italic; \n    text-transform:uppercase; \n    font-weight:normal;\n    margin: 0px 0px;\n    font-size: 26px;\n    color: var(--darkblue);\n}\n\n.tutorial-body {\n    font-size: 16px;\n    word-spacing: 0.3em;\n    margin-top: 1rem;\n    color: var(--darkblue);\n}\n\n/* BUTTON STYLING AND POSITIONING */\n\n.tutorial-next-btn {\n    position: fixed;\n    top: 50%;\n    right: 0;\n    text-align:left;\n    background: var(--turquoise); \n\n}\n\n.tutorial-next-btn:hover {\n    margin-right: 20px;\n    background:var(--periwinkle)\n}\n\n.tutorial-next-btn:after {border-left:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}\n.tutorial-next-btn:hover:after {border-left:21px solid var(--periwinkle)}\n\n.tutorial-prev-btn {\n    position: fixed;\n    top: 50%;\n    left: 0;\n    text-align:right;\n    background: var(--turquoise); \n}\n\n.tutorial-prev-btn:hover {\n    margin-left: 20px;\n    background:var(--periwinkle)\n}\n\n.tutorial-prev-btn:before {border-right:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}\n.tutorial-prev-btn:hover:before {border-right:21px solid var(--periwinkle)}\n\n\n\n\n/* QUESTIONNAIRE STYLING */\n\n.questionnaire-radio {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    align-items: center;\n\n}\n\n.questionnaire-radio .quiz-button {\n    margin-right: 5px;\n    cursor: pointer;\n}\n\n.english-screening-buttons {\n    display: flex;\n    flex-direction: row;\n}\n\n.english-screening-horizontal-bar {\n    display: flex;\n}\n\n.questionnaire-heading {\n    margin: 10% auto 5% auto;\n    display: flex;\n    justify-content: center;\n    width: 590px;\n    text-align: center;\n}\n\n.question-section {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    margin-top: 15px;\n}\n\n.questionnaire-question {\n    padding-bottom: 20px;\n}\n\n.questionnaire-content-container {\n    display:flex;\n    flex-direction:column;\n    align-items: flex-start;\n    width: 590px;\n}\n\n.questionnaire-body {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    background-color: white;\n    font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\n    color: var(--darkblue);\n    width: 100%;\n    font-size: 15px;\n    padding: 25px;\n}\n\n.questionnaire-btn-container {\n    display: flex;\n}\n\n.progress-bar {\n    display: flex;\n    flex-direction:row;\n    align-items: flex-end;\n}\n\n.completed-heading {\n    font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\n    color: var(--turquoise);\n    font-size: 20px;\n    font-weight: bold;\n}\n\n.completed-bar {\n    display: flex;\n    flex-direction: column;\n}\n\n.slider-value-container {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 100%;\n}\n\n.slider-value {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    border: 1px solid lightgrey;\n    width: 40px;\n    height: 40px;\n    border-radius: 50%;\n    background-color: lightgrey;\n}\n\n/* Customizing SLIDER */\n\n.player-slider-container {\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n    padding: 15px 0px;\n}\n\n.player-label {\n    display: flex;\n    width: 25%;\n    padding: 5px 5px;\n    overflow-wrap: anywhere;\n}\n\n.empirica-slider {\n    width: 100%;\n}\n\n.bp3-slider-axis {\n    display: flex;\n    justify-content: space-between;\n}\n\n.bp3-slider-label {\n    transform: translate(0%, 20px);\n    display: flex;\n    position: static;\n    padding: 2px 5px;\n    vertical-align: top;\n    line-height: 1;\n    font-size: 12px;\n}\n\n.bp3-slider-track {\n    background-color: var(--darkblue);\n}\n\n.bp3-slider-handle {\n    background-color: var(--turquoise);\n    border: 1px solid var(--turquoise);\n    border-radius: 50%;\n    background-image: none;\n    box-shadow: none;\n    width: 20px;\n    height: 20px;\n}\n\n/* Turn off label that appears below slider handle */\n.bp3-slider-handle .bp3-slider-label {\n    display: none;\n}\n\n\n.survey-textarea {\n    width: 100%;\n    resize: vertical;\n    padding: 5px 5px 5px 5px;\n    margin-bottom: 30px;\n}\n\n\n\n"
+  "/* Network Survey */\n.network-survey-container {\n    display: flex;\n    flex-direction: column;\n    width: 100%;\n    height: 100%;\n    justify-content: center;\n    align-items: center;\n    text-align: center;\n    font-family: \"Palatino Linotype\", \"Book Antiqua\", \"Palatino\", serif;\n}\n\n.network-survey-container p {\n    display: flex;\n    margin-block-start: 1em;\n    margin-block-end: 1em;\n    margin-inline-start: 0px;\n    margin-inline-end: 0px;\n}\n\n.network-survey-header p {\n    font-weight: bold;\n    text-transform: uppercase;\n    color: var(--darkblue);\n    font-size: 16px;\n    padding: 2em;\n}\n\n.network-survey-body {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    padding: 2em;\n    width: 70%;\n    margin: auto;\n}\n\n.network-survey-body p  {\n    text-transform: none;\n    font-weight: normal;\n    color: var(--darkblue);\n    font-size: 16px;\n}\n\n.network-form {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    padding: 2em;\n    width: 100%;\n}\n\n.input-row {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    width: 50%;\n}\n\n.dropdown-input-label {\n    display: flex;\n    width: 70%;\n    align-items: center;\n    justify-content: center;\n}\n\n.input-label {\n    display: flex;\n    margin-right: 10px;\n}\n\n.relationship-input-row {\n    display: flex;\n    width: 100%;\n    align-items: center;\n    justify-content: center;\n}\n\n.relationship-input-label {\n    display: flex;\n    width: 40%;\n    align-items: center;\n    justify-content: center;\n}\n\n.relationship-buttons-container {\n    display: flex;\n    width: 60%;\n    justify-content: space-evenly;\n}\n\n.network-relationship-button {\n    display: flex;\n    font-family: \"Palatino Linotype\", \"Book Antiqua\", Palatino, serif;\n    font-size: 16px;\n    align-items: center;\n    padding: 0.25em 1em;\n    border: 1px solid black;\n    border-radius: 5px;\n\n    background-color: transparent;\n}\n\n.network-relationship-button:hover {\n    background-color: rgb(142, 209, 205);\n}\n\n.network-relationship-button.selected {\n    text-decoration-color: white;\n    background-color: var(--turquoise);\n}\n\n.network-relationship-button.selected:hover {\n    background: #03a5a7;\n}\n\n.network-button-container {\n    display: flex;\n    width: 100%;\n    justify-content: flex-start;\n    margin-top: 23px;\n}\n\n.personal-input-container {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: flex-start;\n    width: 100%;\n}\n\n.personal-input-container-row {\n    display: flex;\n    flex-direction: row;\n    justify-content: flex-start;\n    align-items: center;\n    width: 100%;\n}\n\n.personal-input-radio-list-container {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    justify-content: flex-start;\n    padding-left: 1em;\n}\n\n.personal-input-radio-container{\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    justify-content: flex-start;\n}\n\n.personal-input-race-specific-container {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    justify-content: flex-start;\n    margin-left: 1em;\n}\n\n.personal-input-race-specific-input {\n    font-size: \"10px\";\n    margin-bottom: 1em;\n    overflow: auto;\n}\n\n.network-list {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    text-transform: none;\n    max-width: 75%;\n    margin: auto;\n}\n\n.network-list li {\n    display: list-item;\n    margin-left: 10px;\n    list-style-type: disc;\n    width: 100%;\n    padding: 1em 2em;\n    text-transform: none;\n    font-style: italic;\n    font-weight: normal;\n    color: var(--darkblue);\n    font-size: 16px;\n}\n\n.dropdown-select-input {\n    font-size: 14px;\n    color: var(--darkblue);\n    margin: 2px;\n    border-radius: 5px;\n}\n\n.name-matrix-table {\n    width: 60%;\n    margin: 0px auto 2em;\n    font-size: 16px;\n}\n\nthead, tbody, tfoot { vertical-align: middle } /* add this rule*/\ntd, th, tr { vertical-align: inherit } /* add this rule */\n\n/* Tutorial */\n\n.tutorial-container {\n    display: flex;\n    flex-direction: column;\n}\n\n.title-static-image {\n    display: flex;\n    justify-content: flex-start;\n    padding: 30px 15px;\n}\n\n.two-col {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    width: 60%;\n}\n\n.tutorial-content {\n    display: flex;\n    flex-direction: column;\n}\n\n.tutorial-static-image {\n    display:flex;\n    margin-right: 40px;\n    width: 45%;\n    justify-content: center;\n    align-items: center;\n}\n\n.tutorial-info {\n    width: 50%;\n}\n\n.intro-heading {\n    font-family:\"Palatino Linotype\", \"Book Antiqua\", Palatino, serif; \n    font-style:italic; \n    text-transform:uppercase; \n    font-weight:normal;\n    margin: 0px 0px;\n    font-size: 26px;\n    color: var(--darkblue);\n}\n\n.tutorial-body {\n    font-size: 16px;\n    word-spacing: 0.3em;\n    margin-top: 1rem;\n    color: var(--darkblue);\n}\n\n/* BUTTON STYLING AND POSITIONING */\n\n.tutorial-next-btn {\n    position: fixed;\n    top: 50%;\n    right: 0;\n    text-align:left;\n    background: var(--turquoise); \n\n}\n\n.tutorial-next-btn:hover {\n    margin-right: 20px;\n    background:var(--periwinkle)\n}\n\n.tutorial-next-btn:after {border-left:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}\n.tutorial-next-btn:hover:after {border-left:21px solid var(--periwinkle)}\n\n.tutorial-prev-btn {\n    position: fixed;\n    top: 50%;\n    left: 0;\n    text-align:right;\n    background: var(--turquoise); \n}\n\n.tutorial-prev-btn:hover {\n    margin-left: 20px;\n    background:var(--periwinkle)\n}\n\n.tutorial-prev-btn:before {border-right:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}\n.tutorial-prev-btn:hover:before {border-right:21px solid var(--periwinkle)}\n\n\n\n\n/* QUESTIONNAIRE STYLING */\n\n.questionnaire-radio {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    align-items: center;\n\n}\n\n.questionnaire-radio .quiz-button {\n    margin-right: 5px;\n    cursor: pointer;\n}\n\n.english-screening-buttons {\n    display: flex;\n    flex-direction: row;\n}\n\n.english-screening-horizontal-bar {\n    display: flex;\n}\n\n.questionnaire-heading {\n    margin: 10% auto 5% auto;\n    display: flex;\n    justify-content: center;\n    width: 590px;\n    text-align: center;\n}\n\n.question-section {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    margin-top: 15px;\n}\n\n.questionnaire-question {\n    padding-bottom: 20px;\n}\n\n.questionnaire-content-container {\n    display:flex;\n    flex-direction:column;\n    align-items: flex-start;\n    width: 590px;\n}\n\n.questionnaire-body {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    background-color: white;\n    font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\n    color: var(--darkblue);\n    width: 100%;\n    font-size: 15px;\n    padding: 25px;\n}\n\n.questionnaire-btn-container {\n    display: flex;\n}\n\n.progress-bar {\n    display: flex;\n    flex-direction:row;\n    align-items: flex-end;\n}\n\n.completed-heading {\n    font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\n    color: var(--turquoise);\n    font-size: 20px;\n    font-weight: bold;\n}\n\n.completed-bar {\n    display: flex;\n    flex-direction: column;\n}\n\n.slider-value-container {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 100%;\n}\n\n.slider-value {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    border: 1px solid lightgrey;\n    width: 40px;\n    height: 40px;\n    border-radius: 50%;\n    background-color: lightgrey;\n}\n\n/* Customizing SLIDER */\n\n.player-slider-container {\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n    padding: 15px 0px;\n}\n\n.player-label {\n    display: flex;\n    width: 25%;\n    padding: 5px 5px;\n    overflow-wrap: anywhere;\n}\n\n.empirica-slider {\n    width: 100%;\n}\n\n.bp3-slider-axis {\n    display: flex;\n    justify-content: space-between;\n}\n\n.bp3-slider-label {\n    transform: translate(0%, 20px);\n    display: flex;\n    position: static;\n    padding: 2px 5px;\n    vertical-align: top;\n    line-height: 1;\n    font-size: 12px;\n}\n\n.bp3-slider-track {\n    background-color: var(--darkblue);\n}\n\n.bp3-slider-handle {\n    background-color: var(--turquoise);\n    border: 1px solid var(--turquoise);\n    border-radius: 50%;\n    background-image: none;\n    box-shadow: none;\n    width: 20px;\n    height: 20px;\n}\n\n/* Turn off label that appears below slider handle */\n.bp3-slider-handle .bp3-slider-label {\n    display: none;\n}\n\n\n.survey-textarea {\n    width: 100%;\n    resize: vertical;\n    padding: 5px 5px 5px 5px;\n    margin-bottom: 30px;\n}\n\n\n\n"
 );
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
