@@ -52,7 +52,7 @@ export default class NetworkSurveySelfFrequency extends React.Component {
 
     event.preventDefault();
     // TODO: log player response to survey question
-    player.set("networkResponseSelfFrequency");
+    player.set("networkResponseSelfFrequency", networkSurveyResponse);
     player.set("networkResponse2", networkSurveyResponse);
     onNext();
   };

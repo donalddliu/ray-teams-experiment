@@ -156,9 +156,9 @@ button {
 .instructions,
 .quiz,
 .exit-survey {
-  button {
-    margin: 2rem 1rem 0 0;
-  }
+  // button {
+  //   margin: 2rem 1rem 0 0;
+  // }
 
   label {
     display: block;
@@ -206,6 +206,23 @@ button {
           min-height: 36px;
         }
       }
+    }
+  }
+
+  .gender-input-row {
+    display: flex;
+    padding: 5px 0px;
+
+    .gender-input-label {
+      display: flex;
+      width: 10%;
+      margin: 1rem 0rem;
+    }
+
+    .gender-input-buttons-container{
+      display: flex;
+      width: fit-content;
+      justify-content: space-between;
     }
   }
 }

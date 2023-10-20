@@ -981,11 +981,6 @@ button {
 button:hover {
   background-color: #ddd;
 }
-.instructions button,
-.quiz button,
-.exit-survey button {
-  margin: 2rem 1rem 0 0;
-}
 .instructions label,
 .quiz label,
 .exit-survey label {
@@ -1031,6 +1026,20 @@ button:hover {
 }
 .exit-survey .form-line.thirds > div label {
   min-height: 36px;
+}
+.exit-survey .gender-input-row {
+  display: flex;
+  padding: 5px 0px;
+}
+.exit-survey .gender-input-row .gender-input-label {
+  display: flex;
+  width: 10%;
+  margin: 1rem 0rem;
+}
+.exit-survey .gender-input-row .gender-input-buttons-container {
+  display: flex;
+  width: fit-content;
+  justify-content: space-between;
 }
 .finished {
   position: absolute;

@@ -266,7 +266,6 @@ export default class NetworkSurveyPersonalQuestions extends React.Component {
         education : "",
         employed : "",
         jobTitle: "",
-        report: "",
       };
   }
 
@@ -281,15 +280,7 @@ export default class NetworkSurveyPersonalQuestions extends React.Component {
 
   handleSubmit = event => {
     const { onNext, player } = this.props;
-    const networkSurveyResponse = {
-        age : this.state.age, 
-        gender : this.state.gender,
-        race : this.state.race,
-        education : this.state.education,
-        employed : this.state.employed,
-        jobTitle : this.state.jobTitle,
-        report : this.state.report
-      };
+    const networkSurveyResponse = this.state;
 
     event.preventDefault();
     // TODO: log player response to survey question
@@ -299,22 +290,20 @@ export default class NetworkSurveyPersonalQuestions extends React.Component {
 
   render() {
     const { player } = this.props;
-    const filledOut = this.state.age && this.state.gender && this.state.race && this.state.education && this.state.employed && this.state.jobTitle;
+    const filledOut = this.state.age && this.state.gender && this.state.race && this.state.education && this.state.employed ;
     const {name1, name2, name3, name4, name5} = this.state;
     const names = [name1, name2, name3, name4, name5];
-    const races = ["White", "Hispanic", "Black or African American", "Asian", "American Indian or Alaska Native", "Native Hawaiian and Other Pacific Islander", "Other"];
-    const education = ["High School", "Bachelor", "Master or higher", "Other"];
-    
+
     return (
           <div className="network-survey-container">
                 <div className="network-survey-header">
                     <p>
-                        WHAT ARE THE GENDERS OF THE PEOPLE IN YOUR NETWORK?
+                        PLEASE ANSWER SOME QUESTIONS ABOUT YOURSELF
                     </p>
                 </div>
                 <img src={`images/hr-color.png`} />
                 <div className="network-survey-body">
-                    <p>The people you cited on the previous page are listed in the table below. Please select the option next to each name that best describes each listed person's gender. </p>
+                    <p>Please answer some questions about yourself. </p>
                     <ul className="network-list">
                     </ul>
                     <form className="network-form" onSubmit={this.handleSubmit}>
@@ -324,8 +313,8 @@ export default class NetworkSurveyPersonalQuestions extends React.Component {
                         <RaceQuestionSet selected={this.state.race} textValue={this.state.raceSpecific} handleRaceChange={this.handleChange} />
                         <EducationQuestionSet selected={this.state.education} handleEducationChange={this.handleChange} />
                         <EmploymentQuestionSet selected={this.state.employed} handleEmploymentChange={this.handleChange} />
-                        <JobTitleQuestionSet textValue={this.state.jobTitle} handleJobTitleChange={this.handleChange} />
-                        <div className="network-button-container">
+                        {this.state.employed == "Yes" && <JobTitleQuestionSet textValue={this.state.jobTitle} handleJobTitleChange={this.handleChange} />}
+                        <div className="network-button-container" style={{marginTop: "2em"}}>
                             <button 
                                 className={!filledOut ? "arrow-button button-submit-disabled" : "arrow-button button-submit"}
                                 disabled={!filledOut} 

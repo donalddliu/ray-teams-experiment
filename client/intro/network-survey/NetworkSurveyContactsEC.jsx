@@ -85,7 +85,7 @@ export default class NetworkSurveyContactsEC extends React.Component {
                         <table className="name-matrix-table">
                             <tbody>
                                 <tr>
-                                    <th>How often does __ communicate with __ ?</th>
+                                    <th>How close is __ with __ ?</th>
                                     <th>{name2}</th>
                                     <th>{name3}</th>
                                     <th>{name4}</th>

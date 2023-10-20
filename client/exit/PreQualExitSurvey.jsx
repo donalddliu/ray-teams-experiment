@@ -18,7 +18,7 @@ const Radio = ({ selected, name, value, label, onChange, required }) => (
 
 export default class PreQualExitSurvey extends React.Component {
   static stepName = "ExitSurvey";
-  state = { age: "", gender: "", email: "", feedback: "" };
+  state = { age: "", gender: "", feedback: "" };
 
   handleChange = event => {
     const el = event.currentTarget;
@@ -35,6 +35,8 @@ export default class PreQualExitSurvey extends React.Component {
     const { age, gender, feedback, education} = this.state;
     const basePay = game.treatment.basePay;
     const conversionRate = game.treatment.conversionRate;
+
+    const filledOut = Object.values(this.state).every(val => val !== '');
 
     return (
       <Centered>
@@ -151,8 +153,12 @@ export default class PreQualExitSurvey extends React.Component {
                 </div>
               </div>
             </div>
-
-            <button type="submit">Submit</button>
+            <div className="network-button-container">
+              <button 
+                type="submit" className={!filledOut ? "arrow-button button-submit-disabled" : "arrow-button button-submit"}      
+                disabled={!filledOut}> Submit
+              </button>
+            </div>
           </form>
         </div>
       </Centered>

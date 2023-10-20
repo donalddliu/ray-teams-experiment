@@ -25,13 +25,7 @@ const GenderButtonSet = ({contactName, tie, genders, genderSelected, handleGende
 export default class NetworkSurveyGenderInterpreter extends React.Component { 
   constructor(props) {
     super(props);
-    // const {name1, name2, name3, name4, name5} = this.props.player.get("networkResponse1");
-    const {name1, name2, name3, name4, name5} = {
-        name1 : "Person 1",
-        name2 : "Person 2",
-        name3 : "Person 3",
-        name4 : "Person 4",
-        name5 : "Person 5"};
+    const {name1, name2, name3, name4, name5} = this.props.player.get("networkResponse1");
 
     this.state = {
         tie1 : "", 

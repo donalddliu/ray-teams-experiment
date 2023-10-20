@@ -2,7 +2,6 @@ import React from "react";
 
 import { Centered } from "meteor/empirica:core";
 import _ from "lodash";
-import { Checkbox } from "@blueprintjs/core";
 
 const RelationshipButtonSet = ({contactName, tie, categories, categoriesSelected, handleCategorySelect}) => {
     return(    
@@ -25,13 +24,7 @@ const RelationshipButtonSet = ({contactName, tie, categories, categoriesSelected
 export default class NetworkSurveyRelationshipInterpreter extends React.Component { 
   constructor(props) {
     super(props);
-    // const {name1, name2, name3, name4, name5} = this.props.player.get("networkResponse1");
-    const {name1, name2, name3, name4, name5} = {
-        name1 : "Person 1",
-        name2 : "Person 2",
-        name3 : "Person 3",
-        name4 : "Person 4",
-        name5 : "Person 5"};
+    const {name1, name2, name3, name4, name5} = this.props.player.get("networkResponse1");
 
     this.state = {
         tie1 : [false, false, false, false], 
@@ -44,7 +37,7 @@ export default class NetworkSurveyRelationshipInterpreter extends React.Componen
         name3: name3,
         name4: name4,
         name5: name5,
-        categories: ["Colleague", "Friend", "Spouse", "Other kin"]
+        categories: ["Current Colleague", "Previous Colleague", "Spouse", "Other kin", "Other"]
       };
   }
 
@@ -74,7 +67,6 @@ export default class NetworkSurveyRelationshipInterpreter extends React.Componen
     const filledOut = this.state.tie1 && this.state.tie2 && this.state.tie3 && this.state.tie4 && this.state.tie5;
     const {name1, name2, name3, name4, name5} = this.state;
     const names = [name1, name2, name3, name4, name5];
-    const categories = ["Current Colleague", "Previous Colleague", "Spouse", "Other kin", "Other"];
     
     return (
           <div className="network-survey-container">
@@ -107,7 +99,7 @@ export default class NetworkSurveyRelationshipInterpreter extends React.Componen
                         <p> What is their relationship to you? (Select all that applies) </p>
                         {names.map((name, i) => {
                             return (
-                                <RelationshipButtonSet key={i} contactName={name} tie={`tie${i+1}`} categories={categories} categoriesSelected={this.state[`tie${i+1}`]} handleCategorySelect={this.handleCategorySelect}/>    
+                                <RelationshipButtonSet key={i} contactName={name} tie={`tie${i+1}`} categories={this.state.categories} categoriesSelected={this.state[`tie${i+1}`]} handleCategorySelect={this.handleCategorySelect}/>    
                             )
                         })}
                         <div className="network-button-container">

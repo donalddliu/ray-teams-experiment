@@ -19,7 +19,7 @@ import NetworkSurveyContactsEC from "./intro/network-survey/NetworkSurveyContact
 import NetworkSurveySelfFrequency from "./intro/network-survey/NetworkSurveySelfFrequency";
 import NetworkSurveyContactsFrequency from "./intro/network-survey/NetworkSurveyContactsFrequency";
 import NetworkSurveyRelationshipInterpreter from "./intro/network-survey/NetworkSurveyRelationshipInterpreter";
-import NetworkGenderInterpreter from "./intro/network-survey/NetworkSurveyGenderInterpreter";
+import NetworkSurveyGenderInterpreter from "./intro/network-survey/NetworkSurveyGenderInterpreter";
 import NetworkSurveyPersonalQuestions from "./intro/network-survey/NetworkSurveyPersonalQuestions";
 
 import TutorialPageOne from "./intro/tutorial/TutorialPageOne";
@@ -64,7 +64,7 @@ Empirica.introSteps((game, treatment) => {
   // MidSurveyFive, MidSurveyFour, MidSurveyThree, MidSurveyTwo, MidSurveyOne,
   const durationConsent = [QuizOne];
   const englishScreen = [EnglishScreen];
-  const networkSurvey = [NetworkSurveySelfContacts, NetworkSurveySelfEC, NetworkSurveySelfFrequency, NetworkSurveyContactsEC ];
+  const networkSurvey = [NetworkSurveySelfContacts, NetworkSurveySelfEC, NetworkSurveySelfFrequency, NetworkSurveyContactsEC, NetworkSurveyRelationshipInterpreter, NetworkSurveyGenderInterpreter, NetworkSurveyPersonalQuestions  ];
   const tutorialSteps = [TutorialPageOne, TutorialPageThree, TutorialPageFour,];
   const symbolDescription = [DescribeSymbolQuestion];
   // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
@@ -86,8 +86,6 @@ Empirica.introSteps((game, treatment) => {
     return [];
   }
 
-  return [NetworkSurveyPersonalQuestions];
-  return networkSurvey;
   return steps;
 });
 

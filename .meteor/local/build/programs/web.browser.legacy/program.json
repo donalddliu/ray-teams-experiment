@@ -780,12 +780,12 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/app/app.js?hash=417be23f667d19d4aafa7981fbe58d4a99829fba",
+      "url": "/app/app.js?hash=9983d53c4ed17c774a30e11d4eaa3fa68e4a573a",
       "sourceMap": "app/app.js.map",
-      "sourceMapUrl": "/app/417be23f667d19d4aafa7981fbe58d4a99829fba.map",
-      "size": 395475,
-      "hash": "417be23f667d19d4aafa7981fbe58d4a99829fba",
-      "sri": "xsmRYWZrzawqO+9ZtStLNq/CzVNz5O7D+a1oc4jFmBAYv68xOtifY7kPSGgdLwTBGqdKPQZilo+KwX8mvI/iNA=="
+      "sourceMapUrl": "/app/9983d53c4ed17c774a30e11d4eaa3fa68e4a573a.map",
+      "size": 397226,
+      "hash": "9983d53c4ed17c774a30e11d4eaa3fa68e4a573a",
+      "sri": "fRIEbVKi36Cyg3H1cEjfXGiA8n344jeFJRDUZTdg4yRtzWAyMtK2yIjJ33TM+Ri5XtpVPdst826dHihWh+I67g=="
     },
     {
       "path": "packages/service-configuration.js",
@@ -802,12 +802,12 @@
       "where": "client",
       "type": "css",
       "cacheable": true,
-      "url": "/merged-stylesheets.css?hash=63fb1c7b51910e0ad1f03800e598ee96c4e85d7e",
+      "url": "/merged-stylesheets.css?hash=eccf0f24ae548d72fdb984f58d2e6043871e8efb",
       "sourceMap": "merged-stylesheets.css.map",
-      "sourceMapUrl": "/63fb1c7b51910e0ad1f03800e598ee96c4e85d7e.map",
-      "size": 21686,
-      "hash": "63fb1c7b51910e0ad1f03800e598ee96c4e85d7e",
-      "sri": "QDP+5+wka9v3fxQ6Uyl4NHxLkUPm9nTm6D5t/SnqjN88GC1DOeU7b0L4Ebfr6qS1Z8bAO+UUbU2XNT1/uLkETw=="
+      "sourceMapUrl": "/eccf0f24ae548d72fdb984f58d2e6043871e8efb.map",
+      "size": 21920,
+      "hash": "eccf0f24ae548d72fdb984f58d2e6043871e8efb",
+      "sri": "O+lDCoBHJqrtzhY8tMgVss6vI6DbnVhflicFoqZdRemDiJUyth9WTRlIY8XMt06DAEG3RHontKtMH+U6YYWCMQ=="
     },
     {
       "path": "packages/empirica_core/ui/components/NoBatch.less.map.json",
@@ -835,8 +835,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/css/intro.css",
-      "size": 8831,
-      "hash": "3040377c61821cf8f9a41918a3bec5ae3576ca17",
+      "size": 8807,
+      "hash": "78edbaed4abbf01ba9c46c885bb6031c08fc562e",
       "sri": null
     },
     {

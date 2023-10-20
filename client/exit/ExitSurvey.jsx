@@ -16,14 +16,55 @@ const Radio = ({ selected, name, value, label, onChange, required }) => (
   </label>
 );
 
+const GenderButtonSet = ({color, genderSelected, handleGenderSelect}) => {
+  const genders = ["Male", "Female", "Not Enough Information"];
+
+  return(    
+      <div className="gender-input-row">
+          <label className="gender-input-label"> {color} </label>
+          <div className="gender-input-buttons-container">
+          {genders.map((gender, index) => {
+              return (
+                  <div key={`${color}-${gender}`} className={gender === genderSelected ? "network-relationship-button selected" : "network-relationship-button"} onClick={() => handleGenderSelect(color, gender)} style={{margin:"0px 10px"}}> {gender} </div>
+              )
+          })
+          }
+          </div>
+      </div>
+  )
+
+}
+
 export default class ExitSurvey extends React.Component {
   static stepName = "ExitSurvey";
-  state = { age: "", gender: "", strength: "", fair: "", feedback: "" };
+
+  constructor(props){
+    super(props);
+    this.state = { 
+      age: "", 
+      gender: "", 
+      strength: "", 
+      fair: "", 
+      feedback: "",
+    };
+    const network = this.props.player.get("neighbors");
+    console.log(network);
+    network.map(otherNodeId => {
+      const otherPlayer = this.props.game.players.find(p => p.get("nodeId") === parseInt(otherNodeId));
+      const otherPlayerColor = otherPlayer.get("anonymousName");
+
+      this.state[otherPlayerColor] = "";
+    })
+  }
 
   handleChange = event => {
     const el = event.currentTarget;
     this.setState({ [el.name]: el.value });
   };
+
+  handleGenderSelect = (color, genderSelected) => {
+    this.setState({ [color]: genderSelected });
+  }
 
   handleSubmit = event => {
     event.preventDefault();
@@ -35,6 +76,11 @@ export default class ExitSurvey extends React.Component {
     const { age, gender, strength, fair, feedback, education } = this.state;
     const basePay = game.treatment.basePay;
     const conversionRate = game.treatment.conversionRate;
+
+    const network = player.get("neighbors");
+
+    // Checks if every key in this.state has a non-empty value
+    const filledOut = Object.values(this.state).every(val => val !== '');
 
     return (
       <Centered>
@@ -137,6 +183,21 @@ export default class ExitSurvey extends React.Component {
                 />
               </div>
             </div>
+            <div>
+              <label htmlFor="strength">
+                  What gender do you think your teammates were?
+              </label>
+              {network.map(otherNodeId => {
+                const otherPlayer = game.players.find(p => p.get("nodeId") === parseInt(otherNodeId));
+                const otherPlayerColor = otherPlayer.get("anonymousName");
+
+                return (
+                  <GenderButtonSet key={otherPlayerColor} color={otherPlayerColor} genderSelected={this.state[otherPlayerColor]} handleGenderSelect={this.handleGenderSelect} />
+                )
+              })}
+            </div>
+
+
 
             <div className="form-line thirds">
               <div>
@@ -183,8 +244,12 @@ export default class ExitSurvey extends React.Component {
                 </div>
               </div>
             </div>
-
-            <button type="submit">Submit</button>
+            <div className="network-button-container">
+              <button 
+                type="submit" className={!filledOut ? "arrow-button button-submit-disabled" : "arrow-button button-submit"}      
+                disabled={!filledOut}> Submit
+              </button>
+            </div>
           </form>
         </div>
       </Centered>
