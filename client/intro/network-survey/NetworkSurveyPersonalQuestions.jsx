@@ -18,25 +18,6 @@ const Radio = ({ selected, name, value, label, onChange }) => (
       {label}
     </label>
   );
-  
-const RaceSpecific = ({race, message, textValue, handleRaceChange }) => {
-    return(
-    <div className="personal-input-race-specific-container">
-        <p style={{margin:"0px 0px", fontSize:"100%"}}> {message}</p>
-        <input 
-            className="personal-input-race-specific-input"
-            id="raceSpecific"
-            type="text"
-            dir="auto"
-            name="raceSpecific"
-            value={textValue}
-            onChange={handleRaceChange}
-            required
-        />
-    </div>  
-
-    )
-}
 
 const AgeQuestionSet = ({ageValue, handleAgeChange}) => {
     return (
@@ -105,6 +86,25 @@ const HispanicQuestionSet = ({selected, handleIsHispanicChange}) => {
                 }
             </div>
         </div>
+    )
+}
+
+const RaceSpecific = ({race, message, textValue, handleRaceChange }) => {
+    return(
+    <div className="personal-input-race-specific-container">
+        <p style={{margin:"0px 0px", fontSize:"100%"}}> {message}</p>
+        <input 
+            className="personal-input-race-specific-input"
+            id="raceSpecific"
+            type="text"
+            dir="auto"
+            name="raceSpecific"
+            value={textValue}
+            onChange={handleRaceChange}
+            required
+        />
+    </div>  
+
     )
 }
 
@@ -204,6 +204,51 @@ const EducationQuestionSet = ({selected, handleEducationChange}) => {
     
 }
 
+const EmploymentQuestionSet = ({selected, handleEmploymentChange}) => {
+    const options = ["Yes",
+        "No"]
+
+    return(
+        <div className="personal-input-container" >
+            <p>Are you currently employed?</p>
+            <div className="personal-input-radio-list-container">
+                {
+                    options.map((option) => {
+                        return (
+                            <Radio
+                                key={option}
+                                selected={selected}
+                                name="employed"
+                                value={option}
+                                label={option}
+                                onChange={handleEmploymentChange}
+                            />
+                        )
+                    })
+                }
+            </div>
+        </div>
+    )
+}
+
+const JobTitleQuestionSet = ({textValue, handleJobTitleChange}) => {
+    return (
+        <div className="personal-input-container" >
+            <p>What is your job title?</p>
+            <input
+                className="personal-input-job-title-input"
+                id="jobTitle"
+                type="text"
+                dir="auto"
+                name="jobTitle"
+                value={textValue}
+                onChange={handleJobTitleChange}
+                required
+            />
+        </div>
+    )
+}
+
 
 // This section asks the user what their personal emotional closeness is to the listed 5 people.
 export default class NetworkSurveyPersonalQuestions extends React.Component { 
@@ -219,8 +264,8 @@ export default class NetworkSurveyPersonalQuestions extends React.Component {
         race : "",
         raceSpecific: "",
         education : "",
-        employment : "",
-        job_title: "",
+        employed : "",
+        jobTitle: "",
         report: "",
       };
   }
@@ -241,7 +286,8 @@ export default class NetworkSurveyPersonalQuestions extends React.Component {
         gender : this.state.gender,
         race : this.state.race,
         education : this.state.education,
-        job_title : this.state.employment,
+        employed : this.state.employed,
+        jobTitle : this.state.jobTitle,
         report : this.state.report
       };
 
@@ -253,7 +299,7 @@ export default class NetworkSurveyPersonalQuestions extends React.Component {
 
   render() {
     const { player } = this.props;
-    const filledOut = this.state.age && this.state.gender && this.state.race && this.state.education && this.state.job_title;
+    const filledOut = this.state.age && this.state.gender && this.state.race && this.state.education && this.state.employed && this.state.jobTitle;
     const {name1, name2, name3, name4, name5} = this.state;
     const names = [name1, name2, name3, name4, name5];
     const races = ["White", "Hispanic", "Black or African American", "Asian", "American Indian or Alaska Native", "Native Hawaiian and Other Pacific Islander", "Other"];
@@ -277,7 +323,8 @@ export default class NetworkSurveyPersonalQuestions extends React.Component {
                         <HispanicQuestionSet selected={this.state.isHispanic} handleIsHispanicChange={this.handleChange} />
                         <RaceQuestionSet selected={this.state.race} textValue={this.state.raceSpecific} handleRaceChange={this.handleChange} />
                         <EducationQuestionSet selected={this.state.education} handleEducationChange={this.handleChange} />
-
+                        <EmploymentQuestionSet selected={this.state.employed} handleEmploymentChange={this.handleChange} />
+                        <JobTitleQuestionSet textValue={this.state.jobTitle} handleJobTitleChange={this.handleChange} />
                         <div className="network-button-container">
                             <button 
                                 className={!filledOut ? "arrow-button button-submit-disabled" : "arrow-button button-submit"}

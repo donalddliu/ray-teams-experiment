@@ -6166,33 +6166,9 @@ var Radio = function (_ref) {
   }), label);
 };
 
-var RaceSpecific = function (_ref2) {
-  var race = _ref2.race,
-      message = _ref2.message,
-      textValue = _ref2.textValue,
-      handleRaceChange = _ref2.handleRaceChange;
-  return /*#__PURE__*/React.createElement("div", {
-    className: "personal-input-race-specific-container"
-  }, /*#__PURE__*/React.createElement("p", {
-    style: {
-      margin: "0px 0px",
-      fontSize: "100%"
-    }
-  }, " ", message), /*#__PURE__*/React.createElement("input", {
-    className: "personal-input-race-specific-input",
-    id: "raceSpecific",
-    type: "text",
-    dir: "auto",
-    name: "raceSpecific",
-    value: textValue,
-    onChange: handleRaceChange,
-    required: true
-  }));
-};
-
-var AgeQuestionSet = function (_ref3) {
-  var ageValue = _ref3.ageValue,
-      handleAgeChange = _ref3.handleAgeChange;
+var AgeQuestionSet = function (_ref2) {
+  var ageValue = _ref2.ageValue,
+      handleAgeChange = _ref2.handleAgeChange;
   return /*#__PURE__*/React.createElement("div", {
     className: "personal-input-container-row"
   }, /*#__PURE__*/React.createElement("p", null, " What is your age? "), /*#__PURE__*/React.createElement("input", {
@@ -6213,9 +6189,9 @@ var AgeQuestionSet = function (_ref3) {
   }));
 };
 
-var GenderButtonSet = function (_ref4) {
-  var genderSelected = _ref4.genderSelected,
-      handleGenderSelect = _ref4.handleGenderSelect;
+var GenderButtonSet = function (_ref3) {
+  var genderSelected = _ref3.genderSelected,
+      handleGenderSelect = _ref3.handleGenderSelect;
   var genders = ["Male", "Female", "N/A"];
   return /*#__PURE__*/React.createElement("div", {
     className: "personal-input-container-row"
@@ -6237,9 +6213,9 @@ var GenderButtonSet = function (_ref4) {
   })));
 };
 
-var HispanicQuestionSet = function (_ref5) {
-  var selected = _ref5.selected,
-      handleIsHispanicChange = _ref5.handleIsHispanicChange;
+var HispanicQuestionSet = function (_ref4) {
+  var selected = _ref4.selected,
+      handleIsHispanicChange = _ref4.handleIsHispanicChange;
   var options = ["No, not Spanish/Hispanic/Latino", "Yes, Mexican, Mexican-American, Chicano", "Yes, Puerto Rican", "Yes, Cuban", "Yes, other Spanish, Hispanic, or Latino"];
   return /*#__PURE__*/React.createElement("div", {
     className: "personal-input-container"
@@ -6255,6 +6231,30 @@ var HispanicQuestionSet = function (_ref5) {
       onChange: handleIsHispanicChange
     });
   })));
+};
+
+var RaceSpecific = function (_ref5) {
+  var race = _ref5.race,
+      message = _ref5.message,
+      textValue = _ref5.textValue,
+      handleRaceChange = _ref5.handleRaceChange;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "personal-input-race-specific-container"
+  }, /*#__PURE__*/React.createElement("p", {
+    style: {
+      margin: "0px 0px",
+      fontSize: "100%"
+    }
+  }, " ", message), /*#__PURE__*/React.createElement("input", {
+    className: "personal-input-race-specific-input",
+    id: "raceSpecific",
+    type: "text",
+    dir: "auto",
+    name: "raceSpecific",
+    value: textValue,
+    onChange: handleRaceChange,
+    required: true
+  }));
 };
 
 var RaceQuestionSet = function (_ref6) {
@@ -6309,6 +6309,43 @@ var EducationQuestionSet = function (_ref7) {
       onChange: handleEducationChange
     });
   })));
+};
+
+var EmploymentQuestionSet = function (_ref8) {
+  var selected = _ref8.selected,
+      handleEmploymentChange = _ref8.handleEmploymentChange;
+  var options = ["Yes", "No"];
+  return /*#__PURE__*/React.createElement("div", {
+    className: "personal-input-container"
+  }, /*#__PURE__*/React.createElement("p", null, "Are you currently employed?"), /*#__PURE__*/React.createElement("div", {
+    className: "personal-input-radio-list-container"
+  }, options.map(function (option) {
+    return /*#__PURE__*/React.createElement(Radio, {
+      key: option,
+      selected: selected,
+      name: "employed",
+      value: option,
+      label: option,
+      onChange: handleEmploymentChange
+    });
+  })));
+};
+
+var JobTitleQuestionSet = function (_ref9) {
+  var textValue = _ref9.textValue,
+      handleJobTitleChange = _ref9.handleJobTitleChange;
+  return /*#__PURE__*/React.createElement("div", {
+    className: "personal-input-container"
+  }, /*#__PURE__*/React.createElement("p", null, "What is your job title?"), /*#__PURE__*/React.createElement("input", {
+    className: "personal-input-job-title-input",
+    id: "jobTitle",
+    type: "text",
+    dir: "auto",
+    name: "jobTitle",
+    value: textValue,
+    onChange: handleJobTitleChange,
+    required: true
+  }));
 }; // This section asks the user what their personal emotional closeness is to the listed 5 people.
 
 
@@ -6345,7 +6382,8 @@ var NetworkSurveyPersonalQuestions = /*#__PURE__*/function (_React$Component) {
         gender: _this.state.gender,
         race: _this.state.race,
         education: _this.state.education,
-        job_title: _this.state.employment,
+        employed: _this.state.employed,
+        jobTitle: _this.state.jobTitle,
         report: _this.state.report
       };
       event.preventDefault(); // TODO: log player response to survey question
@@ -6361,8 +6399,8 @@ var NetworkSurveyPersonalQuestions = /*#__PURE__*/function (_React$Component) {
       race: "",
       raceSpecific: "",
       education: "",
-      employment: "",
-      job_title: "",
+      employed: "",
+      jobTitle: "",
       report: ""
     };
     return _this;
@@ -6373,7 +6411,7 @@ var NetworkSurveyPersonalQuestions = /*#__PURE__*/function (_React$Component) {
   _proto.render = function () {
     function render() {
       var player = this.props.player;
-      var filledOut = this.state.age && this.state.gender && this.state.race && this.state.education && this.state.job_title;
+      var filledOut = this.state.age && this.state.gender && this.state.race && this.state.education && this.state.employed && this.state.jobTitle;
       var _this$state = this.state,
           name1 = _this$state.name1,
           name2 = _this$state.name2,
@@ -6412,6 +6450,12 @@ var NetworkSurveyPersonalQuestions = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/React.createElement(EducationQuestionSet, {
         selected: this.state.education,
         handleEducationChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(EmploymentQuestionSet, {
+        selected: this.state.employed,
+        handleEmploymentChange: this.handleChange
+      }), /*#__PURE__*/React.createElement(JobTitleQuestionSet, {
+        textValue: this.state.jobTitle,
+        handleJobTitleChange: this.handleChange
       }), /*#__PURE__*/React.createElement("div", {
         className: "network-button-container"
       }, /*#__PURE__*/React.createElement("button", {
@@ -10975,7 +11019,7 @@ Meteor.startup(function () {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                                       //
 module.exports = require("meteor/modules").addStyles(
-  "/* Network Survey */\n.network-survey-container {\n    display: flex;\n    flex-direction: column;\n    width: 100%;\n    height: 100%;\n    justify-content: center;\n    align-items: center;\n    text-align: center;\n    font-family: \"Palatino Linotype\", \"Book Antiqua\", \"Palatino\", serif;\n}\n\n.network-survey-container p {\n    display: flex;\n    margin-block-start: 1em;\n    margin-block-end: 1em;\n    margin-inline-start: 0px;\n    margin-inline-end: 0px;\n}\n\n.network-survey-header p {\n    font-weight: bold;\n    text-transform: uppercase;\n    color: var(--darkblue);\n    font-size: 16px;\n    padding: 2em;\n}\n\n.network-survey-body {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    padding: 2em;\n    width: 70%;\n    margin: auto;\n}\n\n.network-survey-body p  {\n    text-transform: none;\n    font-weight: normal;\n    color: var(--darkblue);\n    font-size: 16px;\n}\n\n.network-form {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    padding: 2em;\n    width: 100%;\n}\n\n.input-row {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    width: 50%;\n}\n\n.dropdown-input-label {\n    display: flex;\n    width: 70%;\n    align-items: center;\n    justify-content: center;\n}\n\n.input-label {\n    display: flex;\n    margin-right: 10px;\n}\n\n.relationship-input-row {\n    display: flex;\n    width: 100%;\n    align-items: center;\n    justify-content: center;\n}\n\n.relationship-input-label {\n    display: flex;\n    width: 40%;\n    align-items: center;\n    justify-content: center;\n}\n\n.relationship-buttons-container {\n    display: flex;\n    width: 60%;\n    justify-content: space-evenly;\n}\n\n.network-relationship-button {\n    display: flex;\n    font-family: \"Palatino Linotype\", \"Book Antiqua\", Palatino, serif;\n    font-size: 16px;\n    align-items: center;\n    padding: 0.25em 1em;\n    border: 1px solid black;\n    border-radius: 5px;\n\n    background-color: transparent;\n}\n\n.network-relationship-button:hover {\n    background-color: rgb(142, 209, 205);\n}\n\n.network-relationship-button.selected {\n    text-decoration-color: white;\n    background-color: var(--turquoise);\n}\n\n.network-relationship-button.selected:hover {\n    background: #03a5a7;\n}\n\n.network-button-container {\n    display: flex;\n    width: 100%;\n    justify-content: flex-start;\n    margin-top: 23px;\n}\n\n.personal-input-container {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: flex-start;\n    width: 100%;\n}\n\n.personal-input-container-row {\n    display: flex;\n    flex-direction: row;\n    justify-content: flex-start;\n    align-items: center;\n    width: 100%;\n}\n\n.personal-input-radio-list-container {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    justify-content: flex-start;\n    padding-left: 1em;\n}\n\n.personal-input-radio-container{\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    justify-content: flex-start;\n}\n\n.personal-input-race-specific-container {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    justify-content: flex-start;\n    margin-left: 1em;\n}\n\n.personal-input-race-specific-input {\n    font-size: \"10px\";\n    margin-bottom: 1em;\n    overflow: auto;\n}\n\n.network-list {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    text-transform: none;\n    max-width: 75%;\n    margin: auto;\n}\n\n.network-list li {\n    display: list-item;\n    margin-left: 10px;\n    list-style-type: disc;\n    width: 100%;\n    padding: 1em 2em;\n    text-transform: none;\n    font-style: italic;\n    font-weight: normal;\n    color: var(--darkblue);\n    font-size: 16px;\n}\n\n.dropdown-select-input {\n    font-size: 14px;\n    color: var(--darkblue);\n    margin: 2px;\n    border-radius: 5px;\n}\n\n.name-matrix-table {\n    width: 60%;\n    margin: 0px auto 2em;\n    font-size: 16px;\n}\n\nthead, tbody, tfoot { vertical-align: middle } /* add this rule*/\ntd, th, tr { vertical-align: inherit } /* add this rule */\n\n/* Tutorial */\n\n.tutorial-container {\n    display: flex;\n    flex-direction: column;\n}\n\n.title-static-image {\n    display: flex;\n    justify-content: flex-start;\n    padding: 30px 15px;\n}\n\n.two-col {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    width: 60%;\n}\n\n.tutorial-content {\n    display: flex;\n    flex-direction: column;\n}\n\n.tutorial-static-image {\n    display:flex;\n    margin-right: 40px;\n    width: 45%;\n    justify-content: center;\n    align-items: center;\n}\n\n.tutorial-info {\n    width: 50%;\n}\n\n.intro-heading {\n    font-family:\"Palatino Linotype\", \"Book Antiqua\", Palatino, serif; \n    font-style:italic; \n    text-transform:uppercase; \n    font-weight:normal;\n    margin: 0px 0px;\n    font-size: 26px;\n    color: var(--darkblue);\n}\n\n.tutorial-body {\n    font-size: 16px;\n    word-spacing: 0.3em;\n    margin-top: 1rem;\n    color: var(--darkblue);\n}\n\n/* BUTTON STYLING AND POSITIONING */\n\n.tutorial-next-btn {\n    position: fixed;\n    top: 50%;\n    right: 0;\n    text-align:left;\n    background: var(--turquoise); \n\n}\n\n.tutorial-next-btn:hover {\n    margin-right: 20px;\n    background:var(--periwinkle)\n}\n\n.tutorial-next-btn:after {border-left:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}\n.tutorial-next-btn:hover:after {border-left:21px solid var(--periwinkle)}\n\n.tutorial-prev-btn {\n    position: fixed;\n    top: 50%;\n    left: 0;\n    text-align:right;\n    background: var(--turquoise); \n}\n\n.tutorial-prev-btn:hover {\n    margin-left: 20px;\n    background:var(--periwinkle)\n}\n\n.tutorial-prev-btn:before {border-right:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}\n.tutorial-prev-btn:hover:before {border-right:21px solid var(--periwinkle)}\n\n\n\n\n/* QUESTIONNAIRE STYLING */\n\n.questionnaire-radio {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    align-items: center;\n\n}\n\n.questionnaire-radio .quiz-button {\n    margin-right: 5px;\n    cursor: pointer;\n}\n\n.english-screening-buttons {\n    display: flex;\n    flex-direction: row;\n}\n\n.english-screening-horizontal-bar {\n    display: flex;\n}\n\n.questionnaire-heading {\n    margin: 10% auto 5% auto;\n    display: flex;\n    justify-content: center;\n    width: 590px;\n    text-align: center;\n}\n\n.question-section {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    margin-top: 15px;\n}\n\n.questionnaire-question {\n    padding-bottom: 20px;\n}\n\n.questionnaire-content-container {\n    display:flex;\n    flex-direction:column;\n    align-items: flex-start;\n    width: 590px;\n}\n\n.questionnaire-body {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    background-color: white;\n    font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\n    color: var(--darkblue);\n    width: 100%;\n    font-size: 15px;\n    padding: 25px;\n}\n\n.questionnaire-btn-container {\n    display: flex;\n}\n\n.progress-bar {\n    display: flex;\n    flex-direction:row;\n    align-items: flex-end;\n}\n\n.completed-heading {\n    font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\n    color: var(--turquoise);\n    font-size: 20px;\n    font-weight: bold;\n}\n\n.completed-bar {\n    display: flex;\n    flex-direction: column;\n}\n\n.slider-value-container {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 100%;\n}\n\n.slider-value {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    border: 1px solid lightgrey;\n    width: 40px;\n    height: 40px;\n    border-radius: 50%;\n    background-color: lightgrey;\n}\n\n/* Customizing SLIDER */\n\n.player-slider-container {\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n    padding: 15px 0px;\n}\n\n.player-label {\n    display: flex;\n    width: 25%;\n    padding: 5px 5px;\n    overflow-wrap: anywhere;\n}\n\n.empirica-slider {\n    width: 100%;\n}\n\n.bp3-slider-axis {\n    display: flex;\n    justify-content: space-between;\n}\n\n.bp3-slider-label {\n    transform: translate(0%, 20px);\n    display: flex;\n    position: static;\n    padding: 2px 5px;\n    vertical-align: top;\n    line-height: 1;\n    font-size: 12px;\n}\n\n.bp3-slider-track {\n    background-color: var(--darkblue);\n}\n\n.bp3-slider-handle {\n    background-color: var(--turquoise);\n    border: 1px solid var(--turquoise);\n    border-radius: 50%;\n    background-image: none;\n    box-shadow: none;\n    width: 20px;\n    height: 20px;\n}\n\n/* Turn off label that appears below slider handle */\n.bp3-slider-handle .bp3-slider-label {\n    display: none;\n}\n\n\n.survey-textarea {\n    width: 100%;\n    resize: vertical;\n    padding: 5px 5px 5px 5px;\n    margin-bottom: 30px;\n}\n\n\n\n"
+  "/* Network Survey */\n.network-survey-container {\n    display: flex;\n    flex-direction: column;\n    width: 100%;\n    height: 100%;\n    justify-content: center;\n    align-items: center;\n    text-align: center;\n    font-family: \"Palatino Linotype\", \"Book Antiqua\", \"Palatino\", serif;\n}\n\n.network-survey-container p {\n    display: flex;\n    margin-block-start: 1em;\n    margin-block-end: 1em;\n    margin-inline-start: 0px;\n    margin-inline-end: 0px;\n}\n\n.network-survey-header p {\n    font-weight: bold;\n    text-transform: uppercase;\n    color: var(--darkblue);\n    font-size: 16px;\n    padding: 2em;\n}\n\n.network-survey-body {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    padding: 2em;\n    width: 70%;\n    margin: auto;\n}\n\n.network-survey-body p  {\n    text-transform: none;\n    font-weight: normal;\n    color: var(--darkblue);\n    font-size: 16px;\n}\n\n.network-form {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    padding: 2em;\n    width: 100%;\n}\n\n.input-row {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    width: 50%;\n}\n\n.dropdown-input-label {\n    display: flex;\n    width: 70%;\n    align-items: center;\n    justify-content: center;\n}\n\n.input-label {\n    display: flex;\n    margin-right: 10px;\n}\n\n.relationship-input-row {\n    display: flex;\n    width: 100%;\n    align-items: center;\n    justify-content: center;\n}\n\n.relationship-input-label {\n    display: flex;\n    width: 40%;\n    align-items: center;\n    justify-content: center;\n}\n\n.relationship-buttons-container {\n    display: flex;\n    width: 60%;\n    justify-content: space-evenly;\n}\n\n.network-relationship-button {\n    display: flex;\n    font-family: \"Palatino Linotype\", \"Book Antiqua\", Palatino, serif;\n    font-size: 16px;\n    align-items: center;\n    padding: 0.25em 1em;\n    border: 1px solid black;\n    border-radius: 5px;\n\n    background-color: transparent;\n}\n\n.network-relationship-button:hover {\n    background-color: rgb(142, 209, 205);\n}\n\n.network-relationship-button.selected {\n    text-decoration-color: white;\n    background-color: var(--turquoise);\n}\n\n.network-relationship-button.selected:hover {\n    background: #03a5a7;\n}\n\n.network-button-container {\n    display: flex;\n    width: 100%;\n    justify-content: flex-start;\n    margin-top: 23px;\n}\n\n.personal-input-container {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: flex-start;\n    width: 100%;\n}\n\n.personal-input-container-row {\n    display: flex;\n    flex-direction: row;\n    justify-content: flex-start;\n    align-items: center;\n    width: 100%;\n}\n\n.personal-input-radio-list-container {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    justify-content: flex-start;\n    padding-left: 1em;\n}\n\n.personal-input-radio-container{\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    justify-content: flex-start;\n}\n\n.personal-input-race-specific-container {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    justify-content: flex-start;\n    margin-left: 1em;\n}\n\n.personal-input-race-specific-input {\n    font-size: \"10px\";\n    margin-bottom: 1em;\n    overflow: auto;\n}\n\n.personal-input-job-title-input {\n    font-size: \"10px\";\n    margin-left: 1em;\n    margin-bottom: 1em;\n    overflow: auto\n}\n\n.network-list {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    text-transform: none;\n    max-width: 75%;\n    margin: auto;\n}\n\n.network-list li {\n    display: list-item;\n    margin-left: 10px;\n    list-style-type: disc;\n    width: 100%;\n    padding: 1em 2em;\n    text-transform: none;\n    font-style: italic;\n    font-weight: normal;\n    color: var(--darkblue);\n    font-size: 16px;\n}\n\n.dropdown-select-input {\n    font-size: 14px;\n    color: var(--darkblue);\n    margin: 2px;\n    border-radius: 5px;\n}\n\n.name-matrix-table {\n    width: 60%;\n    margin: 0px auto 2em;\n    font-size: 16px;\n}\n\nthead, tbody, tfoot { vertical-align: middle } /* add this rule*/\ntd, th, tr { vertical-align: inherit } /* add this rule */\n\n/* Tutorial */\n\n.tutorial-container {\n    display: flex;\n    flex-direction: column;\n}\n\n.title-static-image {\n    display: flex;\n    justify-content: flex-start;\n    padding: 30px 15px;\n}\n\n.two-col {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    width: 60%;\n}\n\n.tutorial-content {\n    display: flex;\n    flex-direction: column;\n}\n\n.tutorial-static-image {\n    display:flex;\n    margin-right: 40px;\n    width: 45%;\n    justify-content: center;\n    align-items: center;\n}\n\n.tutorial-info {\n    width: 50%;\n}\n\n.intro-heading {\n    font-family:\"Palatino Linotype\", \"Book Antiqua\", Palatino, serif; \n    font-style:italic; \n    text-transform:uppercase; \n    font-weight:normal;\n    margin: 0px 0px;\n    font-size: 26px;\n    color: var(--darkblue);\n}\n\n.tutorial-body {\n    font-size: 16px;\n    word-spacing: 0.3em;\n    margin-top: 1rem;\n    color: var(--darkblue);\n}\n\n/* BUTTON STYLING AND POSITIONING */\n\n.tutorial-next-btn {\n    position: fixed;\n    top: 50%;\n    right: 0;\n    text-align:left;\n    background: var(--turquoise); \n\n}\n\n.tutorial-next-btn:hover {\n    margin-right: 20px;\n    background:var(--periwinkle)\n}\n\n.tutorial-next-btn:after {border-left:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}\n.tutorial-next-btn:hover:after {border-left:21px solid var(--periwinkle)}\n\n.tutorial-prev-btn {\n    position: fixed;\n    top: 50%;\n    left: 0;\n    text-align:right;\n    background: var(--turquoise); \n}\n\n.tutorial-prev-btn:hover {\n    margin-left: 20px;\n    background:var(--periwinkle)\n}\n\n.tutorial-prev-btn:before {border-right:21px solid var(--turquoise); transition:.35s ease; -moz-transition:.35s ease; -webkit-transition:.35s ease}\n.tutorial-prev-btn:hover:before {border-right:21px solid var(--periwinkle)}\n\n\n\n\n/* QUESTIONNAIRE STYLING */\n\n.questionnaire-radio {\n    display: flex;\n    flex-direction: row;\n    justify-content: center;\n    align-items: center;\n\n}\n\n.questionnaire-radio .quiz-button {\n    margin-right: 5px;\n    cursor: pointer;\n}\n\n.english-screening-buttons {\n    display: flex;\n    flex-direction: row;\n}\n\n.english-screening-horizontal-bar {\n    display: flex;\n}\n\n.questionnaire-heading {\n    margin: 10% auto 5% auto;\n    display: flex;\n    justify-content: center;\n    width: 590px;\n    text-align: center;\n}\n\n.question-section {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    margin-top: 15px;\n}\n\n.questionnaire-question {\n    padding-bottom: 20px;\n}\n\n.questionnaire-content-container {\n    display:flex;\n    flex-direction:column;\n    align-items: flex-start;\n    width: 590px;\n}\n\n.questionnaire-body {\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    background-color: white;\n    font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\n    color: var(--darkblue);\n    width: 100%;\n    font-size: 15px;\n    padding: 25px;\n}\n\n.questionnaire-btn-container {\n    display: flex;\n}\n\n.progress-bar {\n    display: flex;\n    flex-direction:row;\n    align-items: flex-end;\n}\n\n.completed-heading {\n    font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\n    color: var(--turquoise);\n    font-size: 20px;\n    font-weight: bold;\n}\n\n.completed-bar {\n    display: flex;\n    flex-direction: column;\n}\n\n.slider-value-container {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 100%;\n}\n\n.slider-value {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    border: 1px solid lightgrey;\n    width: 40px;\n    height: 40px;\n    border-radius: 50%;\n    background-color: lightgrey;\n}\n\n/* Customizing SLIDER */\n\n.player-slider-container {\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n    padding: 15px 0px;\n}\n\n.player-label {\n    display: flex;\n    width: 25%;\n    padding: 5px 5px;\n    overflow-wrap: anywhere;\n}\n\n.empirica-slider {\n    width: 100%;\n}\n\n.bp3-slider-axis {\n    display: flex;\n    justify-content: space-between;\n}\n\n.bp3-slider-label {\n    transform: translate(0%, 20px);\n    display: flex;\n    position: static;\n    padding: 2px 5px;\n    vertical-align: top;\n    line-height: 1;\n    font-size: 12px;\n}\n\n.bp3-slider-track {\n    background-color: var(--darkblue);\n}\n\n.bp3-slider-handle {\n    background-color: var(--turquoise);\n    border: 1px solid var(--turquoise);\n    border-radius: 50%;\n    background-image: none;\n    box-shadow: none;\n    width: 20px;\n    height: 20px;\n}\n\n/* Turn off label that appears below slider handle */\n.bp3-slider-handle .bp3-slider-label {\n    display: none;\n}\n\n\n.survey-textarea {\n    width: 100%;\n    resize: vertical;\n    padding: 5px 5px 5px 5px;\n    margin-bottom: 30px;\n}\n\n\n\n"
 );
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
