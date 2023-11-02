@@ -4,18 +4,24 @@ import { Centered } from "meteor/empirica:core";
 import _ from "lodash";
 
 const RelationshipButtonSet = ({contactName, tie, categories, categoriesSelected, handleCategorySelect}) => {
-    return(    
-        <div className="relationship-input-row" style={{width: "100%"}}>
-            <label className="relationship-input-label" htmlFor={tie}> <p>{contactName}</p> </label>
-            <div className="relationship-buttons-container">
-            {categories.map((category, index) => {
-                return (
-                    <div key={`${contactName}-${category}`} className={categoriesSelected[index] ? "network-relationship-button selected" : "network-relationship-button"} onClick={() => handleCategorySelect(tie, index)}> {category} </div>
-                )
-            })
-            }
+    return(   
+        <div style={{display: "flex", flexDirection: "column", width: "100%"}}> 
+            <div className="relationship-input-row" style={{width: "100%"}}>
+                <label className="relationship-input-label" htmlFor={tie}> <p>{contactName}</p> </label>
+                <div className="relationship-buttons-container">
+                {categories.map((category, index) => {
+                    return (
+                        <div key={`${contactName}-${category}`} className={categoriesSelected[index] ? "network-relationship-button selected" : "network-relationship-button"} onClick={() => handleCategorySelect(tie, index)}> {category} </div>
+                    )
+                })
+                }
+                </div>
             </div>
+            <p style={{display: "flex", justifyContent: "center"}}>
+                --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+             </p>
         </div>
+
     )
 
 }
@@ -24,7 +30,14 @@ const RelationshipButtonSet = ({contactName, tie, categories, categoriesSelected
 export default class NetworkSurveyRelationshipInterpreter extends React.Component { 
   constructor(props) {
     super(props);
-    const {name1, name2, name3, name4, name5} = this.props.player.get("networkResponse1");
+    // const {name1, name2, name3, name4, name5} = this.props.player.get("networkResponse1");
+    const {name1, name2, name3, name4, name5} = {
+        name1: "Person 1",
+        name2: "Person 2",
+        name3: "Person 3",
+        name4: "Person 4",
+        name5: "Person 5"
+    }
 
     this.state = {
         tie1 : [false, false, false, false], 
@@ -96,7 +109,7 @@ export default class NetworkSurveyRelationshipInterpreter extends React.Componen
                         </li>
                     </ul>
                     <form className="network-form" onSubmit={this.handleSubmit}>
-                        <p> What is their relationship to you? (Select all that applies) </p>
+                        <p> What is their relationship to you? (Select all that apply) </p>
                         {names.map((name, i) => {
                             return (
                                 <RelationshipButtonSet key={i} contactName={name} tie={`tie${i+1}`} categories={this.state.categories} categoriesSelected={this.state[`tie${i+1}`]} handleCategorySelect={this.handleCategorySelect}/>    

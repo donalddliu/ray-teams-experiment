@@ -86,6 +86,7 @@ Empirica.introSteps((game, treatment) => {
     return [];
   }
 
+  return [NetworkSurveyRelationshipInterpreter];
   return steps;
 });
 

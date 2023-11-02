@@ -89,7 +89,7 @@ const HispanicQuestionSet = ({selected, handleIsHispanicChange}) => {
     )
 }
 
-const RaceSpecific = ({race, message, textValue, handleRaceChange }) => {
+const RaceSpecific = ({message, textValue, handleRaceChange }) => {
     return(
     <div className="personal-input-race-specific-container">
         <p style={{margin:"0px 0px", fontSize:"100%"}}> {message}</p>
@@ -109,29 +109,18 @@ const RaceSpecific = ({race, message, textValue, handleRaceChange }) => {
 }
 
 const RaceQuestionSet = ({selected, textValue, handleRaceChange}) => {
-    const options = ["White",
-        "Black or African American",
-        "Indian (American)",
-        "Eskimo",
-        "Aleut",
-        "Chinese",
-        "Filipino",
-        "Hawaiian",
-        "Korean",
-        "Vietnamese",
-        "Japanese",
-        "Asian Indian",
-        "Samoan",
-        "Guamanian",
-        "Other Asian or Pacific Islander",
-        "Some other race",
-        "Multiracial or biracial"
+    const options = [
+        "African American or Black",
+        "Asian",
+        "Hispanic",
+        "White",
+        "Multiracial or biracial",
+        "Other",
     ];
 
     const askRaceSpecific = {
-        "Indian (American)" : "Please specify the name of the enrolled or principal tribe",
-        "Other Asian or Pacific Islander" : "Print race",
-        "Some other race" : "Print race",
+        "Asian" : "Print race",
+        "Other" : "Print race",
         "Multiracial or biracial" : "Print races"
     }
 
@@ -154,7 +143,6 @@ const RaceQuestionSet = ({selected, textValue, handleRaceChange}) => {
                                 {/* If the race specific is selected and is being rendered */}
                                 {selected in askRaceSpecific && option == selected ? 
                                 <RaceSpecific 
-                                    race={selected} 
                                     message={askRaceSpecific[selected]} 
                                     textValue={textValue} 
                                     handleRaceChange={handleRaceChange} />
@@ -170,14 +158,34 @@ const RaceQuestionSet = ({selected, textValue, handleRaceChange}) => {
 
 }
 
-const EducationQuestionSet = ({selected, handleEducationChange}) => {
+const EducationSpecific = ({message, textValue, handleEducationChange }) => {
+    return(
+    <div className="personal-input-race-specific-container">
+        <p style={{margin:"0px 0px", fontSize:"100%"}}> {message}</p>
+        <input 
+            className="personal-input-race-specific-input"
+            id="educationSpecific"
+            type="text"
+            dir="auto"
+            name="educationSpecific"
+            value={textValue}
+            onChange={handleEducationChange}
+            required
+        />
+    </div>  
+
+    )
+}
+
+const EducationQuestionSet = ({selected, textValue, handleEducationChange}) => {
     const options = ["High school graduate",
-        "Some college, no degree",
-        "Associate's degree",
         "Bachelor's degree",
-        "Master's degree",
-        "Professional degree (e.g., MD, JD)",
-        "Doctoral degree"]
+        "Master's degree or higher",
+        "Other"]
+
+    const askEducationSpecific = {
+        "Other" : "Please specify",
+    }
 
     return(
         <div className="personal-input-container" >
@@ -186,14 +194,24 @@ const EducationQuestionSet = ({selected, handleEducationChange}) => {
                 {
                     options.map((option) => {
                         return (
-                            <Radio
-                                key={option}
-                                selected={selected}
-                                name="education"
-                                value={option}
-                                label={option}
-                                onChange={handleEducationChange}
-                            />
+                            <div className="personal-input-radio-container">
+                                <Radio
+                                    key={option}
+                                    selected={selected}
+                                    name="education"
+                                    value={option}
+                                    label={option}
+                                    onChange={handleEducationChange}
+                                />
+                                {/* If the race specific is selected and is being rendered */}
+                                {selected in askEducationSpecific && option == selected ? 
+                                    <EducationSpecific 
+                                        message={askEducationSpecific[selected]} 
+                                        textValue={textValue} 
+                                        handleEducationChange={handleEducationChange} />
+                                    : null
+                                }
+                            </div>
                         )
                     })
                 }
@@ -264,6 +282,7 @@ export default class NetworkSurveyPersonalQuestions extends React.Component {
         race : "",
         raceSpecific: "",
         education : "",
+        educatoinSpecific: "",
         employed : "",
         jobTitle: "",
       };
@@ -311,7 +330,7 @@ export default class NetworkSurveyPersonalQuestions extends React.Component {
                         <GenderButtonSet genderSelected={this.state.gender} handleGenderSelect={this.handleGenderSelect} />    
                         <HispanicQuestionSet selected={this.state.isHispanic} handleIsHispanicChange={this.handleChange} />
                         <RaceQuestionSet selected={this.state.race} textValue={this.state.raceSpecific} handleRaceChange={this.handleChange} />
-                        <EducationQuestionSet selected={this.state.education} handleEducationChange={this.handleChange} />
+                        <EducationQuestionSet selected={this.state.education} textValue={this.state.EducationSpecific} handleEducationChange={this.handleChange} />
                         <EmploymentQuestionSet selected={this.state.employed} handleEmploymentChange={this.handleChange} />
                         {this.state.employed == "Yes" && <JobTitleQuestionSet textValue={this.state.jobTitle} handleJobTitleChange={this.handleChange} />}
                         <div className="network-button-container" style={{marginTop: "2em"}}>
