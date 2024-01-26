@@ -1,0 +1,1331 @@
+treatments:
+  - name: shortTrioDebug
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - raJowFXdnczRSrRwr
+      - YE89DePdMww8S9Ebb
+      - Xmou5Gqq7AuukEi4e
+      - MyZtxncTun649nusy
+      - yvNG4Cjs4k6rXmCpG
+      - Tm5XH7ybQwQGFDwqP
+      - DtthHshoa62oCX5nT
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+    archivedAt: 2022-04-15T15:17:48.768Z
+  - name: inactivityTest
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - raJowFXdnczRSrRwr
+      - YE89DePdMww8S9Ebb
+      - Xmou5Gqq7AuukEi4e
+      - KwGHviryMTE5FHuMD
+      - yvNG4Cjs4k6rXmCpG
+      - Tm5XH7ybQwQGFDwqP
+      - 8napda3soKmi5DGcX
+      - mWYo4A7FfxFs8GW2g
+      - REJ422MTq7TrxdruN
+    archivedAt: 2022-04-15T15:17:49.345Z
+  - name: taskTimeoutTest
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - raJowFXdnczRSrRwr
+      - YE89DePdMww8S9Ebb
+      - Xmou5Gqq7AuukEi4e
+      - MyZtxncTun649nusy
+      - yvNG4Cjs4k6rXmCpG
+      - Tm5XH7ybQwQGFDwqP
+      - bX7FHYS2XAzLnxgny
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+    archivedAt: 2022-04-15T15:00:40.011Z
+  - name: shortTrioGame
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - raJowFXdnczRSrRwr
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - MyZtxncTun649nusy
+      - yvNG4Cjs4k6rXmCpG
+      - Tm5XH7ybQwQGFDwqP
+      - DtthHshoa62oCX5nT
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+    archivedAt: 2022-04-15T15:17:50.133Z
+  - name: inactivityTest2
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - YE89DePdMww8S9Ebb
+      - Xmou5Gqq7AuukEi4e
+      - KwGHviryMTE5FHuMD
+      - yvNG4Cjs4k6rXmCpG
+      - Tm5XH7ybQwQGFDwqP
+      - 8napda3soKmi5DGcX
+      - mWYo4A7FfxFs8GW2g
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - DiCQZKdKPYQZjYWD2
+    archivedAt: 2022-06-12T01:11:09.500Z
+  - name: shortTrioGame2
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - MyZtxncTun649nusy
+      - yvNG4Cjs4k6rXmCpG
+      - Tm5XH7ybQwQGFDwqP
+      - DtthHshoa62oCX5nT
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+    archivedAt: 2022-06-12T01:11:10.018Z
+  - name: shortTrioDebug2
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - MyZtxncTun649nusy
+      - yvNG4Cjs4k6rXmCpG
+      - Tm5XH7ybQwQGFDwqP
+      - 8napda3soKmi5DGcX
+      - mWYo4A7FfxFs8GW2g
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+    archivedAt: 2022-04-15T15:17:53.190Z
+  - name: shortTrioDebug3
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - YE89DePdMww8S9Ebb
+      - Xmou5Gqq7AuukEi4e
+      - ge4fBSKGtP2n7jPth
+      - yvNG4Cjs4k6rXmCpG
+      - Tm5XH7ybQwQGFDwqP
+      - 8napda3soKmi5DGcX
+      - mWYo4A7FfxFs8GW2g
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+    archivedAt: 2022-06-12T01:11:10.236Z
+  - name: idlePastRoundEndTest
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - YE89DePdMww8S9Ebb
+      - Xmou5Gqq7AuukEi4e
+      - MyZtxncTun649nusy
+      - yvNG4Cjs4k6rXmCpG
+      - Tm5XH7ybQwQGFDwqP
+      - bX7FHYS2XAzLnxgny
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - DiCQZKdKPYQZjYWD2
+    archivedAt: 2022-06-12T01:11:10.752Z
+  - name: testEndGameIfPlayerDies
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - YE89DePdMww8S9Ebb
+      - Xmou5Gqq7AuukEi4e
+      - KwGHviryMTE5FHuMD
+      - yvNG4Cjs4k6rXmCpG
+      - Tm5XH7ybQwQGFDwqP
+      - 8napda3soKmi5DGcX
+      - mWYo4A7FfxFs8GW2g
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - DiCQZKdKPYQZjYWD2
+      - kmp4sYRbnmmFmKcq4
+      - aJKb9sq465g3DaEgF
+    archivedAt: 2022-06-12T01:11:17.687Z
+  - name: testNoOverlapSymbols
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - YE89DePdMww8S9Ebb
+      - Xmou5Gqq7AuukEi4e
+      - MyZtxncTun649nusy
+      - yvNG4Cjs4k6rXmCpG
+      - Tm5XH7ybQwQGFDwqP
+      - DtthHshoa62oCX5nT
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - oqbRnHEihJYLK7Mx6
+      - kmp4sYRbnmmFmKcq4
+      - eLZThSwkToELxSDm2
+    archivedAt: 2022-06-12T01:11:17.916Z
+  - name: test30SecondIdleWarning
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - YE89DePdMww8S9Ebb
+      - Xmou5Gqq7AuukEi4e
+      - KwGHviryMTE5FHuMD
+      - yvNG4Cjs4k6rXmCpG
+      - Tm5XH7ybQwQGFDwqP
+      - DtthHshoa62oCX5nT
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - DiCQZKdKPYQZjYWD2
+      - kmp4sYRbnmmFmKcq4
+      - oqbRnHEihJYLK7Mx6
+    archivedAt: 2022-06-12T01:11:18.211Z
+  - name: T1
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - zcaWvcTgbTXCujWd3
+      - MyZtxncTun649nusy
+      - Xmou5Gqq7AuukEi4e
+      - yvNG4Cjs4k6rXmCpG
+      - Tm5XH7ybQwQGFDwqP
+      - DtthHshoa62oCX5nT
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+      - kmp4sYRbnmmFmKcq4
+      - oqbRnHEihJYLK7Mx6
+  - name: T2
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - MyZtxncTun649nusy
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - DtthHshoa62oCX5nT
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+      - 9MYbQSsK6F28K73iw
+      - oqbRnHEihJYLK7Mx6
+  - name: cbNetwork
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - owJz8bmRcHWYEFMrt
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - MyZtxncTun649nusy
+      - yvNG4Cjs4k6rXmCpG
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+      - kmp4sYRbnmmFmKcq4
+      - oqbRnHEihJYLK7Mx6
+  - name: dbNetwork
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - DLpmgndrB7LanCFb6
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - MyZtxncTun649nusy
+      - yvNG4Cjs4k6rXmCpG
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+      - kmp4sYRbnmmFmKcq4
+      - oqbRnHEihJYLK7Mx6
+  - name: wheelNetwork
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - aeDhdD5NgPmJgkkNf
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - MyZtxncTun649nusy
+      - yvNG4Cjs4k6rXmCpG
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+      - kmp4sYRbnmmFmKcq4
+      - oqbRnHEihJYLK7Mx6
+  - name: cbNetworkWithIdling
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - owJz8bmRcHWYEFMrt
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - MyZtxncTun649nusy
+      - MqQs7jm9G5Y8ENskg
+      - Tm5XH7ybQwQGFDwqP
+      - cGiEiRcNoWkbLWvFK
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+      - 9MYbQSsK6F28K73iw
+      - oqbRnHEihJYLK7Mx6
+  - name: dbNetworkWithIdling
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - DLpmgndrB7LanCFb6
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - MyZtxncTun649nusy
+      - MqQs7jm9G5Y8ENskg
+      - Tm5XH7ybQwQGFDwqP
+      - cGiEiRcNoWkbLWvFK
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+      - 9MYbQSsK6F28K73iw
+      - oqbRnHEihJYLK7Mx6
+  - name: wheelNetworkWithIdling
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - aeDhdD5NgPmJgkkNf
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - MyZtxncTun649nusy
+      - MqQs7jm9G5Y8ENskg
+      - Tm5XH7ybQwQGFDwqP
+      - cGiEiRcNoWkbLWvFK
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+      - 9MYbQSsK6F28K73iw
+      - oqbRnHEihJYLK7Mx6
+  - name: cliqueNetworkWithIdling
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - QWvWjSWuwdQmKmLyx
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - MyZtxncTun649nusy
+      - MqQs7jm9G5Y8ENskg
+      - Tm5XH7ybQwQGFDwqP
+      - cGiEiRcNoWkbLWvFK
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+      - 9MYbQSsK6F28K73iw
+      - oqbRnHEihJYLK7Mx6
+  - name: threePlayerWheelPilot
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - X4jAhXdMbGoDPnfcn
+      - MqQs7jm9G5Y8ENskg
+      - Tm5XH7ybQwQGFDwqP
+      - cGiEiRcNoWkbLWvFK
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+      - 9MYbQSsK6F28K73iw
+      - oqbRnHEihJYLK7Mx6
+  - name: threePlayerFCPilot
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - bR87bC2YD3XwjKT2Q
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - X4jAhXdMbGoDPnfcn
+      - MqQs7jm9G5Y8ENskg
+      - Tm5XH7ybQwQGFDwqP
+      - cGiEiRcNoWkbLWvFK
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+      - 9MYbQSsK6F28K73iw
+      - oqbRnHEihJYLK7Mx6
+  - name: fourPlayerWheelPilot
+    factorIds:
+      - PHPwcoonXp3tAYQuF
+      - nGTXMi7ZKM2Fq2jrx
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - X4jAhXdMbGoDPnfcn
+      - MqQs7jm9G5Y8ENskg
+      - Tm5XH7ybQwQGFDwqP
+      - cGiEiRcNoWkbLWvFK
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+      - 9MYbQSsK6F28K73iw
+      - oqbRnHEihJYLK7Mx6
+  - name: fourPlayerFCPilot
+    factorIds:
+      - PHPwcoonXp3tAYQuF
+      - WNNasxKxMXT3GDepN
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - X4jAhXdMbGoDPnfcn
+      - MqQs7jm9G5Y8ENskg
+      - Tm5XH7ybQwQGFDwqP
+      - cGiEiRcNoWkbLWvFK
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+      - 9MYbQSsK6F28K73iw
+      - oqbRnHEihJYLK7Mx6
+  - name: fivePlayerFCPilot (3 min inactivity)
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - QWvWjSWuwdQmKmLyx
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - X4jAhXdMbGoDPnfcn
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - cGiEiRcNoWkbLWvFK
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+      - 9MYbQSsK6F28K73iw
+      - oqbRnHEihJYLK7Mx6
+  - name: fivePlayerCBPilot (3 min inactivity)
+    factorIds:
+      - owJz8bmRcHWYEFMrt
+      - jxHJYXPwAD9rDEyNi
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - X4jAhXdMbGoDPnfcn
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - cGiEiRcNoWkbLWvFK
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+      - 9MYbQSsK6F28K73iw
+      - oqbRnHEihJYLK7Mx6
+  - name: fivePlayerWheelPilot (3 min inactivity)
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - aeDhdD5NgPmJgkkNf
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - X4jAhXdMbGoDPnfcn
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - cGiEiRcNoWkbLWvFK
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+      - 9MYbQSsK6F28K73iw
+      - oqbRnHEihJYLK7Mx6
+  - name: fivePlayerDBPilot (3 min inactivity)
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - DLpmgndrB7LanCFb6
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - X4jAhXdMbGoDPnfcn
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - cGiEiRcNoWkbLWvFK
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - eLZThSwkToELxSDm2
+      - 9MYbQSsK6F28K73iw
+      - oqbRnHEihJYLK7Mx6
+  - name: fivePlayerCBPilotv2
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - XQgR8bDKyYueedrci
+      - rSpWKL6jsauJKHnxC
+      - owJz8bmRcHWYEFMrt
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - KwGHviryMTE5FHuMD
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - KroKA4CAatt3iRhiS
+      - 9MYbQSsK6F28K73iw
+      - oqbRnHEihJYLK7Mx6
+      - mGvyEEv9AnRG3hEde
+      - ZJQsCAKTdxWmSgcsw
+      - L2AgWCheyKsA7ZGQN
+  - name: fivePlayerFCPilotv2
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - XQgR8bDKyYueedrci
+      - rSpWKL6jsauJKHnxC
+      - QWvWjSWuwdQmKmLyx
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - KwGHviryMTE5FHuMD
+      - d2ppwEhvzaZ6LJDYe
+      - XEwTLsRFTcjFXuyXg
+      - Tm5XH7ybQwQGFDwqP
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - KroKA4CAatt3iRhiS
+      - 9MYbQSsK6F28K73iw
+      - oqbRnHEihJYLK7Mx6
+      - mGvyEEv9AnRG3hEde
+      - ZJQsCAKTdxWmSgcsw
+      - L2AgWCheyKsA7ZGQN
+  - name: fivePlayerWheelPilotv2
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - XQgR8bDKyYueedrci
+      - rSpWKL6jsauJKHnxC
+      - aeDhdD5NgPmJgkkNf
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - KwGHviryMTE5FHuMD
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - KroKA4CAatt3iRhiS
+      - 9MYbQSsK6F28K73iw
+      - oqbRnHEihJYLK7Mx6
+      - mGvyEEv9AnRG3hEde
+      - ZJQsCAKTdxWmSgcsw
+      - L2AgWCheyKsA7ZGQN
+  - name: fivePlayerDBPilotv2
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - XQgR8bDKyYueedrci
+      - rSpWKL6jsauJKHnxC
+      - DLpmgndrB7LanCFb6
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - KwGHviryMTE5FHuMD
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - KroKA4CAatt3iRhiS
+      - 9MYbQSsK6F28K73iw
+      - oqbRnHEihJYLK7Mx6
+      - mGvyEEv9AnRG3hEde
+      - ZJQsCAKTdxWmSgcsw
+      - L2AgWCheyKsA7ZGQN
+  - name: preQualificationOld
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - XQgR8bDKyYueedrci
+      - rSpWKL6jsauJKHnxC
+      - QWvWjSWuwdQmKmLyx
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - KwGHviryMTE5FHuMD
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - DiCQZKdKPYQZjYWD2
+      - kmp4sYRbnmmFmKcq4
+      - oqbRnHEihJYLK7Mx6
+      - ESC2pNubvnHJCSn6F
+      - ZJQsCAKTdxWmSgcsw
+      - L2AgWCheyKsA7ZGQN
+    archivedAt: 2022-10-03T19:44:16.568Z
+  - name: preQualification
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - XQgR8bDKyYueedrci
+      - rSpWKL6jsauJKHnxC
+      - QWvWjSWuwdQmKmLyx
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - KwGHviryMTE5FHuMD
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - DiCQZKdKPYQZjYWD2
+      - kmp4sYRbnmmFmKcq4
+      - oqbRnHEihJYLK7Mx6
+      - ESC2pNubvnHJCSn6F
+      - ZJQsCAKTdxWmSgcsw
+      - L2AgWCheyKsA7ZGQN
+      - vdhKSvxPwuaQxzGjR
+  - name: fivePlayerCBPilot
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - fe2W38YBkSG3Bjgqa
+      - rSpWKL6jsauJKHnxC
+      - owJz8bmRcHWYEFMrt
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - KwGHviryMTE5FHuMD
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - DiCQZKdKPYQZjYWD2
+      - kmp4sYRbnmmFmKcq4
+      - oqbRnHEihJYLK7Mx6
+      - ESC2pNubvnHJCSn6F
+      - ZJQsCAKTdxWmSgcsw
+      - L2AgWCheyKsA7ZGQN
+      - o5LdnMWHhMhqaDSxk
+  - name: fivePlayerDBPilot
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - fe2W38YBkSG3Bjgqa
+      - rSpWKL6jsauJKHnxC
+      - DLpmgndrB7LanCFb6
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - KwGHviryMTE5FHuMD
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - DiCQZKdKPYQZjYWD2
+      - kmp4sYRbnmmFmKcq4
+      - oqbRnHEihJYLK7Mx6
+      - ESC2pNubvnHJCSn6F
+      - ZJQsCAKTdxWmSgcsw
+      - L2AgWCheyKsA7ZGQN
+      - o5LdnMWHhMhqaDSxk
+  - name: fivePlayerFCPilot
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - fe2W38YBkSG3Bjgqa
+      - rSpWKL6jsauJKHnxC
+      - QWvWjSWuwdQmKmLyx
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - KwGHviryMTE5FHuMD
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - DiCQZKdKPYQZjYWD2
+      - kmp4sYRbnmmFmKcq4
+      - oqbRnHEihJYLK7Mx6
+      - ESC2pNubvnHJCSn6F
+      - ZJQsCAKTdxWmSgcsw
+      - L2AgWCheyKsA7ZGQN
+      - o5LdnMWHhMhqaDSxk
+  - name: fivePlayerWheelPilot
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - fe2W38YBkSG3Bjgqa
+      - rSpWKL6jsauJKHnxC
+      - aeDhdD5NgPmJgkkNf
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - KwGHviryMTE5FHuMD
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - DiCQZKdKPYQZjYWD2
+      - kmp4sYRbnmmFmKcq4
+      - oqbRnHEihJYLK7Mx6
+      - ESC2pNubvnHJCSn6F
+      - ZJQsCAKTdxWmSgcsw
+      - L2AgWCheyKsA7ZGQN
+      - o5LdnMWHhMhqaDSxk
+  - name: fivePlayerFCProlific
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - XQgR8bDKyYueedrci
+      - pKmtxHeAqmAskyoJ8
+      - QWvWjSWuwdQmKmLyx
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - s5Gswk2Xhmu57St6Z
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - DiCQZKdKPYQZjYWD2
+      - kmp4sYRbnmmFmKcq4
+      - oqbRnHEihJYLK7Mx6
+      - ESC2pNubvnHJCSn6F
+      - ZJQsCAKTdxWmSgcsw
+      - L2AgWCheyKsA7ZGQN
+      - o5LdnMWHhMhqaDSxk
+  - name: fivePlayerWheelProlific
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - XQgR8bDKyYueedrci
+      - pKmtxHeAqmAskyoJ8
+      - aeDhdD5NgPmJgkkNf
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - s5Gswk2Xhmu57St6Z
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - DiCQZKdKPYQZjYWD2
+      - kmp4sYRbnmmFmKcq4
+      - oqbRnHEihJYLK7Mx6
+      - ESC2pNubvnHJCSn6F
+      - ZJQsCAKTdxWmSgcsw
+      - L2AgWCheyKsA7ZGQN
+      - o5LdnMWHhMhqaDSxk
+  - name: testEndGameSurvey
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - XQgR8bDKyYueedrci
+      - pKmtxHeAqmAskyoJ8
+      - owJz8bmRcHWYEFMrt
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - X4jAhXdMbGoDPnfcn
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - DiCQZKdKPYQZjYWD2
+      - kmp4sYRbnmmFmKcq4
+      - oqbRnHEihJYLK7Mx6
+      - Lm5bcQt9e4BGasvuP
+      - ZJQsCAKTdxWmSgcsw
+      - L2AgWCheyKsA7ZGQN
+      - o5LdnMWHhMhqaDSxk
+  - name: fivePlayerFCProlific2
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - XQgR8bDKyYueedrci
+      - pKmtxHeAqmAskyoJ8
+      - QWvWjSWuwdQmKmLyx
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - X4jAhXdMbGoDPnfcn
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - DiCQZKdKPYQZjYWD2
+      - kmp4sYRbnmmFmKcq4
+      - oqbRnHEihJYLK7Mx6
+      - ESC2pNubvnHJCSn6F
+      - ZJQsCAKTdxWmSgcsw
+      - L2AgWCheyKsA7ZGQN
+      - o5LdnMWHhMhqaDSxk
+  - name: fivePlayerWheelProlific2
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - XQgR8bDKyYueedrci
+      - pKmtxHeAqmAskyoJ8
+      - aeDhdD5NgPmJgkkNf
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - X4jAhXdMbGoDPnfcn
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - DiCQZKdKPYQZjYWD2
+      - kmp4sYRbnmmFmKcq4
+      - oqbRnHEihJYLK7Mx6
+      - ESC2pNubvnHJCSn6F
+      - ZJQsCAKTdxWmSgcsw
+      - L2AgWCheyKsA7ZGQN
+      - o5LdnMWHhMhqaDSxk
+  - name: fivePlayerCBProlific2
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - XQgR8bDKyYueedrci
+      - pKmtxHeAqmAskyoJ8
+      - owJz8bmRcHWYEFMrt
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - X4jAhXdMbGoDPnfcn
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - DiCQZKdKPYQZjYWD2
+      - kmp4sYRbnmmFmKcq4
+      - oqbRnHEihJYLK7Mx6
+      - ESC2pNubvnHJCSn6F
+      - ZJQsCAKTdxWmSgcsw
+      - L2AgWCheyKsA7ZGQN
+      - o5LdnMWHhMhqaDSxk
+  - name: fivePlayerDBProlific2
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - XQgR8bDKyYueedrci
+      - pKmtxHeAqmAskyoJ8
+      - DLpmgndrB7LanCFb6
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - X4jAhXdMbGoDPnfcn
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - DiCQZKdKPYQZjYWD2
+      - oqbRnHEihJYLK7Mx6
+      - ESC2pNubvnHJCSn6F
+      - ZJQsCAKTdxWmSgcsw
+      - L2AgWCheyKsA7ZGQN
+      - o5LdnMWHhMhqaDSxk
+      - kmp4sYRbnmmFmKcq4
+  - name: testEndGameSurvey2
+    factorIds:
+      - jxHJYXPwAD9rDEyNi
+      - XQgR8bDKyYueedrci
+      - pKmtxHeAqmAskyoJ8
+      - DLpmgndrB7LanCFb6
+      - zcaWvcTgbTXCujWd3
+      - Xmou5Gqq7AuukEi4e
+      - RLXxzoeMWEHRL8Ean
+      - d2ppwEhvzaZ6LJDYe
+      - Tm5XH7ybQwQGFDwqP
+      - XEwTLsRFTcjFXuyXg
+      - mXXupreKyXwYhAsYG
+      - REJ422MTq7TrxdruN
+      - 7s3eAHEWQZBFtpc37
+      - DiCQZKdKPYQZjYWD2
+      - kmp4sYRbnmmFmKcq4
+      - oqbRnHEihJYLK7Mx6
+      - Lm5bcQt9e4BGasvuP
+      - ZJQsCAKTdxWmSgcsw
+      - L2AgWCheyKsA7ZGQN
+      - o5LdnMWHhMhqaDSxk
+factorTypes:
+  - _id: EMFiKE9FxL6cX7Ez8
+    name: playerCount
+    description: The Number of players participating in the given game.
+    required: true
+    type: Integer
+    min: 1
+  - _id: BxJpCk9cevNnudWBB
+    name: basePay
+    description: >-
+      The base amount of money (in USD) a user will get for completing the
+      experiment
+    required: false
+    type: Number
+    min: 0
+    max: 99999
+  - _id: xusRHAyx8EEBmir9Q
+    name: conversionRate
+    description: >-
+      The conversion rate of score to bonus dollars paid: points x
+      conversionRate = bonus in USD
+    required: false
+    type: Number
+    min: 0
+    max: 99999
+  - _id: bkF6kYmxwzAfyncq3
+    name: networkStructure
+    description: >-
+      For multiplayer, determines who is connected to who in terms of 1-1 chats.
+      For example, “1-2, 1-3, 2-3” means that player 1 can talk to player 2 and
+      3, player 2 can talk to player 1 and 3, and player 3 can talk to player 1
+      and 2.
+    required: true
+    type: String
+    min: 0
+    max: 9999
+  - _id: PRDoNLNam38iHtyzz
+    name: numRounds
+    description: number of rounds that will be played by players
+    required: false
+    type: Integer
+    min: 1
+    max: 20
+    archivedAt: 2022-04-11T19:55:19.676Z
+  - _id: q3mtZL9RRau8pu6Sk
+    name: setSize
+    description: The number of symbols a player sees in each task
+    required: true
+    type: Number
+    min: 1
+    max: 999
+    archivedAt: 2022-04-15T14:13:51.939Z
+  - _id: AvSzfEvM76qzFrB8g
+    name: skipIntro
+    description: 'For debugging purposes: skips over the tutorial and initial quiz'
+    required: false
+    type: Boolean
+  - _id: 8fM3xysHDXN2kYgSq
+    name: setSizeBasedOnPlayerCount
+    description: >-
+      Setting this to true will result in the symbol set size to be playerCount
+      + 1. If false, symbol set size will be based on a default value
+    required: true
+    type: Boolean
+  - _id: X8jdzeWyu2bao9rwj
+    name: userInactivityDuration
+    description: >-
+      Duration of time (seconds) until a player gets kicked out of game due to
+      inactivity (Not messaging, submitting, clicking on anything)
+    required: true
+    type: Number
+    min: 0
+    max: 99999
+  - _id: zeay2JbmRBg99NvnA
+    name: numTaskRounds
+    description: Number of task rounds in a game
+    required: true
+    type: Integer
+    min: 0
+    max: 99999
+  - _id: aJm4nPNsCGuZieGFX
+    name: numSurveyRounds
+    description: >-
+      Number of survey rounds in the game (Surveys rounds will be placed in even
+      intervals within the total number of task rounds)
+    required: true
+    type: Integer
+    min: 0
+    max: 99999
+  - _id: wEsdcXWYJA2acghXg
+    name: taskDuration
+    description: Duration (in seconds) players get to complete a task round
+    required: true
+    type: Integer
+    min: 0
+    max: 999999
+  - _id: rxhc7t7AFwiG7KPM6
+    name: surveyDuration
+    description: Duration (in seconds) players get to complete a survey round
+    required: true
+    type: Integer
+    min: 0
+    max: 999999
+  - _id: EraBq7JRamAjzMMZY
+    name: resultsDuration
+    description: >-
+      Duration (in seconds) players get to see the results following a task
+      round
+    required: true
+    type: Integer
+    min: 0
+    max: 999999
+  - _id: zXqf74Ry9RC9TxLcR
+    name: defaultSetSize
+    description: 'If setSizeBasedOnPlayerCount is false, the defaultSetSize will be used'
+    required: true
+    type: Integer
+    min: 0
+    max: 999
+  - _id: yg3T7jELpr2qFEZYa
+    name: idleWarningTime
+    description: >-
+      Users will be shown a warning idleWarningTime (seconds) before the
+      userInactivityDuration. (i.e. 60 s means players will be shown a warning
+      if they have been idle for (userInactivityDuration - 60) s )
+    required: true
+    type: Integer
+    min: 0
+    max: 999999
+  - _id: CFbrZPGEBjvoXPYt4
+    name: toggleInactiveTimer
+    description: >-
+      If true, turn on inactive timer/warnings; If false, turn off inactive
+      timer/warnings
+    required: true
+    type: Boolean
+    archivedAt: 2022-04-15T15:08:04.033Z
+  - _id: Qm4JPdnxfQE59QgZo
+    name: endGameIfPlayerIdle
+    description: >-
+      If this is true, if a player becomes inactive at any point in the game,
+      the whole game will end. Otherwise, the players will default to a fully
+      connected layer
+    required: true
+    type: Boolean
+  - _id: yxtKFHYTZ7Bj7oSCq
+    name: maxNumOverlap
+    description: Maximum number of symbols that overlap with n-1 players.
+    required: true
+    type: Integer
+    min: 0
+    max: 99999
+  - _id: zR7ehSLAoaBd7BGHa
+    name: maxGameTime
+    description: >-
+      Maximum time (in minutes) allotted for participants to play the game
+      before they are sent to the Exit Survey
+    required: false
+    type: Number
+    min: 0
+    max: 99999
+  - _id: wbr7mLvcfLzB6QRaw
+    name: taskWarningTime
+    description: >-
+      Users will be shown a warning taskWarningTime (seconds) before the
+      taskDuration duration. (i.e. 60 means players will be shown a warning if
+      there is 60 seconds left to complete the task)
+    required: false
+    type: Number
+    min: 0
+    max: 99999
+  - _id: 7wbct5KE4jMw5qMdt
+    name: minPlayerCount
+    description: >-
+      The minimum number of players that a game should have. If there are less
+      players than the minPlayerCount, the game will end.
+    required: false
+    type: Integer
+    min: 0
+    max: 9999
+  - _id: KWoWFwwx7Q6pkgfeq
+    name: isPreQualification
+    description: 'True if  game is pre-qualification, false otherwise'
+    required: false
+    type: Boolean
+factors:
+  - _id: YE89DePdMww8S9Ebb
+    name: 'true'
+    value: true
+    factorTypeId: AvSzfEvM76qzFrB8g
+  - _id: zcaWvcTgbTXCujWd3
+    name: 'false'
+    value: false
+    factorTypeId: AvSzfEvM76qzFrB8g
+  - _id: Xmou5Gqq7AuukEi4e
+    name: 'true'
+    value: true
+    factorTypeId: 8fM3xysHDXN2kYgSq
+  - _id: bYAdpxzGbNaCGoswy
+    name: 'false'
+    value: false
+    factorTypeId: 8fM3xysHDXN2kYgSq
+  - _id: DPpiyJiPbXRnnaNzW
+    name: 'true'
+    value: true
+    factorTypeId: CFbrZPGEBjvoXPYt4
+  - _id: ashM3gK7TxX9CcwLC
+    name: 'false'
+    value: false
+    factorTypeId: CFbrZPGEBjvoXPYt4
+  - _id: 8KFfqTBxKyx2J5wZp
+    name: pair
+    value: 2
+    factorTypeId: EMFiKE9FxL6cX7Ez8
+  - _id: eGhmMXCtyGp5Y7PxZ
+    name: trio
+    value: 3
+    factorTypeId: EMFiKE9FxL6cX7Ez8
+  - _id: 79yjDR8XLoacEwEic
+    name: solo
+    value: 1
+    factorTypeId: EMFiKE9FxL6cX7Ez8
+  - _id: XQgR8bDKyYueedrci
+    name: twoDollars
+    value: 2
+    factorTypeId: BxJpCk9cevNnudWBB
+  - _id: pKmtxHeAqmAskyoJ8
+    name: oneToOne
+    value: 1
+    factorTypeId: xusRHAyx8EEBmir9Q
+  - _id: bR87bC2YD3XwjKT2Q
+    name: threePlayerFullNetwork
+    value: '1-2, 1-3, 2-3'
+    factorTypeId: bkF6kYmxwzAfyncq3
+  - _id: uCbhEMaXMQMqFvF4W
+    name: fifteenRounds
+    value: 15
+    factorTypeId: PRDoNLNam38iHtyzz
+  - _id: dxetKNYRo4sroJkWr
+    name: threePlayerPartialNetwork
+    value: '"1-2, 1-3"'
+    factorTypeId: bkF6kYmxwzAfyncq3
+    archivedAt: 2022-02-28T23:01:43.656Z
+  - _id: YTmoSnX3AbCHH8bNy
+    name: threePlayerPartialNetwork
+    value: '1-2, 1-3'
+    factorTypeId: bkF6kYmxwzAfyncq3
+  - _id: CPW3AN9EBwzbw2KmX
+    name: sixRounds
+    value: 6
+    factorTypeId: PRDoNLNam38iHtyzz
+  - _id: RkpupzrJ6ZXGxtn69
+    name: eighteenRounds
+    value: 18
+    factorTypeId: PRDoNLNam38iHtyzz
+  - _id: raJowFXdnczRSrRwr
+    name: three
+    value: 3
+    factorTypeId: q3mtZL9RRau8pu6Sk
+  - _id: yxqpuh9MNmyfEdQYH
+    name: six
+    value: 6
+    factorTypeId: q3mtZL9RRau8pu6Sk
+  - _id: MyZtxncTun649nusy
+    name: fiveMinutes
+    value: 300
+    factorTypeId: X8jdzeWyu2bao9rwj
+  - _id: KwGHviryMTE5FHuMD
+    name: oneMinute
+    value: 60
+    factorTypeId: X8jdzeWyu2bao9rwj
+  - _id: d2ppwEhvzaZ6LJDYe
+    name: fifteenTasks
+    value: 15
+    factorTypeId: zeay2JbmRBg99NvnA
+  - _id: Tm5XH7ybQwQGFDwqP
+    name: threeSurveys
+    value: 3
+    factorTypeId: aJm4nPNsCGuZieGFX
+  - _id: 8napda3soKmi5DGcX
+    name: veryLong
+    value: 999999
+    factorTypeId: wEsdcXWYJA2acghXg
+  - _id: DtthHshoa62oCX5nT
+    name: tenMinutes
+    value: 600
+    factorTypeId: wEsdcXWYJA2acghXg
+  - _id: REJ422MTq7TrxdruN
+    name: fiveSeconds
+    value: 5
+    factorTypeId: EraBq7JRamAjzMMZY
+  - _id: mWYo4A7FfxFs8GW2g
+    name: veryLong
+    value: 999999
+    factorTypeId: rxhc7t7AFwiG7KPM6
+  - _id: mXXupreKyXwYhAsYG
+    name: tenMinutes
+    value: 600
+    factorTypeId: rxhc7t7AFwiG7KPM6
+  - _id: yvNG4Cjs4k6rXmCpG
+    name: sixTasks
+    value: 6
+    factorTypeId: zeay2JbmRBg99NvnA
+  - _id: bX7FHYS2XAzLnxgny
+    name: oneMinute
+    value: 60
+    factorTypeId: wEsdcXWYJA2acghXg
+  - _id: 7s3eAHEWQZBFtpc37
+    name: threeSymbols
+    value: 3
+    factorTypeId: zXqf74Ry9RC9TxLcR
+  - _id: eLZThSwkToELxSDm2
+    name: oneMinute
+    value: 60
+    factorTypeId: yg3T7jELpr2qFEZYa
+  - _id: DiCQZKdKPYQZjYWD2
+    name: halfMinute
+    value: 30
+    factorTypeId: yg3T7jELpr2qFEZYa
+  - _id: ge4fBSKGtP2n7jPth
+    name: veryLong
+    value: 99999
+    factorTypeId: X8jdzeWyu2bao9rwj
+  - _id: kmp4sYRbnmmFmKcq4
+    name: 'true'
+    value: true
+    factorTypeId: Qm4JPdnxfQE59QgZo
+  - _id: 9MYbQSsK6F28K73iw
+    name: 'false'
+    value: false
+    factorTypeId: Qm4JPdnxfQE59QgZo
+  - _id: oqbRnHEihJYLK7Mx6
+    name: zero
+    value: 0
+    factorTypeId: yxtKFHYTZ7Bj7oSCq
+  - _id: aJKb9sq465g3DaEgF
+    name: one
+    value: 1
+    factorTypeId: yxtKFHYTZ7Bj7oSCq
+  - _id: hfeZ7WynTbZKiCJmb
+    name: two
+    value: 2
+    factorTypeId: yxtKFHYTZ7Bj7oSCq
+  - _id: xyQXsovghRhGC7u79
+    name: noOverlap
+    value: 99999
+    factorTypeId: yxtKFHYTZ7Bj7oSCq
+    archivedAt: 2022-05-11T16:57:13.396Z
+  - _id: jxHJYXPwAD9rDEyNi
+    name: five
+    value: 5
+    factorTypeId: EMFiKE9FxL6cX7Ez8
+  - _id: QWvWjSWuwdQmKmLyx
+    name: cliqueNetwork
+    value: >-
+      1-2, 1-3, 1-4, 1-5, 2-1, 2-3, 2-4, 2-5, 3-1, 3-2, 3-4, 3-5, 4-1, 4-2, 4-3,
+      4-5, 5-1, 5-2, 5-3, 5-4
+    factorTypeId: bkF6kYmxwzAfyncq3
+  - _id: owJz8bmRcHWYEFMrt
+    name: connectedBrokersNetwork
+    value: '1-2, 1-3, 1-4, 1-5, 2-1, 2-3, 2-4, 2-5, 3-1, 3-2, 4-1, 4-2, 5-1, 5-2'
+    factorTypeId: bkF6kYmxwzAfyncq3
+  - _id: DLpmgndrB7LanCFb6
+    name: disconnectedBrokersNetwork
+    value: '1-3, 1-4, 1-5, 2-3, 2-4, 2-5, 3-1, 3-2, 4-1, 4-2, 5-1, 5-2'
+    factorTypeId: bkF6kYmxwzAfyncq3
+  - _id: aeDhdD5NgPmJgkkNf
+    name: wheelNetwork
+    value: '1-2, 1-3, 1-4, 1-5'
+    factorTypeId: bkF6kYmxwzAfyncq3
+  - _id: XEwTLsRFTcjFXuyXg
+    name: fifteenMinutes
+    value: 900
+    factorTypeId: wEsdcXWYJA2acghXg
+  - _id: MqQs7jm9G5Y8ENskg
+    name: twleveTasks
+    value: 12
+    factorTypeId: zeay2JbmRBg99NvnA
+  - _id: cGiEiRcNoWkbLWvFK
+    name: thirtyMinutes
+    value: 1800
+    factorTypeId: wEsdcXWYJA2acghXg
+  - _id: PHPwcoonXp3tAYQuF
+    name: four
+    value: 4
+    factorTypeId: EMFiKE9FxL6cX7Ez8
+  - _id: nGTXMi7ZKM2Fq2jrx
+    name: fourPlayerWheel
+    value: '1-2, 1-3, 1-4'
+    factorTypeId: bkF6kYmxwzAfyncq3
+  - _id: X4jAhXdMbGoDPnfcn
+    name: threeMinutes
+    value: 180
+    factorTypeId: X8jdzeWyu2bao9rwj
+  - _id: WNNasxKxMXT3GDepN
+    name: fourPlayerFC
+    value: '1-2, 1-3, 1-4, 2-1, 2-3, 2-4, 3-1, 3-2, 3-4, 4-1, 4-2, 4-3'
+    factorTypeId: bkF6kYmxwzAfyncq3
+  - _id: rSpWKL6jsauJKHnxC
+    name: oneToOneAndAHalf
+    value: 1.5
+    factorTypeId: xusRHAyx8EEBmir9Q
+  - _id: mGvyEEv9AnRG3hEde
+    name: ninetyMinutes
+    value: 90
+    factorTypeId: zR7ehSLAoaBd7BGHa
+  - _id: RLXxzoeMWEHRL8Ean
+    name: oneAndAHalfMinutes
+    value: 90
+    factorTypeId: X8jdzeWyu2bao9rwj
+  - _id: ZJQsCAKTdxWmSgcsw
+    name: halfMinute
+    value: 30
+    factorTypeId: wbr7mLvcfLzB6QRaw
+  - _id: L2AgWCheyKsA7ZGQN
+    name: four
+    value: 4
+    factorTypeId: 7wbct5KE4jMw5qMdt
+  - _id: KroKA4CAatt3iRhiS
+    name: fifteenSeconds
+    value: 15
+    factorTypeId: yg3T7jELpr2qFEZYa
+  - _id: ESC2pNubvnHJCSn6F
+    name: sixtyMinutes
+    value: 60
+    factorTypeId: zR7ehSLAoaBd7BGHa
+  - _id: vdhKSvxPwuaQxzGjR
+    name: 'true'
+    value: true
+    factorTypeId: KWoWFwwx7Q6pkgfeq
+  - _id: o5LdnMWHhMhqaDSxk
+    name: 'false'
+    value: false
+    factorTypeId: KWoWFwwx7Q6pkgfeq
+  - _id: fe2W38YBkSG3Bjgqa
+    name: threeDollars
+    value: 3
+    factorTypeId: BxJpCk9cevNnudWBB
+  - _id: s5Gswk2Xhmu57St6Z
+    name: twoMinutes
+    value: 120
+    factorTypeId: X8jdzeWyu2bao9rwj
+  - _id: Lm5bcQt9e4BGasvuP
+    name: threeMinutes
+    value: 3
+    factorTypeId: zR7ehSLAoaBd7BGHa
+lobbyConfigs:
+  - name: Default
+    timeoutType: lobby
+    timeoutInSeconds: 600
+    timeoutStrategy: fail
+    gameLobbyIds: []
+  - name: Ignore
+    timeoutType: lobby
+    timeoutInSeconds: 600
+    timeoutStrategy: ignore
+    gameLobbyIds: []
+  - name: ignoreShort
+    timeoutType: lobby
+    timeoutInSeconds: 90
+    timeoutStrategy: ignore
+    gameLobbyIds: []
+    archivedAt: 2022-04-28T00:40:35.282Z
+  - name: shortIgnore
+    timeoutType: lobby
+    timeoutInSeconds: 60
+    timeoutStrategy: ignore
+    gameLobbyIds: []
+    archivedAt: 2022-06-12T01:11:31.999Z
+  - name: LongFail
+    timeoutType: lobby
+    timeoutInSeconds: 1200
+    timeoutStrategy: fail
+    gameLobbyIds: []
+  - name: 25MinLobby
+    timeoutType: lobby
+    timeoutInSeconds: 1500
+    timeoutStrategy: fail
+    gameLobbyIds: []
+  - name: shortFail
+    timeoutType: lobby
+    timeoutInSeconds: 60
+    timeoutStrategy: fail
+    gameLobbyIds: []
