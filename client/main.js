@@ -67,16 +67,12 @@ Empirica.introSteps((game, treatment) => {
   const networkSurvey = [NetworkSurveySelfContacts, NetworkSurveySelfEC, NetworkSurveySelfFrequency, NetworkSurveyContactsEC, NetworkSurveyRelationshipInterpreter, NetworkSurveyGenderInterpreter, NetworkSurveyPersonalQuestions  ];
   const tutorialSteps = [TutorialPageOne, TutorialPageThree, TutorialPageFour,];
   const symbolDescription = [DescribeSymbolQuestion];
-  // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
-  // const quizSteps = [AllQuiz];
   const quizSteps = [QuizFive, QuizSix, QuizSeven, QuizTwo];
   const quizOverview = [QuizOverview];
   const schedule = [Schedule]
   let steps;
   if (game.treatment.isPreQualification) {
     steps = durationConsent.concat(englishScreen, tutorialSteps, quizSteps, symbolDescription, networkSurvey, schedule);
-    // steps = englishScreen.concat(networkSurvey,tutorialSteps,quizSteps, symbolDescription, schedule);
-    // steps = quizSteps.concat(symbolDescription);
 
   } else {
     steps = tutorialSteps.concat(quizOverview);
@@ -86,7 +82,6 @@ Empirica.introSteps((game, treatment) => {
     return [];
   }
 
-  return [NetworkSurveyRelationshipInterpreter];
   return steps;
 });
 

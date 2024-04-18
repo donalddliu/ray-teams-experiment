@@ -7084,7 +7084,7 @@ var NetworkSurveySelfEC = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/React.createElement("li", null, "\u201CEspecially Close\u201D indicates this is one of your closest personal contacts."), /*#__PURE__*/React.createElement("li", null, "\u201CClose\u201D indicates this is someone you enjoy, but don't count him or her among your closest personal contacts."), /*#__PURE__*/React.createElement("li", null, "\u201CLess Than Close\" indicates this is someone you don't mind working with, but have no wish to develop a friendship.")), /*#__PURE__*/React.createElement("form", {
         className: "network-form",
         onSubmit: this.handleSubmit
-      }, /*#__PURE__*/React.createElement("p", null, " How often do you communicate with _ ? "), /*#__PURE__*/React.createElement("div", {
+      }, /*#__PURE__*/React.createElement("p", null, " How close are you with _ ? "), /*#__PURE__*/React.createElement("div", {
         className: "input-row"
       }, /*#__PURE__*/React.createElement("label", {
         className: "dropdown-input-label",
@@ -11043,17 +11043,14 @@ Empirica.introSteps(function (game, treatment) {
   var englishScreen = [EnglishScreen];
   var networkSurvey = [NetworkSurveySelfContacts, NetworkSurveySelfEC, NetworkSurveySelfFrequency, NetworkSurveyContactsEC, NetworkSurveyRelationshipInterpreter, NetworkSurveyGenderInterpreter, NetworkSurveyPersonalQuestions];
   var tutorialSteps = [TutorialPageOne, TutorialPageThree, TutorialPageFour];
-  var symbolDescription = [DescribeSymbolQuestion]; // const quizSteps = [QuizOne, QuizTwo, QuizThree, QuizFour, QuizFive, QuizSix, QuizSeven, QuizEight,];
-  // const quizSteps = [AllQuiz];
-
+  var symbolDescription = [DescribeSymbolQuestion];
   var quizSteps = [QuizFive, QuizSix, QuizSeven, QuizTwo];
   var quizOverview = [QuizOverview];
   var schedule = [Schedule];
   var steps;
 
   if (game.treatment.isPreQualification) {
-    steps = durationConsent.concat(englishScreen, tutorialSteps, quizSteps, symbolDescription, networkSurvey, schedule); // steps = englishScreen.concat(networkSurvey,tutorialSteps,quizSteps, symbolDescription, schedule);
-    // steps = quizSteps.concat(symbolDescription);
+    steps = durationConsent.concat(englishScreen, tutorialSteps, quizSteps, symbolDescription, networkSurvey, schedule);
   } else {
     steps = tutorialSteps.concat(quizOverview);
   }
@@ -11062,7 +11059,6 @@ Empirica.introSteps(function (game, treatment) {
     return [];
   }
 
-  return [NetworkSurveyRelationshipInterpreter];
   return steps;
 }); // The Round component containing the game UI logic.
 // This is where you will be doing the most development.

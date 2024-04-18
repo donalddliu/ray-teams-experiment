@@ -85,7 +85,7 @@ export default class NetworkSurveySelfEC extends React.Component {
                         </li>
                     </ul>
                     <form className="network-form" onSubmit={this.handleSubmit}>
-                        <p> How often do you communicate with _ ? </p>
+                        <p> How close are you with _ ? </p>
                         <div className="input-row">
                             <label className="dropdown-input-label" htmlFor="tie1"> <p>{name1}</p> </label>
                             <DropdownSelect id="tie1" name="tie1" handleChange={this.handleChange}></DropdownSelect>

@@ -1077,7 +1077,7 @@ factors:
     factorTypeId: xusRHAyx8EEBmir9Q
   - _id: bR87bC2YD3XwjKT2Q
     name: threePlayerFullNetwork
-    value: '1-2, 1-3, 2-3'
+    value: '"1-2, 1-3, 2-3"'
     factorTypeId: bkF6kYmxwzAfyncq3
   - _id: uCbhEMaXMQMqFvF4W
     name: fifteenRounds
@@ -1090,7 +1090,7 @@ factors:
     archivedAt: 2022-02-28T23:01:43.656Z
   - _id: YTmoSnX3AbCHH8bNy
     name: threePlayerPartialNetwork
-    value: '1-2, 1-3'
+    value: '"1-2, 1-3"'
     factorTypeId: bkF6kYmxwzAfyncq3
   - _id: CPW3AN9EBwzbw2KmX
     name: sixRounds
@@ -1199,21 +1199,19 @@ factors:
     factorTypeId: EMFiKE9FxL6cX7Ez8
   - _id: QWvWjSWuwdQmKmLyx
     name: cliqueNetwork
-    value: >-
-      1-2, 1-3, 1-4, 1-5, 2-1, 2-3, 2-4, 2-5, 3-1, 3-2, 3-4, 3-5, 4-1, 4-2, 4-3,
-      4-5, 5-1, 5-2, 5-3, 5-4
+    value: '"1-2, 1-3, 1-4, 1-5, 2-1, 2-3, 2-4, 2-5, 3-1, 3-2, 3-4, 3-5, 4-1, 4-2, 4-3, 4-5, 5-1, 5-2, 5-3, 5-4"'
     factorTypeId: bkF6kYmxwzAfyncq3
   - _id: owJz8bmRcHWYEFMrt
     name: connectedBrokersNetwork
-    value: '1-2, 1-3, 1-4, 1-5, 2-1, 2-3, 2-4, 2-5, 3-1, 3-2, 4-1, 4-2, 5-1, 5-2'
+    value: '"1-2, 1-3, 1-4, 1-5, 2-1, 2-3, 2-4, 2-5, 3-1, 3-2, 4-1, 4-2, 5-1, 5-2"'
     factorTypeId: bkF6kYmxwzAfyncq3
   - _id: DLpmgndrB7LanCFb6
     name: disconnectedBrokersNetwork
-    value: '1-3, 1-4, 1-5, 2-3, 2-4, 2-5, 3-1, 3-2, 4-1, 4-2, 5-1, 5-2'
+    value: '"1-3, 1-4, 1-5, 2-3, 2-4, 2-5, 3-1, 3-2, 4-1, 4-2, 5-1, 5-2"'
     factorTypeId: bkF6kYmxwzAfyncq3
   - _id: aeDhdD5NgPmJgkkNf
     name: wheelNetwork
-    value: '1-2, 1-3, 1-4, 1-5'
+    value: '"1-2, 1-3, 1-4, 1-5"'
     factorTypeId: bkF6kYmxwzAfyncq3
   - _id: XEwTLsRFTcjFXuyXg
     name: fifteenMinutes
@@ -1233,7 +1231,7 @@ factors:
     factorTypeId: EMFiKE9FxL6cX7Ez8
   - _id: nGTXMi7ZKM2Fq2jrx
     name: fourPlayerWheel
-    value: '1-2, 1-3, 1-4'
+    value: '"1-2, 1-3, 1-4"'
     factorTypeId: bkF6kYmxwzAfyncq3
   - _id: X4jAhXdMbGoDPnfcn
     name: threeMinutes
@@ -1241,7 +1239,7 @@ factors:
     factorTypeId: X8jdzeWyu2bao9rwj
   - _id: WNNasxKxMXT3GDepN
     name: fourPlayerFC
-    value: '1-2, 1-3, 1-4, 2-1, 2-3, 2-4, 3-1, 3-2, 3-4, 4-1, 4-2, 4-3'
+    value: '"1-2, 1-3, 1-4, 2-1, 2-3, 2-4, 3-1, 3-2, 3-4, 4-1, 4-2, 4-3"'
     factorTypeId: bkF6kYmxwzAfyncq3
   - _id: rSpWKL6jsauJKHnxC
     name: oneToOneAndAHalf

@@ -1,0 +1,523 @@
+treatments:
+  - name: short game
+    factorIds:
+      - 8KFfqTBxKyx2J5wZp
+    archivedAt: 2022-04-05T06:45:45.235Z
+  - name: short trio game
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+    archivedAt: 2022-04-05T06:45:45.663Z
+  - name: soloGame
+    factorIds:
+      - 79yjDR8XLoacEwEic
+      - XQgR8bDKyYueedrci
+      - pKmtxHeAqmAskyoJ8
+      - uCbhEMaXMQMqFvF4W
+    archivedAt: 2022-04-05T06:45:40.066Z
+  - name: duoGame
+    factorIds:
+      - 8KFfqTBxKyx2J5wZp
+      - XQgR8bDKyYueedrci
+      - pKmtxHeAqmAskyoJ8
+    archivedAt: 2022-02-21T21:23:23.930Z
+  - name: duo game
+    factorIds:
+      - 8KFfqTBxKyx2J5wZp
+      - XQgR8bDKyYueedrci
+      - pKmtxHeAqmAskyoJ8
+      - uCbhEMaXMQMqFvF4W
+    archivedAt: 2022-04-05T06:45:47.246Z
+  - name: trio game
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - uCbhEMaXMQMqFvF4W
+    archivedAt: 2022-04-05T06:45:44.371Z
+  - name: shortTrioGame2
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - CPW3AN9EBwzbw2KmX
+      - yxqpuh9MNmyfEdQYH
+    archivedAt: 2022-04-11T19:42:00.475Z
+  - name: shortTrioDebug2
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - CPW3AN9EBwzbw2KmX
+      - yxqpuh9MNmyfEdQYH
+      - 7BsPGtqzGd3iiZDnr
+    archivedAt: 2022-04-11T19:41:14.869Z
+  - name: shortTrioDebug3
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - RkpupzrJ6ZXGxtn69
+      - raJowFXdnczRSrRwr
+      - 7BsPGtqzGd3iiZDnr
+      - X6T4Z4jda22L875Kc
+    archivedAt: 2022-04-11T20:19:06.091Z
+  - name: shortTrioGame3
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - RkpupzrJ6ZXGxtn69
+      - QdGJMFWsbnytK4obZ
+      - raJowFXdnczRSrRwr
+      - X6T4Z4jda22L875Kc
+    archivedAt: 2022-04-11T20:19:06.866Z
+  - name: shortTrioGame
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - YTmoSnX3AbCHH8bNy
+      - raJowFXdnczRSrRwr
+      - QdGJMFWsbnytK4obZ
+      - X6T4Z4jda22L875Kc
+      - KwGHviryMTE5FHuMD
+      - d2ppwEhvzaZ6LJDYe
+      - 44jPeEf3xGYuKbnnF
+    archivedAt: 2024-04-18T22:13:49.429Z
+  - name: shortTrioDebug
+    factorIds:
+      - eGhmMXCtyGp5Y7PxZ
+      - 7BsPGtqzGd3iiZDnr
+      - raJowFXdnczRSrRwr
+      - YTmoSnX3AbCHH8bNy
+      - X6T4Z4jda22L875Kc
+      - KwGHviryMTE5FHuMD
+      - FXcNbAP4B5tc8EhYu
+      - 44jPeEf3xGYuKbnnF
+    archivedAt: 2024-04-18T22:13:49.895Z
+  - name: testCliqueGame
+    factorIds:
+      - WWecX9neNLrbwxjLw
+      - XQgR8bDKyYueedrci
+      - pKmtxHeAqmAskyoJ8
+      - FJ6aesQdBZEygsgun
+      - QdGJMFWsbnytK4obZ
+      - LewdRvPTsKY4BeD7R
+      - SnDfwroT8SA3RnDBR
+      - d2ppwEhvzaZ6LJDYe
+      - 44jPeEf3xGYuKbnnF
+      - n9qsCo9kfLWHLGxwp
+      - RkWdEZn8kazdpWzPg
+      - kcGgqXxu4QmjbrgaE
+      - zZy37GipzYp9vKnWk
+      - zwuWoXK9C5L63qYmi
+      - Rb9q8wHrgWYxqNytX
+      - 2PSQNHyNhxk9CGcNx
+      - B63wWJeJnsPTjRwkM
+      - ZEgRtWBqS8Q7p75NN
+      - XnHvZDk8TAaQetWGk
+      - JeTobjjnB9gbx6B7q
+  - name: testPreQual
+    factorIds:
+      - WWecX9neNLrbwxjLw
+      - XQgR8bDKyYueedrci
+      - pKmtxHeAqmAskyoJ8
+      - FJ6aesQdBZEygsgun
+      - QdGJMFWsbnytK4obZ
+      - LewdRvPTsKY4BeD7R
+      - SnDfwroT8SA3RnDBR
+      - d2ppwEhvzaZ6LJDYe
+      - 44jPeEf3xGYuKbnnF
+      - n9qsCo9kfLWHLGxwp
+      - RkWdEZn8kazdpWzPg
+      - kcGgqXxu4QmjbrgaE
+      - zZy37GipzYp9vKnWk
+      - zwuWoXK9C5L63qYmi
+      - Rb9q8wHrgWYxqNytX
+      - 2PSQNHyNhxk9CGcNx
+      - B63wWJeJnsPTjRwkM
+      - ZEgRtWBqS8Q7p75NN
+      - XnHvZDk8TAaQetWGk
+      - k3HwCZnhh52TCHGzi
+factorTypes:
+  - _id: FkyywwdokTA9frc37
+    name: playerCount
+    description: The Number of players participating in the given game.
+    required: true
+    type: Integer
+    min: 1
+  - _id: BxJpCk9cevNnudWBB
+    name: basePay
+    description: >-
+      The base amount of money (in USD) a user will get for completing the
+      experiment
+    required: false
+    type: Integer
+    min: 1
+    max: 2
+  - _id: xusRHAyx8EEBmir9Q
+    name: conversionRate
+    description: >-
+      The conversion rate of score to bonus dollars paid: points x
+      conversionRate = bonus in USD
+    required: false
+    type: Integer
+    min: 0
+    max: 1
+  - _id: bkF6kYmxwzAfyncq3
+    name: networkStructure
+    description: >-
+      For multiplayer, determines who is connected to who in terms of 1-1 chats.
+      For example, “1-2, 1-3, 2-3” means that player 1 can talk to player 2 and
+      3, player 2 can talk to player 1 and 3, and player 3 can talk to player 1
+      and 2.
+    required: false
+    type: String
+    min: 0
+    max: 9999
+  - _id: PRDoNLNam38iHtyzz
+    name: numRounds
+    description: number of rounds that will be played by players
+    required: false
+    type: Integer
+    min: 1
+    max: 20
+    archivedAt: 2022-04-11T19:55:19.676Z
+  - _id: q3mtZL9RRau8pu6Sk
+    name: setSize
+    description: The number of symbols a player sees in each task
+    required: true
+    type: Number
+    min: 1
+    max: 999
+    archivedAt: 2024-04-18T22:13:08.307Z
+  - _id: AvSzfEvM76qzFrB8g
+    name: skipIntro
+    description: 'For debugging purposes: skips over the tutorial and initial quiz'
+    required: false
+    type: Boolean
+  - _id: 8fM3xysHDXN2kYgSq
+    name: setSizeBasedOnPlayerCount
+    description: >-
+      Setting this to true will result in the symbol set size to be playerCount
+      + 1. If false, symbol set size will be based on a default value
+    required: true
+    type: Boolean
+  - _id: X8jdzeWyu2bao9rwj
+    name: userInactivityDuration
+    description: >-
+      Duration of time (seconds) until a player gets kicked out of game due to
+      inactivity (Not messaging, submitting, clicking on anything)
+    required: true
+    type: Number
+    min: 0
+    max: 99999
+  - _id: zeay2JbmRBg99NvnA
+    name: numTaskRounds
+    description: Number of task rounds in a game
+    required: true
+    type: Integer
+    min: 0
+    max: 99999
+  - _id: aJm4nPNsCGuZieGFX
+    name: numSurveyRounds
+    description: >-
+      Number of survey rounds in the game (Surveys rounds will be placed in even
+      intervals within the total number of task rounds)
+    required: false
+    type: String
+    min: 0
+    max: 99999
+  - _id: wEsdcXWYJA2acghXg
+    name: taskDuration
+    description: Duration (in seconds) players get to complete a task round
+    required: true
+    type: Integer
+    min: 0
+    max: 999999
+  - _id: KXbdTitNcfnMbAAcP
+    name: surveyDuration
+    description: Duration (in seconds) players get to complete the survey round
+    required: false
+    type: String
+    min: 0
+    max: 999999
+  - _id: EraBq7JRamAjzMMZY
+    name: resultsDuration
+    description: >-
+      Duration (in seconds) players get to see the results following a task
+      round
+    required: true
+    type: Integer
+    min: 0
+    max: 999999
+  - _id: zXqf74Ry9RC9TxLcR
+    name: defaultSetSize
+    description: 'If setSizeBasedOnPlayerCount is false, the defaultSetSize will be used'
+    required: true
+    type: Integer
+    min: 0
+    max: 999
+  - _id: yg3T7jELpr2qFEZYa
+    name: idleWarningTime
+    description: >-
+      Users will be shown a warning idleWarningTime (seconds) before the
+      userInactivityDuration. (i.e. 60 s means players will be shown a warning
+      if they have been idle for (userInactivityDuration - 60) s )
+    required: true
+    type: Integer
+    min: 0
+    max: 999999
+  - _id: CFbrZPGEBjvoXPYt4
+    name: toggleInactiveTimer
+    description: >-
+      If true, turn on inactive timer/warnings; If false, turn off inactive
+      timer/warnings
+    required: true
+    type: Boolean
+    archivedAt: 2022-04-15T15:08:04.033Z
+  - _id: Qm4JPdnxfQE59QgZo
+    name: endGameIfPlayerIdle
+    description: >-
+      If this is true, if a player becomes inactive at any point in the game,
+      the whole game will end. Otherwise, the players will default to a fully
+      connected layer
+    required: true
+    type: Boolean
+  - _id: yxtKFHYTZ7Bj7oSCq
+    name: maxNumOverlap
+    description: Maximum number of symbols that overlap with n-1 players.
+    required: true
+    type: Integer
+    min: 0
+    max: 99999
+  - _id: zR7ehSLAoaBd7BGHa
+    name: maxGameTime
+    description: >-
+      Maximum time (in minutes) allotted for participants to play the game
+      before they are sent to the Exit Survey
+    required: false
+    type: Number
+    min: 0
+    max: 99999
+  - _id: wbr7mLvcfLzB6QRaw
+    name: taskWarningTime
+    description: >-
+      Users will be shown a warning taskWarningTime (seconds) before the
+      taskDuration duration. (i.e. 60 means players will be shown a warning if
+      there is 60 seconds left to complete the task)
+    required: false
+    type: Number
+    min: 0
+    max: 99999
+  - _id: 7wbct5KE4jMw5qMdt
+    name: minPlayerCount
+    description: >-
+      The minimum number of players that a game should have. If there are less
+      players than the minPlayerCount, the game will end.
+    required: false
+    type: Integer
+    min: 0
+    max: 9999
+  - _id: KWoWFwwx7Q6pkgfeq
+    name: isPreQualification
+    description: 'True if  game is pre-qualification, false otherwise'
+    required: false
+    type: Boolean
+factors:
+  - _id: 8KFfqTBxKyx2J5wZp
+    name: pair
+    value: 2
+    factorTypeId: FkyywwdokTA9frc37
+  - _id: eGhmMXCtyGp5Y7PxZ
+    name: trio
+    value: 3
+    factorTypeId: FkyywwdokTA9frc37
+  - _id: 79yjDR8XLoacEwEic
+    name: solo
+    value: 1
+    factorTypeId: FkyywwdokTA9frc37
+  - _id: XQgR8bDKyYueedrci
+    name: twoDollars
+    value: 2
+    factorTypeId: BxJpCk9cevNnudWBB
+  - _id: pKmtxHeAqmAskyoJ8
+    name: oneToOne
+    value: 1
+    factorTypeId: xusRHAyx8EEBmir9Q
+  - _id: bR87bC2YD3XwjKT2Q
+    name: threePlayerFullNetwork
+    value: '1-2, 1-3, 2-3'
+    factorTypeId: bkF6kYmxwzAfyncq3
+  - _id: uCbhEMaXMQMqFvF4W
+    name: fifteenRounds
+    value: 15
+    factorTypeId: PRDoNLNam38iHtyzz
+  - _id: dxetKNYRo4sroJkWr
+    name: threePlayerPartialNetwork
+    value: '"1-2, 1-3"'
+    factorTypeId: bkF6kYmxwzAfyncq3
+    archivedAt: 2022-02-28T23:01:43.656Z
+  - _id: YTmoSnX3AbCHH8bNy
+    name: threePlayerPartialNetwork
+    value: '1-2, 1-3'
+    factorTypeId: bkF6kYmxwzAfyncq3
+  - _id: CPW3AN9EBwzbw2KmX
+    name: sixRounds
+    value: 6
+    factorTypeId: PRDoNLNam38iHtyzz
+  - _id: RkpupzrJ6ZXGxtn69
+    name: eighteenRounds
+    value: 18
+    factorTypeId: PRDoNLNam38iHtyzz
+  - _id: raJowFXdnczRSrRwr
+    name: three
+    value: 3
+    factorTypeId: q3mtZL9RRau8pu6Sk
+  - _id: yxqpuh9MNmyfEdQYH
+    name: six
+    value: 6
+    factorTypeId: q3mtZL9RRau8pu6Sk
+  - _id: 7BsPGtqzGd3iiZDnr
+    name: 'true'
+    value: true
+    factorTypeId: AvSzfEvM76qzFrB8g
+  - _id: QdGJMFWsbnytK4obZ
+    name: 'false'
+    value: false
+    factorTypeId: AvSzfEvM76qzFrB8g
+  - _id: X6T4Z4jda22L875Kc
+    name: 'true'
+    value: true
+    factorTypeId: 8fM3xysHDXN2kYgSq
+  - _id: LewdRvPTsKY4BeD7R
+    name: 'false'
+    value: false
+    factorTypeId: 8fM3xysHDXN2kYgSq
+  - _id: MyZtxncTun649nusy
+    name: fiveMinutes
+    value: 300
+    factorTypeId: X8jdzeWyu2bao9rwj
+  - _id: KwGHviryMTE5FHuMD
+    name: oneMinute
+    value: 60
+    factorTypeId: X8jdzeWyu2bao9rwj
+  - _id: d2ppwEhvzaZ6LJDYe
+    name: fifteenTasks
+    value: 15
+    factorTypeId: zeay2JbmRBg99NvnA
+  - _id: 44jPeEf3xGYuKbnnF
+    name: threeSurveys
+    value: '3'
+    factorTypeId: aJm4nPNsCGuZieGFX
+  - _id: FXcNbAP4B5tc8EhYu
+    name: sixTasks
+    value: 6
+    factorTypeId: zeay2JbmRBg99NvnA
+  - _id: bBWY5sz52W8egk3ui
+    name: 'true'
+    value: true
+    factorTypeId: CFbrZPGEBjvoXPYt4
+  - _id: fLwi2DQjExZSyzrrW
+    name: 'false'
+    value: false
+    factorTypeId: CFbrZPGEBjvoXPYt4
+  - _id: Rb9q8wHrgWYxqNytX
+    name: 'true'
+    value: true
+    factorTypeId: Qm4JPdnxfQE59QgZo
+  - _id: wQT2PSFmazor8udkr
+    name: 'false'
+    value: false
+    factorTypeId: Qm4JPdnxfQE59QgZo
+  - _id: k3HwCZnhh52TCHGzi
+    name: 'true'
+    value: true
+    factorTypeId: KWoWFwwx7Q6pkgfeq
+  - _id: JeTobjjnB9gbx6B7q
+    name: 'false'
+    value: false
+    factorTypeId: KWoWFwwx7Q6pkgfeq
+  - _id: FJ6aesQdBZEygsgun
+    name: cliqueNetwork
+    value: >-
+      1-2, 1-3, 1-4, 1-5, 2-1, 2-3, 2-4, 2-5, 3-1, 3-2, 3-4, 3-5, 4-1, 4-2, 4-3,
+      4-5, 5-1, 5-2, 5-3, 5-4
+    factorTypeId: bkF6kYmxwzAfyncq3
+  - _id: XnHvZDk8TAaQetWGk
+    name: four
+    value: 4
+    factorTypeId: 7wbct5KE4jMw5qMdt
+  - _id: B63wWJeJnsPTjRwkM
+    name: sixtyMinutes
+    value: 60
+    factorTypeId: zR7ehSLAoaBd7BGHa
+  - _id: 2PSQNHyNhxk9CGcNx
+    name: zero
+    value: 0
+    factorTypeId: yxtKFHYTZ7Bj7oSCq
+  - _id: Y7o64k2diQeahJf6Z
+    name: one
+    value: 1
+    factorTypeId: yxtKFHYTZ7Bj7oSCq
+  - _id: ZEgRtWBqS8Q7p75NN
+    name: thirtySeconds
+    value: 30
+    factorTypeId: wbr7mLvcfLzB6QRaw
+  - _id: zwuWoXK9C5L63qYmi
+    name: thirtySeconds
+    value: 30
+    factorTypeId: yg3T7jELpr2qFEZYa
+  - _id: EGCgPpvqoq7Bn7sQJ
+    name: sixtySeconds
+    value: 60
+    factorTypeId: yg3T7jELpr2qFEZYa
+  - _id: Rwip5QtXXun5LQcb7
+    name: fifteenSeconds
+    value: 15
+    factorTypeId: yg3T7jELpr2qFEZYa
+  - _id: zZy37GipzYp9vKnWk
+    name: three
+    value: 3
+    factorTypeId: zXqf74Ry9RC9TxLcR
+  - _id: RkWdEZn8kazdpWzPg
+    name: tenMinutes
+    value: '600'
+    factorTypeId: KXbdTitNcfnMbAAcP
+  - _id: pWXagZsdTSyn84Ypj
+    name: fifteenMinutes
+    value: 900
+    factorTypeId: wEsdcXWYJA2acghXg
+  - _id: n9qsCo9kfLWHLGxwp
+    name: tenMinutes
+    value: 600
+    factorTypeId: wEsdcXWYJA2acghXg
+  - _id: kcGgqXxu4QmjbrgaE
+    name: fiveSeconds
+    value: 5
+    factorTypeId: EraBq7JRamAjzMMZY
+  - _id: wDLJNvWR4LJwzbKdm
+    name: four
+    value: 4
+    factorTypeId: FkyywwdokTA9frc37
+  - _id: WWecX9neNLrbwxjLw
+    name: five
+    value: 5
+    factorTypeId: FkyywwdokTA9frc37
+  - _id: 5uruqxHzuSc9sy9W7
+    name: twoMinutes
+    value: 120
+    factorTypeId: X8jdzeWyu2bao9rwj
+  - _id: SnDfwroT8SA3RnDBR
+    name: threeMinutes
+    value: 180
+    factorTypeId: X8jdzeWyu2bao9rwj
+lobbyConfigs:
+  - name: Default
+    timeoutType: lobby
+    timeoutInSeconds: 300
+    timeoutStrategy: fail
+    gameLobbyIds: []
+  - name: test
+    timeoutType: lobby
+    timeoutInSeconds: 60
+    timeoutStrategy: fail
+    gameLobbyIds: []
+  - name: 10MinTimeOut
+    timeoutType: lobby
+    timeoutInSeconds: 600
+    timeoutStrategy: fail
+    gameLobbyIds: []
