@@ -780,11 +780,11 @@
       "where": "client",
       "type": "js",
       "cacheable": true,
-      "url": "/app/app.js?hash=aa22b0d970e8a14c9cbfe9ddab5784491bf58a20",
+      "url": "/app/app.js?hash=0fb4d3496a5213e771d258bb86127382384c4b51",
       "sourceMap": "app/app.js.map",
-      "sourceMapUrl": "/app/aa22b0d970e8a14c9cbfe9ddab5784491bf58a20.map",
+      "sourceMapUrl": "/app/0fb4d3496a5213e771d258bb86127382384c4b51.map",
       "size": 398809,
-      "hash": "aa22b0d970e8a14c9cbfe9ddab5784491bf58a20",
+      "hash": "0fb4d3496a5213e771d258bb86127382384c4b51",
       "sri": "7zShu0WphiFcFiwbljM8ZC9/NfDDHlscSRubbKXGGVg5vKgNa1sOGMjc3595L0A3Dsn/0WVv4br3Hwmu2Xq2Sw=="
     },
     {
@@ -802,12 +802,12 @@
       "where": "client",
       "type": "css",
       "cacheable": true,
-      "url": "/merged-stylesheets.css?hash=eccf0f24ae548d72fdb984f58d2e6043871e8efb",
+      "url": "/merged-stylesheets.css?hash=17ea574a9c9822a9ebca3f66b2be58a8f3f09b1f",
       "sourceMap": "merged-stylesheets.css.map",
-      "sourceMapUrl": "/eccf0f24ae548d72fdb984f58d2e6043871e8efb.map",
-      "size": 21920,
-      "hash": "eccf0f24ae548d72fdb984f58d2e6043871e8efb",
-      "sri": "O+lDCoBHJqrtzhY8tMgVss6vI6DbnVhflicFoqZdRemDiJUyth9WTRlIY8XMt06DAEG3RHontKtMH+U6YYWCMQ=="
+      "sourceMapUrl": "/17ea574a9c9822a9ebca3f66b2be58a8f3f09b1f.map",
+      "size": 22333,
+      "hash": "17ea574a9c9822a9ebca3f66b2be58a8f3f09b1f",
+      "sri": "iD6+d0vS4l27HccEtaom9QWzVXgruLkiG2NnR06Jgl6UJeWxKRGDjsvONymyOQmuvrusGidqTzR/TFfyH37Qkg=="
     },
     {
       "path": "packages/empirica_core/ui/components/NoBatch.less.map.json",
@@ -865,8 +865,8 @@
       "type": "asset",
       "cacheable": false,
       "url": "/css/style.css",
-      "size": 35044,
-      "hash": "96ec361eedb77e641a8d3ff8f9e09c51072f1491",
+      "size": 35211,
+      "hash": "421ed5d56238e28989016a38c550617458c241bd",
       "sri": null
     },
     {

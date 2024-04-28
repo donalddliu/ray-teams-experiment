@@ -21,7 +21,6 @@ Empirica.onGameStart(game => {
       var pairOfPlayers = [player.get("nodeId"), parseInt(otherNodeId)];
       pairOfPlayers.sort((p1,p2) => p1 - p2);
       const otherPlayer = game.players.find(p => p.get("nodeId") === parseInt(otherNodeId));
-      // const otherPlayerId = otherPlayer.id;
       const chatKey = `${pairOfPlayers[0]}-${pairOfPlayers[1]}`;
       activeChats.push(chatKey);
     });

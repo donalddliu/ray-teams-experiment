@@ -36,8 +36,8 @@ Empirica.gameInit(game => {
   const setSize = setSizeBasedOnPlayerCount ? playerCount + 1 : defaultSetSize; //TODO: can change default value in settings
   const numRoundsBeforeSurvey = numTaskRounds/numSurveyRounds;
 
-  let colors = ["Green", "Red", "Yellow", "Blue", "Purple", "White", "Black"]
-  let surveyNum = 1
+  let colors = ["Green", "Red", "Yellow", "Blue", "Purple", "White", "Black", "Brown", "Gray", "Peach", "Cyan", "Orange" ];
+  let surveyNum = 1;
   colors = _.shuffle(colors);
 
   game.players.forEach((player, i) => {
@@ -75,7 +75,6 @@ Empirica.gameInit(game => {
       durationInSeconds: taskDuration
     });
     taskStage.set("task", symbolSet[i]);
-    // getSymbolsForPlayers(symbols, answer, setSize, taskName, game, maxNumOverlap);
     let answer = distributeSymbolsForPlayers(symbols, playerCount, taskName, game);
     taskStage.set("answer", answer);
 
@@ -151,22 +150,29 @@ Empirica.gameInit(game => {
   }
 
   function distributeSymbolsForPlayers(symbolSet, playerCount, taskName, game) {
-    let fullSymbolDistribution = createSymbolSetDistribution(symbolSet);
-
-    let cardSets = [];
-    for (let i = 1; i <= playerCount+1; i++) {
-      cardSets.push(`t${i}`);
+    // Find a subset of N+1 symbols to use
+    // TODO: Might need a different algorithm to select the subset of symbols
+    let reducedSymbolSet = [];
+    for (let i = 1; i <= playerCount +1; i++) {
+      let symbolNum = _.sample(symbolSet);
+      let removedSymbolNum = _.remove(symbolSet, (num) => num === symbolNum);
+      reducedSymbolSet.push(symbolNum);
     }
 
+    let fullSymbolDistribution = createSymbolSetDistribution(reducedSymbolSet);
+
+    // Give player a specific symbol that their set of cards won't have
     let cardDistributions = {}
     game.players.forEach((player) => {
-      let cardSetNum = _.sample(cardSets);
-      let removedCardSetNum = _.remove(cardSets, (num) => num === cardSetNum);
+      let cardSetNum = _.sample(reducedSymbolSet);
+      let removedCardSetNum = _.remove(reducedSymbolSet, (num) => num === cardSetNum);
       cardDistributions[player.get("nodeId")] = cardSetNum;
     })
 
-    let answer = _.sample(cardSets);
+    // The last symbol remaining is the answer
+    let answer = _.sample(reducedSymbolSet);
 
+    // Distrbute players a set of cards that all have the answer, but without their specific symbol
     game.players.forEach((player) => {
       let symbolsPicked = fullSymbolDistribution[answer][cardDistributions[player.get("nodeId")]]
       player.set(taskName, symbolsPicked);
@@ -177,6 +183,7 @@ Empirica.gameInit(game => {
   }
 
   function createSymbolSetDistribution(symbolSet) {
+    // Given the symbol set, creates all combinations of sets with one commmon answer and one specfic symbol removed
     let fullDistribution = {};
     symbolSet.forEach((answer) => {
       symbolsWithoutAnswer = symbolSet.filter(s => s !== answer);

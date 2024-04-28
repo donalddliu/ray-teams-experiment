@@ -708,8 +708,20 @@ body.bp3-dark {
   cursor: pointer;
   padding: 8px 0px 8px 0px;
 }
+.ray-chat-container .chat .header.green {
+  background-color: var(--chat-green);
+}
 .ray-chat-container .chat .header.red {
   background-color: var(--chat-red);
+}
+.ray-chat-container .chat .header.yellow {
+  background-color: var(--chat-yellow);
+}
+.ray-chat-container .chat .header.blue {
+  background-color: var(--chat-blue);
+}
+.ray-chat-container .chat .header.purple {
+  background-color: var(--chat-purple);
 }
 .ray-chat-container .chat .header.white {
   background-color: var(--chat-white);
@@ -717,17 +729,20 @@ body.bp3-dark {
 .ray-chat-container .chat .header.black {
   background-color: var(--chat-black);
 }
-.ray-chat-container .chat .header.blue {
-  background-color: var(--chat-blue);
+.ray-chat-container .chat .header.brown {
+  background-color: var(--chat-brown);
 }
-.ray-chat-container .chat .header.green {
-  background-color: var(--chat-green);
+.ray-chat-container .chat .header.gray {
+  background-color: var(--chat-gray);
 }
-.ray-chat-container .chat .header.purple {
-  background-color: var(--chat-purple);
+.ray-chat-container .chat .header.peach {
+  background-color: var(--chat-peach);
 }
-.ray-chat-container .chat .header.yellow {
-  background-color: var(--chat-yellow);
+.ray-chat-container .chat .header.cyan {
+  background-color: var(--chat-cyan);
+}
+.ray-chat-container .chat .header.orange {
+  background-color: var(--chat-orange);
 }
 .ray-chat-container .chat .messages {
   width: 100%;

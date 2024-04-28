@@ -9,13 +9,18 @@
     --chat-other-color: rgb(242,242,242);
     --periwinkle: rgb(91, 107, 191);
 
-    --chat-red: rgb(255, 44, 44);
-    --chat-white: gray;
-    --chat-black: rgb(12, 11, 11);
     --chat-green: green;
+    --chat-red: rgb(255, 44, 44);
     --chat-yellow: yellow;
-    --chat-purple: purple;
     --chat-blue: #051A46;
+    --chat-purple: purple;
+    --chat-white: rgb(163, 163, 163);
+    --chat-black: rgb(12, 11, 11);
+    --chat-brown: rgb(124,63,0);
+    --chat-gray: rgb(87, 87, 87);
+    --chat-peach: rgb(255,229,180);
+    --chat-cyan: cyan;
+    --chat-orange: orange;
   }
 
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent; } body {line-height: 1,4} ol, ul {list-style: none;} li{ display:inline} blockquote, q {quotes: none} blockquote:before, blockquote:after, q:before, q:after {content: '';content: none} :focus {outline: 0} ins {text-decoration: none} del {text-decoration: line-through} table {border-collapse: collapse;border-spacing: 0} * {margin:0; padding:0}
